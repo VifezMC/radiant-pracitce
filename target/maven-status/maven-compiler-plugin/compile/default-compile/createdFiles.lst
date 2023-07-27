@@ -1,7 +1,10 @@
+neptune\dev\ui\StatsInventory.class
+neptune\dev\commands\user\StatsCMD.class
 neptune\dev\listeners\WorldListener.class
 neptune\dev\player\PlayerState.class
 neptune\dev\utils\Console.class
 neptune\dev\commands\admin\MainCMD.class
+neptune\dev\utils\ItemBuilder.class
 neptune\dev\commands\admin\SetSpawnCMD.class
 neptune\dev\game\EndGame.class
 neptune\dev\utils\CC.class

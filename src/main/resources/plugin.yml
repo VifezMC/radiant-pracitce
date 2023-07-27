@@ -21,3 +21,5 @@ commands:
     description: Get a players ping.
   leavequeue:
     description: Leave a queue.
+  stats:
+    description: Open Stats menu.

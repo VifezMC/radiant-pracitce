@@ -86,9 +86,9 @@ public class KitsCMD implements CommandExecutor {
         Neptune.kitsConfig.set("kits." + name + ".items", "None");
         Neptune.kitsConfig.set("kits." + name + ".armour", "None");
         Neptune.kitsConfig.set("kits." + name + ".icon", "None");
+        Neptune.kitsConfig.set("kits." + name + ".arenas", "None");
 
         saveConfig();
-
     }
 
     private void setItems(String location, ItemStack[] items, Player p) {

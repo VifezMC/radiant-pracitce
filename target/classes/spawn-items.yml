@@ -3,24 +3,24 @@ spawn-items:
     type: IRON_SWORD
     display-name: "&9Unranked Queue &7(Right Click)"
     slot: 1
-    command: "/unranked"
+    command: "unranked"
   item2:
     type: DIAMOND_SWORD
     display-name: "&9Ranked Queue &7(Right Click)"
     slot: 2
-    command: "/ranked"
+    command: "ranked"
   item3:
     type: BOOK
-    display-name: "&9Edit Kit &7(Right Click)"
+    display-name: "&9View Stats &7(Right Click)"
     slot: 5
-    command: "/kiteditor"
+    command: "stats"
   item4:
     type: PAPER
     display-name: "&9Host Event &7(Right Click)"
     slot: 8
-    command: "/events"
+    command: "events"
   item5:
     type: SKULL_ITEM
     display-name: "&9Settings &7(Right Click)"
     slot: 9
-    command: "/settings"
+    command: "settings"

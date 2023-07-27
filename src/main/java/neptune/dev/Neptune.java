@@ -3,6 +3,7 @@ package neptune.dev;
 import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
+import neptune.dev.ui.StatsInventory;
 import neptune.dev.utils.Console;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -35,7 +36,8 @@ public class Neptune extends JavaPlugin {
             new PlayerJoin(),
             new SpawnListeners(),
             new WorldListener(),
-            new GameListener()
+            new GameListener(),
+            new StatsInventory()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
 
@@ -48,6 +50,7 @@ public class Neptune extends JavaPlugin {
     getCommand("queue").setExecutor(new QueueCMD());
     getCommand("ping").setExecutor(new PingCMD());
     getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
+    getCommand("stats").setExecutor(new StatsCMD());
 
     // START MESSSAGE
     Console.sendMessage("&bNeptune Loaded successfully");
