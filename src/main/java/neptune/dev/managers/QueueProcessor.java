@@ -11,6 +11,8 @@ import java.util.List;
 
 public class QueueProcessor {
 
+    static ArenaManager arenaManager = new ArenaManager();
+
 
     private static List<Player> queue = new ArrayList<>();
     private static List<String> playerKit = new ArrayList<>();
@@ -32,8 +34,16 @@ public class QueueProcessor {
                 Player secondPlayer = queue.get(1);
 
                 Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
-
-                processQueueForKit(firstKit, queue);
+                String arena = arenaManager.getFreeArena(kitName);
+                if (arena == null) {
+                    firstPlayer.sendMessage("No free arenas!");
+                    secondPlayer.sendMessage("No free arenas!");
+                    return;
+                } else {
+                    arenaManager.setArenaUsed(arena);
+                    MatchManager.addMatch(firstPlayer, secondPlayer, arena, firstKit);
+                    processQueueForKit(firstKit, queue);
+                }
 
                 Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
 
@@ -42,8 +52,6 @@ public class QueueProcessor {
 
                 queue.remove(firstPlayer);
                 queue.remove(secondPlayer);
-
-                MatchManager.addMatch(firstPlayer, secondPlayer, "arena", firstKit);
             }
         }
     }

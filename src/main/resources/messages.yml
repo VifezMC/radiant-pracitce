@@ -1,7 +1,7 @@
 general:
   join-message:
     - "&7&m--------------------------------"
-    - "&eWelcome to Neptune Network"
+    - "&eWelcome to &bNeptune Network"
     - " "
     - '&fUse the &esword &fto queue for matches!'
     - '&fCheck out our &9Discord&7: &e&ndiscord.oceandev.net'
@@ -11,7 +11,7 @@ general:
   ping-message: "&bYour ping is &f{ping}"
   other-player-ping-message: "&b{player}'s ping is &f{ping}"
 match:
-  match-found: "&BMatch found against &f{opponent}"
+  match-found: "&bMatch found against &f{opponent}"
   kill-message: "&a{winner} &7killed &c{loser}"
 queue:
   already-in-queue-message: "&cYou are already in queue!"

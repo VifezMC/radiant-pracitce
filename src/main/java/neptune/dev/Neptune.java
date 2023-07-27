@@ -31,6 +31,10 @@ public class Neptune extends JavaPlugin {
     // CONFIG
     registerConfigs();
 
+    // MANAGERS
+    ArenaManager arenaManager = new ArenaManager();
+    Console.sendMessage("&bArenaManager loaded successfully" + "\n" + "&bArenas: &f" + arenaManager.getArenas());
+
     // LIST LISTENERS
     Arrays.asList(
             new PlayerJoin(),
@@ -39,8 +43,6 @@ public class Neptune extends JavaPlugin {
             new GameListener(),
             new StatsInventory()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
-
-
 
     // COMMANDS
     getCommand("setspawn").setExecutor(new SetSpawnCMD());
@@ -58,6 +60,7 @@ public class Neptune extends JavaPlugin {
     Console.sendMessage("&bVersion: &f" + Constants.Ver);
     Console.sendMessage("&bDiscord: &f" + Constants.Discord);
   }
+
 
   public void registerConfigs() {
 
@@ -80,7 +83,8 @@ public class Neptune extends JavaPlugin {
     saveResource("spawn-items.yml", false);
     spawnItems = new File(this.getDataFolder(), "spawn-items.yml");
     spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
-    // SPAWN ITEMS
+
+    // KITS CONFIG
     saveResource("kits.yml", false);
     kits = new File(this.getDataFolder(), "kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);

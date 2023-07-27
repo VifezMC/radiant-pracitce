@@ -14,6 +14,7 @@ neptune\dev\utils\PlayerUtils.class
 neptune\dev\listeners\GameListener.class
 neptune\dev\commands\user\QueueCMD.class
 neptune\dev\listeners\SpawnListeners.class
+neptune\dev\managers\ArenaManager.class
 neptune\dev\managers\MatchManager.class
 neptune\dev\commands\admin\ArenaCMD.class
 neptune\dev\Constants.class

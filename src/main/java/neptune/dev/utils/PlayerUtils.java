@@ -24,7 +24,7 @@ public class PlayerUtils {
 
     public static void resetPlayer(Player p) {
         setState(p, PlayerState.LOBBY);
-        p.teleport(toLoc(Neptune.arenaConfig.getString("Lobby")));
+        p.teleport(toLoc(Neptune.arenaConfig.getString("lobby")));
         p.setSaturation(20);
         p.setFlying(false);
         p.setFoodLevel(20);
@@ -49,7 +49,7 @@ public class PlayerUtils {
     public static void endGame(Player p) {
         removeState(p, PlayerState.PLAYING);
         setState(p, PlayerState.LOBBY);
-        p.teleport(toLoc(Neptune.arenaConfig.getString("Lobby")));
+        p.teleport(toLoc(Neptune.arenaConfig.getString("lobby")));
         p.setSaturation(20);
         p.setFlying(false);
         p.setFoodLevel(20);
