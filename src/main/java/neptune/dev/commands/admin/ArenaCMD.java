@@ -61,8 +61,8 @@ public class ArenaCMD implements CommandExecutor {
     }
 
     public void createArena(String name) {
-        Neptune.arenaConfig.set("Arenas." + name + ".spawn1", "None");
-        Neptune.arenaConfig.set("Arenas." + name + ".spawn2", "None");
+        Neptune.arenaConfig.set("arenas." + name + ".spawn1", "None");
+        Neptune.arenaConfig.set("arenas." + name + ".spawn2", "None");
         try {
             Neptune.arenaConfig.save(Neptune.arena);
             Neptune.arenaConfig.load(Neptune.arena);
@@ -72,7 +72,7 @@ public class ArenaCMD implements CommandExecutor {
     }
 
     public void setSpawn(String name, int number, String loc) {
-        Neptune.arenaConfig.set("Arenas." + name + ".spawn" + number, loc);
+        Neptune.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
         try {
             Neptune.arenaConfig.save(Neptune.arena);
             Neptune.arenaConfig.load(Neptune.arena);

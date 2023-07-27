@@ -35,7 +35,7 @@ public class SetSpawnCMD implements CommandExecutor {
         return true;
     }
     public void setSpawn(String loc) {
-        Neptune.arenaConfig.set("Lobby", loc);
+        Neptune.arenaConfig.set("lobby", loc);
         try {
             Neptune.arenaConfig.save(Neptune.arena);
             Neptune.arenaConfig.load(Neptune.arena);

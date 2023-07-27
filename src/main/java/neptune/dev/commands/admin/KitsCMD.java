@@ -31,7 +31,7 @@ public class KitsCMD implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 2) {
+        if (args.length == 3) {
             String kitName = args[1];
 
             if (args[0].equalsIgnoreCase("create")) {
@@ -65,6 +65,11 @@ public class KitsCMD implements CommandExecutor {
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                 player.sendMessage(CC.GREEN + "Kit has been given!");
                 return true;
+            } else if (args[0].equalsIgnoreCase("allowarena")) {
+
+                setArena(kitName, args[2]);
+                player.sendMessage(CC.GREEN + "Arena has been added to kit!");
+                return true;
             }
         }
 
@@ -76,6 +81,7 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit set &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit give &8<&7name&8> &7- &8(&7Give a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
+        player.sendMessage(CC.translate("&b/kit allowarena &8<&7name&8> &8<&7arena&8> &7- &8(&7Allow a kit to be used in an arena&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
 
@@ -86,6 +92,7 @@ public class KitsCMD implements CommandExecutor {
         Neptune.kitsConfig.set("kits." + name + ".items", "None");
         Neptune.kitsConfig.set("kits." + name + ".armour", "None");
         Neptune.kitsConfig.set("kits." + name + ".icon", "None");
+        Neptune.kitsConfig.get("kits." + name + ".arenas", "None");
 
         saveConfig();
 
@@ -115,6 +122,30 @@ public class KitsCMD implements CommandExecutor {
             }
             Neptune.kitsConfig.set("kits." + location + ".icon", Arrays.asList(items));
             saveConfig();
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            Console.sendMessage("&cLocation doesn't exsit!");
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setArena(String location, String arenas) {
+        try {
+            if (Neptune.kitsConfig.get("kits." + location) == null) {
+                throw new IllegalArgumentException("Location does not exist: " + location);
+            } else if (Neptune.kitsConfig.getStringList("kits." + location + ".arenas").contains(arenas)) {
+                throw new IllegalArgumentException("Arena already exists in kit: " + location);
+            } else if (Neptune.arenaConfig.get("arenas." + arenas) == null) {
+                throw new IllegalArgumentException("Arena does not exist: " + arenas);
+            } else {
+                Neptune.kitsConfig.getStringList("kits." + location + ".arenas").add(arenas);
+                Console.sendMessage("&aArena has been added to kit: " + location);
+                Console.sendMessage(Neptune.kitsConfig.getStringList("kits." + location + ".arenas").toString());
+                saveConfig();
+            }
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
