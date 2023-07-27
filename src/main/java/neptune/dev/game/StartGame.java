@@ -18,7 +18,9 @@ public class StartGame {
         for (Player player : players) {
             for (Player otherPlayer : players) {
                 if (player != otherPlayer) {
-                    player.sendMessage(CC.translate("&bMatch found against &f" + otherPlayer.getName()));
+                    String formattingString = Neptune.messagesConfig.getString("match-found");
+                    String formattedMessage = formattingString.replace("{opponent}", otherPlayer.getName());
+                    player.sendMessage(CC.translate(formattedMessage));
                     player.getInventory().clear();
                     player.getInventory().setArmorContents(null);
                     ItemStack[] inventoryContents = getItemsFromConfig(kitName);

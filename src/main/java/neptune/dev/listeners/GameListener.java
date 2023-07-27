@@ -1,11 +1,10 @@
 package neptune.dev.listeners;
 
+import neptune.dev.Neptune;
 import neptune.dev.game.EndGame;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
-import neptune.dev.utils.Console;
-import neptune.dev.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -22,9 +21,9 @@ import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
 public class GameListener implements Listener {
 
-    MatchManager matchManager = new MatchManager();
+    private MatchManager matchManager = new MatchManager();
 
-    @EventHandler // DISABLE PLAYER ITEM PLACE
+    @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
         if (player.getGameMode() != GameMode.CREATIVE) {
@@ -32,9 +31,9 @@ public class GameListener implements Listener {
         }
     }
 
-    @EventHandler // DISABLE PLAYER BLOCK BREAK
-    public void blockBreak(BlockBreakEvent event) {
-        Player player = (Player) event.getPlayer();
+    @EventHandler
+    public void onBlockBreak(BlockBreakEvent event) {
+        Player player = event.getPlayer();
         if (player.getGameMode() != GameMode.CREATIVE) {
             event.setCancelled(true);
         }
@@ -43,29 +42,27 @@ public class GameListener implements Listener {
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
-        if(hasPlayerState(player, PlayerState.PLAYING)) {
-          //  EndGame.EndGame(player.getKiller(), player);
-            Console.sendMessage("null");
+        if (hasPlayerState(player, PlayerState.PLAYING)) {
             String gameID = MatchManager.getMatchID(player).toString();
-            String Player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(0).getName();
-            String Player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(1).getName();
-            String Winner = "";
-            String Loser = "";
-            if((Bukkit.getPlayer(Player2).getGameMode().equals(GameMode.CREATIVE))) {
-                Winner = Player1;
-                Loser = Player2;
-            }else{
-                Winner = Player2;
-                Loser = Player1;
-            }
-            Bukkit.getPlayer(Player2).sendMessage(CC.translate("&c"+ Winner + "&7 killed " + "&a" + Loser));
-            Bukkit.getPlayer(Player1).sendMessage(CC.translate("&c"+ Winner + "&7 killed " + "&a" + Loser));
+            String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(0).getName();
+            String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(1).getName();
+            String winner, loser;
 
-            EndGame.EndGame(Bukkit.getPlayer(Winner), Bukkit.getPlayer(Loser), player);
-            Console.sendMessage("" + MatchManager.getMatchID(player));
-            Console.sendMessage(MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).toString());
+            if (Bukkit.getPlayer(player2).getGameMode().equals(GameMode.CREATIVE)) {
+                winner = player1;
+                loser = player2;
+            } else {
+                winner = player2;
+                loser = player1;
             }
-            event.setDeathMessage(null);
+
+            String formattingString = Neptune.messagesConfig.getString("kill-message");
+            String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
+            Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
+            Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
+            EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), player);
+        }
+        event.setDeathMessage(null);
     }
 
     @EventHandler
@@ -81,13 +78,7 @@ public class GameListener implements Listener {
         World world = location.getWorld();
         Location lightningLocation = new Location(world, x, y, z);
         LightningStrike lightning = world.strikeLightning(lightningLocation);
-        World world1 = location.getWorld();
-        double x1 = location.getX();
-        double y1 = location.getY() + 1.0;
-        double z1 = location.getZ();
-        float yaw = location.getYaw();
-        float pitch = location.getPitch();
-        Location newLocation = new Location(world1, x1, y1, z1, yaw, pitch);
+        Location newLocation = new Location(world, x, y + 1.0, z, location.getYaw(), location.getPitch());
         player.teleport(newLocation);
         player.setHealth(player.getMaxHealth());
         player.setFireTicks(0);

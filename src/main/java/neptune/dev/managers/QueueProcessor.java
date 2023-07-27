@@ -1,8 +1,9 @@
 package neptune.dev.managers;
 
+import neptune.dev.Neptune;
 import neptune.dev.game.StartGame;
+import neptune.dev.utils.CC;
 import neptune.dev.utils.Console;
-import org.apache.logging.log4j.core.selector.ContextSelector;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -10,41 +11,45 @@ import java.util.List;
 
 public class QueueProcessor {
 
+
     private static List<Player> queue = new ArrayList<>();
     private static List<String> playerKit = new ArrayList<>();
 
     public static void addPlayerToQueue(Player player, String kitName) {
-        if (queue.contains(player)) {
-            player.sendMessage("You are already in a queue! Use /leavequeue or use the item in your inventory to leave the queue.");
+        if (isPlayerInQueue(player)) {
+            player.sendMessage(CC.translate(Neptune.messagesConfig.getString("already-in-queue-message")));
             return;
-        } else {
-            queue.add(player);
         }
 
+        queue.add(player);
         playerKit.add(player.getName() + ":" + kitName);
 
         if (queue.size() >= 2 && playerKit.size() >= 2) {
-            if (playerKit.get(0).split(":")[1].equals(playerKit.get(1).split(":")[1])) {
-                Console.sendMessage("Match found between " + queue.get(0).getName() + " and " + queue.get(1).getName());
-                processQueueForKit(playerKit.get(0).split(":")[1], queue);
-                Console.sendMessage("Removing " + queue.get(0).getName() + " and " + queue.get(1).getName() + " from the queue.");
-
+            String firstKit = getPlayerKitName(queue.get(0));
+            String secondKit = getPlayerKitName(queue.get(1));
+            if (firstKit != null && firstKit.equals(secondKit)) {
                 Player firstPlayer = queue.get(0);
                 Player secondPlayer = queue.get(1);
 
-                playerKit.remove(firstPlayer.getName() + ":" + getPlayerKitName(firstPlayer));
-                playerKit.remove(secondPlayer.getName() + ":" + getPlayerKitName(secondPlayer));
+                Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
+
+                processQueueForKit(firstKit, queue);
+
+                Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
+
+                playerKit.remove(firstPlayer.getName() + ":" + firstKit);
+                playerKit.remove(secondPlayer.getName() + ":" + secondKit);
 
                 queue.remove(firstPlayer);
                 queue.remove(secondPlayer);
-                MatchManager.addMatch(firstPlayer, secondPlayer, "arena", getPlayerKitName(firstPlayer));
+
+                MatchManager.addMatch(firstPlayer, secondPlayer, "arena", firstKit);
             }
         }
-
     }
 
     public static void removePlayerFromQueue(Player player) {
-        if (queue.contains(player)) {
+        if (isPlayerInQueue(player)) {
             queue.remove(player);
             String playerKitString = player.getName() + ":" + getPlayerKitName(player);
             playerKit.remove(playerKitString);
