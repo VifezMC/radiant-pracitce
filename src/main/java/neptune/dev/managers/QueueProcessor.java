@@ -21,7 +21,6 @@ public class QueueProcessor {
             player.sendMessage(CC.translate(Neptune.messagesConfig.getString("queue.already-in-queue-message")));
             return;
         }
-
         queue.add(player);
         playerKit.add(player.getName() + ":" + kitName);
 
