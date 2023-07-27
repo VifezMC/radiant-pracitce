@@ -1,0 +1,110 @@
+package neptune.dev.listeners;
+
+import neptune.dev.Neptune;
+import neptune.dev.player.PlayerState;
+import neptune.dev.utils.CC;
+import org.bukkit.GameMode;
+import org.bukkit.Material;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+
+import static neptune.dev.utils.PlayerUtils.hasPlayerState;
+import static org.bukkit.Bukkit.getLogger;
+
+public class SpawnListeners implements Listener {
+
+    @EventHandler // DISABLING DAMAGE IN LOBBY
+    public void onDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player player = (Player) event.getEntity();
+            if (hasPlayerState(player, PlayerState.LOBBY)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+    @EventHandler // DISABLING FOOD DROP IN LOBBY
+    public void onFoodLevel(FoodLevelChangeEvent event) {
+        Player player = (Player) event.getEntity();
+        if (hasPlayerState(player, PlayerState.LOBBY)) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler // DISABLE PLAYER ITEM DROPS
+    public void onDrop(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
+                event.setCancelled(true);
+        }
+    }
+
+    @EventHandler // DISABLE PLAYER ITEM PLACE
+    public void onBlockPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
+            event.setCancelled(true);
+        }
+    }
+//    @EventHandler // DISABLE PLAYER DROP MOVING THINGS IN INV
+//    public void onClickInv(InventoryClickEvent event) {
+//        Player player = (Player) event.getWhoClicked();
+//        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
+//            event.setCancelled(true);
+//        }
+//    }
+
+    @EventHandler // DISABLE PLAYER BLOCK BREAK
+    public void blockBreak(BlockBreakEvent event) {
+        Player player = (Player) event.getPlayer();
+        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler // SPAWN ITEMS
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        ItemStack item = event.getItem();
+
+        if (event.getAction().toString().contains("RIGHT_CLICK") && item != null) {
+            for (String itemName : Neptune.spawnItemsConfig.getConfigurationSection("spawn-items").getKeys(false)) {
+                ConfigurationSection itemSection = Neptune.spawnItemsConfig.getConfigurationSection("spawn-items." + itemName);
+                if (itemSection == null) {
+                    getLogger().warning("Invalid configuration for spawn item '" + itemName + "'. Please check 'config.yml'");
+                    continue;
+                }
+
+                Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
+                if (material == null) {
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    continue;
+                }
+
+                if (item.getType() == material && item.hasItemMeta()) {
+                    ItemMeta meta = item.getItemMeta();
+                    String displayName = itemSection.getString("display-name", "&6Ranked Queue &7(Right Click)");
+
+                    if (meta != null && meta.getDisplayName() != null && meta.getDisplayName().equals(CC.translate(displayName))) {
+                        String command = itemSection.getString("command", "");
+                        if (!command.isEmpty()) {
+                            player.performCommand(command);
+                            event.setCancelled(true);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+}

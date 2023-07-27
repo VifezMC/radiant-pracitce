@@ -1,0 +1,23 @@
+main: neptune.dev.Neptune
+name: Neptune
+version: 1.0
+description: High Quality Practice Plugin
+author: Ocean Deveolment
+api-version: 1.8
+api: Beta
+
+commands:
+  setspawn:
+    description: Sets server spawn.
+  arena:
+    description: Arena commands.
+  neptune:
+    description: Main command.
+  kit:
+    description: Main command for kits.
+  queue:
+    description: Queue Command.
+  ping:
+    description: Get a players ping.
+  leavequeue:
+    description: Leave a queue.
