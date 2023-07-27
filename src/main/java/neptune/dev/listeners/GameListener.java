@@ -56,7 +56,7 @@ public class GameListener implements Listener {
                 loser = player1;
             }
 
-            String formattingString = Neptune.messagesConfig.getString("kill-message");
+            String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
             Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
             Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));

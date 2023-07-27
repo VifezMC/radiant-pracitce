@@ -1,14 +1,17 @@
-join-message:
-  - "&7&m--------------------------------"
-  - "&eWelcome to Neptune Network"
-  - " "
-  - '&fUse the &esword &fto queue for matches!'
-  - '&fCheck out our &9Discord&7: &e&ndiscord.oceandev.net'
-  - '&fType &e''/help''&f for help'
-  -  ' '
-  - '&7&m--------------------------------'
-ping-message: "&bYour ping is &f{ping}"
-other-player-ping-message: "&b{player}'s ping is &f{ping}"
-match-found: "&BMatch found against &f{opponent}"
-kill-message: "&a{winner} &7killed &c{loser}"
-already-in-queue-message: "&cYou are already in queue!"
+general:
+  join-message:
+    - "&7&m--------------------------------"
+    - "&eWelcome to Neptune Network"
+    - " "
+    - '&fUse the &esword &fto queue for matches!'
+    - '&fCheck out our &9Discord&7: &e&ndiscord.oceandev.net'
+    - '&fType &e''/help''&f for help'
+    -  ' '
+    - '&7&m--------------------------------'
+  ping-message: "&bYour ping is &f{ping}"
+  other-player-ping-message: "&b{player}'s ping is &f{ping}"
+match:
+  match-found: "&BMatch found against &f{opponent}"
+  kill-message: "&a{winner} &7killed &c{loser}"
+queue:
+  already-in-queue-message: "&cYou are already in queue!"

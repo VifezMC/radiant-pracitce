@@ -17,7 +17,7 @@ public class QueueProcessor {
 
     public static void addPlayerToQueue(Player player, String kitName) {
         if (isPlayerInQueue(player)) {
-            player.sendMessage(CC.translate(Neptune.messagesConfig.getString("already-in-queue-message")));
+            player.sendMessage(CC.translate(Neptune.messagesConfig.getString("queue.already-in-queue-message")));
             return;
         }
 

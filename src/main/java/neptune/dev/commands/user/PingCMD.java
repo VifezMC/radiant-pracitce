@@ -20,7 +20,7 @@ public class PingCMD implements CommandExecutor {
         Player player = (Player) sender;
 
         if (args.length == 0) {
-            String formattingString = Neptune.messagesConfig.getString("ping-message");
+            String formattingString = Neptune.messagesConfig.getString("general.ping-message");
             String formattedMessage = formattingString.replace("{player}", player.getName()).replace("{ping}", PlayerUtils.getPing(player));
             player.sendMessage(CC.translate(formattedMessage));
         } else if (args.length == 1) {
@@ -29,7 +29,7 @@ public class PingCMD implements CommandExecutor {
                 player.sendMessage(ChatColor.RED + "Player not found or not online.");
                 return true;
             }
-            String formattingString2 = Neptune.messagesConfig.getString("other-player-ping-message");
+            String formattingString2 = Neptune.messagesConfig.getString("general.other-player-ping-message");
             String formattedMessage2 = formattingString2.replace("{player}", target.getName()).replace("{ping}", PlayerUtils.getPing(target));
             player.sendMessage(CC.translate(formattedMessage2));
         } else {

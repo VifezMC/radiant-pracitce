@@ -34,7 +34,7 @@ public class PlayerUtils {
 
         // JOIN MESSAGE
         if (Neptune.pluginConfig.getBoolean("enable-join-message")) {
-            for (String msg : Neptune.messagesConfig.getStringList("join-message")) {
+            for (String msg : Neptune.messagesConfig.getStringList("general.join-message")) {
                 p.sendMessage(CC.translate(msg));
             }
         }
