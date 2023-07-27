@@ -3,6 +3,7 @@ package neptune.dev.commands.user;
 import neptune.dev.Neptune;
 import neptune.dev.managers.QueueProcessor;
 import neptune.dev.utils.CC;
+import neptune.dev.utils.PlayerUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,11 +26,14 @@ public class QueueCMD implements CommandExecutor {
             return true;
         }
 
-        String kitName = args[0].toLowerCase();
+        String kitName = args[0];
 
         if (getConfiguredKits().contains(kitName)) {
             Player player = (Player) sender;
-            player.sendMessage(CC.translate("&bYou were added to " + args[0]) + " queue");
+            String formattingString = Neptune.messagesConfig.getString("queue.added-to-queue");
+            String formattedMessage = formattingString.replace("{gamemode}", args[0]);
+            player.sendMessage(CC.translate(formattedMessage));
+
             QueueProcessor.addPlayerToQueue(player, kitName);
         } else {
             sender.sendMessage(CC.translate("&cThe kit '" + kitName + "' doesn't exist!"));

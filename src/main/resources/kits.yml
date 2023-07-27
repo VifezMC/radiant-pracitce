@@ -1,5 +1,5 @@
 kits:
-  nodebuff:
+  Nodebuff:
     items:
       - ==: org.bukkit.inventory.ItemStack
         type: DIAMOND_SWORD
@@ -149,6 +149,6 @@ kits:
             PROTECTION_ENVIRONMENTAL: 2
             DURABILITY: 3
     icon:
-      - ==: org.bukkit.inventory.ItemStack
-        type: POTION
-        damage: 16421
+      ==: org.bukkit.inventory.ItemStack
+      type: POTION
+      damage: 16421

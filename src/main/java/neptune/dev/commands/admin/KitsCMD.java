@@ -108,23 +108,22 @@ public class KitsCMD implements CommandExecutor {
             e.printStackTrace();
         }
     }
-    private void setIcon(String location, ItemStack items) {
+    private void setIcon(String location, ItemStack item) {
         try {
             if (Neptune.kitsConfig.get("kits." + location) == null) {
                 throw new IllegalArgumentException("Location does not exist: " + location);
             }
-            Neptune.kitsConfig.set("kits." + location + ".icon", Arrays.asList(items));
+            Neptune.kitsConfig.set("kits." + location + ".icon", item);
             saveConfig();
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (IllegalArgumentException e) {
-            Console.sendMessage("&cLocation doesn't exsit!");
+            Console.sendMessage("&cLocation doesn't exist!");
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 
     private void setArmour(String location, ItemStack[] items, Player p) {
         try {

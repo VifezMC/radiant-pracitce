@@ -14,13 +14,14 @@ neptune\dev\utils\PlayerUtils.class
 neptune\dev\listeners\GameListener.class
 neptune\dev\commands\user\QueueCMD.class
 neptune\dev\listeners\SpawnListeners.class
-neptune\dev\managers\ArenaManager.class
 neptune\dev\managers\MatchManager.class
 neptune\dev\commands\admin\ArenaCMD.class
 neptune\dev\Constants.class
 neptune\dev\game\EndGame$1.class
 neptune\dev\game\StartGame.class
+neptune\dev\ui\UnrankedInventory.class
 neptune\dev\Neptune.class
+neptune\dev\commands\user\UnrankedCMD.class
 neptune\dev\commands\user\LeaveQueueCMD.class
 neptune\dev\game\Match.class
 neptune\dev\commands\user\PingCMD.class

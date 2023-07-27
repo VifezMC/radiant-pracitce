@@ -4,6 +4,7 @@ import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
 import neptune.dev.ui.StatsInventory;
+import neptune.dev.ui.UnrankedInventory;
 import neptune.dev.utils.Console;
 import org.bukkit.configuration.file.*;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -31,17 +32,14 @@ public class Neptune extends JavaPlugin {
     // CONFIG
     registerConfigs();
 
-    // MANAGERS
-    ArenaManager arenaManager = new ArenaManager();
-    Console.sendMessage("&bArenaManager loaded successfully" + "\n" + "&bArenas: &f" + arenaManager.getArenas());
-
     // LIST LISTENERS
     Arrays.asList(
             new PlayerJoin(),
             new SpawnListeners(),
             new WorldListener(),
             new GameListener(),
-            new StatsInventory()
+            new StatsInventory(),
+            new UnrankedInventory()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
 
     // COMMANDS
@@ -53,6 +51,7 @@ public class Neptune extends JavaPlugin {
     getCommand("ping").setExecutor(new PingCMD());
     getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
     getCommand("stats").setExecutor(new StatsCMD());
+    getCommand("unranked").setExecutor(new UnrankedCMD());
 
     // START MESSSAGE
     Console.sendMessage("&bNeptune Loaded successfully");

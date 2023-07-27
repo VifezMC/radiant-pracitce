@@ -14,7 +14,7 @@ import org.bukkit.inventory.Inventory;
 
 public class StatsInventory implements Listener {
 
-    public static void openStats(Player player) {
+    public static void openMenu(Player player) {
         Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate("&8Stats of " + player.getName()));
         for (int x = 0; x < 27; x++) {
             menu.setItem(x, ItemBuilder.build(Material.STAINED_GLASS_PANE, 1, 15, "&0.", null));

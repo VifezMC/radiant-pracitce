@@ -15,3 +15,6 @@ match:
   kill-message: "&a{winner} &7killed &c{loser}"
 queue:
   already-in-queue-message: "&cYou are already in queue!"
+  added-to-queue: "&bYou were added to {gamemode} queue!"
+  leave-queue: "&cYou left queue!"
+  not-in-queue: "&cYou are not in queue!"

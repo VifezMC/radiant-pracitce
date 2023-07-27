@@ -23,3 +23,5 @@ commands:
     description: Leave a queue.
   stats:
     description: Open Stats menu.
+  unranked:
+    description: Open unranked menu.

@@ -107,4 +107,40 @@ public class SpawnListeners implements Listener {
         }
     }
 
+    @EventHandler // Queue Items
+    public void onPlayerInteract2(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        ItemStack item = event.getItem();
+
+        if (event.getAction().toString().contains("RIGHT_CLICK") && item != null) {
+            for (String itemName : Neptune.spawnItemsConfig.getConfigurationSection("queue-items").getKeys(false)) {
+                ConfigurationSection itemSection = Neptune.spawnItemsConfig.getConfigurationSection("queue-items." + itemName);
+                if (itemSection == null) {
+                    getLogger().warning("Invalid configuration for spawn item '" + itemName + "'. Please check 'config.yml'");
+                    continue;
+                }
+
+                Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
+                if (material == null) {
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    continue;
+                }
+
+                if (item.getType() == material && item.hasItemMeta()) {
+                    ItemMeta meta = item.getItemMeta();
+                    String displayName = itemSection.getString("display-name", "&6Ranked Queue &7(Right Click)");
+
+                    if (meta != null && meta.getDisplayName() != null && meta.getDisplayName().equals(CC.translate(displayName))) {
+                        String command = itemSection.getString("command", "");
+                        if (!command.isEmpty()) {
+                            player.performCommand(command);
+                            event.setCancelled(true);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
 }

@@ -14,7 +14,6 @@ import java.util.Map;
 
 public class StartGame {
     private static Map<Player, PlayerState> playerStates = new HashMap<>();
-    static ArenaManager arenaManager = new ArenaManager();
 
     public static void StartGame(String kitName, List<Player> players) {
         for (Player player : players) {
@@ -35,8 +34,6 @@ public class StartGame {
                 }
             }
         }
-        arenaManager.teleportToArena(Bukkit.getPlayer(players.get(0).getName()), kitName, 1);
-        arenaManager.teleportToArena(Bukkit.getPlayer(players.get(1).getName()), kitName, 2);
     }
     private static ItemStack[] getItemsFromConfig(String location) {
         return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".items")).toArray(new ItemStack[0]);

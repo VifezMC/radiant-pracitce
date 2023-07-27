@@ -1,15 +1,13 @@
 package neptune.dev.commands.user;
 
-import neptune.dev.managers.QueueProcessor;
-import neptune.dev.ui.StatsInventory;
-import neptune.dev.utils.CC;
-import org.bukkit.Bukkit;
+import neptune.dev.Neptune;
+import neptune.dev.ui.UnrankedInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class StatsCMD implements CommandExecutor {
+public class UnrankedCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String s, String[] strings) {
         if (!(sender instanceof Player)) {
@@ -17,7 +15,7 @@ public class StatsCMD implements CommandExecutor {
             return true;
         }
         Player player = (Player) sender;
-        StatsInventory.openMenu(player);
+        UnrankedInventory.openMenu(player, Neptune.kitsConfig);
         return true;
     }
 }

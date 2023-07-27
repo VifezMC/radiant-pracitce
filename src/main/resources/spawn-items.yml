@@ -24,3 +24,9 @@ spawn-items:
     display-name: "&9Settings &7(Right Click)"
     slot: 9
     command: "settings"
+queue-items:
+  item1:
+    type: REDSTONE
+    display-name: "&9Leave Queue &7(Right Click)"
+    slot: 1
+    command: "leavequeue"
