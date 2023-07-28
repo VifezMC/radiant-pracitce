@@ -40,15 +40,15 @@ public class UnrankedInventory implements Listener {
 
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
+            Player player = (Player) event.getWhoClicked();
         if (event.getInventory().getTitle().equals(CC.translate("&8Unranked Queue"))) {
+            if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
             event.setCancelled(true);
             player.closeInventory();
             player.getInventory().clear();
             PlayerUtils.createQueueItems(player);
             player.updateInventory();
-            ItemStack clickedItem = event.getCurrentItem();
-            if (clickedItem != null && clickedItem.getType() != Material.AIR) {
+                ItemStack clickedItem = event.getCurrentItem();
                 String itemName = clickedItem.getItemMeta().getDisplayName();
                 if (itemName != null && !itemName.isEmpty()) {
                     itemName = itemName.replaceAll("§.", "");
