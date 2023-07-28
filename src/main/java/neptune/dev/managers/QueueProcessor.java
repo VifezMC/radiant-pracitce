@@ -7,14 +7,14 @@ import neptune.dev.utils.Console;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class QueueProcessor {
 
+
+
     private static List<Player> queue = new ArrayList<>();
-    private static Map<Player, String> playerKit = new HashMap<>();
+    private static List<String> playerKit = new ArrayList<>();
     public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
@@ -24,17 +24,37 @@ public class QueueProcessor {
         }
 
         queue.add(player);
-        playerKit.put(player, kitName);
+        playerKit.add(player.getName() + ":" + kitName);
 
-        if (queue.size() >= 2) {
-            processQueue();
+        if (queue.size() >= 2 && playerKit.size() >= 2) {
+            String firstKit = getPlayerKitName(queue.get(0));
+            String secondKit = getPlayerKitName(queue.get(1));
+            if (firstKit != null && firstKit.equals(secondKit)) {
+                Player firstPlayer = queue.get(0);
+                Player secondPlayer = queue.get(1);
+                firstPlayer.getInventory().clear();
+                secondPlayer.getInventory().setArmorContents(null);
+                Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
+
+                MatchManager.addMatch(firstPlayer, secondPlayer, "test", firstKit);
+                processQueueForKit(firstKit, queue);
+                Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
+                playerKit.remove(firstPlayer.getName() + ":" + firstKit);
+                playerKit.remove(secondPlayer.getName() + ":" + secondKit);
+
+                queue.remove(firstPlayer);
+                queue.remove(secondPlayer);
+                QueueProcessor.playing = QueueProcessor.playing + 2;
+
+            }
         }
     }
 
     public static void removePlayerFromQueue(Player player) {
         if (isPlayerInQueue(player)) {
             queue.remove(player);
-            playerKit.remove(player);
+            String playerKitString = player.getName() + ":" + getPlayerKitName(player);
+            playerKit.remove(playerKitString);
         } else {
             player.sendMessage("You are not in a queue!");
         }
@@ -44,29 +64,23 @@ public class QueueProcessor {
         return queue.contains(player);
     }
 
-    private static void processQueue() {
-        List<Player> matchedPlayers = new ArrayList<>();
-
-        for (Player player : queue) {
-            String kitName = playerKit.get(player);
-            if (!matchedPlayers.contains(player)) {
-                List<Player> matchingPlayers = new ArrayList<>();
-                matchingPlayers.add(player);
-
-                for (Player otherPlayer : queue) {
-                    if (player != otherPlayer && playerKit.get(otherPlayer).equals(kitName)) {
-                        matchingPlayers.add(otherPlayer);
-                        matchedPlayers.add(otherPlayer);
-                    }
-                }
-
-                if (matchingPlayers.size() >= 2) {
-                    StartGame.StartGame(kitName, matchingPlayers);
+    private static void processQueueForKit(String kitName, List<Player> players) {
+        for (Player player : players) {
+            for (Player otherPlayer : players) {
+                if (player != otherPlayer) {
+                    StartGame.StartGame(kitName, players);
                 }
             }
         }
+    }
 
-        matchedPlayers.forEach(playerKit::remove);
-        queue.removeAll(matchedPlayers);
+    private static String getPlayerKitName(Player player) {
+        for (String kitInfo : playerKit) {
+            String[] parts = kitInfo.split(":");
+            if (parts.length == 2 && parts[0].equals(player.getName())) {
+                return parts[1];
+            }
+        }
+        return null;
     }
 }

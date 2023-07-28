@@ -4,18 +4,14 @@ import neptune.dev.game.Match;
 import neptune.dev.utils.Console;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class MatchManager {
 
-    private static final List<Match> matches = new ArrayList<>();
+    private static List<Match> matches = new ArrayList<>();
 
     public static void addMatch(Player player1, Player player2, String arenaName, String kitName) {
-        Match match = new Match(player1, player2, arenaName, kitName, UUID.randomUUID().toString());
-        matches.add(match);
+        matches.add(new Match(player1, player2, arenaName, kitName, UUID.randomUUID().toString()));
         Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName + " with kit " + kitName);
     }
 
@@ -26,10 +22,11 @@ public class MatchManager {
             if (match.getMatchID().equals(matchID.toString())) {
                 iterator.remove();
                 Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName() + " with kit " + match.getKitName());
-                break;
             }
         }
     }
+
+
 
     public static UUID getMatchID(Player player) {
         for (Match match : matches) {
@@ -60,4 +57,5 @@ public class MatchManager {
         }
         return null;
     }
+
 }

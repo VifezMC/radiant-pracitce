@@ -9,8 +9,10 @@ scoreboard:
     - "&7&m--------------------"
   match:
     - "&7&m--------------------"
-    - "&fOnline: &9{online_players}"
-    - "&fPlaying: &9{playing_players}"
+    - "&9Opponent: &f{opponent}"
+    - " "
+    - "&aYou Ping: &f{user_ping}"
+    - "&cOpponent Ping: &f{opponent_ping}"
     - " "
     - "&7oceandev.net"
     - "&7&m--------------------"

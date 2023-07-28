@@ -41,10 +41,7 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        event.getDrops().clear();
-        event.setDeathMessage(null);
         Player player = event.getEntity();
-
         if (hasPlayerState(player, PlayerState.PLAYING)) {
             String gameID = MatchManager.getMatchID(player).toString();
             String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(0).getName();
@@ -65,7 +62,14 @@ public class GameListener implements Listener {
             Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
             EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), player);
         }
+        event.setDeathMessage(null);
+    }
 
+    @EventHandler
+    public void onPlayerDeath2(PlayerDeathEvent event) {
+        event.getDrops().clear();
+        event.setDeathMessage(null);
+        Player player = event.getEntity();
         player.setGameMode(GameMode.CREATIVE);
         Location location = player.getLocation();
         double x = location.getX();

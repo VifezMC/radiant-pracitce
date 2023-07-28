@@ -32,7 +32,6 @@ public class StartGame {
                     player.updateInventory();
                     PlayerUtils.removeState(player, PlayerState.LOBBY);
                     PlayerUtils.setState(player, PlayerState.PLAYING);
-                    QueueProcessor.playing = QueueProcessor.playing + 2;
                 }
             }
         }
