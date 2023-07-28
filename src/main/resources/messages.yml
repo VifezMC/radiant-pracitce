@@ -11,7 +11,7 @@ general:
   ping-message: "&eYour ping is &f{ping}"
   other-player-ping-message: "&e{player}'s ping is &f{ping}"
 match:
-  match-found: "&bMatch found against &f{opponent}"
+  match-found: "&eMatch found against &f{opponent}"
   kill-message: "&a{winner} &7killed &c{loser}"
 queue:
   already-in-queue-message: "&cYou are already in queue!"
