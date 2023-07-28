@@ -43,7 +43,6 @@ public class GameListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player player = event.getEntity();
         if (hasPlayerState(player, PlayerState.PLAYING)) {
-            String gameID = MatchManager.getMatchID(player).toString();
             String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(0).getName();
             String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(1).getName();
             String winner, loser;
