@@ -2,4 +2,4 @@ general:
   enable-join-message: true
 menus:
   queue:
-    item-color: "&e"
+    item-color: "&9"

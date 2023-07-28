@@ -3,9 +3,11 @@ package neptune.dev;
 import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
+import neptune.dev.managers.GameScoreboard;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventory;
 import neptune.dev.utils.Console;
+import neptune.dev.utils.assemble.Assemble;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -25,13 +27,15 @@ public class Neptune extends JavaPlugin {
   public static FileConfiguration spawnItemsConfig;
   public static File kits;
   public static FileConfiguration kitsConfig;
-
+  public static File scoreboard;
+  public static FileConfiguration scoreboardConfig;
   @Override
   public void onEnable() {
     instance = this;
 
     // CONFIG
     registerConfigs();
+    Assemble assemble = new Assemble(this, new GameScoreboard());
 
     // LIST LISTENERS
     Arrays.asList(
@@ -86,6 +90,11 @@ public class Neptune extends JavaPlugin {
     saveResource("kits.yml", false);
     kits = new File(this.getDataFolder(), "kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);
+
+    // Scoreboard CONFIG
+    saveResource("scoreboard.yml", false);
+    scoreboard = new File(this.getDataFolder(), "scoreboard.yml");
+    scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
   }
 
   @Override

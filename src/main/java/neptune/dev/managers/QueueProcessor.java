@@ -15,6 +15,7 @@ public class QueueProcessor {
 
     private static List<Player> queue = new ArrayList<>();
     private static Map<Player, String> playerKit = new HashMap<>();
+    public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
         if (isPlayerInQueue(player)) {

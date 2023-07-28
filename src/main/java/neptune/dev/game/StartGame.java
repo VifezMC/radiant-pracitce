@@ -1,6 +1,7 @@
 package neptune.dev.game;
 
 import neptune.dev.Neptune;
+import neptune.dev.managers.QueueProcessor;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
 import neptune.dev.utils.PlayerUtils;
@@ -31,6 +32,7 @@ public class StartGame {
                     player.updateInventory();
                     PlayerUtils.removeState(player, PlayerState.LOBBY);
                     PlayerUtils.setState(player, PlayerState.PLAYING);
+                    QueueProcessor.playing = QueueProcessor.playing + 2;
                 }
             }
         }

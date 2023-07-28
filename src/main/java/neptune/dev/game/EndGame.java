@@ -1,6 +1,7 @@
 package neptune.dev.game;
 
 import neptune.dev.managers.MatchManager;
+import neptune.dev.managers.QueueProcessor;
 import neptune.dev.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -16,7 +17,7 @@ public class EndGame {
                 PlayerUtils.endGame(winner);
                 PlayerUtils.endGame(loser);
                 MatchManager.removeMatch(MatchManager.getMatchID(p));
-
+                QueueProcessor.playing = QueueProcessor.playing - 2;
             }
         }, 60L);
 

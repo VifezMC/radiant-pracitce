@@ -28,5 +28,5 @@ queue-items:
   item1:
     type: REDSTONE
     display-name: "&9Leave Queue &7(Right Click)"
-    slot: 1
+    slot: 9
     command: "leavequeue"
