@@ -34,14 +34,17 @@ public class QueueProcessor {
                 Player secondPlayer = queue.get(1);
                 firstPlayer.getInventory().clear();
                 secondPlayer.getInventory().setArmorContents(null);
-                Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
+                if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+                    Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
 
+                }
                 MatchManager.addMatch(firstPlayer, secondPlayer, "test", firstKit);
                 processQueueForKit(firstKit, queue);
-                Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
+                if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+                    Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
+                }
                 playerKit.remove(firstPlayer.getName() + ":" + firstKit);
                 playerKit.remove(secondPlayer.getName() + ":" + secondKit);
-
                 queue.remove(firstPlayer);
                 queue.remove(secondPlayer);
                 QueueProcessor.playing = QueueProcessor.playing + 2;

@@ -1,5 +1,6 @@
 package neptune.dev.managers;
 
+import neptune.dev.Neptune;
 import neptune.dev.game.Match;
 import neptune.dev.utils.Console;
 import org.bukkit.entity.Player;
@@ -15,13 +16,17 @@ public class MatchManager {
         UUID matchID = UUID.randomUUID();
         Match match = new Match(player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);
-        Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName + " with kit " + kitName);
+        if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+            Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName + " with kit " + kitName);
+        }
     }
 
     public static void removeMatch(UUID matchID) {
         Match match = matches.remove(matchID);
         if (match != null) {
-            Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName() + " with kit " + match.getKitName());
+            if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+                Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName() + " with kit " + match.getKitName());
+            }
         }
     }
 
