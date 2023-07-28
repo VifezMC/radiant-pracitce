@@ -14,7 +14,7 @@ public class GameScoreboard implements AssembleAdapter {
 
     @Override
     public String getTitle(Player player) {
-        return Neptune.scoreboardConfig.getString("SCOREBOARD.TITLE");
+        return Neptune.scoreboardConfig.getString("scoreboard.title");
     }
 
     @Override
@@ -24,14 +24,14 @@ public class GameScoreboard implements AssembleAdapter {
         if (state == PlayerState.LOBBY) {
             toReturn = getLobbyLines();
         } else if (state == PlayerState.PLAYING) {
-            toReturn.addAll(Neptune.scoreboardConfig.getStringList("SCOREBOARD.MATCH"));
+            toReturn.addAll(Neptune.scoreboardConfig.getStringList("scoreboard.match"));
         }
         return toReturn;
     }
 
     private List<String> getLobbyLines() {
         List<String> lobbyLines = new ArrayList<>();
-        List<String> lobbyConfig = Neptune.scoreboardConfig.getStringList("SCOREBOARD.LOBBY");
+        List<String> lobbyConfig = Neptune.scoreboardConfig.getStringList("scoreboard.lobby");
         for (String line : lobbyConfig) {
             line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueProcessor.playing));

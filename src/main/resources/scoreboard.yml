@@ -1,13 +1,13 @@
-SCOREBOARD:
-  TITLE: "&9PRACTICE"
-  LOBBY:
+scoreboard:
+  title: "&9PRACTICE"
+  lobby:
     - "&7&m--------------------"
     - "&fOnline: &9{online_players}"
     - "&fPlaying: &9{playing_players}"
     - " "
     - "&7oceandev.net"
     - "&7&m--------------------"
-  MATCH:
+  match:
     - "&7&m--------------------"
     - "&fOnline: &9{online_players}"
     - "&fPlaying: &9{playing_players}"
