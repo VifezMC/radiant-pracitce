@@ -132,7 +132,7 @@ public class SpawnListeners implements Listener {
                     String displayName = itemSection.getString("display-name", "&6Ranked Queue &7(Right Click)");
 
                     if (meta != null && meta.getDisplayName() != null && meta.getDisplayName().equals(CC.translate(displayName))) {
-                        String command = itemSection.getString("command", "");
+                        String command = itemSection.getString("command");
                         if (!command.isEmpty()) {
                             player.performCommand(command);
                             event.setCancelled(true);
