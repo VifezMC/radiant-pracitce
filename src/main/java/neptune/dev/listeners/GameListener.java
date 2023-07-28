@@ -16,6 +16,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
@@ -64,6 +65,30 @@ public class GameListener implements Listener {
         event.setDeathMessage(null);
     }
 
+    @EventHandler
+    public void onPlayerQuit(PlayerQuitEvent event) {
+        event.setQuitMessage(null);
+        Player p = event.getPlayer();
+        if (hasPlayerState(p, PlayerState.PLAYING)) {
+            String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(0).getName();
+            String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(1).getName();
+            String winner, loser;
+
+            if (Bukkit.getPlayer(player2).getGameMode().equals(GameMode.CREATIVE)) {
+                winner = player1;
+                loser = player2;
+            } else {
+                winner = player2;
+                loser = player1;
+            }
+
+            String formattingString = Neptune.messagesConfig.getString("match.kill-message");
+            String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
+            Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
+            Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
+            EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), p);
+        }
+    }
     @EventHandler
     public void onPlayerDeath2(PlayerDeathEvent event) {
         event.getDrops().clear();
