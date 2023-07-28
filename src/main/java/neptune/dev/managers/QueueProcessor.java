@@ -4,6 +4,7 @@ import neptune.dev.Neptune;
 import neptune.dev.game.StartGame;
 import neptune.dev.utils.CC;
 import neptune.dev.utils.Console;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -45,6 +46,23 @@ public class QueueProcessor {
                 queue.remove(firstPlayer);
                 queue.remove(secondPlayer);
                 QueueProcessor.playing = QueueProcessor.playing + 2;
+
+                Player user;
+                Player opponent;
+                if(firstPlayer == player){
+                    user = firstPlayer;
+                    opponent = secondPlayer;
+                }
+                else{
+                    user = secondPlayer;
+                    opponent = firstPlayer;
+                }
+                String formattingString = Neptune.messagesConfig.getString("match.match-found");
+                String formattedMessage = formattingString.replace("{opponent}", user.getName());
+                firstPlayer.sendMessage(CC.translate(formattedMessage));
+                String formattingString2 = Neptune.messagesConfig.getString("match.match-found");
+                String formattedMessage2 = formattingString2.replace("{opponent}", opponent.getName());
+                secondPlayer.sendMessage(CC.translate(formattedMessage2));
 
             }
         }
