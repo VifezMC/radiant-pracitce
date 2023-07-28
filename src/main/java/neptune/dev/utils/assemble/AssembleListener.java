@@ -44,10 +44,4 @@ public class AssembleListener implements Listener {
 		event.getPlayer().setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
 	}
 
-	//TODO see how we can make this better
-//	@EventHandler
-//	public void onPluginDisable(PluginDisableEvent event) {
-//		getAssemble().disable();
-//	}
-
 }
