@@ -20,6 +20,7 @@ neptune\dev\utils\PlayerUtils.class
 neptune\dev\utils\assemble\AssembleListener.class
 neptune\dev\listeners\GameListener.class
 neptune\dev\commands\user\QueueCMD.class
+neptune\dev\managers\Scoreboard.class
 neptune\dev\listeners\SpawnListeners.class
 neptune\dev\managers\MatchManager.class
 neptune\dev\utils\assemble\events\AssembleBoardCreateEvent.class
@@ -33,7 +34,6 @@ neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
 neptune\dev\commands\user\LeaveQueueCMD.class
-neptune\dev\managers\GameScoreboard.class
 neptune\dev\game\Match.class
 neptune\dev\commands\user\PingCMD.class
 neptune\dev\managers\QueueProcessor.class

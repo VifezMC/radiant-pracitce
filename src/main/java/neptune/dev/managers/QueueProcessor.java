@@ -4,7 +4,6 @@ import neptune.dev.Neptune;
 import neptune.dev.game.StartGame;
 import neptune.dev.utils.CC;
 import neptune.dev.utils.Console;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class QueueProcessor {
-
 
 
     private static List<Player> queue = new ArrayList<>();
@@ -78,7 +76,7 @@ public class QueueProcessor {
         for (Player player : players) {
             for (Player otherPlayer : players) {
                 if (player != otherPlayer) {
-                    StartGame.StartGame(kitName, players);
+                    StartGame.startGame(kitName, players);
                 }
             }
         }

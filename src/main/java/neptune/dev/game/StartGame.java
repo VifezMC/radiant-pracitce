@@ -1,43 +1,34 @@
 package neptune.dev.game;
 
 import neptune.dev.Neptune;
-import neptune.dev.managers.QueueProcessor;
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.CC;
 import neptune.dev.utils.PlayerUtils;
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class StartGame {
-    private static Map<Player, PlayerState> playerStates = new HashMap<>();
+    public static void startGame(String kitName, List<Player> players) {
+        ItemStack[] inventoryContents = getItemsFromConfig(kitName);
+        ItemStack[] armorContents = getArmorFromConfig(kitName);
 
-    public static void StartGame(String kitName, List<Player> players) {
         for (Player player : players) {
-            for (Player otherPlayer : players) {
-                if (player != otherPlayer) {
-                    player.getInventory().clear();
-                    player.getInventory().setArmorContents(null);
-                    ItemStack[] inventoryContents = getItemsFromConfig(kitName);
-                    ItemStack[] armorContents = getArmorFromConfig(kitName);
-                    player.getInventory().setContents(inventoryContents);
-                    player.getInventory().setArmorContents(armorContents);
-                    player.updateInventory();
-                    PlayerUtils.removeState(player, PlayerState.LOBBY);
-                    PlayerUtils.setState(player, PlayerState.PLAYING);
-                }
-            }
+            player.getInventory().clear();
+            player.getInventory().setArmorContents(null);
+            player.getInventory().setContents(inventoryContents);
+            player.getInventory().setArmorContents(armorContents);
+            player.updateInventory();
+            PlayerUtils.removeState(player, PlayerState.LOBBY);
+            PlayerUtils.setState(player, PlayerState.PLAYING);
         }
     }
+
     private static ItemStack[] getItemsFromConfig(String location) {
-        return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".items")).toArray(new ItemStack[0]);
+        return Neptune.kitsConfig.getList("kits." + location + ".items").toArray(new ItemStack[0]);
     }
 
     private static ItemStack[] getArmorFromConfig(String location) {
-        return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".armour")).toArray(new ItemStack[0]);
+        return Neptune.kitsConfig.getList("kits." + location + ".armour").toArray(new ItemStack[0]);
     }
 }

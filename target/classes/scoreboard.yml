@@ -12,7 +12,7 @@ scoreboard:
     - "&9Opponent: &f{opponent}"
     - " "
     - "&aYour Ping: &f{user_ping}"
-    - "&cOpponent Ping: &f{opponent_ping}"
+    - "&cTheir Ping: &f{opponent_ping}"
     - " "
     - "&7oceandev.net"
     - "&7&m--------------------"

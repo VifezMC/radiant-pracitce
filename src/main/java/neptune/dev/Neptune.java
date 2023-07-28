@@ -3,7 +3,7 @@ package neptune.dev;
 import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
-import neptune.dev.managers.GameScoreboard;
+import neptune.dev.managers.Scoreboard;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventory;
 import neptune.dev.utils.Console;
@@ -37,7 +37,7 @@ public class Neptune extends JavaPlugin {
     registerConfigs();
 
     // SCOREBOARD
-    Assemble assemble = new Assemble(this, new GameScoreboard());
+    Assemble assemble = new Assemble(this, new Scoreboard());
 
     // LIST LISTENERS
     Arrays.asList(

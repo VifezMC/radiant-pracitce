@@ -6,18 +6,18 @@ import java.util.UUID;
 
 public class Match {
 
-    Player player1;
-    Player player2;
-    String arenaName;
-    String kitName;
-    String matchID;
+    private Player player1;
+    private Player player2;
+    private String arenaName;
+    private String kitName;
+    private UUID matchID;
 
-    public Match(Player player1, Player player2, String arenaName, String kitName, String matchID) {
+    public Match(Player player1, Player player2, String arenaName, String kitName, UUID matchID) {
         this.player1 = player1;
         this.player2 = player2;
         this.arenaName = arenaName;
         this.kitName = kitName;
-        this.matchID = UUID.randomUUID().toString();
+        this.matchID = matchID;
     }
 
     public Player getPlayer1() {
@@ -36,7 +36,7 @@ public class Match {
         return kitName;
     }
 
-    public String getMatchID() {
+    public UUID getMatchID() {
         return matchID;
     }
 }
