@@ -1,6 +1,5 @@
 package neptune.dev.managers;
 
-
 import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.PlayerUtils;
@@ -20,28 +19,26 @@ public class GameScoreboard implements AssembleAdapter {
 
     @Override
     public List<String> getLines(Player player) {
-        final List<String> toReturn = new ArrayList<>();
-        if (PlayerUtils.getState(player) == PlayerState.LOBBY) {
-            return getLobby(player);
-        }
-        if (PlayerUtils.getState(player) == PlayerState.PLAYING) {
+        List<String> toReturn = new ArrayList<>();
+        PlayerState state = PlayerUtils.getState(player);
+        if (state == PlayerState.LOBBY) {
+            toReturn = getLobbyLines();
+        } else if (state == PlayerState.PLAYING) {
             toReturn.addAll(Neptune.scoreboardConfig.getStringList("SCOREBOARD.MATCH"));
         }
         return toReturn;
     }
 
-    public List<String> getLobby(Player player) {
-        List<String> toReturn = new ArrayList<>();
-        if (PlayerUtils.getState(player) == PlayerState.LOBBY) {
-            for (String sb : Neptune.scoreboardConfig.getStringList("SCOREBOARD.LOBBY")) {
-                String msg = sb;
-                msg = msg.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
-                msg = msg.replace("{playing_players}", String.valueOf(QueueProcessor.playing));
-                toReturn.add(msg);
-            }
+    private List<String> getLobbyLines() {
+        List<String> lobbyLines = new ArrayList<>();
+        List<String> lobbyConfig = Neptune.scoreboardConfig.getStringList("SCOREBOARD.LOBBY");
+        for (String line : lobbyConfig) {
+            line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
+            line = line.replace("{playing_players}", String.valueOf(QueueProcessor.playing));
+            lobbyLines.add(line);
         }
-        return toReturn;
-}
+        return lobbyLines;
+    }
 
     public int getPing(Player player) {
         return ((CraftPlayer) player).getHandle().ping;
