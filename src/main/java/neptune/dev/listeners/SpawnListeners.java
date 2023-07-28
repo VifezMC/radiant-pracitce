@@ -117,7 +117,7 @@ public class SpawnListeners implements Listener {
             for (String itemName : Neptune.spawnItemsConfig.getConfigurationSection("queue-items").getKeys(false)) {
                 ConfigurationSection itemSection = Neptune.spawnItemsConfig.getConfigurationSection("queue-items." + itemName);
                 if (itemSection == null) {
-                    getLogger().warning("Invalid configuration for spawn item '" + itemName + "'. Please check 'config.yml'");
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
                     continue;
                 }
 

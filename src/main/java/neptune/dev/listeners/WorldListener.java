@@ -1,6 +1,7 @@
 package neptune.dev.listeners;
 
 import org.bukkit.Difficulty;
+import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBurnEvent;
@@ -13,6 +14,8 @@ import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.event.world.WorldLoadEvent;
+
+import static org.bukkit.Bukkit.getServer;
 
 public class WorldListener implements Listener {
 
@@ -33,10 +36,20 @@ public class WorldListener implements Listener {
             event.setCancelled(true);
         }
     }
+
+    @EventHandler
+    private void setAlwaysDay() {
+        for (World world : getServer().getWorlds()) {
+            world.setTime(6000);
+            world.setGameRuleValue("doDaylightCycle", "false");
+        }
+    }
+
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
             event.setCancelled(true);
     }
+
     @EventHandler
     public void onBlockIgnite(BlockIgniteEvent event) {
         if (event.getCause() == BlockIgniteEvent.IgniteCause.LIGHTNING) {
