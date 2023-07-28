@@ -45,6 +45,16 @@ public class MatchManager {
         }
         return null;
     }
+    public static String getOpponent(Player player) {
+        for (Match match : matches) {
+            if (match.getPlayer1().equals(player)) {
+                return match.getPlayer2().getName();
+            } else if (match.getPlayer2().equals(player)) {
+                return match.getPlayer1().getName();
+            }
+        }
+        return null;
+    }
 
     public static List<Player> getMatchPlayers(UUID matchID) {
         for (Match match : matches) {

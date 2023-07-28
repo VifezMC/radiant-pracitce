@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class QueueProcessor {
 
@@ -47,21 +48,12 @@ public class QueueProcessor {
                 queue.remove(secondPlayer);
                 QueueProcessor.playing = QueueProcessor.playing + 2;
 
-                Player user;
-                Player opponent;
-                if(firstPlayer == player){
-                    user = firstPlayer;
-                    opponent = secondPlayer;
-                }
-                else{
-                    user = secondPlayer;
-                    opponent = firstPlayer;
-                }
+
                 String formattingString = Neptune.messagesConfig.getString("match.match-found");
-                String formattedMessage = formattingString.replace("{opponent}", user.getName());
+                String formattedMessage = formattingString.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer)));
                 firstPlayer.sendMessage(CC.translate(formattedMessage));
                 String formattingString2 = Neptune.messagesConfig.getString("match.match-found");
-                String formattedMessage2 = formattingString2.replace("{opponent}", opponent.getName());
+                String formattedMessage2 = formattingString2.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer)));
                 secondPlayer.sendMessage(CC.translate(formattedMessage2));
 
             }
