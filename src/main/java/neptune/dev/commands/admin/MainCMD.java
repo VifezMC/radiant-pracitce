@@ -8,10 +8,10 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.Sound;
-import org.bukkit.inventory.ItemStack;
 
 
 public class MainCMD implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -24,14 +24,23 @@ public class MainCMD implements CommandExecutor {
             player.sendMessage(CC.translate("&cYou don't have permission to use this command."));
             return true;
         }
-        if (args.length == 1) {
-            if (args[0].equalsIgnoreCase("reload")) {
-                Neptune.instance.registerConfigs();
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                player.sendMessage(CC.GREEN + "Configs have been reloaded!");
-                return true;
-            }
+
+        if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
+            reloadConfigs(player);
+            return true;
         }
+
+        showPluginInfo(player);
+        return true;
+    }
+
+    private void reloadConfigs(Player player) {
+        Neptune.instance.registerConfigs();
+        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+        player.sendMessage(CC.GREEN + "Configs have been reloaded!");
+    }
+
+    private void showPluginInfo(Player player) {
         player.sendMessage(CC.translate("&7&m--------------------------------------------"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&bRunning Neptune Practice Core"));
@@ -41,7 +50,5 @@ public class MainCMD implements CommandExecutor {
         player.sendMessage((CC.translate("&bDiscord: &f" + Constants.Discord)));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m--------------------------------------------"));
-
-        return true;
     }
 }

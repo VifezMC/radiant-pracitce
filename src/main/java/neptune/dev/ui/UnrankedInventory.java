@@ -1,7 +1,6 @@
 package neptune.dev.ui;
 
 import neptune.dev.Neptune;
-import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
 import neptune.dev.utils.PlayerUtils;
 import org.bukkit.Bukkit;

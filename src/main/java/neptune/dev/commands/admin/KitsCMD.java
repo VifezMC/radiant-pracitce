@@ -31,53 +31,37 @@ public class KitsCMD implements CommandExecutor {
             return true;
         }
 
-        if (args.length == 2) {
+        if (args.length >= 2) {
             String kitName = args[1];
 
-            if (args[0].equalsIgnoreCase("create")) {
-                createKit(kitName);
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                player.sendMessage(CC.GREEN + "Kit has been created!");
-                return true;
-            } else if (args[0].equalsIgnoreCase("set")) {
-                ItemStack[] content = player.getInventory().getContents();
-                ItemStack[] armour = player.getInventory().getArmorContents();
-
-                setItems(kitName, content, player);
-                setArmour(kitName, armour, player);
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                player.sendMessage(CC.GREEN + "Kit inventory has been set!");
-                return true;
-            } else if (args[0].equalsIgnoreCase("give")) {
-                player.getInventory().clear();
-                player.getInventory().setArmorContents(null);
-                ItemStack[] inventoryContents = getItemsFromConfig(kitName);
-                ItemStack[] armorContents = getArmorFromConfig(kitName);
-                player.getInventory().setContents(inventoryContents);
-                player.getInventory().setArmorContents(armorContents);
-                player.updateInventory();
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                player.sendMessage(CC.GREEN + "Kit has been given!");
-                return true;
-            } else if (args[0].equalsIgnoreCase("seticon")) {
-
-                setIcon(kitName, player.getItemInHand());
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                player.sendMessage(CC.GREEN + "Kit has been given!");
-                return true;
+            switch (args[0]) {
+                case "create":
+                    createKit(kitName);
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit has been created!");
+                    break;
+                case "set":
+                    setItemsAndArmour(kitName, player);
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit inventory has been set!");
+                    break;
+                case "give":
+                    giveKit(kitName, player);
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit has been given!");
+                    break;
+                case "seticon":
+                    setIcon(kitName, player.getItemInHand());
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit icon has been set!");
+                    break;
+                default:
+                    showKitCommands(player);
+                    break;
             }
+        } else {
+            showKitCommands(player);
         }
-
-        player.sendMessage(CC.translate("&7&m------------------------------------------------"));
-        player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&8- &7Kit commands:"));
-        player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&b/kit create &8<&7name&8> &7- &8(&7Create a kit&8)"));
-        player.sendMessage(CC.translate("&b/kit set &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
-        player.sendMessage(CC.translate("&b/kit give &8<&7name&8> &7- &8(&7Give a kit's inventory&8)"));
-        player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
-        player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&7&m------------------------------------------------"));
 
         return true;
     }
@@ -87,62 +71,39 @@ public class KitsCMD implements CommandExecutor {
         Neptune.kitsConfig.set("kits." + name + ".armour", "None");
         Neptune.kitsConfig.set("kits." + name + ".icon", "None");
         Neptune.kitsConfig.set("kits." + name + ".arenas", "None");
-
         saveConfig();
     }
 
-    private void setItems(String location, ItemStack[] items, Player p) {
-        try {
-            if (Neptune.kitsConfig.get("kits." + location) == null) {
-                throw new IllegalArgumentException("Location does not exist: " + location);
-            }
-            Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
-            saveConfig();
-        } catch (NullPointerException e) {
-            p.sendMessage(CC.translate("&cLocation is null!"));
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            Console.sendMessage("&cLocation doesn't exsit!");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void setItemsAndArmour(String kitName, Player player) {
+        ItemStack[] content = player.getInventory().getContents();
+        ItemStack[] armour = player.getInventory().getArmorContents();
+
+        setItems(kitName, content);
+        setArmour(kitName, armour);
+        saveConfig();
     }
+
+    private void setItems(String location, ItemStack[] items) {
+        Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
+    }
+
     private void setIcon(String location, ItemStack item) {
-        try {
-            if (Neptune.kitsConfig.get("kits." + location) == null) {
-                throw new IllegalArgumentException("Location does not exist: " + location);
-            }
-            Neptune.kitsConfig.set("kits." + location + ".icon", item);
-            saveConfig();
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            Console.sendMessage("&cLocation doesn't exist!");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Neptune.kitsConfig.set("kits." + location + ".icon", item);
     }
 
-    private void setArmour(String location, ItemStack[] items, Player p) {
-        try {
-            if (Neptune.kitsConfig.get("kits." + location) == null) {
-                throw new IllegalArgumentException("Location does not exist: " + location);
-            }
-            Neptune.kitsConfig.set("kits." + location + ".armour", Arrays.asList(items));
-            saveConfig();
-        } catch (NullPointerException e) {
-            p.sendMessage(CC.translate("&cLocation is null!"));
-            e.printStackTrace();
-        } catch (IllegalArgumentException e) {
-            Console.sendMessage("&cLocation doesn't exsit!");
-            e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private void setArmour(String location, ItemStack[] items) {
+        Neptune.kitsConfig.set("kits." + location + ".armour", Arrays.asList(items));
     }
 
+    private void giveKit(String kitName, Player player) {
+        player.getInventory().clear();
+        player.getInventory().setArmorContents(null);
+        ItemStack[] inventoryContents = getItemsFromConfig(kitName);
+        ItemStack[] armorContents = getArmorFromConfig(kitName);
+        player.getInventory().setContents(inventoryContents);
+        player.getInventory().setArmorContents(armorContents);
+        player.updateInventory();
+    }
 
     private ItemStack[] getItemsFromConfig(String location) {
         return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".items")).toArray(new ItemStack[0]);
@@ -159,5 +120,18 @@ public class KitsCMD implements CommandExecutor {
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }
+    }
+
+    private void showKitCommands(Player player) {
+        player.sendMessage(CC.translate("&7&m------------------------------------------------"));
+        player.sendMessage(CC.translate(""));
+        player.sendMessage(CC.translate("&8- &7Kit commands:"));
+        player.sendMessage(CC.translate(""));
+        player.sendMessage(CC.translate("&b/kit create &8<&7name&8> &7- &8(&7Create a kit&8)"));
+        player.sendMessage(CC.translate("&b/kit set &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
+        player.sendMessage(CC.translate("&b/kit give &8<&7name&8> &7- &8(&7Give a kit's inventory&8)"));
+        player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
+        player.sendMessage(CC.translate(""));
+        player.sendMessage(CC.translate("&7&m------------------------------------------------"));
     }
 }

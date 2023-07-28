@@ -29,23 +29,52 @@ public class ArenaCMD implements CommandExecutor {
             return true;
         }
 
+        if (args.length >= 2) {
+            String arenaName = args[1];
 
-        if (args.length == 2) {
             if (args[0].equalsIgnoreCase("create")) {
-                createArena(args[1]);
-                player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + args[1] + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need set spawn1 and spawn2."));
+                createArena(arenaName);
+                player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set spawn1 and spawn2."));
+            } else if (args[0].equalsIgnoreCase("setspawn1")) {
+                setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
+                player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
+            } else if (args[0].equalsIgnoreCase("setspawn2")) {
+                setSpawn(arenaName, 2, PlayerUtils.toString(player.getLocation()));
+                player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
+            } else {
+                showArenaCommands(player);
             }
-            if (args[0].equalsIgnoreCase("setspawn1")) {
-                setSpawn(args[1],1, PlayerUtils.toString(player.getLocation()));
-                player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + args[1] + " &a!"));
-            }
-            if (args[0].equalsIgnoreCase("setspawn2")) {
-                setSpawn(args[1],2, PlayerUtils.toString(player.getLocation()));
-                player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + args[1] + " &a!"));
-            }
+
             return true;
+        } else {
+            showArenaCommands(player);
         }
+
+        return true;
+    }
+
+    private void createArena(String name) {
+        Neptune.arenaConfig.set("arenas." + name + ".spawn1", "None");
+        Neptune.arenaConfig.set("arenas." + name + ".spawn2", "None");
+        saveConfig();
+    }
+
+    private void setSpawn(String name, int number, String loc) {
+        Neptune.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
+        saveConfig();
+    }
+
+    private void saveConfig() {
+        try {
+            Neptune.arenaConfig.save(Neptune.arena);
+            Neptune.arenaConfig.load(Neptune.arena);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void showArenaCommands(Player player) {
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&8- &7Arena commands:"));
@@ -57,27 +86,5 @@ public class ArenaCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/arena setspawn2 &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
-        return true;
-    }
-
-    public void createArena(String name) {
-        Neptune.arenaConfig.set("arenas." + name + ".spawn1", "None");
-        Neptune.arenaConfig.set("arenas." + name + ".spawn2", "None");
-        try {
-            Neptune.arenaConfig.save(Neptune.arena);
-            Neptune.arenaConfig.load(Neptune.arena);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void setSpawn(String name, int number, String loc) {
-        Neptune.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
-        try {
-            Neptune.arenaConfig.save(Neptune.arena);
-            Neptune.arenaConfig.load(Neptune.arena);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
     }
 }

@@ -6,7 +6,8 @@ import neptune.dev.listeners.*;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventory;
 import neptune.dev.utils.Console;
-import org.bukkit.configuration.file.*;
+import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -60,9 +61,7 @@ public class Neptune extends JavaPlugin {
     Console.sendMessage("&bDiscord: &f" + Constants.Discord);
   }
 
-
   public void registerConfigs() {
-
     // ARENAS
     saveResource("arenas.yml", false);
     arena = new File(this.getDataFolder(), "arenas.yml");

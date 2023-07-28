@@ -29,18 +29,25 @@ public class SetSpawnCMD implements CommandExecutor {
             return true;
         }
 
-        setSpawn(PlayerUtils.toString(player.getLocation()));
-        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-        player.sendMessage(CC.GREEN + "Spawn has been set!" + "\n" + CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!" ));
+        String loc = PlayerUtils.toString(player.getLocation());
+        setSpawn(loc, player);
         return true;
     }
-    public void setSpawn(String loc) {
+
+    public void setSpawn(String loc, Player player) {
         Neptune.arenaConfig.set("lobby", loc);
+        saveConfig(player);
+        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+        player.sendMessage(CC.GREEN + "Spawn has been set!\n" + CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+    }
+
+    private void saveConfig(Player player) {
         try {
             Neptune.arenaConfig.save(Neptune.arena);
             Neptune.arenaConfig.load(Neptune.arena);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
+            player.sendMessage(CC.translate("&cAn error occurred while saving the config. Please check the server logs for more details."));
         }
     }
 }

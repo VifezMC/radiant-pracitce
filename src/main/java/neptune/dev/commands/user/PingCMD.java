@@ -3,17 +3,17 @@ package neptune.dev.commands.user;
 import neptune.dev.Neptune;
 import neptune.dev.utils.CC;
 import neptune.dev.utils.PlayerUtils;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public class PingCMD implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(ChatColor.RED + "Only players can use this command.");
+            sender.sendMessage(CC.RED + "Only players can use this command.");
             return true;
         }
 
@@ -26,14 +26,14 @@ public class PingCMD implements CommandExecutor {
         } else if (args.length == 1) {
             Player target = sender.getServer().getPlayer(args[0]);
             if (target == null || !target.isOnline()) {
-                player.sendMessage(ChatColor.RED + "Player not found or not online.");
+                player.sendMessage(CC.RED + "Player not found or not online.");
                 return true;
             }
             String formattingString2 = Neptune.messagesConfig.getString("general.other-player-ping-message");
             String formattedMessage2 = formattingString2.replace("{player}", target.getName()).replace("{ping}", PlayerUtils.getPing(target));
             player.sendMessage(CC.translate(formattedMessage2));
         } else {
-            player.sendMessage(ChatColor.RED + "Usage: /ping [<username>]");
+            player.sendMessage(CC.RED + "Usage: /ping [<username>]");
         }
 
         return true;
