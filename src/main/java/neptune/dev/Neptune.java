@@ -35,6 +35,8 @@ public class Neptune extends JavaPlugin {
 
     // CONFIG
     registerConfigs();
+
+    // SCOREBOARD
     Assemble assemble = new Assemble(this, new GameScoreboard());
 
     // LIST LISTENERS
