@@ -1,8 +1,8 @@
 package neptune.dev.ui;
 
+import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
-import neptune.dev.utils.ItemBuilder;
 import neptune.dev.utils.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -27,16 +27,11 @@ public class UnrankedInventory implements Listener {
                 ConfigurationSection kitConfig = kitsSection.getConfigurationSection(kitName);
                 if (kitConfig.contains("icon")) {
                     ItemStack iconItem = kitConfig.getItemStack("icon");
-
                     ItemMeta itemMeta = iconItem.getItemMeta();
-                    if (itemMeta != null) {
-                        itemMeta.removeItemFlags(ItemFlag.values());
-                        iconItem.setItemMeta(itemMeta);
-                    }
-
-                    ItemBuilder itemBuilder = new ItemBuilder(iconItem);
-                    itemBuilder.setName(CC.translate("&a" + kitName));
-                    menu.addItem(itemBuilder.toItemStack());
+                    itemMeta.addItemFlags(ItemFlag.values());
+                    itemMeta.setDisplayName(CC.translate(Neptune.pluginConfig.getString("menus.queue.item-color") + kitName));
+                    iconItem.setItemMeta(itemMeta);
+                    menu.addItem(iconItem);
                 }
             }
         }

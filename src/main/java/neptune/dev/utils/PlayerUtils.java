@@ -33,7 +33,7 @@ public class PlayerUtils {
         p.setGameMode(GameMode.SURVIVAL);
 
         // JOIN MESSAGE
-        if (Neptune.pluginConfig.getBoolean("enable-join-message")) {
+        if (Neptune.pluginConfig.getBoolean("general.enable-join-message")) {
             for (String msg : Neptune.messagesConfig.getStringList("general.join-message")) {
                 p.sendMessage(CC.translate(msg));
             }
