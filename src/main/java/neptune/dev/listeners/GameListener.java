@@ -74,12 +74,12 @@ public class GameListener implements Listener {
             String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(1).getName();
             String winner, loser;
 
-            if (Bukkit.getPlayer(player2).getGameMode().equals(GameMode.CREATIVE)) {
-                winner = player1;
-                loser = player2;
-            } else {
+            if (p.getName() == Bukkit.getPlayer(player1).getName()) {
                 winner = player2;
                 loser = player1;
+            } else {
+                winner = player1;
+                loser = player2;
             }
 
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
