@@ -78,10 +78,6 @@ public class KitsCMD implements CommandExecutor {
                             player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
                             break;
                     }
-
-                default:
-                    showKitCommands(player);
-                    break;
             }
         } else {
             showKitCommands(player);

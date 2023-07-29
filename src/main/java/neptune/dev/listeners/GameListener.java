@@ -31,21 +31,6 @@ public class GameListener implements Listener {
     private MatchManager matchManager = new MatchManager();
     public HashMap<String, Integer> boxingHits = new HashMap<>();
 
-    @EventHandler
-    public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-
-        if (player.getGameMode() != GameMode.CREATIVE) {
-            if (hasPlayerState(player, PlayerState.PLAYING)) {
-                if (!Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
-                    event.setCancelled(false);
-                } else {
-                    event.setCancelled(true);
-                }
-            }
-
-        }
-    }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -186,6 +171,22 @@ public class GameListener implements Listener {
                     }
                 }
             }
+        }
+    }
+
+    @EventHandler
+    public void onBlockPlace(BlockPlaceEvent event) {
+        Player player = event.getPlayer();
+
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            if (hasPlayerState(player, PlayerState.PLAYING)) {
+                if (!Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
+                    event.setCancelled(false);
+                } else {
+                    event.setCancelled(true);
+                }
+            }
+
         }
     }
 }
