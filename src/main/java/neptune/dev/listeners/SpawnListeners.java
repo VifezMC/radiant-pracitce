@@ -85,7 +85,7 @@ public class SpawnListeners implements Listener {
                     continue;
                 }
 
-                Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
+                Material material = Material.matchMaterial(itemSection.getString("type"));
                 if (material == null) {
                     getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
                     continue;
@@ -93,7 +93,7 @@ public class SpawnListeners implements Listener {
 
                 if (item.getType() == material && item.hasItemMeta()) {
                     ItemMeta meta = item.getItemMeta();
-                    String displayName = itemSection.getString("display-name", "&6Ranked Queue &7(Right Click)");
+                    String displayName = itemSection.getString("display-name");
 
                     if (meta != null && meta.getDisplayName() != null && meta.getDisplayName().equals(CC.translate(displayName))) {
                         String command = itemSection.getString("command", "");
@@ -121,7 +121,7 @@ public class SpawnListeners implements Listener {
                     continue;
                 }
 
-                Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
+                Material material = Material.matchMaterial(itemSection.getString("type"));
                 if (material == null) {
                     getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
                     continue;
@@ -129,7 +129,7 @@ public class SpawnListeners implements Listener {
 
                 if (item.getType() == material && item.hasItemMeta()) {
                     ItemMeta meta = item.getItemMeta();
-                    String displayName = itemSection.getString("display-name", "&6Ranked Queue &7(Right Click)");
+                    String displayName = itemSection.getString("display-name");
 
                     if (meta != null && meta.getDisplayName() != null && meta.getDisplayName().equals(CC.translate(displayName))) {
                         String command = itemSection.getString("command");
