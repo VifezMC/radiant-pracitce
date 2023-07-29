@@ -3,7 +3,6 @@ package neptune.dev.commands.admin;
 import neptune.dev.Constants;
 import neptune.dev.Neptune;
 import neptune.dev.utils.CC;
-import neptune.dev.utils.Console;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -33,51 +32,31 @@ public class KitsCMD implements CommandExecutor {
 
         if (args.length >= 2) {
             String kitName = args[1];
-            String rule = args[2];
 
             switch (args[0]) {
                 case "create":
                     createKit(kitName);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit has been created!");
                     break;
                 case "set":
                     setItemsAndArmour(kitName, player);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit inventory has been set!");
                     break;
                 case "give":
                     giveKit(kitName, player);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit has been given!");
                     break;
                 case "seticon":
                     setIcon(kitName, player.getItemInHand());
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit icon has been set!");
                     break;
                 case "rules":
-                    switch (rule) {
-                        case "boxing":
-                            addRule(kitName, "boxing");
-                            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                            player.sendMessage(CC.GREEN + "Kit rule has been added!");
-                            break;
-                        case "build":
-                            addRule(kitName, "build");
-                            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                            player.sendMessage(CC.GREEN + "Kit rule has been added!");
-                            break;
-                        case "sumo":
-                            addRule(kitName, "sumo");
-                            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                            player.sendMessage(CC.GREEN + "Kit rule has been added!");
-                            break;
-                        default:
-                            player.sendMessage(CC.RED + "Invalid rule");
-                            player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
-                            break;
+                    if (args.length >= 3) {
+                        String rule = args[2];
+                        addRule(kitName, rule, player);
+                    } else {
+                        player.sendMessage(CC.RED + "Please specify a rule (boxing, build, sumo).");
                     }
+                    break;
+                default:
+                    player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
+                    break;
             }
         } else {
             showKitCommands(player);
@@ -127,18 +106,26 @@ public class KitsCMD implements CommandExecutor {
     }
 
     private ItemStack[] getItemsFromConfig(String location) {
-        return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".items")).toArray(new ItemStack[0]);
+        return Neptune.kitsConfig.getList("kits." + location + ".items").toArray(new ItemStack[0]);
     }
 
     private ItemStack[] getArmorFromConfig(String location) {
-        return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".armour")).toArray(new ItemStack[0]);
+        return Neptune.kitsConfig.getList("kits." + location + ".armour").toArray(new ItemStack[0]);
     }
 
-    private void addRule(String kitName, String rule) {
-        List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
-        rules.add(rule);
-        Neptune.kitsConfig.set("kits." + kitName + ".rules", rules);
-        saveConfig();
+    private void addRule(String kitName, String rule, Player player) {
+        List<String> validRules = Arrays.asList("boxing", "build", "sumo");
+        if (validRules.contains(rule)) {
+            List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
+            rules.add(rule);
+            Neptune.kitsConfig.set("kits." + kitName + ".rules", rules);
+            saveConfig();
+            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+            player.sendMessage(CC.GREEN + "Kit rule has been added!");
+        } else {
+            player.sendMessage(CC.RED + "Invalid rule");
+            player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
+        }
     }
 
     private void saveConfig() {
@@ -159,8 +146,8 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit set &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit give &8<&7name&8> &7- &8(&7Give a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
+        player.sendMessage(CC.translate("&b/kit rules &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
     }
-
 }

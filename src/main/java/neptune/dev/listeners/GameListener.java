@@ -115,6 +115,13 @@ public class GameListener implements Listener {
                     p.setGameMode(GameMode.CREATIVE);
                     PlayerUtils.removeState(p, PlayerState.PLAYING);
                     PlayerUtils.setState(p, PlayerState.LOBBY);
+                    Location location = p.getLocation();
+                    double x = location.getX();
+                    double y = location.getY() + 6.0;
+                    double z = location.getZ();
+                    World world = location.getWorld();
+                    Location lightningLocation = new Location(world, x, y, z);
+                    LightningStrike lightning = world.strikeLightning(lightningLocation);
                     Match match = MatchManager.getMatch(p);
                     Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
                     Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
