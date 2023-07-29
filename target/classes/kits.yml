@@ -1,0 +1,154 @@
+kits:
+  Nodebuff:
+    items:
+      - ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_SWORD
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            DAMAGE_ALL: 3
+            DURABILITY: 3
+            FIRE_ASPECT: 2
+      - ==: org.bukkit.inventory.ItemStack
+        type: ENDER_PEARL
+        amount: 16
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 8259
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 8226
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: COOKED_BEEF
+        amount: 64
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 8226
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 16421
+      - ==: org.bukkit.inventory.ItemStack
+        type: POTION
+        damage: 8226
+    armour:
+      - ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_BOOTS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 2
+            DURABILITY: 3
+      - ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_LEGGINGS
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 2
+            DURABILITY: 3
+      - ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_CHESTPLATE
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 2
+            DURABILITY: 3
+      - ==: org.bukkit.inventory.ItemStack
+        type: DIAMOND_HELMET
+        meta:
+          ==: ItemMeta
+          meta-type: UNSPECIFIC
+          enchants:
+            PROTECTION_ENVIRONMENTAL: 2
+            DURABILITY: 3
+    icon:
+      ==: org.bukkit.inventory.ItemStack
+      type: POTION
+      damage: 16421
