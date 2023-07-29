@@ -180,8 +180,8 @@ public class GameListener implements Listener {
 
         if (player.getGameMode() != GameMode.CREATIVE) {
             if (hasPlayerState(player, PlayerState.PLAYING)) {
-                if (!Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
-                    event.setCancelled(false);
+                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
+                        event.setCancelled(false);
                 } else {
                     event.setCancelled(true);
                 }

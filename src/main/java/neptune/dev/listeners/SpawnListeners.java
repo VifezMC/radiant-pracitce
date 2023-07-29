@@ -51,26 +51,11 @@ public class SpawnListeners implements Listener {
         }
     }
 
-    @EventHandler // DISABLE PLAYER ITEM PLACE
-    public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
-            event.setCancelled(true);
-        }
-    }
     @EventHandler // REMOVE PLAYER FROM QUEUE IF THEY LEAVE
     public void onPlayerLeave(PlayerQuitEvent event) {
         event.setQuitMessage(null);
         if (QueueProcessor.isPlayerInQueue(event.getPlayer())) {
             QueueProcessor.removePlayerFromQueue(event.getPlayer());
-        }
-    }
-
-    @EventHandler // DISABLE PLAYER BLOCK BREAK
-    public void blockBreak(BlockBreakEvent event) {
-        Player player = (Player) event.getPlayer();
-        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
-            event.setCancelled(true);
         }
     }
 
