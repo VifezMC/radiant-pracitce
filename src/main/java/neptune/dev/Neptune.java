@@ -61,10 +61,10 @@ public class Neptune extends JavaPlugin {
     getCommand("unranked").setExecutor(new UnrankedCMD());
 
     // START MESSSAGE
-    Console.sendMessage("&bNeptune Loaded successfully");
-    Console.sendMessage("&bAuthor: &f" + Constants.Autor);
-    Console.sendMessage("&bVersion: &f" + Constants.Ver);
-    Console.sendMessage("&bDiscord: &f" + Constants.Discord);
+    Console.sendMessage("&9Neptune Loaded successfully");
+    Console.sendMessage("&9Author: &f" + Constants.Autor);
+    Console.sendMessage("&9Version: &f" + Constants.Ver);
+    Console.sendMessage("&9Discord: &f" + Constants.Discord);
   }
 
   public void registerConfigs() {
