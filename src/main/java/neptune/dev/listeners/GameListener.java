@@ -6,6 +6,7 @@ import neptune.dev.game.Match;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
+import neptune.dev.utils.PlayerUtils;
 import org.bukkit.*;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
@@ -19,18 +20,12 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
 public class GameListener implements Listener {
 
-    private MatchManager matchManager = new MatchManager();
-    public HashMap<String, Integer> boxingHits = new HashMap<>();
-    private Set<Player> playersHandledForSumoDeath = new HashSet<>();
-
+    private HashMap<String, Integer> boxingHits = new HashMap<>();
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -44,23 +39,24 @@ public class GameListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(0).getName();
-            String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(1).getName();
-            String winner, loser;
+            Match match = MatchManager.getMatch(p);
+            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
+            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
+            Player winner, loser;
 
-            if (Bukkit.getPlayer(player2).getGameMode().equals(GameMode.CREATIVE)) {
-                winner = player1;
-                loser = player2;
+            if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
+                winner = opponent1;
+                loser = opponent2;
             } else {
-                winner = player2;
-                loser = player1;
+                winner = opponent2;
+                loser = opponent1;
             }
 
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
-            String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
-            Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
-            Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
-            EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), p);
+            String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
+            opponent1.sendMessage(CC.translate(formattedMessage));
+            opponent2.sendMessage(CC.translate(formattedMessage));
+            EndGame.EndGame(winner, loser, p);
         }
         event.setDeathMessage(null);
     }
@@ -70,25 +66,27 @@ public class GameListener implements Listener {
         event.setQuitMessage(null);
         Player p = event.getPlayer();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(0).getName();
-            String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(p)).get(1).getName();
-            String winner, loser;
+            Match match = MatchManager.getMatch(p);
+            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
+            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
+            Player winner, loser;
 
-            if (p.getName() == Bukkit.getPlayer(player1).getName()) {
-                winner = player2;
-                loser = player1;
+            if (p.getName().equals(opponent1.getName())) {
+                winner = opponent2;
+                loser = opponent1;
             } else {
-                winner = player1;
-                loser = player2;
+                winner = opponent1;
+                loser = opponent2;
             }
 
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
-            String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
-            Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
-            Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
-            EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), p);
+            String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
+            opponent1.sendMessage(CC.translate(formattedMessage));
+            opponent2.sendMessage(CC.translate(formattedMessage));
+            EndGame.EndGame(winner, loser, p);
         }
     }
+
     @EventHandler
     public void onPlayerDeath2(PlayerDeathEvent event) {
         event.getDrops().clear();
@@ -108,34 +106,33 @@ public class GameListener implements Listener {
         p.setFireTicks(0);
     }
 
-    // Game rule listeners
     @EventHandler
     public void onSumoDeath(PlayerMoveEvent event) {
-        Player player = event.getPlayer();
-        if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("sumo")) {
-            if (player.getLocation().getBlock().getType() == Material.WATER ||
-                    player.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
-                if (hasPlayerState(player, PlayerState.PLAYING) && !playersHandledForSumoDeath.contains(player)) {
-                    playersHandledForSumoDeath.add(player);
+        Player p = event.getPlayer();
+        if (hasPlayerState(p, PlayerState.PLAYING)) {
+            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
+                if (p.getLocation().getBlock().getType() == Material.WATER || p.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
+                    p.setGameMode(GameMode.CREATIVE);
+                    PlayerUtils.removeState(p, PlayerState.PLAYING);
+                    PlayerUtils.setState(p, PlayerState.LOBBY);
+                    Match match = MatchManager.getMatch(p);
+                    Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
+                    Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
+                    Player winner, loser;
 
-                    player.setGameMode(GameMode.CREATIVE);
-                    String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(0).getName();
-                    String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(1).getName();
-                    String winner, loser;
-
-                    if (Bukkit.getPlayer(player2).getGameMode().equals(GameMode.CREATIVE)) {
-                        winner = player1;
-                        loser = player2;
+                    if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
+                        winner = opponent1;
+                        loser = opponent2;
                     } else {
-                        winner = player2;
-                        loser = player1;
+                        winner = opponent2;
+                        loser = opponent1;
                     }
 
                     String formattingString = Neptune.messagesConfig.getString("match.kill-message");
-                    String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
-                    Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
-                    Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
-                    EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), player);
+                    String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
+                    opponent1.sendMessage(CC.translate(formattedMessage));
+                    opponent2.sendMessage(CC.translate(formattedMessage));
+                    EndGame.EndGame(winner, loser, p);
                 }
             }
         }
@@ -148,30 +145,30 @@ public class GameListener implements Listener {
             Player damaged = (Player) event.getEntity();
             if (hasPlayerState(damager, PlayerState.PLAYING) && hasPlayerState(damaged, PlayerState.PLAYING)) {
                 if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(damager).getKitName() + ".rules").contains("boxing")) {
-                    if (boxingHits.containsKey(damager.getName())) {
-                        boxingHits.put(damager.getName(), boxingHits.get(damager.getName()) + 1);
-                        damager.sendMessage("[DEBUG] " + boxingHits.get(damager.getName()));
-                    } else {
-                        boxingHits.put(damager.getName(), 1);
-                    }
-                    if (boxingHits.get(damager.getName()) >= 100) {
-                        String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(damager)).get(0).getName();
-                        String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(damager)).get(1).getName();
-                        String winner, loser;
+                    boxingHits.putIfAbsent(damager.getName(), 0);
+                    int hitCount = boxingHits.get(damager.getName()) + 1;
+                    boxingHits.put(damager.getName(), hitCount);
+                    damager.sendMessage("[DEBUG] " + hitCount);
 
-                        if (Bukkit.getPlayer(player2).getGameMode().equals(GameMode.CREATIVE)) {
-                            winner = player1;
-                            loser = player2;
+                    if (hitCount >= 100) {
+                        Match match = MatchManager.getMatch(damager);
+                        Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
+                        Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
+                        Player winner, loser;
+
+                        if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
+                            winner = opponent1;
+                            loser = opponent2;
                         } else {
-                            winner = player2;
-                            loser = player1;
+                            winner = opponent2;
+                            loser = opponent1;
                         }
 
                         String formattingString = Neptune.messagesConfig.getString("match.kill-message");
-                        String formattedMessage = formattingString.replace("{winner}", winner).replace("{loser}", loser);
-                        Bukkit.getPlayer(player1).sendMessage(CC.translate(formattedMessage));
-                        Bukkit.getPlayer(player2).sendMessage(CC.translate(formattedMessage));
-                        EndGame.EndGame(Bukkit.getPlayer(winner), Bukkit.getPlayer(loser), damager);
+                        String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
+                        opponent1.sendMessage(CC.translate(formattedMessage));
+                        opponent2.sendMessage(CC.translate(formattedMessage));
+                        EndGame.EndGame(winner, loser, damager);
                     }
                 }
             }
@@ -184,13 +181,10 @@ public class GameListener implements Listener {
 
         if (player.getGameMode() != GameMode.CREATIVE) {
             if (hasPlayerState(player, PlayerState.PLAYING)) {
-                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
-                        event.setCancelled(false);
-                } else {
+                if (!Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
                     event.setCancelled(true);
                 }
             }
-
         }
     }
 }

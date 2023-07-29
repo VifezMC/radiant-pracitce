@@ -16,6 +16,7 @@ import org.bukkit.potion.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import static org.bukkit.Bukkit.getLogger;
 
@@ -25,6 +26,7 @@ public class PlayerUtils {
     private static Map<String, ItemStack> spawnItemsCache = new HashMap<>();
     private static Map<String, ItemStack> queueItemsCache = new HashMap<>();
     private static World lobbyWorld;
+    private static final Logger logger = getLogger();
 
     public static void resetPlayer(Player p) {
         setState(p, PlayerState.LOBBY);
@@ -113,14 +115,14 @@ public class PlayerUtils {
     private static void createItems(Player player, String configSection, Map<String, ItemStack> itemCache) {
         ConfigurationSection itemsSection = Neptune.spawnItemsConfig.getConfigurationSection(configSection);
         if (itemsSection == null) {
-            getLogger().warning("Invalid configuration for " + configSection + ". Please check 'config.yml'");
+            logger.warning("Invalid configuration for " + configSection + ". Please check 'config.yml'");
             return;
         }
 
         for (String itemName : itemsSection.getKeys(false)) {
             ConfigurationSection itemSection = itemsSection.getConfigurationSection(itemName);
             if (itemSection == null) {
-                getLogger().warning("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
+                logger.warning("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
                 continue;
             }
 
@@ -128,7 +130,7 @@ public class PlayerUtils {
             if (cachedItem == null) {
                 Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
                 if (material == null) {
-                    getLogger().warning("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    logger.warning("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
                     continue;
                 }
 
