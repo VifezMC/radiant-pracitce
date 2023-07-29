@@ -42,18 +42,9 @@ public class WorldListener implements Listener {
         }
     }
 
-
-    @EventHandler
-    public void onTimeSkip() {
-        for (World world : getServer().getWorlds()) {
-            world.setTime(6000);
-            world.setGameRuleValue("doDaylightCycle", "false");
-        }
-    }
-
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        event.setCancelled(true);
+        event.getItemDrop().remove();
     }
 
     @EventHandler
