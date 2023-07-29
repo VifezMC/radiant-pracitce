@@ -5,6 +5,7 @@ import neptune.dev.player.PlayerState;
 import neptune.dev.utils.PlayerUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.List;
 
@@ -13,14 +14,17 @@ public class StartGame {
         ItemStack[] inventoryContents = getItemsFromConfig(kitName);
         ItemStack[] armorContents = getArmorFromConfig(kitName);
 
-        for (Player player : players) {
-            player.getInventory().clear();
-            player.getInventory().setArmorContents(null);
-            player.getInventory().setContents(inventoryContents);
-            player.getInventory().setArmorContents(armorContents);
-            player.updateInventory();
-            PlayerUtils.removeState(player, PlayerState.LOBBY);
-            PlayerUtils.setState(player, PlayerState.PLAYING);
+        for (Player p : players) {
+            p.getInventory().clear();
+            p.getInventory().setArmorContents(null);
+            p.getInventory().setContents(inventoryContents);
+            p.getInventory().setArmorContents(armorContents);
+            p.updateInventory();
+            for (PotionEffect effect : p.getActivePotionEffects()) {
+                p.removePotionEffect(effect.getType());
+            }
+            PlayerUtils.removeState(p, PlayerState.LOBBY);
+            PlayerUtils.setState(p, PlayerState.PLAYING);
         }
     }
 

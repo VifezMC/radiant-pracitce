@@ -12,6 +12,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.potion.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +58,9 @@ public class PlayerUtils {
         p.setHealth(p.getMaxHealth());
         p.setFireTicks(0);
         p.setGameMode(GameMode.SURVIVAL);
-
+        for (PotionEffect effect : p.getActivePotionEffects()) {
+            p.removePotionEffect(effect.getType());
+        }
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
         createSpawnItems(p);
