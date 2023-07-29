@@ -11,6 +11,7 @@ import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.event.world.WorldLoadEvent;
@@ -32,17 +33,27 @@ public class WorldListener implements Listener {
 
     @EventHandler
     public void onWeatherChange(WeatherChangeEvent event) {
-        if (event.toWeatherState()) {
-            event.setCancelled(true);
+        for (World world : getServer().getWorlds()) {
+            world.setTime(6000);
+            world.setGameRuleValue("doDaylightCycle", "false");
+            if (event.toWeatherState()) {
+                event.setCancelled(true);
+            }
         }
     }
 
+
     @EventHandler
-    private void setAlwaysDay() {
+    public void onTimeSkip() {
         for (World world : getServer().getWorlds()) {
             world.setTime(6000);
             world.setGameRuleValue("doDaylightCycle", "false");
         }
+    }
+
+    @EventHandler
+    public void onPlayerDropItem(PlayerDropItemEvent event) {
+        event.setCancelled(true);
     }
 
     @EventHandler
