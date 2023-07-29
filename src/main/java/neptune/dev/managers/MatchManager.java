@@ -18,7 +18,7 @@ public class MatchManager {
         Match match = new Match(player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);
         if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
-            Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName + " with kit " + kitName);
+            Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName.getName() + " with kit " + kitName);
         }
     }
 
@@ -26,7 +26,7 @@ public class MatchManager {
         Match match = matches.remove(matchID);
         if (match != null) {
             if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
-                Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName() + " with kit " + match.getKitName());
+                Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName().getName() + " with kit " + match.getKitName());
             }
         }
     }
