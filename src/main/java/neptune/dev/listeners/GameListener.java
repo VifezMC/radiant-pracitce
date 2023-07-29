@@ -161,7 +161,7 @@ public class GameListener implements Listener {
                 if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(damager).getKitName() + ".rules").contains("boxing")) {
                     if (boxingHits.containsKey(damager.getName())) {
                         boxingHits.put(damager.getName(), boxingHits.get(damager.getName()) + 1);
-                        damager.sendMessage("DEBUG: " + boxingHits.get(damager.getName()));
+                        damager.sendMessage("[DEBUG] " + boxingHits.get(damager.getName()));
                     } else {
                         boxingHits.put(damager.getName(), 1);
                     }

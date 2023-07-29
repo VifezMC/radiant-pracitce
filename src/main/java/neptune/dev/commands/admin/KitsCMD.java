@@ -74,7 +74,7 @@ public class KitsCMD implements CommandExecutor {
                             player.sendMessage(CC.GREEN + "Kit rule has been added!");
                             break;
                         default:
-                            player.sendMessage(CC.RED + "Invalid rule.");
+                            player.sendMessage(CC.RED + "Invalid rule");
                             player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
                             break;
                     }
