@@ -1,6 +1,7 @@
 package neptune.dev.managers;
 
 import neptune.dev.Neptune;
+import neptune.dev.game.Arena;
 import neptune.dev.game.Match;
 import neptune.dev.utils.Console;
 import org.bukkit.entity.Player;
@@ -12,7 +13,7 @@ public class MatchManager {
 
     private static Map<UUID, Match> matches = new ConcurrentHashMap<>();
 
-    public static void addMatch(Player player1, Player player2, String arenaName, String kitName) {
+    public static void addMatch(Player player1, Player player2, Arena arenaName, String kitName) {
         UUID matchID = UUID.randomUUID();
         Match match = new Match(player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);

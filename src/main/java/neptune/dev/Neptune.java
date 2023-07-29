@@ -3,6 +3,7 @@ package neptune.dev;
 import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
+import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.Scoreboard;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventory;
@@ -30,9 +31,12 @@ public class Neptune extends JavaPlugin {
   public static File scoreboard;
   public static FileConfiguration scoreboardConfig;
 
+  public static ArenaManager arenaManager;
+
   @Override
   public void onEnable() {
     instance = this;
+    arenaManager = new ArenaManager();
 
     // CONFIG
     registerConfigs();
@@ -58,6 +62,7 @@ public class Neptune extends JavaPlugin {
     saveResourceIfNotExists("arenas.yml", false);
     arena = new File(this.getDataFolder(), "arenas.yml");
     arenaConfig = YamlConfiguration.loadConfiguration(arena);
+    arenaManager.loadArenas();
 
     // MAIN CONFIG
     saveResourceIfNotExists("config.yml", false);
@@ -118,5 +123,8 @@ public class Neptune extends JavaPlugin {
   @Override
   public void onDisable() {
     getServer().getPluginManager().disablePlugin(this);
+  }
+  public static ArenaManager getArenaManager() {
+    return arenaManager;
   }
 }

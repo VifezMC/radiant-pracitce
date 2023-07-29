@@ -8,11 +8,11 @@ public class Match {
 
     private Player player1;
     private Player player2;
-    private String arenaName;
+    private Arena arenaName;
     private String kitName;
     private UUID matchID;
 
-    public Match(Player player1, Player player2, String arenaName, String kitName, UUID matchID) {
+    public Match(Player player1, Player player2, Arena arenaName, String kitName, UUID matchID) {
         this.player1 = player1;
         this.player2 = player2;
         this.arenaName = arenaName;
@@ -28,7 +28,7 @@ public class Match {
         return player2;
     }
 
-    public String getArenaName() {
+    public Arena getArenaName() {
         return arenaName;
     }
 
