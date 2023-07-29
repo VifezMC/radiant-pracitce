@@ -6,10 +6,7 @@ import neptune.dev.game.Match;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
-import org.bukkit.Bukkit;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -22,7 +19,9 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
@@ -30,6 +29,7 @@ public class GameListener implements Listener {
 
     private MatchManager matchManager = new MatchManager();
     public HashMap<String, Integer> boxingHits = new HashMap<>();
+    private Set<Player> playersHandledForSumoDeath = new HashSet<>();
 
 
     @EventHandler
@@ -112,9 +112,13 @@ public class GameListener implements Listener {
     @EventHandler
     public void onSumoDeath(PlayerMoveEvent event) {
         Player player = event.getPlayer();
-        if (hasPlayerState(player, PlayerState.PLAYING)) {
-            if (MatchManager.getMatch(player).getKitName().equalsIgnoreCase("sumo")) {
-                if (player.getLocation().getBlock().isLiquid()) {
+        if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("sumo")) {
+            if (player.getLocation().getBlock().getType() == Material.WATER ||
+                    player.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
+                if (hasPlayerState(player, PlayerState.PLAYING) && !playersHandledForSumoDeath.contains(player)) {
+                    playersHandledForSumoDeath.add(player);
+
+                    player.setGameMode(GameMode.CREATIVE);
                     String player1 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(0).getName();
                     String player2 = MatchManager.getMatchPlayers(MatchManager.getMatchID(player)).get(1).getName();
                     String winner, loser;
