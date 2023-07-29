@@ -79,7 +79,7 @@ public class Neptune extends JavaPlugin {
     kits = new File(this.getDataFolder(), "kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);
 
-    // Scoreboard CONFIG
+    // SCOREBOARD CONFIG
     saveResourceIfNotExists("scoreboard.yml", false);
     scoreboard = new File(this.getDataFolder(), "scoreboard.yml");
     scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
