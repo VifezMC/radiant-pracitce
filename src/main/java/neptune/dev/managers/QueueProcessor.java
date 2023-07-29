@@ -6,15 +6,12 @@ import neptune.dev.utils.CC;
 import neptune.dev.utils.Console;
 import org.bukkit.entity.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class QueueProcessor {
 
-
-    private static List<Player> queue = new ArrayList<>();
-    private static List<String> playerKit = new ArrayList<>();
+    private static List<Player> queue = new LinkedList<>();
+    private static Set<String> playerKit = new HashSet<>();
     public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
