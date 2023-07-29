@@ -1,6 +1,8 @@
 package neptune.dev.listeners;
 
+import neptune.dev.Neptune;
 import org.bukkit.Difficulty;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -44,7 +46,11 @@ public class WorldListener implements Listener {
 
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        event.getItemDrop().remove();
+        if (Neptune.pluginConfig.getBoolean("general.clear-empty-bottles")) {
+            if (event.getItemDrop().getItemStack().getType() == Material.GLASS_BOTTLE) {
+                event.getItemDrop().remove();
+            }
+        }
     }
 
     @EventHandler

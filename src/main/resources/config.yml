@@ -1,6 +1,7 @@
 general:
   enable-join-message: true
   enable-debug: false
+  clear-empty-bottles: true #Remove bottle from the ground if its empty
 menus:
   queue:
     item-color: "&9"
