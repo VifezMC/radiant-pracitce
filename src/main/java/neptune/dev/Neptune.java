@@ -29,6 +29,7 @@ public class Neptune extends JavaPlugin {
   public static FileConfiguration kitsConfig;
   public static File scoreboard;
   public static FileConfiguration scoreboardConfig;
+
   @Override
   public void onEnable() {
     instance = this;
@@ -40,25 +41,10 @@ public class Neptune extends JavaPlugin {
     Assemble assemble = new Assemble(this, new Scoreboard());
 
     // LIST LISTENERS
-    Arrays.asList(
-            new PlayerJoin(),
-            new SpawnListeners(),
-            new WorldListener(),
-            new GameListener(),
-            new StatsInventory(),
-            new UnrankedInventory()
-    ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
+    registerEventListeners();
 
     // COMMANDS
-    getCommand("setspawn").setExecutor(new SetSpawnCMD());
-    getCommand("arena").setExecutor(new ArenaCMD());
-    getCommand("neptune").setExecutor(new MainCMD());
-    getCommand("kit").setExecutor(new KitsCMD());
-    getCommand("queue").setExecutor(new QueueCMD());
-    getCommand("ping").setExecutor(new PingCMD());
-    getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
-    getCommand("stats").setExecutor(new StatsCMD());
-    getCommand("unranked").setExecutor(new UnrankedCMD());
+    registerCommands();
 
     // START MESSSAGE
     Console.sendMessage("&9Neptune Loaded successfully");
@@ -69,36 +55,68 @@ public class Neptune extends JavaPlugin {
 
   public void registerConfigs() {
     // ARENAS
-    saveResource("arenas.yml", false);
+    saveResourceIfNotExists("arenas.yml", false);
     arena = new File(this.getDataFolder(), "arenas.yml");
     arenaConfig = YamlConfiguration.loadConfiguration(arena);
 
     // MAIN CONFIG
-    saveResource("config.yml", false);
+    saveResourceIfNotExists("config.yml", false);
     config = new File(this.getDataFolder(), "config.yml");
     pluginConfig = YamlConfiguration.loadConfiguration(config);
 
     // MESSAGES CONFIG
-    saveResource("messages.yml", false);
+    saveResourceIfNotExists("messages.yml", false);
     messages = new File(this.getDataFolder(), "messages.yml");
     messagesConfig = YamlConfiguration.loadConfiguration(messages);
 
     // SPAWN ITEMS
-    saveResource("spawn-items.yml", false);
+    saveResourceIfNotExists("spawn-items.yml", false);
     spawnItems = new File(this.getDataFolder(), "spawn-items.yml");
     spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
 
     // KITS CONFIG
-    saveResource("kits.yml", false);
+    saveResourceIfNotExists("kits.yml", false);
     kits = new File(this.getDataFolder(), "kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);
 
     // Scoreboard CONFIG
-    saveResource("scoreboard.yml", false);
+    saveResourceIfNotExists("scoreboard.yml", false);
     scoreboard = new File(this.getDataFolder(), "scoreboard.yml");
     scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
   }
 
+  private void registerEventListeners() {
+    Arrays.asList(
+            new PlayerJoin(),
+            new SpawnListeners(),
+            new WorldListener(),
+            new GameListener(),
+            new StatsInventory(),
+            new UnrankedInventory()
+    ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
+  }
+
+  private void registerCommands() {
+    getCommand("setspawn").setExecutor(new SetSpawnCMD());
+    getCommand("arena").setExecutor(new ArenaCMD());
+    getCommand("neptune").setExecutor(new MainCMD());
+    getCommand("kit").setExecutor(new KitsCMD());
+    getCommand("queue").setExecutor(new QueueCMD());
+    getCommand("ping").setExecutor(new PingCMD());
+    getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
+    getCommand("stats").setExecutor(new StatsCMD());
+    getCommand("unranked").setExecutor(new UnrankedCMD());
+  }
+
+  private void saveResourceIfNotExists(String resourcePath, boolean replace) {
+    File file = new File(this.getDataFolder(), resourcePath);
+    if (!file.exists()) {
+      saveResource(resourcePath, replace);
+    }
+  }
+
   @Override
-  public void onDisable() {}
+  public void onDisable() {
+    getServer().getPluginManager().disablePlugin(this);
+  }
 }
