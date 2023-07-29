@@ -33,6 +33,7 @@ public class KitsCMD implements CommandExecutor {
 
         if (args.length >= 2) {
             String kitName = args[1];
+            String rule = args[2];
 
             switch (args[0]) {
                 case "create":
@@ -55,6 +56,29 @@ public class KitsCMD implements CommandExecutor {
                     player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                     player.sendMessage(CC.GREEN + "Kit icon has been set!");
                     break;
+                case "rules":
+                    switch (rule) {
+                        case "boxing":
+                            addRule(kitName, "boxing");
+                            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                            player.sendMessage(CC.GREEN + "Kit rule has been added!");
+                            break;
+                        case "build":
+                            addRule(kitName, "build");
+                            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                            player.sendMessage(CC.GREEN + "Kit rule has been added!");
+                            break;
+                        case "sumo":
+                            addRule(kitName, "sumo");
+                            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                            player.sendMessage(CC.GREEN + "Kit rule has been added!");
+                            break;
+                        default:
+                            player.sendMessage(CC.RED + "Invalid rule.");
+                            player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
+                            break;
+                    }
+
                 default:
                     showKitCommands(player);
                     break;
@@ -71,6 +95,7 @@ public class KitsCMD implements CommandExecutor {
         Neptune.kitsConfig.set("kits." + name + ".armour", "None");
         Neptune.kitsConfig.set("kits." + name + ".icon", "None");
         Neptune.kitsConfig.set("kits." + name + ".arenas", "None");
+        Neptune.kitsConfig.set("kits." + name + ".rules", "None");
         saveConfig();
     }
 
@@ -113,6 +138,13 @@ public class KitsCMD implements CommandExecutor {
         return ((List<ItemStack>) Neptune.kitsConfig.get("kits." + location + ".armour")).toArray(new ItemStack[0]);
     }
 
+    private void addRule(String kitName, String rule) {
+        List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
+        rules.add(rule);
+        Neptune.kitsConfig.set("kits." + kitName + ".rules", rules);
+        saveConfig();
+    }
+
     private void saveConfig() {
         try {
             Neptune.kitsConfig.save(Neptune.kits);
@@ -134,4 +166,5 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
     }
+
 }
