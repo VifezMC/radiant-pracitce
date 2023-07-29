@@ -1,6 +1,7 @@
 package neptune.dev.listeners;
 
 import neptune.dev.Neptune;
+import neptune.dev.managers.QueueProcessor;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.CC;
 import org.bukkit.GameMode;
@@ -16,6 +17,7 @@ import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -56,13 +58,13 @@ public class SpawnListeners implements Listener {
             event.setCancelled(true);
         }
     }
-//    @EventHandler // DISABLE PLAYER DROP MOVING THINGS IN INV
-//    public void onClickInv(InventoryClickEvent event) {
-//        Player player = (Player) event.getWhoClicked();
-//        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
-//            event.setCancelled(true);
-//        }
-//    }
+    @EventHandler // REMOVE PLAYER FROM QUEUE IF THEY LEAVE
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        event.setQuitMessage(null);
+        if (QueueProcessor.isPlayerInQueue(event.getPlayer())) {
+            QueueProcessor.removePlayerFromQueue(event.getPlayer());
+        }
+    }
 
     @EventHandler // DISABLE PLAYER BLOCK BREAK
     public void blockBreak(BlockBreakEvent event) {
