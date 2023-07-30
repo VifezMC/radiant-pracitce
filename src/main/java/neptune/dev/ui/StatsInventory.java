@@ -1,7 +1,7 @@
 package neptune.dev.ui;
 
-import neptune.dev.utils.CC;
-import neptune.dev.utils.ItemBuilder;
+import neptune.dev.utils.render.CC;
+import neptune.dev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

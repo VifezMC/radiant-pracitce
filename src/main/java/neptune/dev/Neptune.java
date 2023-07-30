@@ -7,7 +7,7 @@ import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.Scoreboard;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventory;
-import neptune.dev.utils.Console;
+import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -30,7 +30,6 @@ public class Neptune extends JavaPlugin {
   public static FileConfiguration kitsConfig;
   public static File scoreboard;
   public static FileConfiguration scoreboardConfig;
-
   public static ArenaManager arenaManager;
 
 
@@ -59,6 +58,7 @@ public class Neptune extends JavaPlugin {
   }
 
   public void registerConfigs() {
+
     // ARENAS
     saveResourceIfNotExists("arenas.yml", false);
     arena = new File(this.getDataFolder(), "arenas.yml");

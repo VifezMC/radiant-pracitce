@@ -3,16 +3,15 @@ package neptune.dev.managers;
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
 import neptune.dev.game.StartGame;
-import neptune.dev.utils.CC;
-import neptune.dev.utils.Console;
+import neptune.dev.utils.render.CC;
+import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;
 
 import java.util.*;
 
 public class QueueProcessor {
 
-    private static List<Player> queue = new LinkedList<>();
-    private static Set<String> playerKit = new HashSet<>();
+    static Map<Player, String> newQueue = new HashMap<>();
     public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
@@ -21,79 +20,67 @@ public class QueueProcessor {
             return;
         }
 
-        queue.add(player);
-        playerKit.add(player.getName() + ":" + kitName);
+        newQueue.put(player, kitName);
 
-        if (queue.size() >= 2 && playerKit.size() >= 2) {
-            String firstKit = getPlayerKitName(queue.get(0));
-            String secondKit = getPlayerKitName(queue.get(1));
-            if (firstKit != null && firstKit.equals(secondKit)) {
-                Player firstPlayer = queue.get(0);
-                Player secondPlayer = queue.get(1);
-                firstPlayer.getInventory().clear();
-                secondPlayer.getInventory().setArmorContents(null);
-                if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
-                    Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
+        if (newQueue.size() >= 2) {
+            List<Player> players = new ArrayList<>(newQueue.keySet());
+            Set<String> kitNames = new HashSet<>(newQueue.values());
 
-                }
-                Arena a = ArenaManager.getRandomArena();
-                MatchManager.addMatch(firstPlayer, secondPlayer, a, firstKit);
-                firstPlayer.teleport(a.getSpawn1());
-                secondPlayer.teleport(a.getSpawn2());
-                processQueueForKit(firstKit, queue);
-                if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
-                    Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
-                }
-                playerKit.remove(firstPlayer.getName() + ":" + firstKit);
-                playerKit.remove(secondPlayer.getName() + ":" + secondKit);
-                queue.remove(firstPlayer);
-                queue.remove(secondPlayer);
-                QueueProcessor.playing = QueueProcessor.playing + 2;
-
-
-                String formattingString = Neptune.messagesConfig.getString("match.match-found");
-                String formattedMessage = formattingString.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer)).replace( "{arena}", (CharSequence) MatchManager.getMatch(firstPlayer).getArenaName()));
-
-                firstPlayer.sendMessage(CC.translate(formattedMessage));
-                String formattingString2 = Neptune.messagesConfig.getString("match.match-found");
-                String formattedMessage2 = formattingString2.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer)));
-                secondPlayer.sendMessage(CC.translate(formattedMessage2));
-
+            if (kitNames.size() == 1) {
+                startMatch(players);
             }
         }
     }
 
+    private static void startMatch(List<Player> players) {
+        Player firstPlayer = players.get(0);
+        Player secondPlayer = players.get(1);
+        String kitName = newQueue.get(firstPlayer);
+
+        firstPlayer.getInventory().clear();
+        secondPlayer.getInventory().setArmorContents(null);
+
+        if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+            Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
+        }
+
+        Arena a = ArenaManager.getRandomArena();
+        MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
+        firstPlayer.teleport(a.getSpawn1());
+        secondPlayer.teleport(a.getSpawn2());
+
+        processQueueForKit(kitName, players);
+
+        if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+            Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
+        }
+
+        newQueue.remove(firstPlayer);
+        newQueue.remove(secondPlayer);
+        playing += 2;
+
+        String opponentMessage = Neptune.messagesConfig.getString("match.match-found")
+                .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer)));
+        firstPlayer.sendMessage(CC.translate(opponentMessage));
+
+        String opponentMessage2 = Neptune.messagesConfig.getString("match.match-found")
+                .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer)));
+        secondPlayer.sendMessage(CC.translate(opponentMessage2));
+    }
+
     public static void removePlayerFromQueue(Player player) {
         if (isPlayerInQueue(player)) {
-            queue.remove(player);
-            String playerKitString = player.getName() + ":" + getPlayerKitName(player);
-            playerKit.remove(playerKitString);
+            newQueue.remove(player);
         } else {
             player.sendMessage("You are not in a queue!");
         }
     }
 
     public static boolean isPlayerInQueue(Player player) {
-        return queue.contains(player);
+        return newQueue.containsKey(player);
     }
 
     private static void processQueueForKit(String kitName, List<Player> players) {
-        for (Player player : players) {
-            for (Player otherPlayer : players) {
-                if (player != otherPlayer) {
-                    StartGame.startGame(kitName, players);
-                }
-            }
-        }
-    }
-
-    private static String getPlayerKitName(Player player) {
-        for (String kitInfo : playerKit) {
-            String[] parts = kitInfo.split(":");
-            if (parts.length == 2 && parts[0].equals(player.getName())) {
-                return parts[1];
-            }
-        }
-        return null;
+        players.forEach(player -> StartGame.startGame(kitName, players));
     }
 }

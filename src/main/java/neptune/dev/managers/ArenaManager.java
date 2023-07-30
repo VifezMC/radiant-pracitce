@@ -2,6 +2,7 @@ package neptune.dev.managers;
 
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
+import neptune.dev.utils.render.Console;
 import neptune.dev.utils.LocationUtil;
 import org.bukkit.Location;
 
@@ -48,9 +49,4 @@ public class ArenaManager {
         return arenas;
     }
 
-    public static List<Arena> getArenas(List<String> arenaNames) {
-        return Neptune.getArenaManager().getArenas().stream()
-                .filter(a -> arenaNames.contains(a.getName()))
-                .collect(Collectors.toList());
-    }
 }

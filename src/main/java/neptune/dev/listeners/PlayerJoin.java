@@ -2,12 +2,15 @@ package neptune.dev.listeners;
 
 
 
-import neptune.dev.utils.PlayerUtils;
-
+import neptune.dev.Neptune;
+import neptune.dev.player.PlayerState;
+import neptune.dev.utils.render.CC;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import static neptune.dev.utils.PlayerUtils.*;
 
 public class PlayerJoin implements Listener {
 
@@ -15,13 +18,31 @@ public class PlayerJoin implements Listener {
 
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
+        Player p = event.getPlayer();
 
-        // SET PLAYER VALUES TO NEW tbh I have no idea what to set this to
-        PlayerUtils.resetPlayer(player);
+        // ON PLAY JOIN
+        setState(p, PlayerState.LOBBY);
+        p.teleport(getLobbyLocation());
+        p.setSaturation(20);
+        p.setFlying(false);
+        p.setFoodLevel(20);
+        p.setHealth(p.getMaxHealth());
+        p.setFireTicks(0);
+        p.setGameMode(GameMode.SURVIVAL);
+
+        if (Neptune.pluginConfig.getBoolean("general.enable-join-message")) {
+            for (String msg : Neptune.messagesConfig.getStringList("general.join-message")) {
+                p.sendMessage(CC.translate(msg));
+            }
+        }
+
+        p.getInventory().clear();
+        p.getInventory().setArmorContents(null);
+        createSpawnItems(p);
+        p.updateInventory();
+
 
         // REMOVE JOIN MESSAGE
         event.setJoinMessage(null);
     }
-
 }

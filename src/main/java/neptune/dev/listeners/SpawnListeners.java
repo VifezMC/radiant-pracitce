@@ -3,18 +3,15 @@ package neptune.dev.listeners;
 import neptune.dev.Neptune;
 import neptune.dev.managers.QueueProcessor;
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.CC;
+import neptune.dev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -35,6 +32,7 @@ public class SpawnListeners implements Listener {
             }
         }
     }
+
     @EventHandler // DISABLING FOOD DROP IN LOBBY
     public void onFoodLevel(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
@@ -47,7 +45,7 @@ public class SpawnListeners implements Listener {
     public void onDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
         if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
-                event.setCancelled(true);
+            event.setCancelled(true);
         }
     }
 

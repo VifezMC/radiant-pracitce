@@ -2,6 +2,7 @@ package neptune.dev.utils;
 
 import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
+import neptune.dev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -28,27 +29,6 @@ public class PlayerUtils {
     private static World lobbyWorld;
     private static final Logger logger = getLogger();
 
-    public static void resetPlayer(Player p) {
-        setState(p, PlayerState.LOBBY);
-        p.teleport(getLobbyLocation());
-        p.setSaturation(20);
-        p.setFlying(false);
-        p.setFoodLevel(20);
-        p.setHealth(p.getMaxHealth());
-        p.setFireTicks(0);
-        p.setGameMode(GameMode.SURVIVAL);
-
-        if (Neptune.pluginConfig.getBoolean("general.enable-join-message")) {
-            for (String msg : Neptune.messagesConfig.getStringList("general.join-message")) {
-                p.sendMessage(CC.translate(msg));
-            }
-        }
-
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        createSpawnItems(p);
-        p.updateInventory();
-    }
 
     public static void endGame(Player p) {
         removeState(p, PlayerState.PLAYING);
@@ -76,7 +56,7 @@ public class PlayerUtils {
         return lobbyWorld;
     }
 
-    private static Location getLobbyLocation() {
+    public static Location getLobbyLocation() {
         String[] data = Neptune.arenaConfig.getString("lobby").split(":");
         double x = Double.parseDouble(data[1]);
         double y = Double.parseDouble(data[2]);

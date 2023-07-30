@@ -3,7 +3,7 @@ neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.class
 neptune\dev\commands\admin\SetSpawnCMD.class
 neptune\dev\game\EndGame.class
 neptune\dev\utils\assemble\AssembleThread.class
-neptune\dev\utils\CC.class
+neptune\dev\utils\render\Console.class
 neptune\dev\utils\assemble\AssembleStyle.class
 neptune\dev\listeners\PlayerJoin.class
 neptune\dev\listeners\SpawnListeners.class
@@ -15,12 +15,11 @@ neptune\dev\commands\user\PingCMD.class
 neptune\dev\utils\assemble\AssembleAdapter.class
 neptune\dev\commands\user\StatsCMD.class
 neptune\dev\utils\assemble\AssembleBoard.class
+neptune\dev\utils\render\ItemBuilder.class
 neptune\dev\listeners\WorldListener.class
 neptune\dev\player\PlayerState.class
-neptune\dev\utils\Console.class
 neptune\dev\commands\admin\MainCMD.class
 neptune\dev\utils\assemble\AssembleBoardEntry.class
-neptune\dev\utils\ItemBuilder.class
 neptune\dev\listeners\PlayerLeaveListener.class
 neptune\dev\commands\admin\KitsCMD.class
 neptune\dev\utils\PlayerUtils.class
@@ -40,4 +39,5 @@ neptune\dev\ui\UnrankedInventory.class
 neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
+neptune\dev\utils\render\CC.class
 neptune\dev\managers\QueueProcessor.class

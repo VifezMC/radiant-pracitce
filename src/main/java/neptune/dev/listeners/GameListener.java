@@ -1,11 +1,12 @@
 package neptune.dev.listeners;
 
+import neptune.dev.Constants;
 import neptune.dev.Neptune;
 import neptune.dev.game.EndGame;
 import neptune.dev.game.Match;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.CC;
+import neptune.dev.utils.render.CC;
 import neptune.dev.utils.PlayerUtils;
 import org.bukkit.*;
 import org.bukkit.entity.LightningStrike;
@@ -20,6 +21,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.HashMap;
+import java.util.List;
 
 import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
@@ -30,8 +32,32 @@ public class GameListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (player.getGameMode() != GameMode.CREATIVE) {
-            event.setCancelled(true);
+        if (hasPlayerState(player, PlayerState.LOBBY)) {
+            if(player.hasPermission(Constants.PlName + ".build")) {
+                event.setCancelled(false);
+
+            }else{
+                event.setCancelled(true);
+
+            }
+
+            if (player.getGameMode() == GameMode.CREATIVE) {
+                event.setCancelled(true);
+            } else if (player.hasPermission(Constants.PlName + ".build")) {
+                event.setCancelled(false);
+
+            }
+        }
+        if (hasPlayerState(player, PlayerState.PLAYING)) {
+            if (player.getGameMode() == GameMode.CREATIVE) {
+                event.setCancelled(true);
+            }else{
+                String kitName = MatchManager.getMatch(player).getKitName();
+                List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
+
+                if (!rules.contains("build")) {
+                    event.setCancelled(true);
+                }}
         }
     }
 
@@ -186,11 +212,15 @@ public class GameListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
 
-        if (player.getGameMode() != GameMode.CREATIVE) {
-            if (hasPlayerState(player, PlayerState.PLAYING)) {
-                if (!Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(player).getKitName() + ".rules").contains("build")) {
-                    event.setCancelled(true);
-                }
+        if (player.getGameMode() == GameMode.CREATIVE) {
+            return;
+        }
+        if (hasPlayerState(player, PlayerState.PLAYING)) {
+            String kitName = MatchManager.getMatch(player).getKitName();
+            List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
+
+            if (!rules.contains("build")) {
+                event.setCancelled(true);
             }
         }
     }

@@ -1,4 +1,4 @@
-package neptune.dev.utils;
+package neptune.dev.utils.render;
 
 import static org.bukkit.Bukkit.getServer;
 

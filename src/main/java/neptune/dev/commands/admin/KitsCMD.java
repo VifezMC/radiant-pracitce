@@ -2,7 +2,7 @@ package neptune.dev.commands.admin;
 
 import neptune.dev.Constants;
 import neptune.dev.Neptune;
-import neptune.dev.utils.CC;
+import neptune.dev.utils.render.CC;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -36,15 +36,23 @@ public class KitsCMD implements CommandExecutor {
             switch (args[0]) {
                 case "create":
                     createKit(kitName);
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit has been created!");
                     break;
                 case "set":
                     setItemsAndArmour(kitName, player);
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit has been set to your inventory!");
                     break;
                 case "give":
                     giveKit(kitName, player);
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "There you go!");
                     break;
                 case "seticon":
                     setIcon(kitName, player.getItemInHand());
+                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    player.sendMessage(CC.GREEN + "Kit icon has been set!");
                     break;
                 case "rules":
                     if (args.length >= 3) {

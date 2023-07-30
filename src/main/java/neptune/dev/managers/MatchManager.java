@@ -3,7 +3,7 @@ package neptune.dev.managers;
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
 import neptune.dev.game.Match;
-import neptune.dev.utils.Console;
+import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;
 
 import java.util.*;

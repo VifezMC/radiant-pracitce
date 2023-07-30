@@ -1,10 +1,9 @@
 package neptune.dev.commands.admin;
 
 import neptune.dev.Constants;
-import neptune.dev.utils.CC;
+import neptune.dev.utils.render.CC;
 import neptune.dev.utils.PlayerUtils;
 import neptune.dev.Neptune;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
