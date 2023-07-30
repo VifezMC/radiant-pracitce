@@ -2,9 +2,12 @@ package neptune.dev.managers;
 
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
+import neptune.dev.utils.PlayerUtils;
+import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.LocationUtil;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,10 +34,17 @@ public class ArenaManager {
         }
     }
 
-    public static Arena getRandomArena() {
+    public static Arena getRandomArena(Player p1, Player p2) {
         List<Arena> allArenas = Neptune.getArenaManager().getArenas();
+
+        if (allArenas.isEmpty()) {
+            p1.sendMessage(CC.translate("&cNo Arenas available."));
+            p2.sendMessage(CC.translate("&cNo Arenas available."));
+        }
+
         return allArenas.get(new Random().nextInt(allArenas.size()));
     }
+
 
     public Arena getByName(String name) {
         for (Arena arena : arenas) {

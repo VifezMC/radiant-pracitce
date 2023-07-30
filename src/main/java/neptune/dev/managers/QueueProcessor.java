@@ -44,7 +44,7 @@ public class QueueProcessor {
             Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
         }
 
-        Arena a = ArenaManager.getRandomArena();
+        Arena a = ArenaManager.getRandomArena(firstPlayer, secondPlayer);
         MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
         firstPlayer.teleport(a.getSpawn1());
         secondPlayer.teleport(a.getSpawn2());
