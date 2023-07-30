@@ -17,6 +17,8 @@ import java.util.List;
 
 public class KitsCMD implements CommandExecutor {
 
+    private static final String PERMISSION = Constants.PlName + ".kits";
+
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
@@ -25,46 +27,37 @@ public class KitsCMD implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        if (!player.hasPermission(Constants.PlName + ".kits")) {
+        if (!player.hasPermission(PERMISSION)) {
             player.sendMessage(CC.translate("&cYou don't have permission to use this command."));
             return true;
         }
 
         if (args.length >= 2) {
             String kitName = args[1];
+            String action = args[0].toLowerCase();
 
-            switch (args[0]) {
-                case "create":
-                    createKit(kitName);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit has been created!");
-                    break;
-                case "set":
-                    setItemsAndArmour(kitName, player);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit has been set to your inventory!");
-                    break;
-                case "give":
-                    giveKit(kitName, player);
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "There you go!");
-                    break;
-                case "seticon":
-                    setIcon(kitName, player.getItemInHand());
-                    player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    player.sendMessage(CC.GREEN + "Kit icon has been set!");
-                    break;
-                case "rules":
-                    if (args.length >= 3) {
-                        String rule = args[2];
-                        addRule(kitName, rule, player);
-                    } else {
-                        player.sendMessage(CC.RED + "Please specify a rule (boxing, build, sumo).");
-                    }
-                    break;
-                default:
-                    player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
-                    break;
+            if (action.equals("create")) {
+                createKit(kitName);
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                player.sendMessage(CC.GREEN + "Kit has been created!");
+            } else if (action.equals("set")) {
+                setItemsAndArmour(kitName, player);
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+            } else if (action.equals("give")) {
+                giveKit(kitName, player);
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+            } else if (action.equals("seticon")) {
+                setIcon(kitName, player.getItemInHand(), player);
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+            } else if (action.equals("rules")) {
+                if (args.length >= 3) {
+                    String rule = args[2].toLowerCase();
+                    addRule(kitName, rule, player);
+                } else {
+                    player.sendMessage(CC.RED + "Please specify a rule (boxing, build, sumo).");
+                }
+            } else {
+                player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
             }
         } else {
             showKitCommands(player);
@@ -83,20 +76,30 @@ public class KitsCMD implements CommandExecutor {
     }
 
     private void setItemsAndArmour(String kitName, Player player) {
-        ItemStack[] content = player.getInventory().getContents();
-        ItemStack[] armour = player.getInventory().getArmorContents();
+        if (kitExists(kitName)) {
+            ItemStack[] content = player.getInventory().getContents();
+            ItemStack[] armour = player.getInventory().getArmorContents();
 
-        setItems(kitName, content);
-        setArmour(kitName, armour);
-        saveConfig();
+            setItems(kitName, content, player);
+            setArmour(kitName, armour);
+            saveConfig();
+            player.sendMessage(CC.GREEN + "Kit has been set to your inventory!");
+        }else{
+            player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
+        }
     }
 
-    private void setItems(String location, ItemStack[] items) {
-        Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
+    private void setItems(String location, ItemStack[] items, Player player) {
+            Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
     }
 
-    private void setIcon(String location, ItemStack item) {
-        Neptune.kitsConfig.set("kits." + location + ".icon", item);
+    private void setIcon(String location, ItemStack item, Player player) {
+        if (kitExists(location)) {
+            Neptune.kitsConfig.set("kits." + location + ".icon", item);
+            player.sendMessage(CC.GREEN + "Kit icon has been set!");
+        }else{
+            player.sendMessage(CC.RED + "Kit with name '" + location + "' does not exist.");
+        }
     }
 
     private void setArmour(String location, ItemStack[] items) {
@@ -104,13 +107,18 @@ public class KitsCMD implements CommandExecutor {
     }
 
     private void giveKit(String kitName, Player player) {
-        player.getInventory().clear();
-        player.getInventory().setArmorContents(null);
-        ItemStack[] inventoryContents = getItemsFromConfig(kitName);
-        ItemStack[] armorContents = getArmorFromConfig(kitName);
-        player.getInventory().setContents(inventoryContents);
-        player.getInventory().setArmorContents(armorContents);
-        player.updateInventory();
+            if (kitExists(kitName)) {
+                player.getInventory().clear();
+                player.getInventory().setArmorContents(null);
+                ItemStack[] inventoryContents = getItemsFromConfig(kitName);
+                ItemStack[] armorContents = getArmorFromConfig(kitName);
+                player.getInventory().setContents(inventoryContents);
+                player.getInventory().setArmorContents(armorContents);
+                player.updateInventory();
+                player.sendMessage(CC.GREEN + "There you go!");
+            }else{
+                player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
+            }
     }
 
     private ItemStack[] getItemsFromConfig(String location) {
@@ -134,6 +142,10 @@ public class KitsCMD implements CommandExecutor {
             player.sendMessage(CC.RED + "Invalid rule");
             player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
         }
+    }
+
+    private boolean kitExists(String kitName) {
+        return Neptune.kitsConfig.contains("kits." + kitName);
     }
 
     private void saveConfig() {
