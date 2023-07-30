@@ -3,6 +3,7 @@ package neptune.dev.commands.admin;
 import neptune.dev.Constants;
 import neptune.dev.Neptune;
 import neptune.dev.utils.render.CC;
+import neptune.dev.utils.render.Console;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -80,7 +81,7 @@ public class KitsCMD implements CommandExecutor {
             ItemStack[] content = player.getInventory().getContents();
             ItemStack[] armour = player.getInventory().getArmorContents();
 
-            setItems(kitName, content, player);
+            setItems(kitName, content);
             setArmour(kitName, armour);
             saveConfig();
             player.sendMessage(CC.GREEN + "Kit has been set to your inventory!");
@@ -89,7 +90,7 @@ public class KitsCMD implements CommandExecutor {
         }
     }
 
-    private void setItems(String location, ItemStack[] items, Player player) {
+    private void setItems(String location, ItemStack[] items) {
             Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
     }
 
@@ -97,6 +98,7 @@ public class KitsCMD implements CommandExecutor {
         if (kitExists(location)) {
             Neptune.kitsConfig.set("kits." + location + ".icon", item);
             player.sendMessage(CC.GREEN + "Kit icon has been set!");
+            saveConfig();
         }else{
             player.sendMessage(CC.RED + "Kit with name '" + location + "' does not exist.");
         }
