@@ -173,7 +173,7 @@ public class GameListener implements Listener {
         }
     }
 
-    @EventHandler // DISABLING DAMAGE IN LOBBY
+    @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player p = (Player) event.getEntity();
@@ -185,7 +185,7 @@ public class GameListener implements Listener {
         }
     }
 
-    @EventHandler // DISABLING FOOD DROP IN LOBBY
+    @EventHandler
     public void onFoodLevel(FoodLevelChangeEvent event) {
         Player p = (Player) event.getEntity();
         if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
@@ -203,11 +203,13 @@ public class GameListener implements Listener {
             Player damaged = (Player) event.getEntity();
             if (hasPlayerState(damager, PlayerState.PLAYING) && hasPlayerState(damaged, PlayerState.PLAYING)) {
                 if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(damager).getKitName() + ".rules").contains("boxing")) {
+                    damaged.setHealth(20);
+                    damaged.setFoodLevel(20);
+                    damaged.setSaturation(20.0f);
                     boxingHits.putIfAbsent(damager.getName(), 0);
                     int hitCount = boxingHits.get(damager.getName()) + 1;
                     boxingHits.put(damager.getName(), hitCount);
                     damager.sendMessage("[DEBUG] " + hitCount);
-
                     if (hitCount >= 100) {
                         Match match = MatchManager.getMatch(damager);
                         Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
