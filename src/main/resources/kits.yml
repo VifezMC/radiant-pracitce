@@ -152,3 +152,6 @@ kits:
       ==: org.bukkit.inventory.ItemStack
       type: POTION
       damage: 16421
+    arenas:
+      - test
+      - test 2

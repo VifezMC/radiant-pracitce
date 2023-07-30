@@ -33,6 +33,7 @@ public class Neptune extends JavaPlugin {
 
   public static ArenaManager arenaManager;
 
+
   @Override
   public void onEnable() {
     instance = this;
@@ -124,7 +125,9 @@ public class Neptune extends JavaPlugin {
   public void onDisable() {
     getServer().getPluginManager().disablePlugin(this);
   }
+
   public static ArenaManager getArenaManager() {
     return arenaManager;
   }
+
 }

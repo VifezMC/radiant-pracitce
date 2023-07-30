@@ -52,7 +52,8 @@ public class QueueProcessor {
 
 
                 String formattingString = Neptune.messagesConfig.getString("match.match-found");
-                String formattedMessage = formattingString.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer)));
+                String formattedMessage = formattingString.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer)).replace( "{arena}", (CharSequence) MatchManager.getMatch(firstPlayer).getArenaName()));
+
                 firstPlayer.sendMessage(CC.translate(formattedMessage));
                 String formattingString2 = Neptune.messagesConfig.getString("match.match-found");
                 String formattedMessage2 = formattingString2.replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer)));

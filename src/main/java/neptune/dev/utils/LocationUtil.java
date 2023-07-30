@@ -7,6 +7,13 @@ import org.bukkit.World;
 public class LocationUtil {
 
     public static Location toLoc(String location) {
+        // world
+        // -3.419668650903687
+        // 89.0
+        // 1.782061216093611
+        // 10.2046585
+        // 3.6850157
+
         String[] data =  location.split(":");
         World w = Neptune.instance.getServer().getWorld(data[0]);
         double x = Double.parseDouble(data[1]);

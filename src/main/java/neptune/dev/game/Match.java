@@ -12,6 +12,7 @@ public class Match {
     private String kitName;
     private UUID matchID;
 
+
     public Match(Player player1, Player player2, Arena arenaName, String kitName, UUID matchID) {
         this.player1 = player1;
         this.player2 = player2;
