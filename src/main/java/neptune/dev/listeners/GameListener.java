@@ -16,6 +16,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -167,6 +169,29 @@ public class GameListener implements Listener {
                     opponent2.sendMessage(CC.translate(formattedMessage));
                     EndGame.EndGame(winner, loser, p);
                 }
+            }
+        }
+    }
+
+    @EventHandler // DISABLING DAMAGE IN LOBBY
+    public void onDamage(EntityDamageEvent event) {
+        if (event.getEntity() instanceof Player) {
+            Player p = (Player) event.getEntity();
+            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
+                if (hasPlayerState(p, PlayerState.PLAYING)) {
+                    p.setHealth(p.getMaxHealth());
+                }
+            }
+        }
+    }
+
+    @EventHandler // DISABLING FOOD DROP IN LOBBY
+    public void onFoodLevel(FoodLevelChangeEvent event) {
+        Player p = (Player) event.getEntity();
+        if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
+            if (hasPlayerState(p, PlayerState.PLAYING)) {
+                event.setCancelled(true);
+                p.setSaturation(20.0f);
             }
         }
     }
