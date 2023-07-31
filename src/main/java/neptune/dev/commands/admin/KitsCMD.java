@@ -33,35 +33,33 @@ public class KitsCMD implements CommandExecutor {
             return true;
         }
 
-        if (args.length >= 2) {
-            String kitName = args[1];
+        if (args.length >= 1) {
             String action = args[0].toLowerCase();
-
-            if (action.equals("create")) {
+            if (action.equals("create") && args.length >= 2) {
+                String kitName = args[1];
                 createKit(kitName);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                 player.sendMessage(CC.GREEN + "Kit has been created!");
-            } else if (action.equals("set")) {
+            } else if (action.equals("set") && args.length >= 2) {
+                String kitName = args[1];
                 setItemsAndArmour(kitName, player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-            } else if (action.equals("give")) {
+            } else if (action.equals("give") && args.length >= 2) {
+                String kitName = args[1];
                 giveKit(kitName, player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-            } else if (action.equals("seticon")) {
+            } else if (action.equals("seticon") && args.length >= 2) {
+                String kitName = args[1];
                 setIcon(kitName, player.getItemInHand(), player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-            } else if (action.equals("arenas")) {
-                if (args.length >= 3) {
-                    String arena = args[2];
-                    addArena(kitName, arena, player);
-                }
-            } else if (action.equals("rules")) {
-                if (args.length >= 3) {
-                    String rule = args[2].toLowerCase();
-                    addRule(kitName, rule, player);
-                } else {
-                    player.sendMessage(CC.RED + "Please specify a rule (boxing, build, sumo).");
-                }
+            } else if (action.equals("arenas") && args.length >= 3) {
+                String kitName = args[1];
+                String arena = args[2];
+                addArena(kitName, arena, player);
+            } else if (action.equals("rules") && args.length >= 3) {
+                String kitName = args[1];
+                String rule = args[2].toLowerCase();
+                addRule(kitName, rule, player);
             } else {
                 player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
             }
@@ -191,6 +189,7 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit give &8<&7name&8> &7- &8(&7Give a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
         player.sendMessage(CC.translate("&b/kit rules &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
+        player.sendMessage(CC.translate("&b/kit arenas &8<&7name&8> &8<&7arena&8> &7- &8(&7Add an Arena to kit&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
     }

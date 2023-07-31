@@ -23,8 +23,6 @@ public class StartGame {
             for (PotionEffect effect : p.getActivePotionEffects()) {
                 p.removePotionEffect(effect.getType());
             }
-            PlayerUtils.removeState(p, PlayerState.LOBBY);
-            PlayerUtils.setState(p, PlayerState.PLAYING);
         }
     }
 
