@@ -38,9 +38,11 @@ public class ArenaCMD implements CommandExecutor {
             } else if (args[0].equalsIgnoreCase("setspawn1")) {
                 setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
             } else if (args[0].equalsIgnoreCase("setspawn2")) {
                 setSpawn(arenaName, 2, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
             } else {
                 showArenaCommands(player);
             }
