@@ -179,7 +179,7 @@ public class GameListener implements Listener {
             Player p = (Player) event.getEntity();
             if (hasPlayerState(p, PlayerState.PLAYING)) {
                 if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
-                    p.setHealth(p.getMaxHealth());
+                    event.setDamage(0);
                 }
             }
         }
@@ -190,8 +190,7 @@ public class GameListener implements Listener {
         Player p = (Player) event.getEntity();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
             if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
-                event.setCancelled(true);
-                p.setSaturation(20.0f);
+                event.setFoodLevel(20);
             }
         }
     }
@@ -238,7 +237,7 @@ public class GameListener implements Listener {
             Player p = (Player) event.getEntity();
             if (hasPlayerState(p, PlayerState.PLAYING)) {
                 if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nodamage")) {
-                    p.setHealth(p.getMaxHealth());
+                    event.setDamage(0);
                 }
             }
         }
@@ -249,8 +248,7 @@ public class GameListener implements Listener {
         Player p = (Player) event.getEntity();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
             if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nohunger")) {
-                event.setCancelled(true);
-                p.setSaturation(20.0f);
+                event.setFoodLevel(20);
             }
         }
     }
