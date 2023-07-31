@@ -57,8 +57,9 @@ public class QueueProcessor {
             return;
         }
 
-        Collections.shuffle(arenas);
-        String selectedArena = arenas.get(0);
+        Random random = new Random();
+        int randomNumber = random.nextInt(arenas.size());
+        String selectedArena = arenas.get(randomNumber);
         Arena a = ArenaManager.getByName(selectedArena);
 
         MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
