@@ -133,7 +133,7 @@ public class KitsCMD implements CommandExecutor {
 
     private void addRule(String kitName, String rule, Player player) {
         if (kitExists(kitName)) {
-            List<String> validRules = Arrays.asList("boxing", "build", "sumo");
+            List<String> validRules = Arrays.asList("boxing", "build", "sumo", "nodamage", "nohunger");
             if (validRules.contains(rule)) {
                 List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
                 rules.add(rule);
@@ -142,8 +142,8 @@ public class KitsCMD implements CommandExecutor {
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                 player.sendMessage(CC.GREEN + "Kit rule has been added!");
             } else {
-                player.sendMessage(CC.RED + "Invalid rule");
-                player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo");
+                player.sendMessage(CC.RED + "Invalid rules");
+                player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo, noDamage, noHunger");
             }
         }else{
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
