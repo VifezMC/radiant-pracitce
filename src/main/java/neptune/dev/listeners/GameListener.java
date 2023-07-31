@@ -177,8 +177,8 @@ public class GameListener implements Listener {
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player p = (Player) event.getEntity();
-            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
-                if (hasPlayerState(p, PlayerState.PLAYING)) {
+            if (hasPlayerState(p, PlayerState.PLAYING)) {
+                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
                     p.setHealth(p.getMaxHealth());
                 }
             }
@@ -188,8 +188,8 @@ public class GameListener implements Listener {
     @EventHandler
     public void onFoodLevel(FoodLevelChangeEvent event) {
         Player p = (Player) event.getEntity();
-        if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
-            if (hasPlayerState(p, PlayerState.PLAYING)) {
+        if (hasPlayerState(p, PlayerState.PLAYING)) {
+            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
                 event.setCancelled(true);
                 p.setSaturation(20.0f);
             }
@@ -236,8 +236,8 @@ public class GameListener implements Listener {
     public void onBoxingDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player p = (Player) event.getEntity();
-            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nodamage")) {
-                if (hasPlayerState(p, PlayerState.PLAYING)) {
+            if (hasPlayerState(p, PlayerState.PLAYING)) {
+                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nodamage")) {
                     p.setHealth(p.getMaxHealth());
                 }
             }
@@ -247,8 +247,8 @@ public class GameListener implements Listener {
     @EventHandler
     public void onBoxingFoodLevel(FoodLevelChangeEvent event) {
         Player p = (Player) event.getEntity();
-        if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nohunger")) {
-            if (hasPlayerState(p, PlayerState.PLAYING)) {
+        if (hasPlayerState(p, PlayerState.PLAYING)) {
+            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nohunger")) {
                 event.setCancelled(true);
                 p.setSaturation(20.0f);
             }
