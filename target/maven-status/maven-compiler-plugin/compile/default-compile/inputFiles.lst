@@ -7,6 +7,7 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\a
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\Neptune.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\PlayerUtils.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\LeaveQueueCMD.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\UnrankedInventoryLegacy.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\PingCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\StatsInventory.java
@@ -33,10 +34,10 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\r
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\WorldListener.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\UnrankedCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\GameListener.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\UnrankedInventoryModern.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleBoard.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\render\ItemBuilder.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\MatchManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\Assemble.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleThread.java
-C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\UnrankedInventory.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\game\EndGame.java

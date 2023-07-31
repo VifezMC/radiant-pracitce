@@ -3,7 +3,6 @@ package neptune.dev.ui;
 import neptune.dev.Neptune;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.PlayerUtils;
-import neptune.dev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -16,7 +15,7 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class UnrankedInventory implements Listener {
+public class UnrankedInventoryModern implements Listener {
 
     public static void openMenu(Player player, ConfigurationSection kitsConfig) {
         Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate("&8Unranked Queue"));
@@ -31,7 +30,7 @@ public class UnrankedInventory implements Listener {
                     ItemStack iconItem = kitConfig.getItemStack("icon");
                     ItemMeta itemMeta = iconItem.getItemMeta();
                     itemMeta.addItemFlags(ItemFlag.values());
-                    itemMeta.setDisplayName(CC.translate(Neptune.pluginConfig.getString("menus.queue.item-color") + kitName));
+                    itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.item-color") + kitName));
                     iconItem.setItemMeta(itemMeta);
                     menu.setItem(y * 9 + x, iconItem);
                     x++;

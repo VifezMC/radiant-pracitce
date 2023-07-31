@@ -1,0 +1,3 @@
+queue-gui-type:
+  type: "modern" # You change between legacy and modern
+  item-color: "&9"

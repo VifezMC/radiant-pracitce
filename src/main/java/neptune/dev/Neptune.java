@@ -6,7 +6,7 @@ import neptune.dev.listeners.*;
 import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.Scoreboard;
 import neptune.dev.ui.StatsInventory;
-import neptune.dev.ui.UnrankedInventory;
+import neptune.dev.ui.UnrankedInventoryModern;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -31,6 +31,9 @@ public class Neptune extends JavaPlugin {
   public static File scoreboard;
   public static FileConfiguration scoreboardConfig;
   public static ArenaManager arenaManager;
+  public static File menus;
+  public static FileConfiguration menusConfig;
+
 
 
   @Override
@@ -89,6 +92,11 @@ public class Neptune extends JavaPlugin {
     saveResourceIfNotExists("scoreboard.yml", false);
     scoreboard = new File(this.getDataFolder(), "scoreboard.yml");
     scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
+
+    // Menus CONFIG
+    saveResourceIfNotExists("menus.yml", false);
+    menus = new File(this.getDataFolder(), "menus.yml");
+    menusConfig = YamlConfiguration.loadConfiguration(menus);
   }
 
   private void registerEventListeners() {
@@ -98,7 +106,7 @@ public class Neptune extends JavaPlugin {
             new WorldListener(),
             new GameListener(),
             new StatsInventory(),
-            new UnrankedInventory()
+            new UnrankedInventoryModern()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
   }
 

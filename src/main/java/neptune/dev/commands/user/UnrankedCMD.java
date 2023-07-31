@@ -1,7 +1,8 @@
 package neptune.dev.commands.user;
 
 import neptune.dev.Neptune;
-import neptune.dev.ui.UnrankedInventory;
+import neptune.dev.ui.UnrankedInventoryLegacy;
+import neptune.dev.ui.UnrankedInventoryModern;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -17,7 +18,11 @@ public class UnrankedCMD implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        UnrankedInventory.openMenu(player, Neptune.kitsConfig);
+        if(Neptune.menusConfig.getString("queue-gui-type.type").contains("modern")){
+            UnrankedInventoryModern.openMenu(player, Neptune.kitsConfig);
+        }else{
+            UnrankedInventoryLegacy.openMenu(player, Neptune.kitsConfig);
+        }
         return true;
     }
 }

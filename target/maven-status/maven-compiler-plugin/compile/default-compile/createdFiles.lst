@@ -1,4 +1,5 @@
 neptune\dev\ui\StatsInventory.class
+neptune\dev\ui\UnrankedInventoryModern.class
 neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.class
 neptune\dev\commands\admin\SetSpawnCMD.class
 neptune\dev\game\EndGame.class
@@ -19,6 +20,7 @@ neptune\dev\utils\render\ItemBuilder.class
 neptune\dev\listeners\WorldListener.class
 neptune\dev\player\PlayerState.class
 neptune\dev\commands\admin\MainCMD.class
+neptune\dev\ui\UnrankedInventoryLegacy.class
 neptune\dev\utils\assemble\AssembleBoardEntry.class
 neptune\dev\listeners\PlayerLeaveListener.class
 neptune\dev\commands\admin\KitsCMD.class
@@ -35,7 +37,6 @@ neptune\dev\utils\assemble\Assemble.class
 neptune\dev\commands\admin\ArenaCMD.class
 neptune\dev\Constants.class
 neptune\dev\game\EndGame$1.class
-neptune\dev\ui\UnrankedInventory.class
 neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
