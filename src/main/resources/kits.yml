@@ -163,6 +163,7 @@ kits:
           HIDE_POTION_EFFECTS: null
           HIDE_ATTRIBUTES: null
           HIDE_DESTROYS: null
+    arenas: None
   Sumo:
     items:
       - null
@@ -234,6 +235,9 @@ kits:
           HIDE_DESTROYS: null
     rules:
       - sumo
+      - nodamage
+      - nohunger
+    arenas: None
   Classic:
     items:
       - ==: org.bukkit.inventory.ItemStack
