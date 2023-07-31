@@ -61,7 +61,6 @@ public class QueueProcessor {
         int randomNumber = random.nextInt(arenas.size());
         String selectedArena = arenas.get(randomNumber);
         Arena a = ArenaManager.getByName(selectedArena);
-
         MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
 
         firstPlayer.teleport(a.getSpawn1());
