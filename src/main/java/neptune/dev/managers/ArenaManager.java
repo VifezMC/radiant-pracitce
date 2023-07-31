@@ -32,27 +32,6 @@ public class ArenaManager {
         }
     }
 
-    public static Arena getRandomArena(Player p1, Player p2) {
-        List<Arena> allArenas = Neptune.getArenaManager().getArenas();
-
-        if (allArenas.isEmpty()) {
-            p1.sendMessage(CC.translate("&cNo Arenas available."));
-            p2.sendMessage(CC.translate("&cNo Arenas available."));
-            return null;
-        }
-
-        return allArenas.get(new Random().nextInt(allArenas.size()));
-    }
-
-    public static String getRandomString(ArrayList<String> list) {
-        if (list == null || list.isEmpty()) {
-            throw new IllegalArgumentException("The ArrayList is empty or null.");
-        }
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(list.size());
-        return list.get(randomIndex);
-    }
 
     public static Arena getByName(String name) {
         for (Arena arena : arenas) {
