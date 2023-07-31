@@ -50,6 +50,11 @@ public class KitsCMD implements CommandExecutor {
             } else if (action.equals("seticon")) {
                 setIcon(kitName, player.getItemInHand(), player);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+            } else if (action.equals("arenas")) {
+                if (args.length >= 3) {
+                    String arena = args[2];
+                    addArena(kitName, arena, player);
+                }
             } else if (action.equals("rules")) {
                 if (args.length >= 3) {
                     String rule = args[2].toLowerCase();
@@ -145,6 +150,19 @@ public class KitsCMD implements CommandExecutor {
                 player.sendMessage(CC.RED + "Invalid rules");
                 player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo, noDamage, noHunger");
             }
+        }else{
+            player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
+        }
+    }
+
+    private void addArena(String kitName, String arena, Player player) {
+        if (kitExists(kitName)) {
+                List<String> arenas = Neptune.kitsConfig.getStringList("kits." + kitName + ".arenas");
+                arenas.add(arena);
+                Neptune.kitsConfig.set("kits." + kitName + ".arenas", arenas);
+                saveConfig();
+                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                player.sendMessage(CC.GREEN + "Arena has been added to kit!");
         }else{
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
         }

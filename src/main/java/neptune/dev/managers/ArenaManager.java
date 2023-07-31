@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class ArenaManager {
 
-    private List<Arena> arenas;
+    private static List<Arena> arenas;
 
     public ArenaManager() {
         this.arenas = new ArrayList<>();
@@ -45,8 +45,18 @@ public class ArenaManager {
         return allArenas.get(new Random().nextInt(allArenas.size()));
     }
 
+        public static String getRandomString(ArrayList<String> list) {
+        if (list == null || list.isEmpty()) {
+            throw new IllegalArgumentException("The ArrayList is empty or null.");
+        }
 
-    public Arena getByName(String name) {
+        Random random = new Random();
+        int randomIndex = random.nextInt(list.size());
+        return list.get(randomIndex);
+    }
+
+
+    public static Arena getByName(String name) {
         for (Arena arena : arenas) {
             if (arena.getName().equals(name)) {
                 return arena;

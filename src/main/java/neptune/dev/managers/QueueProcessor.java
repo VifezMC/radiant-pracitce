@@ -6,12 +6,14 @@ import neptune.dev.game.StartGame;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;
-
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+import static neptune.dev.managers.ArenaManager.getRandomString;
 
 public class QueueProcessor {
 
-    static Map<Player, String> newQueue = new HashMap<>();
+    static Map<Player, String> newQueue = new ConcurrentHashMap<>();
     public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
@@ -44,7 +46,18 @@ public class QueueProcessor {
             Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
         }
 
-        Arena a = ArenaManager.getRandomArena(firstPlayer, secondPlayer);
+        List<String> arenas = Neptune.kitsConfig.getStringList("kits." + kitName + ".arenas");
+
+        if (arenas.isEmpty()) {
+            firstPlayer.sendMessage(CC.translate("&cNo arenas found."));
+            secondPlayer.sendMessage(CC.translate("&cNo arenas found."));
+            newQueue.remove(firstPlayer);
+            newQueue.remove(secondPlayer);
+            return;
+        }
+        Collections.shuffle(arenas);
+        String selectedArena = arenas.get(0);
+        Arena a = ArenaManager.getByName(selectedArena);
         MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
         firstPlayer.teleport(a.getSpawn1());
         secondPlayer.teleport(a.getSpawn2());
