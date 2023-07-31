@@ -8,13 +8,13 @@ import neptune.dev.utils.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;
+
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-
 public class QueueProcessor {
 
-    static Map<Player, String> newQueue = new ConcurrentHashMap<>();
+    private static final Map<Player, String> newQueue = new ConcurrentHashMap<>();
     public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
@@ -56,16 +56,21 @@ public class QueueProcessor {
             newQueue.remove(secondPlayer);
             return;
         }
+
         Collections.shuffle(arenas);
         String selectedArena = arenas.get(0);
         Arena a = ArenaManager.getByName(selectedArena);
+
         MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
+
         firstPlayer.teleport(a.getSpawn1());
         secondPlayer.teleport(a.getSpawn2());
+
         PlayerUtils.removeState(firstPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
         PlayerUtils.removeState(secondPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(secondPlayer, PlayerState.PLAYING);
+
         processQueueForKit(kitName, players);
 
         if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
