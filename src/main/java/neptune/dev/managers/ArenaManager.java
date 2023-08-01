@@ -3,13 +3,10 @@ package neptune.dev.managers;
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
 import neptune.dev.utils.LocationUtil;
-import neptune.dev.utils.render.CC;
 import org.bukkit.Location;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class ArenaManager {
 
