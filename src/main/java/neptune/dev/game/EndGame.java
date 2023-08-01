@@ -1,5 +1,6 @@
 package neptune.dev.game;
 
+import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.managers.QueueProcessor;
 import neptune.dev.utils.PlayerUtils;
@@ -16,10 +17,20 @@ public class EndGame {
             public void run() {
                 PlayerUtils.endGame(winner);
                 PlayerUtils.endGame(loser);
+
+                Match match = MatchManager.getMatch(p);
+
+                if (match != null) {
+                    String arenaName = match.getArenaNameAsString();
+                    Arena arena = ArenaManager.getByName(arenaName);
+                    if (arena != null) {
+                        arena.setAvailable(true);
+                    }
+                }
+
                 MatchManager.removeMatch(MatchManager.getMatchID(p));
                 QueueProcessor.playing = QueueProcessor.playing - 2;
             }
         }, 60L);
-
     }
 }

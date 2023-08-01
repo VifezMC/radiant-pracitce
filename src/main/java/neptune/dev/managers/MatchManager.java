@@ -12,11 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MatchManager {
 
     private static Map<UUID, Match> matches = new ConcurrentHashMap<>();
+    private static Map<UUID, Arena> matchArenas = new ConcurrentHashMap<>(); // New map to store match-arena association
 
     public static void addMatch(Player player1, Player player2, Arena arenaName, String kitName) {
         UUID matchID = UUID.randomUUID();
         Match match = new Match(player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);
+        matchArenas.put(matchID, arenaName); // Store the arena associated with the match
         if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
             Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName.getName() + " with kit " + kitName);
         }
@@ -29,6 +31,7 @@ public class MatchManager {
                 Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName().getName() + " with kit " + match.getKitName());
             }
         }
+        matchArenas.remove(matchID); // Remove the associated arena reference
     }
 
     public static UUID getMatchID(Player player) {
@@ -48,6 +51,10 @@ public class MatchManager {
             }
         }
         return null;
+    }
+
+    public static Arena getArena(UUID matchID) {
+        return matchArenas.get(matchID);
     }
 
     public static String getOpponent(Player player) {

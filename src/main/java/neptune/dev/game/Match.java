@@ -40,4 +40,8 @@ public class Match {
     public UUID getMatchID() {
         return matchID;
     }
+
+    public String getArenaNameAsString() {
+        return arenaName.getName();
+    }
 }

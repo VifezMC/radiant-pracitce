@@ -57,14 +57,22 @@ public class QueueProcessor {
             return;
         }
 
-        Random random = new Random();
-        int randomNumber = random.nextInt(arenas.size());
-        String selectedArena = arenas.get(randomNumber);
-        Arena a = ArenaManager.getByName(selectedArena);
-        MatchManager.addMatch(firstPlayer, secondPlayer, a, kitName);
+        Arena selectedArena = selectRandomAvailableArena(arenas);
+        if (selectedArena == null) {
+            firstPlayer.sendMessage(CC.translate("&cNo available arenas found."));
+            secondPlayer.sendMessage(CC.translate("&cNo available arenas found."));
+            newQueue.remove(firstPlayer);
+            newQueue.remove(secondPlayer);
+            return;
+        }
 
-        firstPlayer.teleport(a.getSpawn1());
-        secondPlayer.teleport(a.getSpawn2());
+        selectedArena.setAvailable(false);
+        newQueue.remove(firstPlayer);
+        newQueue.remove(secondPlayer);
+        MatchManager.addMatch(firstPlayer, secondPlayer, selectedArena, kitName);
+
+        firstPlayer.teleport(selectedArena.getSpawn1());
+        secondPlayer.teleport(selectedArena.getSpawn2());
 
         PlayerUtils.removeState(firstPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
@@ -77,8 +85,6 @@ public class QueueProcessor {
             Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
         }
 
-        newQueue.remove(firstPlayer);
-        newQueue.remove(secondPlayer);
         playing += 2;
 
         String opponentMessage = Neptune.messagesConfig.getString("match.match-found")
@@ -104,5 +110,20 @@ public class QueueProcessor {
 
     private static void processQueueForKit(String kitName, List<Player> players) {
         players.forEach(player -> StartGame.startGame(kitName, players));
+    }
+
+    private static Arena selectRandomAvailableArena(List<String> arenas) {
+        List<Arena> availableArenas = new ArrayList<>();
+        for (String arenaName : arenas) {
+            Arena arena = ArenaManager.getByName(arenaName);
+            if (arena != null && arena.isAvailable()) {
+                availableArenas.add(arena);
+            }
+        }
+        if (availableArenas.isEmpty()) {
+            return null;
+        }
+        Random random = new Random();
+        return availableArenas.get(random.nextInt(availableArenas.size()));
     }
 }

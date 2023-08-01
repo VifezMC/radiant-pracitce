@@ -29,7 +29,6 @@ public class ArenaManager {
         }
     }
 
-
     public static Arena getByName(String name) {
         for (Arena arena : arenas) {
             if (arena.getName().equals(name)) {
@@ -43,4 +42,19 @@ public class ArenaManager {
         return arenas;
     }
 
+    public Arena reserveArena() {
+        for (Arena arena : arenas) {
+            if (arena.isAvailable()) {
+                arena.setAvailable(false);
+                return arena;
+            }
+        }
+        return null;
+    }
+
+    public void releaseArena(Arena arena) {
+        if (arena != null) {
+            arena.setAvailable(true);
+        }
+    }
 }
