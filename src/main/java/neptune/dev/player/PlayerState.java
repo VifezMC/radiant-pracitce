@@ -1,5 +1,8 @@
 package neptune.dev.player;
 
 public enum PlayerState {
-    LOBBY, PLAYING
+    LOBBY,
+    SPECTATING,
+    IN_QUEUE,
+    PLAYING
 }

@@ -21,7 +21,7 @@ public class PingCMD implements CommandExecutor {
 
         if (args.length == 0) {
             String formattingString = Neptune.messagesConfig.getString("general.ping-message");
-            String formattedMessage = formattingString.replace("{player}", player.getName()).replace("{ping}", PlayerUtils.getPing(player));
+            String formattedMessage = formattingString.replace("{player}", player.getName()).replace("{ping}", PlayerUtils.getPing(player) + "");
             player.sendMessage(CC.translate(formattedMessage));
         } else if (args.length == 1) {
             Player target = sender.getServer().getPlayer(args[0]);
@@ -30,7 +30,7 @@ public class PingCMD implements CommandExecutor {
                 return true;
             }
             String formattingString2 = Neptune.messagesConfig.getString("general.other-player-ping-message");
-            String formattedMessage2 = formattingString2.replace("{player}", target.getName()).replace("{ping}", PlayerUtils.getPing(target));
+            String formattedMessage2 = formattingString2.replace("{player}", target.getName()).replace("{ping}", PlayerUtils.getPing(target) + "");
             player.sendMessage(CC.translate(formattedMessage2));
         } else {
             player.sendMessage(CC.RED + "Usage: /ping [<username>]");

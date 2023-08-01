@@ -3,10 +3,7 @@ package neptune.dev.utils;
 import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.render.CC;
-import org.bukkit.GameMode;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -88,10 +85,16 @@ public class PlayerUtils {
         return loc.getWorld().getName() + ":" + loc.getX() + ":" + loc.getY() + ":" + loc.getZ() + ":" + loc.getYaw() + ":" + loc.getPitch();
     }
 
-    public static String getPing(Player player) {
-        return ((CraftPlayer) player).getHandle().ping + "";
+    public static int getPing(Player player) {
+        try {
+            String version = Bukkit.getServer().getClass().getPackage().getName().substring(23);
+            Class<?> craftPlayer = Class.forName("org.bukkit.craftbukkit." + version + ".entity.CraftPlayer");
+            Object handle = craftPlayer.getMethod("getHandle", new Class[0]).invoke(player);
+            return (Integer) handle.getClass().getDeclaredField("ping").get(handle);
+        } catch (Exception e) {
+            return -1;
+        }
     }
-
     private static void createItems(Player player, String configSection, Map<String, ItemStack> itemCache) {
         ConfigurationSection itemsSection = Neptune.spawnItemsConfig.getConfigurationSection(configSection);
         if (itemsSection == null) {

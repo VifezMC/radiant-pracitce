@@ -1,3 +1,7 @@
+MONGO:
+  URI: "mongodb://localhost:27017"
+  DATABASE: "Neptune"
+  
 general:
   enable-join-message: true
   enable-debug: false

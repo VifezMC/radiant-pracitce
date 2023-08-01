@@ -1,14 +1,21 @@
 package neptune.dev;
 
+import lombok.Getter;
 import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
 import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.Scoreboard;
+import neptune.dev.player.Profile;
+import neptune.dev.player.ProfileManager;
+import neptune.dev.storage.MongoManager;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventoryModern;
+import neptune.dev.utils.ClassUtil;
+import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,8 +23,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.File;
 import java.util.Arrays;
 
+@Getter
 public class Neptune extends JavaPlugin {
+
+  @Getter
   public static Neptune instance;
+
+  private final ClassUtil classUtil = new ClassUtil();
+
+  private MongoManager mongoManager;
+  private ProfileManager profileManager;
+
   public static File arena;
   public static FileConfiguration arenaConfig;
   public static File config;
@@ -34,8 +50,6 @@ public class Neptune extends JavaPlugin {
   public static File menus;
   public static FileConfiguration menusConfig;
 
-
-
   @Override
   public void onEnable() {
     instance = this;
@@ -49,9 +63,15 @@ public class Neptune extends JavaPlugin {
 
     // LIST LISTENERS
     registerEventListeners();
+    logMessage("&7[&9Neptune&7] &aLoaded listeners!");
 
     // COMMANDS
     registerCommands();
+    logMessage("&7[&9Neptune&7] &aLoaded commands!");
+
+
+    loadManagers();
+    logMessage("&7[&9Neptune&7] &aLoaded managers!");
 
     // START MESSSAGE
     Console.sendMessage("&9Neptune Loaded successfully");
@@ -99,6 +119,7 @@ public class Neptune extends JavaPlugin {
     menusConfig = YamlConfiguration.loadConfiguration(menus);
   }
 
+
   private void registerEventListeners() {
     Arrays.asList(
             new PlayerJoin(),
@@ -122,6 +143,7 @@ public class Neptune extends JavaPlugin {
     getCommand("unranked").setExecutor(new UnrankedCMD());
   }
 
+
   private void saveResourceIfNotExists(String resourcePath, boolean replace) {
     File file = new File(this.getDataFolder(), resourcePath);
     if (!file.exists()) {
@@ -131,6 +153,14 @@ public class Neptune extends JavaPlugin {
 
   @Override
   public void onDisable() {
+
+    for (Profile profile : this.getProfileManager().getAllProfiles()) {
+      this.getProfileManager().save(profile);
+    }
+
+    if (mongoManager != null) {
+      mongoManager.close();
+    }
     getServer().getPluginManager().disablePlugin(this);
   }
 
@@ -138,4 +168,12 @@ public class Neptune extends JavaPlugin {
     return arenaManager;
   }
 
+  private void loadManagers() {
+    mongoManager = new MongoManager(this);
+    profileManager = new ProfileManager();
+  }
+
+  public static void logMessage(String string) {
+    Bukkit.getConsoleSender().sendMessage(CC.translate(string));
+  }
 }
