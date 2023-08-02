@@ -19,8 +19,10 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
+import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,7 @@ import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 public class GameListener implements Listener {
 
     private final HashMap<String, Integer> boxingHits = new HashMap<>();
+    private final String[] materials = new String[]{"SWORD", "_AXE"};
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
@@ -266,6 +269,33 @@ public class GameListener implements Listener {
             if (!rules.contains("build")) {
                 event.setCancelled(true);
             }
+        }
+    }
+
+    @EventHandler
+    public void onPlayerDropItem(PlayerDropItemEvent event) {
+        Player player = event.getPlayer();
+        Match match = MatchManager.getMatch(player);
+
+        if (match == null) {
+            return;
+        }
+
+        ItemStack itemStack = event.getItemDrop().getItemStack();
+        Material itemType = itemStack.getType();
+
+        Material type = event.getItemDrop().getItemStack().getType();
+        String material = type.toString();
+        for (String name : this.materials) {
+            if (!material.contains(name)) continue;
+            event.setCancelled(true);
+            player.sendMessage(CC.RED + "You may want to keep on this!");
+        }
+
+        // glass bottles and bowls are removed from inventories but
+        // don't spawn items on the ground
+        if (itemType == Material.GLASS_BOTTLE || itemType == Material.BOWL) {
+            event.getItemDrop().remove();
         }
     }
 }
