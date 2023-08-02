@@ -79,8 +79,8 @@ public class Neptune extends JavaPlugin {
   public void registerConfigs() {
 
     // ARENAS
-    saveResourceIfNotExists("arenas.yml", false);
-    arena = new File(this.getDataFolder(), "arenas.yml");
+    saveResourceIfNotExists("cache/arenas.yml", false);
+    arena = new File(this.getDataFolder(), "cache/arenas.yml");
     arenaConfig = YamlConfiguration.loadConfiguration(arena);
     arenaManager.loadArenas();
 
@@ -90,28 +90,28 @@ public class Neptune extends JavaPlugin {
     pluginConfig = YamlConfiguration.loadConfiguration(config);
 
     // MESSAGES CONFIG
-    saveResourceIfNotExists("messages.yml", false);
-    messages = new File(this.getDataFolder(), "messages.yml");
+    saveResourceIfNotExists("features/messages.yml", false);
+    messages = new File(this.getDataFolder(), "features/messages.yml");
     messagesConfig = YamlConfiguration.loadConfiguration(messages);
 
     // SPAWN ITEMS
-    saveResourceIfNotExists("spawn-items.yml", false);
-    spawnItems = new File(this.getDataFolder(), "spawn-items.yml");
+    saveResourceIfNotExists("features/spawn-items.yml", false);
+    spawnItems = new File(this.getDataFolder(), "features/spawn-items.yml");
     spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
 
     // KITS CONFIG
-    saveResourceIfNotExists("kits.yml", false);
-    kits = new File(this.getDataFolder(), "kits.yml");
+    saveResourceIfNotExists("cache/kits.yml", false);
+    kits = new File(this.getDataFolder(), "cache/kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);
 
     // SCOREBOARD CONFIG
-    saveResourceIfNotExists("scoreboard.yml", false);
-    scoreboard = new File(this.getDataFolder(), "scoreboard.yml");
+    saveResourceIfNotExists("ui/scoreboard.yml", false);
+    scoreboard = new File(this.getDataFolder(), "ui/scoreboard.yml");
     scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
 
     // Menus CONFIG
-    saveResourceIfNotExists("menus.yml", false);
-    menus = new File(this.getDataFolder(), "menus.yml");
+    saveResourceIfNotExists("ui/menus.yml", false);
+    menus = new File(this.getDataFolder(), "ui/menus.yml");
     menusConfig = YamlConfiguration.loadConfiguration(menus);
   }
 
