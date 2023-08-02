@@ -11,7 +11,6 @@ import neptune.dev.player.ProfileManager;
 import neptune.dev.storage.MongoManager;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventoryModern;
-import neptune.dev.utils.ClassUtil;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
@@ -28,9 +27,6 @@ public class Neptune extends JavaPlugin {
 
   @Getter
   public static Neptune instance;
-
-  private final ClassUtil classUtil = new ClassUtil();
-
   private MongoManager mongoManager;
   private ProfileManager profileManager;
 
@@ -164,13 +160,16 @@ public class Neptune extends JavaPlugin {
     getServer().getPluginManager().disablePlugin(this);
   }
 
+
   public static ArenaManager getArenaManager() {
     return arenaManager;
   }
 
   private void loadManagers() {
-    mongoManager = new MongoManager(this);
-    profileManager = new ProfileManager();
+    if(pluginConfig.getString("save-type").contains("Mongo")){
+      mongoManager = new MongoManager(this);
+      profileManager = new ProfileManager();
+    }
   }
 
   public static void logMessage(String string) {

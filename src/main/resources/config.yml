@@ -1,3 +1,4 @@
+save-type: "flatfile" # flatfile or Mongo
 MONGO:
   URI: "mongodb://localhost:27017"
   DATABASE: "Neptune"
@@ -5,4 +6,4 @@ MONGO:
 general:
   enable-join-message: true
   enable-debug: false
-  clear-empty-bottles: true #Remove bottle from the ground if its empty
+  clear-empty-bottles: true # Remove bottle from the ground if its empty

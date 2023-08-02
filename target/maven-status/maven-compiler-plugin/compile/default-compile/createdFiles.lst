@@ -54,6 +54,5 @@ neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
 neptune\dev\utils\render\CC.class
-neptune\dev\utils\ClassUtil.class
 neptune\dev\utils\mongo\MongoCredentials.class
 neptune\dev\managers\QueueProcessor.class

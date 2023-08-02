@@ -15,15 +15,24 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-public class UnrankedInventoryModern implements Listener {
+import java.util.ArrayList;
+import java.util.List;
 
+public class UnrankedInventoryModern implements Listener {
     public static void openMenu(Player player, ConfigurationSection kitsConfig) {
-        Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate("&8Unranked Queue"));
+        Inventory menu = Bukkit.createInventory(null, 9 * Neptune.menusConfig.getInt("queue-gui-type.height"), CC.translate(Neptune.menusConfig.getString("queue-gui-type.menu-name")));
 
         if (kitsConfig != null && kitsConfig.contains("kits")) {
             ConfigurationSection kitsSection = kitsConfig.getConfigurationSection("kits");
+            int counter = 0;
             int x = 1;
             int y = 1;
+            String loreKey = "queue-gui-type.item-meta";
+            List<String> lore = Neptune.menusConfig.getStringList(loreKey);
+            List<String> translatedLore = new ArrayList<>();
+            for (String loreLine : lore) {
+                translatedLore.add(CC.translate(loreLine).replace("{queueing}", "0").replace("{playing}", "0"));
+            }
             for (String kitName : kitsSection.getKeys(false)) {
                 ConfigurationSection kitConfig = kitsSection.getConfigurationSection(kitName);
                 if (kitConfig.contains("icon")) {
@@ -31,22 +40,29 @@ public class UnrankedInventoryModern implements Listener {
                     ItemMeta itemMeta = iconItem.getItemMeta();
                     itemMeta.addItemFlags(ItemFlag.values());
                     itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.item-color") + kitName));
+                    itemMeta.setLore(translatedLore);
                     iconItem.setItemMeta(itemMeta);
-                    menu.setItem(y * 9 + x, iconItem);
-                    x++;
-                    if (x > 8) {
-                        x = 1;
-                        y++;
+
+                    int slotIndex = y * 9 + x;
+                    if (slotIndex == 17) {
+                        slotIndex = 19;
                     }
+                    menu.setItem(slotIndex, iconItem);
+                    counter++;
+                    x = counter % 9 == 0 ? 1 : counter % 9 + 1;
+                    y = counter / 9 + 1;
                 }
             }
         }
 
         for (int i = 0; i < menu.getSize(); i++) {
             if (menu.getItem(i) == null || menu.getItem(i).getType() == Material.AIR) {
-                ItemStack blueGlassPane = new ItemStack(Material.STAINED_GLASS_PANE, 1, (short) 11);
+                Material material = Material.matchMaterial(Neptune.menusConfig.getString("queue-gui-type.surrounding-items"));
+                short durability = (short) Neptune.menusConfig.getInt("queue-gui-type.durability");
+                String itemName = Neptune.menusConfig.getString("queue-gui-type.surrounding-items-name");
+                ItemStack blueGlassPane = new ItemStack(material, 1, durability);
                 ItemMeta glassPaneMeta = blueGlassPane.getItemMeta();
-                glassPaneMeta.setDisplayName(CC.translate("&bEmpty"));
+                glassPaneMeta.setDisplayName(CC.translate(itemName));
                 glassPaneMeta.addItemFlags(ItemFlag.values());
                 blueGlassPane.setItemMeta(glassPaneMeta);
                 menu.setItem(i, blueGlassPane);
@@ -58,7 +74,7 @@ public class UnrankedInventoryModern implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getInventory().getTitle().equals(CC.translate("&8Unranked Queue"))) {
+        if (event.getInventory().getTitle().equals(CC.translate(Neptune.menusConfig.getString("queue-gui-type.menu-name")))) {
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
                 ItemStack clickedItem = event.getCurrentItem();
                 ItemMeta itemMeta = clickedItem.getItemMeta();
