@@ -13,6 +13,7 @@ general:
 match:
   match-found: "&9Match found against &f{opponent}"
   kill-message: "&a{winner} &7killed &c{loser}"
+  cooldown-message: "&cYou need to wait {cooldown} seconds!"
 queue:
   already-in-queue-message: "&cYou are already in queue!"
   added-to-queue: " \n &9{gamemode} Queue \n &fSearching for a match.. \n  "

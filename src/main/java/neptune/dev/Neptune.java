@@ -11,6 +11,7 @@ import neptune.dev.player.ProfileManager;
 import neptune.dev.storage.MongoManager;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventoryModern;
+import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
@@ -50,6 +51,9 @@ public class Neptune extends JavaPlugin {
   public void onEnable() {
     instance = this;
     arenaManager = new ArenaManager();
+
+    // PEARL COOLDOWN
+    Cooldowns.createCooldown("enderpearl");
 
     // CONFIG
     registerConfigs();

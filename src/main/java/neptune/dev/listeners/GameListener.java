@@ -6,20 +6,21 @@ import neptune.dev.game.EndGame;
 import neptune.dev.game.Match;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.PlayerState;
+import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.PlayerUtils;
 import org.bukkit.*;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.FoodLevelChangeEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
@@ -78,6 +79,28 @@ public class GameListener implements Listener {
             EndGame.EndGame(winner, loser, p);
         }
         event.setDeathMessage(null);
+    }
+
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onPlayerInteract(PlayerInteractEvent event) {
+        if (!event.hasItem() || event.getItem().getType() != Material.ENDER_PEARL || !event.getAction().name().contains("RIGHT_")) {
+            return;
+        }
+        if (Cooldowns.isOnCooldown("enderpearl", event.getPlayer())) {
+            event.setCancelled(true);
+            event.getPlayer().updateInventory();
+            event.getPlayer().sendMessage(CC.translate(Neptune.messagesConfig.getString("match.cooldown-message").replace("{cooldown}", Cooldowns.getCooldownForPlayerInt("enderpearl", event.getPlayer()) + "")));
+        }
+    }
+
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+    public void onProjectileLaunch(ProjectileLaunchEvent event) {
+        Player shooter = (Player) event.getEntity().getShooter();
+        if (event.getEntityType() != EntityType.ENDER_PEARL) {
+            return;
+        }
+        Cooldowns.addCooldown("enderpearl", shooter, 15);
     }
 
     @EventHandler

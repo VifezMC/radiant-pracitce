@@ -13,6 +13,7 @@ neptune\dev\utils\mongo\IMongo.class
 neptune\dev\utils\terminable\composite\AbstractCompositeTerminable.class
 neptune\dev\utils\terminable\composite\AbstractWeakCompositeTerminable.class
 neptune\dev\listeners\PlayerJoin.class
+neptune\dev\utils\Cooldowns.class
 neptune\dev\player\Profile.class
 neptune\dev\listeners\SpawnListeners.class
 neptune\dev\managers\MatchManager.class
