@@ -46,9 +46,13 @@ public class Cooldowns {
         return (int)(Cooldowns.cooldown.get(string).get(player.getUniqueId()) - System.currentTimeMillis()) / 1000;
     }
 
-    public static long getCooldownForPlayerLong(final String string, final Player player) {
-        return Cooldowns.cooldown.get(string).get(player.getUniqueId()) - System.currentTimeMillis();
+    public static String getCooldownForPlayerString(final String string, final Player player) {
+        double cooldownMillis = Cooldowns.cooldown.get(string).get(player.getUniqueId()) - System.currentTimeMillis();
+        double cooldownSeconds = cooldownMillis / 1000.0;
+        String formattedCooldown = String.format("%.1f", cooldownSeconds);
+        return formattedCooldown;
     }
+
 
     public static void removeCooldown(final String string, final Player player) {
         if (!Cooldowns.cooldown.containsKey(string)) {

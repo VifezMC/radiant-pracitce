@@ -90,7 +90,7 @@ public class GameListener implements Listener {
         if (Cooldowns.isOnCooldown("enderpearl", event.getPlayer())) {
             event.setCancelled(true);
             event.getPlayer().updateInventory();
-            event.getPlayer().sendMessage(CC.translate(Neptune.messagesConfig.getString("match.cooldown-message").replace("{cooldown}", Cooldowns.getCooldownForPlayerInt("enderpearl", event.getPlayer()) + "")));
+            event.getPlayer().sendMessage(CC.translate(Neptune.messagesConfig.getString("match.cooldown-message").replace("{cooldown}", Cooldowns.getCooldownForPlayerString("enderpearl", event.getPlayer()))));
         }
     }
 
