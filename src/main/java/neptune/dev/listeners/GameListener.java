@@ -100,7 +100,7 @@ public class GameListener implements Listener {
         if (event.getEntityType() != EntityType.ENDER_PEARL) {
             return;
         }
-        Cooldowns.addCooldown("enderpearl", shooter, 15);
+        Cooldowns.addCooldown("enderpearl", shooter, Neptune.pluginConfig.getInt("general.ender-pearl-cooldown"));
     }
 
     @EventHandler
