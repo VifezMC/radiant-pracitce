@@ -14,6 +14,7 @@ import org.bukkit.potion.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
 import static org.bukkit.Bukkit.getLogger;
@@ -25,8 +26,6 @@ public class PlayerUtils {
     private static Map<String, ItemStack> queueItemsCache = new HashMap<>();
     private static World lobbyWorld;
     private static final Logger logger = getLogger();
-
-
     public static void endGame(Player p) {
         removeState(p, PlayerState.PLAYING);
         setState(p, PlayerState.LOBBY);

@@ -1,0 +1,13 @@
+divisions:
+  Iron1:
+    name: "&8Iron I"
+    item: IRON_INGOT
+    required-elo: 0
+  Iron2:
+    name: "&8Iron II"
+    item: IRON_INGOT
+    required-elo: 100
+  Iron3:
+    name: "&8Iron III"
+    item: IRON_INGOT
+    required-elo: 200

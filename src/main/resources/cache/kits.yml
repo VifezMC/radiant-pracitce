@@ -237,6 +237,8 @@ kits:
       - sumo
       - nodamage
       - nohunger
+      - nohunger
+      - nohunger
     arenas: None
   Classic:
     items:
@@ -392,6 +394,8 @@ kits:
     arenas: None
     rules:
       - boxing
+      - nodamage
+      - nohunger
   BuildUHC:
     items:
       - ==: org.bukkit.inventory.ItemStack

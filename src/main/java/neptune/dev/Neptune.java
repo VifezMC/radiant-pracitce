@@ -46,6 +46,8 @@ public class Neptune extends JavaPlugin {
   public static ArenaManager arenaManager;
   public static File menus;
   public static FileConfiguration menusConfig;
+  public static File divisions;
+  public static FileConfiguration divisionsConfig;
 
   @Override
   public void onEnable() {
@@ -117,6 +119,12 @@ public class Neptune extends JavaPlugin {
     saveResourceIfNotExists("ui/menus.yml", false);
     menus = new File(this.getDataFolder(), "ui/menus.yml");
     menusConfig = YamlConfiguration.loadConfiguration(menus);
+
+    // Menus CONFIG
+    saveResourceIfNotExists("features/divisions.yml", false);
+    divisions = new File(this.getDataFolder(), "features/divisions.yml");
+    divisionsConfig = YamlConfiguration.loadConfiguration(divisions);
+
   }
 
 
