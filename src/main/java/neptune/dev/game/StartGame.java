@@ -20,6 +20,7 @@ public class StartGame {
             p.getInventory().setContents(inventoryContents);
             p.getInventory().setArmorContents(armorContents);
             p.updateInventory();
+            p.closeInventory();
             for (PotionEffect effect : p.getActivePotionEffects()) {
                 p.removePotionEffect(effect.getType());
             }
