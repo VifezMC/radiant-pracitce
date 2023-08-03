@@ -8,7 +8,7 @@ import neptune.dev.managers.MatchManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
-import neptune.dev.utils.PlayerUtils;
+import neptune.dev.player.PlayerUtils;
 import org.bukkit.*;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
@@ -28,7 +28,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.HashMap;
 import java.util.List;
 
-import static neptune.dev.utils.PlayerUtils.hasPlayerState;
+import static neptune.dev.player.PlayerUtils.hasPlayerState;
 
 public class GameListener implements Listener {
 

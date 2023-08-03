@@ -10,7 +10,10 @@ import neptune.dev.player.Profile;
 import neptune.dev.player.ProfileManager;
 import neptune.dev.storage.MongoManager;
 import neptune.dev.ui.StatsInventory;
-import neptune.dev.ui.UnrankedInventoryModern;
+import neptune.dev.ui.ranked.RankedInventoryLegacy;
+import neptune.dev.ui.ranked.RankedModernUI;
+import neptune.dev.ui.unranked.UnrankedInventoryLegacy;
+import neptune.dev.ui.unranked.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
@@ -135,7 +138,8 @@ public class Neptune extends JavaPlugin {
             new WorldListener(),
             new GameListener(),
             new StatsInventory(),
-            new UnrankedInventoryModern()
+            new UnrankedInventoryModern(),
+            new RankedModernUI()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
   }
 
@@ -149,6 +153,7 @@ public class Neptune extends JavaPlugin {
     getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
     getCommand("stats").setExecutor(new StatsCMD());
     getCommand("unranked").setExecutor(new UnrankedCMD());
+    getCommand("ranked").setExecutor(new RankedCMD());
   }
 
 

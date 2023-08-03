@@ -8,8 +8,10 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\terminable\composite\AbstractWeakCompositeTerminable.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\mongo\Mongo.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\terminable\composite\CompositeTerminable.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\ranked\RankedInventoryLegacy.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\QueueCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\Constants.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\unranked\UnrankedInventoryLegacy.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleBoardEntry.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleListener.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\ProfileManager.java
@@ -18,6 +20,7 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listene
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\LocationUtil.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\PlayerJoin.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\QueueProcessor.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\RankedCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\events\AssembleBoardCreateEvent.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\game\StartGame.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\WorldListener.java
@@ -32,11 +35,11 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\storage
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\Scoreboard.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\mongo\IMongo.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\admin\ArenaCMD.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\PlayerUtils.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleStyle.java
-C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\PlayerUtils.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\LeaveQueueCMD.java
-C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\UnrankedInventoryLegacy.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\ranked\RankedModernUI.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\PingCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\StatsInventory.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\PlayerState.java
@@ -52,7 +55,7 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listene
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\render\Console.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\UnrankedCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\GameListener.java
-C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\UnrankedInventoryModern.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\Assemble.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\terminable\TerminableConsumer.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\unranked\UnrankedInventoryModern.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleThread.java

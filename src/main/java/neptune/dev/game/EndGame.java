@@ -3,7 +3,7 @@ package neptune.dev.game;
 import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.managers.QueueProcessor;
-import neptune.dev.utils.PlayerUtils;
+import neptune.dev.player.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitScheduler;

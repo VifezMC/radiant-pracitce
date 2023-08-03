@@ -1,4 +1,4 @@
-package neptune.dev.utils;
+package neptune.dev.player;
 
 import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;

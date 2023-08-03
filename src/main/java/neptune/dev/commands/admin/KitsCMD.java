@@ -60,6 +60,10 @@ public class KitsCMD implements CommandExecutor {
                 String kitName = args[1];
                 String rule = args[2].toLowerCase();
                 addRule(kitName, rule, player);
+            } else if (action.equals("ranked") && args.length >= 3) {
+                String kitName = args[1];
+                String rankedValue = args[2].toLowerCase();
+                setRankedStatus(kitName, rankedValue, player);
             } else {
                 player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
             }
@@ -126,6 +130,17 @@ public class KitsCMD implements CommandExecutor {
             }
     }
 
+    private void setRankedStatus(String kitName, String rankedValue, Player player) {
+        if (kitExists(kitName)) {
+            boolean isRanked = Boolean.parseBoolean(rankedValue);
+            Neptune.kitsConfig.set("kits." + kitName + ".ranked", isRanked);
+            saveConfig();
+            player.sendMessage(CC.GREEN + "Kit ranked status has been updated!");
+        } else {
+            player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
+        }
+    }
+
     private ItemStack[] getItemsFromConfig(String location) {
         return Neptune.kitsConfig.getList("kits." + location + ".items").toArray(new ItemStack[0]);
     }
@@ -190,6 +205,7 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
         player.sendMessage(CC.translate("&b/kit rules &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
         player.sendMessage(CC.translate("&b/kit arenas &8<&7name&8> &8<&7arena&8> &7- &8(&7Add an Arena to kit&8)"));
+        player.sendMessage(CC.translate("&b/kit ranked &8<&7name&8> &8<&7true/false&8> &7- &8(&7Set a kit to ranke&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m------------------------------------------------"));
     }

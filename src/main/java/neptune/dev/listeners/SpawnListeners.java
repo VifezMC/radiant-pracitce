@@ -18,7 +18,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import static neptune.dev.utils.PlayerUtils.hasPlayerState;
+import static neptune.dev.player.PlayerUtils.hasPlayerState;
 import static org.bukkit.Bukkit.getLogger;
 
 public class SpawnListeners implements Listener {
