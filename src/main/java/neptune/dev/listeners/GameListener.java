@@ -60,22 +60,14 @@ public class GameListener implements Listener {
         Match match = MatchManager.getMatch(p);
 
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-            Player winner, loser;
-
-            if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
-                winner = opponent1;
-                loser = opponent2;
-            } else {
-                winner = opponent2;
-                loser = opponent1;
-            }
+            assert match != null;
+            Player winner = MatchManager.getWinner(match.getMatchID());
+            Player loser = MatchManager.getLoser(match.getMatchID());
 
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            opponent1.sendMessage(CC.translate(formattedMessage));
-            opponent2.sendMessage(CC.translate(formattedMessage));
+            winner.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(formattedMessage));
             EndGame.EndGame(winner, loser, p);
         }
         event.setDeathMessage(null);
@@ -110,22 +102,13 @@ public class GameListener implements Listener {
         Match match = MatchManager.getMatch(p);
 
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-            Player winner, loser;
-
-            if (p.getName().equals(opponent1.getName())) {
-                winner = opponent2;
-                loser = opponent1;
-            } else {
-                winner = opponent1;
-                loser = opponent2;
-            }
+            Player winner = MatchManager.getWinner(match.getMatchID());
+            Player loser = MatchManager.getLoser(match.getMatchID());
 
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            opponent1.sendMessage(CC.translate(formattedMessage));
-            opponent2.sendMessage(CC.translate(formattedMessage));
+            winner.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(formattedMessage));
             EndGame.EndGame(winner, loser, p);
         }
     }
@@ -176,22 +159,13 @@ public class GameListener implements Listener {
         Location lightningLocation = new Location(world, x, y, z);
         LightningStrike lightning = world.strikeLightning(lightningLocation);
         Match match = MatchManager.getMatch(p);
-        Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-        Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-        Player winner, loser;
-
-        if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
-            winner = opponent1;
-            loser = opponent2;
-        } else {
-            winner = opponent2;
-            loser = opponent1;
-        }
+        Player winner = MatchManager.getWinner(match.getMatchID());
+        Player loser = MatchManager.getLoser(match.getMatchID());
 
         String formattingString = Neptune.messagesConfig.getString("match.kill-message");
         String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-        opponent1.sendMessage(CC.translate(formattedMessage));
-        opponent2.sendMessage(CC.translate(formattedMessage));
+        winner.sendMessage(CC.translate(formattedMessage));
+        loser.sendMessage(CC.translate(formattedMessage));
         EndGame.EndGame(winner, loser, p);
     }
 
@@ -237,22 +211,13 @@ public class GameListener implements Listener {
         damager.sendMessage("[DEBUG] " + hitCount);
         if (hitCount >= 100) {
             Match match = MatchManager.getMatch(damager);
-            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-            Player winner, loser;
-
-            if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
-                winner = opponent1;
-                loser = opponent2;
-            } else {
-                winner = opponent2;
-                loser = opponent1;
-            }
+            Player winner = MatchManager.getWinner(match.getMatchID());
+            Player loser = MatchManager.getLoser(match.getMatchID());
 
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            opponent1.sendMessage(CC.translate(formattedMessage));
-            opponent2.sendMessage(CC.translate(formattedMessage));
+            winner.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(formattedMessage));
             EndGame.EndGame(winner, loser, damager);
         }
     }

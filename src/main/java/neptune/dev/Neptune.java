@@ -5,17 +5,13 @@ import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
 import neptune.dev.managers.ArenaManager;
-import neptune.dev.managers.Scoreboard;
-import neptune.dev.player.Profile;
-import neptune.dev.player.ProfileManager;
-import neptune.dev.storage.MongoManager;
+import neptune.dev.managers.Scoreboard; 
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
-import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
-import org.bukkit.Bukkit;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -28,8 +24,6 @@ public class Neptune extends JavaPlugin {
 
   @Getter
   public static Neptune instance;
-  private MongoManager mongoManager;
-  private ProfileManager profileManager;
 
   public static File arena;
   public static FileConfiguration arenaConfig;
@@ -43,6 +37,7 @@ public class Neptune extends JavaPlugin {
   public static FileConfiguration kitsConfig;
   public static File scoreboard;
   public static FileConfiguration scoreboardConfig;
+  @Getter
   public static ArenaManager arenaManager;
   public static File menus;
   public static FileConfiguration menusConfig;
@@ -54,7 +49,7 @@ public class Neptune extends JavaPlugin {
     instance = this;
     arenaManager = new ArenaManager();
 
-    // PEARL COOLDOWN
+    // PEARL COOL-DOWN
     Cooldowns.createCooldown("enderpearl");
 
     // CONFIG
@@ -63,19 +58,15 @@ public class Neptune extends JavaPlugin {
     // SCOREBOARD
     Assemble assemble = new Assemble(this, new Scoreboard());
 
-    // LIST LISTENERS
+    // LISTENERS
     registerEventListeners();
-    logMessage("&7[&9Neptune&7] &aLoaded listeners!");
+    Console.sendMessage("&7[&9Neptune&7] &aLoaded listeners!");
 
     // COMMANDS
     registerCommands();
-    logMessage("&7[&9Neptune&7] &aLoaded commands!");
+    Console.sendMessage("&7[&9Neptune&7] &aLoaded commands!");
 
-
-    loadManagers();
-    logMessage("&7[&9Neptune&7] &aLoaded managers!");
-
-    // START MESSSAGE
+    // START MESSAGE
     Console.sendMessage("&9Neptune Loaded successfully");
     Console.sendMessage("&9Author: &f" + Constants.Autor);
     Console.sendMessage("&9Version: &f" + Constants.Ver);
@@ -84,47 +75,15 @@ public class Neptune extends JavaPlugin {
 
   public void registerConfigs() {
 
-    // ARENAS
-    saveResourceIfNotExists("cache/arenas.yml", false);
-    arena = new File(this.getDataFolder(), "cache/arenas.yml");
-    arenaConfig = YamlConfiguration.loadConfiguration(arena);
-    arenaManager.loadArenas();
-
-    // MAIN CONFIG
-    saveResourceIfNotExists("config.yml", false);
-    config = new File(this.getDataFolder(), "config.yml");
-    pluginConfig = YamlConfiguration.loadConfiguration(config);
-
-    // MESSAGES CONFIG
-    saveResourceIfNotExists("features/messages.yml", false);
-    messages = new File(this.getDataFolder(), "features/messages.yml");
-    messagesConfig = YamlConfiguration.loadConfiguration(messages);
-
-    // SPAWN ITEMS
-    saveResourceIfNotExists("features/spawn-items.yml", false);
-    spawnItems = new File(this.getDataFolder(), "features/spawn-items.yml");
-    spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
-
-    // KITS CONFIG
-    saveResourceIfNotExists("cache/kits.yml", false);
-    kits = new File(this.getDataFolder(), "cache/kits.yml");
-    kitsConfig = YamlConfiguration.loadConfiguration(kits);
-
-    // SCOREBOARD CONFIG
-    saveResourceIfNotExists("ui/scoreboard.yml", false);
-    scoreboard = new File(this.getDataFolder(), "ui/scoreboard.yml");
-    scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
-
-    // Menus CONFIG
-    saveResourceIfNotExists("ui/menus.yml", false);
-    menus = new File(this.getDataFolder(), "ui/menus.yml");
-    menusConfig = YamlConfiguration.loadConfiguration(menus);
-
-    // Menus CONFIG
-    saveResourceIfNotExists("features/divisions.yml", false);
-    divisions = new File(this.getDataFolder(), "features/divisions.yml");
-    divisionsConfig = YamlConfiguration.loadConfiguration(divisions);
-
+    // CONFIGS
+    createResource(arenaConfig, arena, "cache/arenas.yml");
+    createResource(pluginConfig, config, "config.yml");
+    createResource(messagesConfig, messages, "features/messages.yml");
+    createResource(spawnItemsConfig, spawnItems, "features/spawn-items.yml");
+    createResource(kitsConfig, kits, "cache/kits.yml");
+    createResource(scoreboardConfig, scoreboard, "ui/scoreboard.yml");
+    createResource(menusConfig, menus, "ui/menus.yml");
+    createResource(divisionsConfig, divisions, "features/divisions.yml");
   }
 
 
@@ -140,51 +99,37 @@ public class Neptune extends JavaPlugin {
   }
 
   private void registerCommands() {
-    getCommand("setspawn").setExecutor(new SetSpawnCMD());
-    getCommand("arena").setExecutor(new ArenaCMD());
-    getCommand("neptune").setExecutor(new MainCMD());
-    getCommand("kit").setExecutor(new KitsCMD());
-    getCommand("queue").setExecutor(new QueueCMD());
-    getCommand("ping").setExecutor(new PingCMD());
-    getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
-    getCommand("stats").setExecutor(new StatsCMD());
-    getCommand("unranked").setExecutor(new UnrankedCMD());
+    cmdCreate("setspawn", new SetSpawnCMD());
+    cmdCreate("arena", new ArenaCMD());
+    cmdCreate("neptune", new MainCMD());
+    cmdCreate("kit", new KitsCMD());
+    cmdCreate("queue", new QueueCMD());
+    cmdCreate("ping", new PingCMD());
+    cmdCreate("leavequeue", new LeaveQueueCMD());
+    cmdCreate("stats", new StatsCMD());
+    cmdCreate("unranked", new UnrankedCMD());
   }
 
 
-  private void saveResourceIfNotExists(String resourcePath, boolean replace) {
+  private void saveResourceIfNotExists(String resourcePath) {
     File file = new File(this.getDataFolder(), resourcePath);
     if (!file.exists()) {
-      saveResource(resourcePath, replace);
+      saveResource(resourcePath, false);
     }
+  }
+
+  public void cmdCreate(String command, CommandExecutor commandFile){
+    getCommand(command).setExecutor(commandFile);
+  }
+
+  public void createResource(FileConfiguration  fileConfig, File file, String path){
+    saveResourceIfNotExists(path);
+    file = new File(this.getDataFolder(), path);
+    fileConfig = YamlConfiguration.loadConfiguration(file);
   }
 
   @Override
   public void onDisable() {
-
-    for (Profile profile : this.getProfileManager().getAllProfiles()) {
-      this.getProfileManager().save(profile);
-    }
-
-    if (mongoManager != null) {
-      mongoManager.close();
-    }
     getServer().getPluginManager().disablePlugin(this);
-  }
-
-
-  public static ArenaManager getArenaManager() {
-    return arenaManager;
-  }
-
-  private void loadManagers() {
-    if(pluginConfig.getString("save-type").contains("Mongo")){
-      mongoManager = new MongoManager(this);
-      profileManager = new ProfileManager();
-    }
-  }
-
-  public static void logMessage(String string) {
-    Bukkit.getConsoleSender().sendMessage(CC.translate(string));
   }
 }

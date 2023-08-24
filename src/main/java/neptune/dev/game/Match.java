@@ -44,4 +44,18 @@ public class Match {
     public String getArenaNameAsString() {
         return arenaName.getName();
     }
+
+    public boolean involvesPlayer(Player player) {
+        return player1.getUniqueId().equals(player.getUniqueId()) || player2.getUniqueId().equals(player.getUniqueId());
+    }
+
+    public Player getOtherPlayer(Player player) {
+        if (player1.getUniqueId().equals(player.getUniqueId())) {
+            return player2;
+        } else if (player2.getUniqueId().equals(player.getUniqueId())) {
+            return player1;
+        }
+        return null;
+    }
+
 }

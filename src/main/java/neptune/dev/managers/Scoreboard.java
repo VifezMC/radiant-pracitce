@@ -4,6 +4,7 @@ import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.PlayerUtils;
 import neptune.dev.utils.assemble.AssembleAdapter;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -16,21 +17,12 @@ public class Scoreboard implements AssembleAdapter {
     private final String lobbyTitle;
     private final List<String> scoreboardLobby;
     private final List<String> scoreboardMatch;
-
-    private int playingPlayers;
+    private static int playingPlayers = QueueProcessor.playing;
 
     public Scoreboard() {
         lobbyTitle = Neptune.scoreboardConfig.getString("scoreboard.title");
         scoreboardLobby = Neptune.scoreboardConfig.getStringList("scoreboard.lobby");
         scoreboardMatch = Neptune.scoreboardConfig.getStringList("scoreboard.match");
-        updateServerStats();
-    }
-
-    /**
-     * Updates the number of playing players from the QueueProcessor.
-     */
-    private void updateServerStats() {
-        playingPlayers = QueueProcessor.playing;
     }
 
     @Override
@@ -69,23 +61,16 @@ public class Scoreboard implements AssembleAdapter {
 
         if (matchPlayers != null && matchPlayers.size() >= 2) {
             Player user = matchPlayers.get(0);
-            Player opponent = matchPlayers.get(1);
-
-            if (opponent == player) {
-                Player temp = user;
-                user = opponent;
-                opponent = temp;
-            }
+            String opponent = MatchManager.getOpponent(user);
 
             int userPing = getPing(user);
-            int opponentPing = getPing(opponent);
-
+            int opponentPing = getPing(Bukkit.getPlayer(opponent));
             for (String line : scoreboardMatch) {
                 line = line.replace("{online_players}", String.valueOf(playingPlayers));
                 line = line.replace("{playing_players}", String.valueOf(playingPlayers));
                 line = line.replace("{user_ping}", String.valueOf(userPing));
                 line = line.replace("{opponent_ping}", String.valueOf(opponentPing));
-                line = line.replace("{opponent}", opponent.getName());
+                line = line.replace("{opponent}", Bukkit.getPlayer(opponent).getName()  );
                 matchLines.add(line);
             }
         }
