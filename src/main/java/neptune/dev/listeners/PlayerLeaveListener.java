@@ -11,6 +11,7 @@ public class PlayerLeaveListener implements Listener {
     @EventHandler
     public void onPlayerLeave(PlayerQuitEvent event) {
         event.setQuitMessage(null);
+
         if (QueueProcessor.isPlayerInQueue(event.getPlayer())) {
             QueueProcessor.removePlayerFromQueue(event.getPlayer());
         }
