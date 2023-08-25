@@ -59,14 +59,14 @@ public class Neptune extends JavaPlugin {
 
     // LISTENERS
     registerEventListeners();
-    Console.sendMessage("&7[&9Neptune&7] &aLoaded listeners!");
+    Console.sendMessage("&7[&9" + Constants.PlName + "&7] &aLoaded listeners!");
 
     // COMMANDS
     registerCommands();
-    Console.sendMessage("&7[&9Neptune&7] &aLoaded commands!");
+    Console.sendMessage("&7[&9" + Constants.PlName + "&7] &aLoaded commands!");
 
     // START MESSSAGE
-    Console.sendMessage("&9Neptune Loaded successfully");
+    Console.sendMessage("&9" + Constants.PlName + " Loaded successfully");
     Console.sendMessage("&9Author: &f" + Constants.Autor);
     Console.sendMessage("&9Version: &f" + Constants.Ver);
     Console.sendMessage("&9Discord: &f" + Constants.Discord);
