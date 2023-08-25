@@ -1,8 +1,7 @@
 package neptune.dev.commands.user;
 
 import neptune.dev.Neptune;
-import neptune.dev.ui.UnrankedInventoryLegacy;
-import neptune.dev.ui.UnrankedInventoryModern;
+import neptune.dev.ui.unranked.*;
 import neptune.dev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
