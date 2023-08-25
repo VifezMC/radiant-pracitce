@@ -18,7 +18,7 @@ public class ArenaCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be used by players.");
+            sender.sendMessage(CC.translate("&cOnly players can use this command."));
             return true;
         }
 

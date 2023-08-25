@@ -5,12 +5,15 @@ import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
 import neptune.dev.managers.ArenaManager;
-import neptune.dev.managers.Scoreboard; 
+import neptune.dev.managers.Scoreboard;
+import neptune.dev.player.Profile;
 import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
+import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -37,7 +40,6 @@ public class Neptune extends JavaPlugin {
   public static FileConfiguration kitsConfig;
   public static File scoreboard;
   public static FileConfiguration scoreboardConfig;
-  @Getter
   public static ArenaManager arenaManager;
   public static File menus;
   public static FileConfiguration menusConfig;
@@ -49,7 +51,7 @@ public class Neptune extends JavaPlugin {
     instance = this;
     arenaManager = new ArenaManager();
 
-    // PEARL COOL-DOWN
+    // PEARL COOLDOWN
     Cooldowns.createCooldown("enderpearl");
 
     // CONFIG
@@ -66,7 +68,7 @@ public class Neptune extends JavaPlugin {
     registerCommands();
     Console.sendMessage("&7[&9Neptune&7] &aLoaded commands!");
 
-    // START MESSAGE
+    // START MESSSAGE
     Console.sendMessage("&9Neptune Loaded successfully");
     Console.sendMessage("&9Author: &f" + Constants.Autor);
     Console.sendMessage("&9Version: &f" + Constants.Ver);
@@ -75,17 +77,47 @@ public class Neptune extends JavaPlugin {
 
   public void registerConfigs() {
 
-    // CONFIGS
-    createResource(arenaConfig, arena, "cache/arenas.yml");
-    createResource(pluginConfig, config, "config.yml");
-    createResource(messagesConfig, messages, "features/messages.yml");
-    createResource(spawnItemsConfig, spawnItems, "features/spawn-items.yml");
-    createResource(kitsConfig, kits, "cache/kits.yml");
-    createResource(scoreboardConfig, scoreboard, "ui/scoreboard.yml");
-    createResource(menusConfig, menus, "ui/menus.yml");
-    createResource(divisionsConfig, divisions, "features/divisions.yml");
-  }
+    // ARENAS
+    saveResourceIfNotExists("cache/arenas.yml", false);
+    arena = new File(this.getDataFolder(), "cache/arenas.yml");
+    arenaConfig = YamlConfiguration.loadConfiguration(arena);
+    arenaManager.loadArenas();
 
+    // MAIN CONFIG
+    saveResourceIfNotExists("config.yml", false);
+    config = new File(this.getDataFolder(), "config.yml");
+    pluginConfig = YamlConfiguration.loadConfiguration(config);
+
+    // MESSAGES CONFIG
+    saveResourceIfNotExists("features/messages.yml", false);
+    messages = new File(this.getDataFolder(), "features/messages.yml");
+    messagesConfig = YamlConfiguration.loadConfiguration(messages);
+
+    // SPAWN ITEMS
+    saveResourceIfNotExists("features/spawn-items.yml", false);
+    spawnItems = new File(this.getDataFolder(), "features/spawn-items.yml");
+    spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
+
+    // KITS CONFIG
+    saveResourceIfNotExists("cache/kits.yml", false);
+    kits = new File(this.getDataFolder(), "cache/kits.yml");
+    kitsConfig = YamlConfiguration.loadConfiguration(kits);
+
+    // SCOREBOARD CONFIG
+    saveResourceIfNotExists("ui/scoreboard.yml", false);
+    scoreboard = new File(this.getDataFolder(), "ui/scoreboard.yml");
+    scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
+
+    // Menus CONFIG
+    saveResourceIfNotExists("ui/menus.yml", false);
+    menus = new File(this.getDataFolder(), "ui/menus.yml");
+    menusConfig = YamlConfiguration.loadConfiguration(menus);
+
+    // Menus CONFIG
+    saveResourceIfNotExists("features/divisions.yml", false);
+    divisions = new File(this.getDataFolder(), "features/divisions.yml");
+    divisionsConfig = YamlConfiguration.loadConfiguration(divisions);
+  }
 
   private void registerEventListeners() {
     Arrays.asList(
@@ -99,33 +131,27 @@ public class Neptune extends JavaPlugin {
   }
 
   private void registerCommands() {
-    cmdCreate("setspawn", new SetSpawnCMD());
-    cmdCreate("arena", new ArenaCMD());
-    cmdCreate("neptune", new MainCMD());
-    cmdCreate("kit", new KitsCMD());
-    cmdCreate("queue", new QueueCMD());
-    cmdCreate("ping", new PingCMD());
-    cmdCreate("leavequeue", new LeaveQueueCMD());
-    cmdCreate("stats", new StatsCMD());
-    cmdCreate("unranked", new UnrankedCMD());
+    createCMD("setspawn", new SetSpawnCMD());
+    createCMD("arena", new ArenaCMD());
+    createCMD("neptune", new MainCMD());
+    createCMD("kit", new KitsCMD());
+    createCMD("queue", new QueueCMD());
+    createCMD("ping", new PingCMD());
+    createCMD("leavequeue", new LeaveQueueCMD());
+    createCMD("stats", new StatsCMD());
+    createCMD("unranked", new UnrankedCMD());
   }
 
 
-  private void saveResourceIfNotExists(String resourcePath) {
+  private void saveResourceIfNotExists(String resourcePath, boolean replace) {
     File file = new File(this.getDataFolder(), resourcePath);
     if (!file.exists()) {
-      saveResource(resourcePath, false);
+      saveResource(resourcePath, replace);
     }
   }
 
-  public void cmdCreate(String command, CommandExecutor commandFile){
-    getCommand(command).setExecutor(commandFile);
-  }
-
-  public void createResource(FileConfiguration  fileConfig, File file, String path){
-    saveResourceIfNotExists(path);
-    file = new File(this.getDataFolder(), path);
-    fileConfig = YamlConfiguration.loadConfiguration(file);
+  private void createCMD(String command, CommandExecutor classFile){
+    getCommand(command).setExecutor(classFile);
   }
 
   @Override

@@ -3,6 +3,7 @@ package neptune.dev.commands.user;
 import neptune.dev.Neptune;
 import neptune.dev.ui.UnrankedInventoryLegacy;
 import neptune.dev.ui.UnrankedInventoryModern;
+import neptune.dev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,7 +14,7 @@ public class UnrankedCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("Only players can use this command.");
+            sender.sendMessage(CC.translate("&cOnly players can use this command."));
             return true;
         }
 
