@@ -74,7 +74,7 @@ public class Neptune extends JavaPlugin {
 
   public void registerConfigs() {
 
-    // ARENAS
+    // ARENAS CONFIG
     saveResourceIfNotExists("cache/arenas.yml", false);
     arena = new File(this.getDataFolder(), "cache/arenas.yml");
     arenaConfig = YamlConfiguration.loadConfiguration(arena);
@@ -105,12 +105,12 @@ public class Neptune extends JavaPlugin {
     scoreboard = new File(this.getDataFolder(), "ui/scoreboard.yml");
     scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
 
-    // Menus CONFIG
+    // MENUS CONFIG
     saveResourceIfNotExists("ui/menus.yml", false);
     menus = new File(this.getDataFolder(), "ui/menus.yml");
     menusConfig = YamlConfiguration.loadConfiguration(menus);
 
-    // Menus CONFIG
+    // DIVISIONS CONFIG
     saveResourceIfNotExists("features/divisions.yml", false);
     divisions = new File(this.getDataFolder(), "features/divisions.yml");
     divisionsConfig = YamlConfiguration.loadConfiguration(divisions);
