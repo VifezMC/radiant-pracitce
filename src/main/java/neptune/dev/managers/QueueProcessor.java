@@ -4,7 +4,7 @@ import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
 import neptune.dev.game.StartGame;
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.PlayerUtils;
+import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;

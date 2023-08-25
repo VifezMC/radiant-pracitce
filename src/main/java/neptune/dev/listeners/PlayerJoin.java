@@ -10,7 +10,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
-import static neptune.dev.utils.PlayerUtils.*;
+import org.bukkit.potion.PotionEffect;
+
+import static neptune.dev.player.PlayerUtils.*;
 
 public class PlayerJoin implements Listener {
 
@@ -35,7 +37,9 @@ public class PlayerJoin implements Listener {
                 p.sendMessage(CC.translate(msg));
             }
         }
-
+        for (PotionEffect effect : p.getActivePotionEffects()) {
+            p.removePotionEffect(effect.getType());
+        }
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
         createSpawnItems(p);

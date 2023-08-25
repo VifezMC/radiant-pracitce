@@ -1,8 +1,8 @@
-package neptune.dev.ui;
+package neptune.dev.ui.unranked;
 
 import neptune.dev.Neptune;
 import neptune.dev.utils.render.CC;
-import neptune.dev.utils.PlayerUtils;
+import neptune.dev.player.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class UnrankedInventoryModern implements Listener {
     public static void openMenu(Player player, ConfigurationSection kitsConfig) {
-        Inventory menu = Bukkit.createInventory(null, 9 * Neptune.menusConfig.getInt("queue-gui-type.height"), CC.translate(Neptune.menusConfig.getString("queue-gui-type.menu-name")));
+        Inventory menu = Bukkit.createInventory(null, 9 * Neptune.menusConfig.getInt("queue-gui-type.unranked.height"), CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.menu-name")));
 
         if (kitsConfig != null && kitsConfig.contains("kits")) {
             ConfigurationSection kitsSection = kitsConfig.getConfigurationSection("kits");
@@ -39,7 +39,7 @@ public class UnrankedInventoryModern implements Listener {
                     ItemStack iconItem = kitConfig.getItemStack("icon");
                     ItemMeta itemMeta = iconItem.getItemMeta();
                     itemMeta.addItemFlags(ItemFlag.values());
-                    itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.item-color") + kitName));
+                    itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.item-color") + kitName));
                     itemMeta.setLore(translatedLore);
                     iconItem.setItemMeta(itemMeta);
 
@@ -57,9 +57,9 @@ public class UnrankedInventoryModern implements Listener {
 
         for (int i = 0; i < menu.getSize(); i++) {
             if (menu.getItem(i) == null || menu.getItem(i).getType() == Material.AIR) {
-                Material material = Material.matchMaterial(Neptune.menusConfig.getString("queue-gui-type.surrounding-items"));
-                short durability = (short) Neptune.menusConfig.getInt("queue-gui-type.durability");
-                String itemName = Neptune.menusConfig.getString("queue-gui-type.surrounding-items-name");
+                Material material = Material.matchMaterial(Neptune.menusConfig.getString("queue-gui-type.unranked.surrounding-items"));
+                short durability = (short) Neptune.menusConfig.getInt("queue-gui-type.unranked.durability");
+                String itemName = Neptune.menusConfig.getString("queue-gui-type.unranked.surrounding-items-name");
                 ItemStack blueGlassPane = new ItemStack(material, 1, durability);
                 ItemMeta glassPaneMeta = blueGlassPane.getItemMeta();
                 glassPaneMeta.setDisplayName(CC.translate(itemName));
@@ -74,7 +74,7 @@ public class UnrankedInventoryModern implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getInventory().getTitle().equals(CC.translate(Neptune.menusConfig.getString("queue-gui-type.menu-name")))) {
+        if (event.getInventory().getTitle().equals(CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.menu-name")))) {
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
                 ItemStack clickedItem = event.getCurrentItem();
                 ItemMeta itemMeta = clickedItem.getItemMeta();

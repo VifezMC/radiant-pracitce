@@ -2,7 +2,7 @@ package neptune.dev.managers;
 
 import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.PlayerUtils;
+import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.assemble.AssembleAdapter;
 import org.bukkit.entity.Player;
 
@@ -23,15 +23,8 @@ public class Scoreboard implements AssembleAdapter {
         lobbyTitle = Neptune.scoreboardConfig.getString("scoreboard.title");
         scoreboardLobby = Neptune.scoreboardConfig.getStringList("scoreboard.lobby");
         scoreboardMatch = Neptune.scoreboardConfig.getStringList("scoreboard.match");
-        updateServerStats();
     }
 
-    /**
-     * Updates the number of playing players from the QueueProcessor.
-     */
-    private void updateServerStats() {
-        playingPlayers = QueueProcessor.playing;
-    }
 
     @Override
     public String getTitle(Player player) {
@@ -54,6 +47,8 @@ public class Scoreboard implements AssembleAdapter {
     private List<String> getLobbyLines() {
         List<String> lobbyLines = new ArrayList<>();
         int onlinePlayers = Neptune.instance.getServer().getOnlinePlayers().size();
+        int playingPlayers = QueueProcessor.playing;;
+
         for (String line : scoreboardLobby) {
             line = line.replace("{online_players}", String.valueOf(onlinePlayers));
             line = line.replace("{playing_players}", String.valueOf(playingPlayers));

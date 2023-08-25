@@ -1,8 +1,6 @@
 package neptune.dev.game;
 
 import neptune.dev.Neptune;
-import neptune.dev.player.PlayerState;
-import neptune.dev.utils.PlayerUtils;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
