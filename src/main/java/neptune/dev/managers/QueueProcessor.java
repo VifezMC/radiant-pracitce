@@ -2,7 +2,7 @@ package neptune.dev.managers;
 
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
-import neptune.dev.game.StartGame;
+import neptune.dev.game.Game;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
@@ -74,9 +74,8 @@ public class QueueProcessor {
         firstPlayer.teleport(selectedArena.getSpawn1());
         secondPlayer.teleport(selectedArena.getSpawn2());
 
-        PlayerUtils.removeState(firstPlayer, PlayerState.LOBBY);
+
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
-        PlayerUtils.removeState(secondPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(secondPlayer, PlayerState.PLAYING);
 
         processQueueForKit(kitName, players);
@@ -109,7 +108,7 @@ public class QueueProcessor {
     }
 
     private static void processQueueForKit(String kitName, List<Player> players) {
-        players.forEach(player -> StartGame.startGame(kitName, players));
+        players.forEach(player -> Game.startGame(kitName, players));
     }
 
     private static Arena selectRandomAvailableArena(List<String> arenas) {

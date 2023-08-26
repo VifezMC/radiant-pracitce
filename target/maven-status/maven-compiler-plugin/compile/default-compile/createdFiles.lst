@@ -3,8 +3,8 @@ neptune\dev\commands\user\RankedCMD.class
 neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.class
 neptune\dev\ui\ranked\RankedInventoryLegacy.class
 neptune\dev\player\PlayerUtils.class
+neptune\dev\player\GameState.class
 neptune\dev\commands\admin\SetSpawnCMD.class
-neptune\dev\game\EndGame.class
 neptune\dev\utils\assemble\AssembleThread.class
 neptune\dev\utils\render\Console.class
 neptune\dev\utils\assemble\AssembleStyle.class
@@ -13,7 +13,6 @@ neptune\dev\utils\Cooldowns.class
 neptune\dev\player\Profile.class
 neptune\dev\listeners\SpawnListeners.class
 neptune\dev\managers\MatchManager.class
-neptune\dev\game\StartGame.class
 neptune\dev\ui\unranked\UnrankedInventoryLegacy.class
 neptune\dev\commands\user\LeaveQueueCMD.class
 neptune\dev\game\Match.class
@@ -27,6 +26,7 @@ neptune\dev\listeners\WorldListener.class
 neptune\dev\player\PlayerState.class
 neptune\dev\commands\admin\MainCMD.class
 neptune\dev\utils\assemble\AssembleBoardEntry.class
+neptune\dev\game\Game.class
 neptune\dev\listeners\PlayerLeaveListener.class
 neptune\dev\commands\admin\KitsCMD.class
 neptune\dev\utils\LocationUtil.class

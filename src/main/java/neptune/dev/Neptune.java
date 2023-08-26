@@ -110,7 +110,7 @@ public class Neptune extends JavaPlugin {
     menus = new File(this.getDataFolder(), "ui/menus.yml");
     menusConfig = YamlConfiguration.loadConfiguration(menus);
 
-    // DIVISIONS CONFIG
+    // DIVISION CONFIG
     saveResourceIfNotExists("features/divisions.yml", false);
     divisions = new File(this.getDataFolder(), "features/divisions.yml");
     divisionsConfig = YamlConfiguration.loadConfiguration(divisions);

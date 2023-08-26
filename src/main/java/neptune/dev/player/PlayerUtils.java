@@ -22,28 +22,11 @@ import static org.bukkit.Bukkit.getLogger;
 public class PlayerUtils {
 
     private static Map<Player, PlayerState> playerStates = new HashMap<>();
+    private static Map<Player, GameState> gameStates = new HashMap<>();
     private static Map<String, ItemStack> spawnItemsCache = new HashMap<>();
     private static Map<String, ItemStack> queueItemsCache = new HashMap<>();
     private static World lobbyWorld;
     private static final Logger logger = getLogger();
-    public static void endGame(Player p) {
-        removeState(p, PlayerState.PLAYING);
-        setState(p, PlayerState.LOBBY);
-        p.teleport(getLobbyLocation());
-        p.setSaturation(20);
-        p.setFlying(false);
-        p.setFoodLevel(20);
-        p.setHealth(p.getMaxHealth());
-        p.setFireTicks(0);
-        p.setGameMode(GameMode.SURVIVAL);
-        for (PotionEffect effect : p.getActivePotionEffects()) {
-            p.removePotionEffect(effect.getType());
-        }
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        createSpawnItems(p);
-        p.updateInventory();
-    }
 
     private static World getLobbyWorld() {
         if (lobbyWorld == null) {
@@ -64,20 +47,32 @@ public class PlayerUtils {
     }
 
     public static void setState(Player player, PlayerState state) {
+        playerStates.remove(player);
         playerStates.put(player, state);
     }
-
+    public static void setGameState(Player player, GameState state) {
+        gameStates.remove(player);
+        gameStates.put(player, state);
+    }
     public static void removeState(Player player, PlayerState state) {
         playerStates.remove(player, state);
     }
-
+    public static void removeGameState(Player player, GameState state) {
+        gameStates.remove(player, state);
+    }
     public static PlayerState getState(Player player) {
         return playerStates.getOrDefault(player, PlayerState.LOBBY);
     }
-
+    public static GameState getGameState(Player player) {
+        return gameStates.getOrDefault(player, GameState.DEFAULT);
+    }
     public static boolean hasPlayerState(Player player, PlayerState state) {
         PlayerState currentPlayerState = getState(player);
         return currentPlayerState == state;
+    }
+    public static boolean hasGamePlayerState(Player player, GameState state) {
+        GameState currentGamePlayerState = getGameState(player);
+        return currentGamePlayerState == state;
     }
 
     public static String toString(Location loc) {
