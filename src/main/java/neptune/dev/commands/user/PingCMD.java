@@ -13,7 +13,7 @@ public class PingCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage(CC.RED + "Only players can use this command.");
+            sender.sendMessage(CC.translate("&cOnly players can use this command."));
             return true;
         }
 

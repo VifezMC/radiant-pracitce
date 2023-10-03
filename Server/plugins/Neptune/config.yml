@@ -1,0 +1,5 @@
+general:
+  enable-join-message: true
+  enable-debug: false
+  clear-empty-bottles: true # Remove bottle from the ground if its empty
+  ender-pearl-cooldown: 15

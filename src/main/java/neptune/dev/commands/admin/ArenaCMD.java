@@ -18,7 +18,7 @@ public class ArenaCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be used by players.");
+            sender.sendMessage(CC.translate("&cOnly players can use this command."));
             return true;
         }
 
@@ -35,6 +35,7 @@ public class ArenaCMD implements CommandExecutor {
                 createArena(arenaName);
                 player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
                 player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set spawn1 and spawn2."));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
             } else if (args[0].equalsIgnoreCase("pos1")) {
                 setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
