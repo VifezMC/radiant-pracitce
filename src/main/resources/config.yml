@@ -1,10 +1,6 @@
-save-type: "flatfile" # flatfile or Mongo
-MONGO:
-  URI: "mongodb://localhost:27017"
-  DATABASE: "Neptune"
-  
 general:
   enable-join-message: true
   enable-debug: false
   clear-empty-bottles: true # Remove bottle from the ground if its empty
   ender-pearl-cooldown: 15
+  disable-fall-damage: true

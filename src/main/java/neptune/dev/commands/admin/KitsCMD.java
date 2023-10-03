@@ -2,6 +2,7 @@ package neptune.dev.commands.admin;
 
 import neptune.dev.Constants;
 import neptune.dev.Neptune;
+import neptune.dev.managers.KitManager;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.Sound;
@@ -18,7 +19,6 @@ import java.util.List;
 
 public class KitsCMD implements CommandExecutor {
 
-    private static final String PERMISSION = Constants.PlName + ".kits";
 
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
@@ -28,49 +28,98 @@ public class KitsCMD implements CommandExecutor {
         }
 
         Player player = (Player) sender;
-        if (!player.hasPermission(PERMISSION)) {
+        if (!player.hasPermission(Constants.PlName + ".kits")) {
             player.sendMessage(CC.translate("&cYou don't have permission to use this command."));
             return true;
         }
 
         if (args.length >= 1) {
             String action = args[0].toLowerCase();
-            if (action.equals("create") && args.length >= 2) {
-                String kitName = args[1];
-                createKit(kitName);
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                player.sendMessage(CC.GREEN + "Kit has been created!");
-            } else if (action.equals("set") && args.length >= 2) {
-                String kitName = args[1];
-                setItemsAndArmour(kitName, player);
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-            } else if (action.equals("give") && args.length >= 2) {
-                String kitName = args[1];
-                giveKit(kitName, player);
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-            } else if (action.equals("seticon") && args.length >= 2) {
-                String kitName = args[1];
-                setIcon(kitName, player.getItemInHand(), player);
-                player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-            } else if (action.equals("arenas") && args.length >= 3) {
-                String kitName = args[1];
-                String arena = args[2];
-                addArena(kitName, arena, player);
-            } else if (action.equals("rules") && args.length >= 3) {
-                String kitName = args[1];
-                String rule = args[2].toLowerCase();
-                addRule(kitName, rule, player);
-            } else if (action.equals("ranked") && args.length >= 3) {
-                String kitName = args[1];
-                String rankedValue = args[2].toLowerCase();
-                setRankedStatus(kitName, rankedValue, player);
-            } else {
-                player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
+            switch (action) {
+                case "create":
+                    if (args.length >= 2) {
+                        String kitName = args[1];
+                        createKit(kitName);
+                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                        player.sendMessage(CC.GREEN + "Kit has been created!");
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit create <name>.");
+                    }
+                    break;
+                case "set":
+                    if (args.length >= 2) {
+                        String kitName = args[1];
+                        setItemsAndArmour(kitName, player);
+                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit set <name>.");
+                    }
+                    break;
+                case "give":
+                    if (args.length >= 2) {
+                        String kitName = args[1];
+                        giveKit(kitName, player);
+                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit give <name>.");
+                    }
+                    break;
+                case "seticon":
+                    if (args.length >= 2) {
+                        String kitName = args[1];
+                        setIcon(kitName, player.getItemInHand(), player);
+                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit seticon <name>.");
+                    }
+                    break;
+                case "setdescription":
+                    if (args.length >= 2) {
+                        String kitName = args[1];
+                        StringBuilder description = new StringBuilder();
+                        for (int i = 2; i < args.length; i++) {
+                            description.append(args[i]).append(" ");
+                        }
+                        setDesc(kitName, description.toString(), player);
+                        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit setdescription <name> <description>.");
+                    }
+                    break;
+                case "arenas":
+                    if (args.length >= 3) {
+                        String kitName = args[1];
+                        String arena = args[2];
+                        addArena(kitName, arena, player);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit arenas <name> <arena>.");
+                    }
+                    break;
+                case "rules":
+                    if (args.length >= 3) {
+                        String kitName = args[1];
+                        String rule = args[2].toLowerCase();
+                        addRule(kitName, rule, player);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit rules <name> <rule>.");
+                    }
+                    break;
+                case "ranked":
+                    if (args.length >= 3) {
+                        String kitName = args[1];
+                        String rankedValue = args[2].toLowerCase();
+                        setRankedStatus(kitName, rankedValue, player);
+                    } else {
+                        player.sendMessage(CC.RED + "Invalid command usage. Use /kit ranked <name> <true/false>.");
+                    }
+                    break;
+                default:
+                    player.sendMessage(CC.RED + "Invalid command. Use /kit for available commands.");
+                    break;
             }
         } else {
             showKitCommands(player);
         }
-
         return true;
     }
 
@@ -80,6 +129,7 @@ public class KitsCMD implements CommandExecutor {
         Neptune.kitsConfig.set("kits." + name + ".icon", "None");
         Neptune.kitsConfig.set("kits." + name + ".arenas", "None");
         Neptune.kitsConfig.set("kits." + name + ".rules", "None");
+        Neptune.kitsConfig.set("kits." + name + ".description", "None");
         saveConfig();
     }
 
@@ -101,6 +151,12 @@ public class KitsCMD implements CommandExecutor {
             Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
     }
 
+    private void setDesc(String location, String desc, Player p) {
+        Neptune.kitsConfig.set("kits." + location + ".description", desc);
+        p.sendMessage(CC.GREEN + "Kit description has been set!");
+    }
+
+
     private void setIcon(String location, ItemStack item, Player player) {
         if (kitExists(location)) {
             Neptune.kitsConfig.set("kits." + location + ".icon", item);
@@ -119,8 +175,8 @@ public class KitsCMD implements CommandExecutor {
             if (kitExists(kitName)) {
                 player.getInventory().clear();
                 player.getInventory().setArmorContents(null);
-                ItemStack[] inventoryContents = getItemsFromConfig(kitName);
-                ItemStack[] armorContents = getArmorFromConfig(kitName);
+                ItemStack[] inventoryContents = KitManager.getKit(kitName).getItems();
+                ItemStack[] armorContents = KitManager.getKit(kitName).getArmour();
                 player.getInventory().setContents(inventoryContents);
                 player.getInventory().setArmorContents(armorContents);
                 player.updateInventory();
@@ -139,14 +195,6 @@ public class KitsCMD implements CommandExecutor {
         } else {
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
         }
-    }
-
-    private ItemStack[] getItemsFromConfig(String location) {
-        return Neptune.kitsConfig.getList("kits." + location + ".items").toArray(new ItemStack[0]);
-    }
-
-    private ItemStack[] getArmorFromConfig(String location) {
-        return Neptune.kitsConfig.getList("kits." + location + ".armour").toArray(new ItemStack[0]);
     }
 
     private void addRule(String kitName, String rule, Player player) {
@@ -203,6 +251,7 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit set &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit give &8<&7name&8> &7- &8(&7Give a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit seticon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
+        player.sendMessage(CC.translate("&b/kit setdescription &8<&7name&8> &8<&7description&8> &7- &8(&7Set a kit's description&8)"));
         player.sendMessage(CC.translate("&b/kit rules &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
         player.sendMessage(CC.translate("&b/kit arenas &8<&7name&8> &8<&7arena&8> &7- &8(&7Add an Arena to kit&8)"));
         player.sendMessage(CC.translate("&b/kit ranked &8<&7name&8> &8<&7true/false&8> &7- &8(&7Set a kit to ranke&8)"));

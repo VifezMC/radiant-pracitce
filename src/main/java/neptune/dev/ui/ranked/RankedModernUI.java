@@ -81,7 +81,7 @@ public class RankedModernUI implements Listener {
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
                 ItemStack clickedItem = event.getCurrentItem();
                 ItemMeta itemMeta = clickedItem.getItemMeta();
-                if (itemMeta != null && itemMeta.getDisplayName() != null && itemMeta.getDisplayName().equals(CC.translate("&bEmpty"))) {
+                if (itemMeta != null && itemMeta.getDisplayName() != null && itemMeta.getDisplayName().equals(Neptune.menusConfig.getString("queue-gui-type.unranked.surrounding-items"))) {
                     event.setCancelled(true);
                     return;
                 }

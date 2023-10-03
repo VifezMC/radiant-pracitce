@@ -1,16 +1,13 @@
 package neptune.dev.player;
 
 import neptune.dev.Neptune;
-import neptune.dev.player.PlayerState;
 import neptune.dev.utils.render.CC;
 import org.bukkit.*;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.potion.PotionEffect;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,29 +18,12 @@ import static org.bukkit.Bukkit.getLogger;
 
 public class PlayerUtils {
 
-    private static Map<Player, PlayerState> playerStates = new HashMap<>();
-    private static Map<String, ItemStack> spawnItemsCache = new HashMap<>();
-    private static Map<String, ItemStack> queueItemsCache = new HashMap<>();
+    public static Map<Player, PlayerState> playerStates = new ConcurrentHashMap<>();
+    public static Map<Player, GameState> gameStates = new ConcurrentHashMap<>();
+    public static Map<String, ItemStack> spawnItemsCache = new ConcurrentHashMap<>();
+    private static Map<String, ItemStack> queueItemsCache = new ConcurrentHashMap<>();
     private static World lobbyWorld;
     private static final Logger logger = getLogger();
-    public static void endGame(Player p) {
-        removeState(p, PlayerState.PLAYING);
-        setState(p, PlayerState.LOBBY);
-        p.teleport(getLobbyLocation());
-        p.setSaturation(20);
-        p.setFlying(false);
-        p.setFoodLevel(20);
-        p.setHealth(p.getMaxHealth());
-        p.setFireTicks(0);
-        p.setGameMode(GameMode.SURVIVAL);
-        for (PotionEffect effect : p.getActivePotionEffects()) {
-            p.removePotionEffect(effect.getType());
-        }
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        createSpawnItems(p);
-        p.updateInventory();
-    }
 
     private static World getLobbyWorld() {
         if (lobbyWorld == null) {
@@ -64,21 +44,29 @@ public class PlayerUtils {
     }
 
     public static void setState(Player player, PlayerState state) {
+        playerStates.remove(player);
         playerStates.put(player, state);
     }
-
-    public static void removeState(Player player, PlayerState state) {
-        playerStates.remove(player, state);
+    public static void setGState(Player player, GameState state) {
+        gameStates.remove(player);
+        gameStates.put(player, state);
     }
 
     public static PlayerState getState(Player player) {
         return playerStates.getOrDefault(player, PlayerState.LOBBY);
     }
-
+    public static GameState getGState(Player player) {
+        return gameStates.getOrDefault(player, GameState.DEFAULT);
+    }
     public static boolean hasPlayerState(Player player, PlayerState state) {
         PlayerState currentPlayerState = getState(player);
         return currentPlayerState == state;
     }
+    public static boolean hasGPlayerState(Player player, GameState state) {
+        GameState currentPlayerState = getGState(player);
+        return currentPlayerState == state;
+    }
+
 
     public static String toString(Location loc) {
         return loc.getWorld().getName() + ":" + loc.getX() + ":" + loc.getY() + ":" + loc.getZ() + ":" + loc.getYaw() + ":" + loc.getPitch();

@@ -4,6 +4,7 @@ import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
 import neptune.dev.game.Match;
 import neptune.dev.utils.render.Console;
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.*;
@@ -12,13 +13,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class MatchManager {
 
     private static Map<UUID, Match> matches = new ConcurrentHashMap<>();
-    private static Map<UUID, Arena> matchArenas = new ConcurrentHashMap<>(); // New map to store match-arena association
+    private static Map<UUID, Arena> matchArenas = new ConcurrentHashMap<>();
 
     public static void addMatch(Player player1, Player player2, Arena arenaName, String kitName) {
         UUID matchID = UUID.randomUUID();
         Match match = new Match(player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);
-        matchArenas.put(matchID, arenaName); // Store the arena associated with the match
+        matchArenas.put(matchID, arenaName);
         if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
             Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName.getName() + " with kit " + kitName);
         }
@@ -31,7 +32,7 @@ public class MatchManager {
                 Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName().getName() + " with kit " + match.getKitName());
             }
         }
-        matchArenas.remove(matchID); // Remove the associated arena reference
+        matchArenas.remove(matchID);
     }
 
     public static UUID getMatchID(Player player) {
@@ -57,12 +58,12 @@ public class MatchManager {
         return matchArenas.get(matchID);
     }
 
-    public static String getOpponent(Player player) {
+    public static Player getOpponent(Player player) {
         for (Match match : matches.values()) {
             if (match.getPlayer1().getUniqueId().equals(player.getUniqueId())) {
-                return match.getPlayer2().getName();
+                return match.getPlayer2();
             } else if (match.getPlayer2().getUniqueId().equals(player.getUniqueId())) {
-                return match.getPlayer1().getName();
+                return match.getPlayer1();
             }
         }
         return null;
@@ -77,5 +78,35 @@ public class MatchManager {
             return players;
         }
         return null;
+    }
+
+    public static Player getMatchWinner(UUID matchID) {
+        Match match = matches.get(matchID);
+        if (match != null) {
+            Player player1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
+            Player player2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
+
+            if (player1.getGameMode() == GameMode.CREATIVE) {
+                return player2; // Player 1 is in Creative mode, so player 2 wins
+            } else if (player2.getGameMode() == GameMode.CREATIVE) {
+                return player1; // Player 2 is in Creative mode, so player 1 wins
+            }
+        }
+        return null; // No winner or match not found
+    }
+
+    public static Player getMatchLoser(UUID matchID) {
+        Match match = matches.get(matchID);
+        if (match != null) {
+            Player player1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
+            Player player2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
+
+            if (player1.getGameMode() == GameMode.CREATIVE) {
+                return player1; // Player 1 is in Creative mode, so player 1 loses
+            } else if (player2.getGameMode() == GameMode.CREATIVE) {
+                return player2; // Player 2 is in Creative mode, so player 2 loses
+            }
+        }
+        return null; // No loser or match not found
     }
 }

@@ -26,20 +26,14 @@ public class MainCMD implements CommandExecutor {
         }
 
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-            reloadConfigs(player);
+            Neptune.redloadManagers();
+            player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+            player.sendMessage(CC.GREEN + "Configs have been reloaded!");
             return true;
         }
-
         showPluginInfo(player);
         return true;
     }
-
-    private void reloadConfigs(Player player) {
-        Neptune.instance.registerConfigs();
-        player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-        player.sendMessage(CC.GREEN + "Configs have been reloaded!");
-    }
-
     private void showPluginInfo(Player player) {
         player.sendMessage(CC.translate("&7&m--------------------------------------------"));
         player.sendMessage(CC.translate(""));

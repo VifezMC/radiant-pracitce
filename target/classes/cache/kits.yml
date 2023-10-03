@@ -156,6 +156,12 @@ kits:
         ==: ItemMeta
         meta-type: POTION
         display-name: "\xa79Nodebuff"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -164,6 +170,8 @@ kits:
           HIDE_ATTRIBUTES: null
           HIDE_DESTROYS: null
     arenas: None
+    ranked: true
+    description: "The PotPvP"
   Sumo:
     items:
       - null
@@ -226,6 +234,12 @@ kits:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: "\xa79Sumo"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -240,6 +254,8 @@ kits:
       - nohunger
       - nohunger
     arenas: None
+    ranked: true
+    description: "First to be knocked off loses"
   Classic:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -301,6 +317,12 @@ kits:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: "\xa79Classic"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -309,6 +331,8 @@ kits:
           HIDE_ATTRIBUTES: null
           HIDE_DESTROYS: null
     rules: None
+    ranked: true
+    description: "A classic kit with no enchantments"
   Boxing:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -384,6 +408,12 @@ kits:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: "\xa79Boxing"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -396,6 +426,8 @@ kits:
       - boxing
       - nodamage
       - nohunger
+    ranked: true
+    description: "First player to reach 100 hits wins"
   BuildUHC:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -505,6 +537,12 @@ kits:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: "\xa79BuildUHC"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -515,6 +553,8 @@ kits:
     arenas: None
     rules:
       - build
+    ranked: true
+    description: "Ultra Hardcore with bows and fishing rods"
   Skywars:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -622,6 +662,12 @@ kits:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: "\xa79Skywars"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -632,6 +678,8 @@ kits:
     arenas: None
     rules:
       - build
+    ranked: true
+    description: ""
   Gapple:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -759,6 +807,12 @@ kits:
         ==: ItemMeta
         meta-type: UNSPECIFIC
         display-name: "\xa79Gapple"
+        lore:
+          - ' '
+          - "\xa7fPlaying: \xa790"
+          - "\xa7fQueuing: \xa790"
+          - ' '
+          - "\xa7aClick to play."
         ItemFlags: !!set
           HIDE_PLACED_ON: null
           HIDE_ENCHANTS: null
@@ -768,3 +822,5 @@ kits:
           HIDE_DESTROYS: null
     arenas: None
     rules: None
+    ranked: true
+    description: "The &oold &r&7boxing"

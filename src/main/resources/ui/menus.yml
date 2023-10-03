@@ -1,12 +1,12 @@
 queue-gui-type:
   unranked:
     type: "modern" # You change between legacy and modern
-    item-color: "&9"
+    item-color: "&b"
     height: 3
     menu-name: "&8Unranked Queue"
     surrounding-items: STAINED_GLASS_PANE
-    surrounding-items-name: "&bEmpty"
-    durability: 11
+    surrounding-items-name: " "
+    durability: 7
   ranked:
     type: "modern" # You change between legacy and modern
     item-color: "&9"
@@ -16,8 +16,9 @@ queue-gui-type:
     surrounding-items-name: "&bEmpty"
     durability: 11
   item-meta:
+    - "&7{description}"
     - " "
-    - "&fPlaying: &9{playing}"
-    - "&fQueuing: &9{queueing}"
+    - "&fPlaying: &b{playing}"
+    - "&fQueuing: &b{queueing}"
     - " "
     - "&aClick to play."

@@ -3,6 +3,7 @@ package neptune.dev.listeners;
 import neptune.dev.Neptune;
 import neptune.dev.managers.QueueProcessor;
 import neptune.dev.player.PlayerState;
+import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -12,6 +13,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.FoodLevelChangeEvent;
+import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -27,16 +29,26 @@ public class SpawnListeners implements Listener {
     public void onDamage(EntityDamageEvent event) {
         if (event.getEntity() instanceof Player) {
             Player player = (Player) event.getEntity();
-            if (hasPlayerState(player, PlayerState.LOBBY)) {
+            if (hasPlayerState(player, PlayerState.LOBBY) || hasPlayerState(player, PlayerState.INQUEUE)) {
                 event.setCancelled(true);
             }
+        }
+    }
+
+    @EventHandler // DISABLE ALL COMMAND WHILE IN QUEUE OR INGAME
+    public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
+        String command = event.getMessage().toLowerCase();
+        Player p = event.getPlayer();
+        if(hasPlayerState(p, PlayerState.INQUEUE) || hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue")){
+            event.setCancelled(true);
+            p.sendMessage(CC.translate("&cYou can't use commands while in-game or in queue."));
         }
     }
 
     @EventHandler // DISABLING FOOD DROP IN LOBBY
     public void onFoodLevel(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
-        if (hasPlayerState(player, PlayerState.LOBBY)) {
+        if (hasPlayerState(player, PlayerState.LOBBY) || hasPlayerState(player, PlayerState.INQUEUE)) {
             event.setCancelled(true);
         }
     }
@@ -44,7 +56,7 @@ public class SpawnListeners implements Listener {
     @EventHandler // DISABLE PLAYER ITEM DROPS
     public void onDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
-        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE) {
+        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE || hasPlayerState(player, PlayerState.INQUEUE)) {
             event.setCancelled(true);
         }
     }
@@ -55,6 +67,8 @@ public class SpawnListeners implements Listener {
         if (QueueProcessor.isPlayerInQueue(event.getPlayer())) {
             QueueProcessor.removePlayerFromQueue(event.getPlayer());
         }
+        PlayerUtils.playerStates.remove(event.getPlayer());
+        PlayerUtils.gameStates.remove(event.getPlayer());
     }
 
     @EventHandler // SPAWN ITEMS

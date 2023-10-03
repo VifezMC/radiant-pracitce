@@ -3,8 +3,11 @@ package neptune.dev.listeners;
 
 
 import neptune.dev.Neptune;
+import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
+import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
+import neptune.dev.utils.render.Console;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -21,10 +24,14 @@ public class PlayerJoin implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
-
         // ON PLAY JOIN
         setState(p, PlayerState.LOBBY);
-        p.teleport(getLobbyLocation());
+        PlayerUtils.setGState(p, GameState.DEFAULT);
+        if(!Neptune.arenaConfig.getString("lobby").equals("none")){
+            p.teleport(getLobbyLocation());
+        }else{
+            Console.sendMessage("&bNeptune &8| &cMake sure to set server spawn /setspawn");
+        }
         p.setSaturation(20);
         p.setFlying(false);
         p.setFoodLevel(20);

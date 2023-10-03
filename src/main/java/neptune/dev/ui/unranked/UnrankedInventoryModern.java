@@ -1,11 +1,13 @@
 package neptune.dev.ui.unranked;
 
 import neptune.dev.Neptune;
+import neptune.dev.game.Kit;
+import neptune.dev.managers.KitManager;
+import neptune.dev.managers.QueueProcessor;
 import neptune.dev.utils.render.CC;
 import neptune.dev.player.PlayerUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -19,40 +21,70 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UnrankedInventoryModern implements Listener {
-    public static void openMenu(Player player, ConfigurationSection kitsConfig) {
+    private static KitManager kitManager;
+
+    public UnrankedInventoryModern(KitManager kitManager) {
+        this.kitManager = kitManager;
+    }
+
+    public static void openMenu(Player player) {
         Inventory menu = Bukkit.createInventory(null, 9 * Neptune.menusConfig.getInt("queue-gui-type.unranked.height"), CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.menu-name")));
 
-        if (kitsConfig != null && kitsConfig.contains("kits")) {
-            ConfigurationSection kitsSection = kitsConfig.getConfigurationSection("kits");
-            int counter = 0;
-            int x = 1;
-            int y = 1;
-            String loreKey = "queue-gui-type.item-meta";
-            List<String> lore = Neptune.menusConfig.getStringList(loreKey);
-            List<String> translatedLore = new ArrayList<>();
-            for (String loreLine : lore) {
-                translatedLore.add(CC.translate(loreLine).replace("{queueing}", "0").replace("{playing}", "0"));
-            }
-            for (String kitName : kitsSection.getKeys(false)) {
-                ConfigurationSection kitConfig = kitsSection.getConfigurationSection(kitName);
-                if (kitConfig.contains("icon")) {
-                    ItemStack iconItem = kitConfig.getItemStack("icon");
-                    ItemMeta itemMeta = iconItem.getItemMeta();
-                    itemMeta.addItemFlags(ItemFlag.values());
-                    itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.item-color") + kitName));
-                    itemMeta.setLore(translatedLore);
-                    iconItem.setItemMeta(itemMeta);
 
-                    int slotIndex = y * 9 + x;
-                    if (slotIndex == 17) {
-                        slotIndex = 19;
+        int counter = 0;
+        int x = 1;
+        int y = 1;
+        String loreKey = "queue-gui-type.item-meta";
+        List<String> lore = Neptune.menusConfig.getStringList(loreKey);
+        List<String> translatedLore = new ArrayList<>();
+
+        for (Kit kit : kitManager.getKits()) {
+            ItemStack iconItem = kit.getIcon();
+            ItemMeta itemMeta = iconItem.getItemMeta();
+            itemMeta.addItemFlags(ItemFlag.values());
+            itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.item-color") + kit.getName()));
+
+            // Populate the translatedLore list with lore lines from your configuration
+            translatedLore.clear();
+            for (String loreLine : lore) {
+                translatedLore.add(CC.translate(loreLine));
+            }
+
+            String description = kit.getDescription();
+            List<String> loreWithDescription = new ArrayList<>();
+            boolean descriptionAdded = false;
+
+            for (String loreLine : translatedLore) {
+                if (loreLine.contains("{playing}")) {
+                    loreWithDescription.add(loreLine.replace("{playing}", Integer.toString(kitManager.getKit(kit.getName()).getPlaying())));
+                } else if (loreLine.contains("{queueing}")) {
+                    loreWithDescription.add(loreLine.replace("{queueing}", Integer.toString(kitManager.getKit(kit.getName()).getQueue())));
+                } else if (loreLine.contains("{description}")) {
+                    if (description != null && !description.isEmpty()) {
+                        loreWithDescription.add(loreLine.replace("{description}", CC.translate(description)));
+                        descriptionAdded = true;
                     }
-                    menu.setItem(slotIndex, iconItem);
-                    counter++;
-                    x = counter % 9 == 0 ? 1 : counter % 9 + 1;
-                    y = counter / 9 + 1;
+                } else {
+                    loreWithDescription.add(loreLine);
                 }
             }
+
+            if (!descriptionAdded && description != null && !description.isEmpty()) {
+                loreWithDescription.add("");
+            }
+
+            itemMeta.setLore(loreWithDescription);
+            iconItem.setItemMeta(itemMeta);
+
+            int slotIndex = y * 9 + x;
+            if (slotIndex == 17) {
+                slotIndex = 19;
+            }
+
+            menu.setItem(slotIndex, iconItem);
+            counter++;
+            x = counter % 9 == 0 ? 1 : counter % 9 + 1;
+            y = counter / 9 + 1;
         }
 
         for (int i = 0; i < menu.getSize(); i++) {
@@ -68,6 +100,7 @@ public class UnrankedInventoryModern implements Listener {
                 menu.setItem(i, blueGlassPane);
             }
         }
+
         player.openInventory(menu);
     }
 
@@ -78,7 +111,7 @@ public class UnrankedInventoryModern implements Listener {
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
                 ItemStack clickedItem = event.getCurrentItem();
                 ItemMeta itemMeta = clickedItem.getItemMeta();
-                if (itemMeta != null && itemMeta.getDisplayName() != null && itemMeta.getDisplayName().equals(CC.translate("&bEmpty"))) {
+                if (itemMeta != null && itemMeta.getDisplayName() != null && itemMeta.getDisplayName().equals(CC.translate(Neptune.menusConfig.getString("queue-gui-type.unranked.surrounding-items-name")))) {
                     event.setCancelled(true);
                     return;
                 }

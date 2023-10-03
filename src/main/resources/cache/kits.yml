@@ -171,6 +171,7 @@ kits:
           HIDE_DESTROYS: null
     arenas: None
     ranked: true
+    description: "The PotPvP"
   Sumo:
     items:
       - null
@@ -254,6 +255,7 @@ kits:
       - nohunger
     arenas: None
     ranked: true
+    description: "First to be knocked off loses"
   Classic:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -330,6 +332,7 @@ kits:
           HIDE_DESTROYS: null
     rules: None
     ranked: true
+    description: "A classic kit with no enchantments"
   Boxing:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -424,6 +427,7 @@ kits:
       - nodamage
       - nohunger
     ranked: true
+    description: "First player to reach 100 hits wins"
   BuildUHC:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -550,6 +554,7 @@ kits:
     rules:
       - build
     ranked: true
+    description: "Ultra Hardcore with bows and fishing rods"
   Skywars:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -674,6 +679,7 @@ kits:
     rules:
       - build
     ranked: true
+    description: ""
   Gapple:
     items:
       - ==: org.bukkit.inventory.ItemStack
@@ -817,3 +823,4 @@ kits:
     arenas: None
     rules: None
     ranked: true
+    description: "The &oold &r&7boxing"

@@ -19,7 +19,7 @@ public class UnrankedCMD implements CommandExecutor {
 
         Player player = (Player) sender;
         if(Neptune.menusConfig.getString("queue-gui-type.unranked.type").contains("modern")){
-            UnrankedInventoryModern.openMenu(player, Neptune.kitsConfig);
+            UnrankedInventoryModern.openMenu(player);
         }else{
             UnrankedInventoryLegacy.openMenu(player, Neptune.kitsConfig);
         }

@@ -2,7 +2,7 @@ main: neptune.dev.Neptune
 name: Neptune
 version: 1.0
 description: High Quality Practice Plugin
-author: Ocean Deveolment
+author: lrxh
 api-version: 1.8
 api: Beta
 

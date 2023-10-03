@@ -1,10 +1,12 @@
 package neptune.dev.listeners;
 
-import neptune.dev.Constants;
 import neptune.dev.Neptune;
-import neptune.dev.game.EndGame;
+import neptune.dev.game.Game;
+import neptune.dev.game.Kit;
 import neptune.dev.game.Match;
+import neptune.dev.managers.KitManager;
 import neptune.dev.managers.MatchManager;
+import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
@@ -37,46 +39,37 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
-        Player player = event.getPlayer();
-        Match match = MatchManager.getMatch(player);
-
-        if (hasPlayerState(player, PlayerState.LOBBY)) {
-            if (player.getGameMode() == GameMode.CREATIVE || player.hasPermission(Constants.PlName + ".build")) {
-                event.setCancelled(false);
-            }
-        } else if (hasPlayerState(player, PlayerState.PLAYING)) {
-            String kitName = match.getKitName();
-            List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
-
-            if (!rules.contains("build")) {
+            if (!(event.getPlayer().getGameMode() == GameMode.CREATIVE) || PlayerUtils.hasPlayerState(event.getPlayer(),PlayerState.ENDED)) {
                 event.setCancelled(true);
-            }
         }
     }
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
         Player p = event.getEntity();
-        Match match = MatchManager.getMatch(p);
-
+        event.getDrops().clear();
+        event.setDeathMessage(null);
+        p.setGameMode(GameMode.CREATIVE);
+        Location location = p.getLocation();
+        double x = location.getX();
+        double y = location.getY() + 6.0;
+        double z = location.getZ();
+        World world = location.getWorld();
+        Location lightningLocation = new Location(world, x, y, z);
+        LightningStrike lightning = world.strikeLightning(lightningLocation);
+        Location newLocation = new Location(world, x, y + 1.0, z, location.getYaw(), location.getPitch());
+        p.teleport(newLocation);
+        p.setHealth(p.getMaxHealth());
+        p.setFireTicks(0);
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-            Player winner, loser;
-
-            if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
-                winner = opponent1;
-                loser = opponent2;
-            } else {
-                winner = opponent2;
-                loser = opponent1;
-            }
-
+            Player loser = event.getEntity(), winner = MatchManager.getOpponent(loser);
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            opponent1.sendMessage(CC.translate(formattedMessage));
-            opponent2.sendMessage(CC.translate(formattedMessage));
-            EndGame.EndGame(winner, loser, p);
+            winner.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(formattedMessage));
+            PlayerUtils.setState(winner, PlayerState.ENDED);
+            PlayerUtils.setState(loser, PlayerState.ENDED);
+            Game.EndGame(winner, loser);
         }
         event.setDeathMessage(null);
     }
@@ -107,47 +100,16 @@ public class GameListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
         Player p = event.getPlayer();
-        Match match = MatchManager.getMatch(p);
-
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-            Player winner, loser;
-
-            if (p.getName().equals(opponent1.getName())) {
-                winner = opponent2;
-                loser = opponent1;
-            } else {
-                winner = opponent1;
-                loser = opponent2;
-            }
-
+            Player loser = event.getPlayer(), winner = MatchManager.getOpponent(loser);
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            opponent1.sendMessage(CC.translate(formattedMessage));
-            opponent2.sendMessage(CC.translate(formattedMessage));
-            EndGame.EndGame(winner, loser, p);
+            winner.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(formattedMessage));
+            Game.EndGame(winner, loser);
         }
     }
 
-    @EventHandler
-    public void onPlayerDeath2(PlayerDeathEvent event) {
-        event.getDrops().clear();
-        event.setDeathMessage(null);
-        Player p = event.getEntity();
-        p.setGameMode(GameMode.CREATIVE);
-        Location location = p.getLocation();
-        double x = location.getX();
-        double y = location.getY() + 6.0;
-        double z = location.getZ();
-        World world = location.getWorld();
-        Location lightningLocation = new Location(world, x, y, z);
-        LightningStrike lightning = world.strikeLightning(lightningLocation);
-        Location newLocation = new Location(world, x, y + 1.0, z, location.getYaw(), location.getPitch());
-        p.teleport(newLocation);
-        p.setHealth(p.getMaxHealth());
-        p.setFireTicks(0);
-    }
 
     @EventHandler
     public void onSumoDeath(PlayerMoveEvent event) {
@@ -155,8 +117,7 @@ public class GameListener implements Listener {
         if (hasPlayerState(p, PlayerState.PLAYING)) {
             Match match = MatchManager.getMatch(p);
             String kitName = match.getKitName();
-
-            if (Neptune.kitsConfig.getStringList("kits." + kitName + ".rules").contains("sumo")) {
+            if (KitManager.getKit(kitName).getRules().contains("sumo")) {
                 if (p.getLocation().getBlock().getType() == Material.WATER || p.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
                     handleSumoDeath(p);
                 }
@@ -166,7 +127,7 @@ public class GameListener implements Listener {
 
     private void handleSumoDeath(Player p) {
         p.setGameMode(GameMode.CREATIVE);
-        PlayerUtils.removeState(p, PlayerState.PLAYING);
+//        PlayerUtils.removeState(p, PlayerState.PLAYING);
         PlayerUtils.setState(p, PlayerState.LOBBY);
         Location location = p.getLocation();
         double x = location.getX();
@@ -176,23 +137,12 @@ public class GameListener implements Listener {
         Location lightningLocation = new Location(world, x, y, z);
         LightningStrike lightning = world.strikeLightning(lightningLocation);
         Match match = MatchManager.getMatch(p);
-        Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-        Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-        Player winner, loser;
-
-        if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
-            winner = opponent1;
-            loser = opponent2;
-        } else {
-            winner = opponent2;
-            loser = opponent1;
-        }
-
+        Player winner = MatchManager.getOpponent(p), loser = p;
         String formattingString = Neptune.messagesConfig.getString("match.kill-message");
         String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-        opponent1.sendMessage(CC.translate(formattedMessage));
-        opponent2.sendMessage(CC.translate(formattedMessage));
-        EndGame.EndGame(winner, loser, p);
+        winner.sendMessage(CC.translate(formattedMessage));
+        loser.sendMessage(CC.translate(formattedMessage));
+        Game.EndGame(winner, loser);
     }
 
     @EventHandler
@@ -200,9 +150,29 @@ public class GameListener implements Listener {
         if (event.getEntity() instanceof Player) {
             Player p = (Player) event.getEntity();
             if (hasPlayerState(p, PlayerState.PLAYING)) {
-                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
+                if (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo")) {
                     event.setDamage(0);
                 }
+            }
+            if (hasPlayerState(p, PlayerState.ENDED)) {
+                event.setCancelled(true);
+            }
+
+            if (hasPlayerState(p, PlayerState.LOBBY) || hasPlayerState(p, PlayerState.INQUEUE) || PlayerUtils.hasGPlayerState(p, GameState.SUMO)) {
+                event.setCancelled(true);
+            }
+        }
+    }
+
+
+    @EventHandler
+    public void onMove(PlayerMoveEvent event) {
+        Player p = event.getPlayer();
+        if (hasPlayerState(p, PlayerState.PLAYING) && PlayerUtils.hasGPlayerState(p, GameState.SUMO) && (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo"))) {
+                Location to = event.getTo();
+                Location from = event.getFrom();
+                if ((to.getX() != from.getX() || to.getZ() != from.getZ())) {
+                    p.teleport(from);
             }
         }
     }
@@ -211,7 +181,7 @@ public class GameListener implements Listener {
     public void onFoodLevel(FoodLevelChangeEvent event) {
         Player p = (Player) event.getEntity();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("sumo")) {
+            if (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo")) {
                 event.setFoodLevel(20);
             }
         }
@@ -223,7 +193,8 @@ public class GameListener implements Listener {
             Player damager = (Player) event.getDamager();
             Player damaged = (Player) event.getEntity();
             if (hasPlayerState(damager, PlayerState.PLAYING) && hasPlayerState(damaged, PlayerState.PLAYING)) {
-                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(damager).getKitName() + ".rules").contains("boxing")) {
+                if (KitManager.getKit(MatchManager.getMatch(damager).getKitName()).getRules().contains("boxing")) {
+
                     handleBoxingDeath(damager);
                 }
             }
@@ -237,23 +208,12 @@ public class GameListener implements Listener {
         damager.sendMessage("[DEBUG] " + hitCount);
         if (hitCount >= 100) {
             Match match = MatchManager.getMatch(damager);
-            Player opponent1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player opponent2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-            Player winner, loser;
-
-            if (opponent2.getGameMode().equals(GameMode.CREATIVE)) {
-                winner = opponent1;
-                loser = opponent2;
-            } else {
-                winner = opponent2;
-                loser = opponent1;
-            }
-
+            Player winner = MatchManager.getMatchWinner(match.getMatchID()), loser = damager;
             String formattingString = Neptune.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            opponent1.sendMessage(CC.translate(formattedMessage));
-            opponent2.sendMessage(CC.translate(formattedMessage));
-            EndGame.EndGame(winner, loser, damager);
+            winner.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(formattedMessage));
+            Game.EndGame(winner, loser);
         }
     }
 
@@ -262,7 +222,8 @@ public class GameListener implements Listener {
         if (event.getEntity() instanceof Player) {
             Player p = (Player) event.getEntity();
             if (hasPlayerState(p, PlayerState.PLAYING)) {
-                if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nodamage")) {
+                if (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("nodamage")) {
+
                     event.setDamage(0);
                 }
             }
@@ -273,7 +234,7 @@ public class GameListener implements Listener {
     public void onBoxingFoodLevel(FoodLevelChangeEvent event) {
         Player p = (Player) event.getEntity();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
-            if (Neptune.kitsConfig.getStringList("kits." + MatchManager.getMatch(p).getKitName() + ".rules").contains("nohunger")) {
+            if (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("nohunger")) {
                 event.setFoodLevel(20);
             }
         }
@@ -281,15 +242,12 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        if (player.getGameMode() == GameMode.CREATIVE) {
+        Player p = event.getPlayer();
+        if (p.getGameMode() == GameMode.CREATIVE) {
             return;
         }
-        if (hasPlayerState(player, PlayerState.PLAYING)) {
-            String kitName = MatchManager.getMatch(player).getKitName();
-            List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
-
-            if (!rules.contains("build")) {
+        if (hasPlayerState(p, PlayerState.PLAYING)) {
+            if (!KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("build")) {
                 event.setCancelled(true);
             }
         }

@@ -53,7 +53,7 @@ public class AssembleThread extends Thread {
             final String title = ChatColor.translateAlternateColorCodes('&', this.assemble.getAdapter().getTitle(player));
 
             // Update the title if needed
-            if (!objective.getDisplayName().equals(title)) {
+            if (!objective.getName().equals(title)) {
                 objective.setDisplayName(title);
             }
 

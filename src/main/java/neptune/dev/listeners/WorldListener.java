@@ -4,6 +4,7 @@ import neptune.dev.Neptune;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.World;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBurnEvent;
@@ -11,6 +12,7 @@ import org.bukkit.event.block.BlockIgniteEvent;
 import org.bukkit.event.block.BlockSpreadEvent;
 import org.bukkit.event.block.LeavesDecayEvent;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.ExplosionPrimeEvent;
 import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -50,6 +52,16 @@ public class WorldListener implements Listener {
             if (event.getItemDrop().getItemStack().getType() == Material.GLASS_BOTTLE) {
                 event.getItemDrop().remove();
             }
+        }
+    }
+
+    @EventHandler
+    public void EntityDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player
+                && Neptune.pluginConfig.getBoolean("general.disable-fall-damage")
+                && e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
+
+                e.setCancelled(true);
         }
     }
 

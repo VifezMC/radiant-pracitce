@@ -38,23 +38,7 @@ public class ArenaManager {
         return null;
     }
 
-    public List<Arena> getArenas() {
+    public static List<Arena> getArenas() {
         return arenas;
-    }
-
-    public Arena reserveArena() {
-        for (Arena arena : arenas) {
-            if (arena.isAvailable()) {
-                arena.setAvailable(false);
-                return arena;
-            }
-        }
-        return null;
-    }
-
-    public void releaseArena(Arena arena) {
-        if (arena != null) {
-            arena.setAvailable(true);
-        }
     }
 }

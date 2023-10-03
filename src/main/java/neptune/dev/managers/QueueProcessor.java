@@ -2,7 +2,8 @@ package neptune.dev.managers;
 
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
-import neptune.dev.game.StartGame;
+import neptune.dev.game.Game;
+import neptune.dev.game.Match;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
@@ -12,9 +13,10 @@ import org.bukkit.entity.Player;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class QueueProcessor {
+import static neptune.dev.player.PlayerUtils.*;
 
-    private static final Map<Player, String> newQueue = new ConcurrentHashMap<>();
+public class QueueProcessor {
+    public static Map<Player, String> Queue = new ConcurrentHashMap<>();
     public static int playing;
 
     public static void addPlayerToQueue(Player player, String kitName) {
@@ -23,14 +25,16 @@ public class QueueProcessor {
             return;
         }
 
-        newQueue.put(player, kitName);
+        Queue.put(player, kitName);
+        KitManager.getKit(kitName).addQueue(1);
 
-        if (newQueue.size() >= 2) {
-            List<Player> players = new ArrayList<>(newQueue.keySet());
-            Set<String> kitNames = new HashSet<>(newQueue.values());
+        if (Queue.size() >= 2) {
+            List<Player> players = new ArrayList<>(Queue.keySet());
+            Set<String> kitNames = new HashSet<>(Queue.values());
 
             if (kitNames.size() == 1) {
                 startMatch(players);
+                KitManager.getKit(kitName).removeQueue(2);
             }
         }
     }
@@ -38,7 +42,7 @@ public class QueueProcessor {
     private static void startMatch(List<Player> players) {
         Player firstPlayer = players.get(0);
         Player secondPlayer = players.get(1);
-        String kitName = newQueue.get(firstPlayer);
+        String kitName = Queue.get(firstPlayer);
 
         firstPlayer.getInventory().clear();
         secondPlayer.getInventory().setArmorContents(null);
@@ -47,36 +51,55 @@ public class QueueProcessor {
             Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
         }
 
-        List<String> arenas = Neptune.kitsConfig.getStringList("kits." + kitName + ".arenas");
 
-        if (arenas.isEmpty()) {
+        if (KitManager.getKit(kitName).getArenas().isEmpty()) {
             firstPlayer.sendMessage(CC.translate("&cNo arenas found."));
             secondPlayer.sendMessage(CC.translate("&cNo arenas found."));
-            newQueue.remove(firstPlayer);
-            newQueue.remove(secondPlayer);
+            firstPlayer.teleport(getLobbyLocation());
+            secondPlayer.teleport(getLobbyLocation());
+            Queue.remove(firstPlayer);
+            Queue.remove(secondPlayer);
+            firstPlayer.teleport(getLobbyLocation());
+            firstPlayer.getInventory().clear();
+            createSpawnItems(firstPlayer);
+            firstPlayer.updateInventory();
+
+            secondPlayer.getInventory().clear();
+            createSpawnItems(secondPlayer);
+            secondPlayer.updateInventory();
+            secondPlayer.teleport(getLobbyLocation());
             return;
         }
 
-        Arena selectedArena = selectRandomAvailableArena(arenas);
+        Arena selectedArena = selectRandomAvailableArena(KitManager.getKit(kitName).getArenas());
         if (selectedArena == null) {
             firstPlayer.sendMessage(CC.translate("&cNo available arenas found."));
             secondPlayer.sendMessage(CC.translate("&cNo available arenas found."));
-            newQueue.remove(firstPlayer);
-            newQueue.remove(secondPlayer);
+            Queue.remove(firstPlayer);
+            Queue.remove(secondPlayer);
+            firstPlayer.teleport(getLobbyLocation());
+            firstPlayer.getInventory().clear();
+            createSpawnItems(firstPlayer);
+            firstPlayer.updateInventory();
+
+            secondPlayer.getInventory().clear();
+            createSpawnItems(secondPlayer);
+            secondPlayer.updateInventory();
+            secondPlayer.teleport(getLobbyLocation());
             return;
         }
 
         selectedArena.setAvailable(false);
-        newQueue.remove(firstPlayer);
-        newQueue.remove(secondPlayer);
+        Queue.remove(firstPlayer);
+        Queue.remove(secondPlayer);
         MatchManager.addMatch(firstPlayer, secondPlayer, selectedArena, kitName);
 
         firstPlayer.teleport(selectedArena.getSpawn1());
         secondPlayer.teleport(selectedArena.getSpawn2());
 
-        PlayerUtils.removeState(firstPlayer, PlayerState.LOBBY);
+        //PlayerUtils.removeState(firstPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
-        PlayerUtils.removeState(secondPlayer, PlayerState.LOBBY);
+        //PlayerUtils.removeState(secondPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(secondPlayer, PlayerState.PLAYING);
 
         processQueueForKit(kitName, players);
@@ -86,30 +109,36 @@ public class QueueProcessor {
         }
 
         playing += 2;
-
+        KitManager.getKit(kitName).addPlaying(2);
         String opponentMessage = Neptune.messagesConfig.getString("match.match-found")
-                .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer)));
+                .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer).getName()))
+                .replace("{opponent-ping}", PlayerUtils.getPing(MatchManager.getOpponent(firstPlayer)) + "")
+                .replace("{kit}", MatchManager.getMatch(firstPlayer).getKitName())
+                .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(firstPlayer)).getName());
         firstPlayer.sendMessage(CC.translate(opponentMessage));
 
         String opponentMessage2 = Neptune.messagesConfig.getString("match.match-found")
-                .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer)));
+                .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer).getName()))
+                .replace("{opponent-ping}", PlayerUtils.getPing(MatchManager.getOpponent(secondPlayer)) + "")
+                .replace("{kit}", MatchManager.getMatch(firstPlayer).getKitName())
+                .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(secondPlayer)).getName());
         secondPlayer.sendMessage(CC.translate(opponentMessage2));
     }
 
     public static void removePlayerFromQueue(Player player) {
         if (isPlayerInQueue(player)) {
-            newQueue.remove(player);
+            Queue.remove(player);
         } else {
             player.sendMessage("You are not in a queue!");
         }
     }
 
     public static boolean isPlayerInQueue(Player player) {
-        return newQueue.containsKey(player);
+        return Queue.containsKey(player);
     }
 
     private static void processQueueForKit(String kitName, List<Player> players) {
-        players.forEach(player -> StartGame.startGame(kitName, players));
+        players.forEach(player -> Game.startGame(kitName, players));
     }
 
     private static Arena selectRandomAvailableArena(List<String> arenas) {

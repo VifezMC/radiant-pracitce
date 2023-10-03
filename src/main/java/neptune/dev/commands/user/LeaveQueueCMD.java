@@ -1,9 +1,12 @@
 package neptune.dev.commands.user;
 
 import neptune.dev.Neptune;
+import neptune.dev.managers.KitManager;
 import neptune.dev.managers.QueueProcessor;
+import neptune.dev.player.PlayerState;
 import neptune.dev.utils.render.CC;
 import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.render.Console;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -14,21 +17,23 @@ public class LeaveQueueCMD implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!(sender instanceof Player)) {
-            sender.sendMessage("This command can only be used by players.");
+            sender.sendMessage(CC.translate("&cOnly players can use this command."));
             return true;
         }
 
-        Player player = (Player) sender;
-        if (QueueProcessor.isPlayerInQueue(player)) {
-            QueueProcessor.removePlayerFromQueue(player);
-            String formattingString = Neptune.messagesConfig.getString("queue.leave-queue");
-            player.sendMessage(CC.translate(formattingString));
-            player.getInventory().clear();
-            PlayerUtils.createSpawnItems(player);
-            player.updateInventory();
+        Player p = (Player) sender;
+        if (QueueProcessor.isPlayerInQueue(p)) {
+            KitManager.getKit(QueueProcessor.Queue.get(p)).removeQueue(1);
+            String formattingString = Neptune.messagesConfig.getString("queue.leave-queue").replace("{kit}", QueueProcessor.Queue.get(p));
+            QueueProcessor.removePlayerFromQueue(p);
+            p.sendMessage(CC.translate(formattingString));
+            p.getInventory().clear();
+            PlayerUtils.createSpawnItems(p);
+            PlayerUtils.setState(p, PlayerState.LOBBY);
+            p.updateInventory();
         } else {
             String formattingString = Neptune.messagesConfig.getString("queue.not-in-queue");
-            player.sendMessage(CC.translate(formattingString));
+            p.sendMessage(CC.translate(formattingString));
         }
 
         return true;

@@ -1,5 +1,6 @@
 package neptune.dev.commands.user;
 
+import neptune.dev.listeners.BlockListener;
 import neptune.dev.ui.StatsInventory;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -13,8 +14,9 @@ public class StatsCMD implements CommandExecutor {
             sender.sendMessage("Only players can use this command.");
             return true;
         }
-        Player player = (Player) sender;
-        StatsInventory.openMenu(player);
+        Player p = (Player) sender;
+        BlockListener.removeBlocks(p);
+        StatsInventory.openMenu(p);
         return true;
     }
 }
