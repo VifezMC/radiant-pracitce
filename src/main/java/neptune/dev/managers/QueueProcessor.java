@@ -75,12 +75,14 @@ public class QueueProcessor {
         if (selectedArena == null) {
             firstPlayer.sendMessage(CC.translate("&cNo available arenas found."));
             secondPlayer.sendMessage(CC.translate("&cNo available arenas found."));
+
             Queue.remove(firstPlayer);
             Queue.remove(secondPlayer);
-            firstPlayer.teleport(getLobbyLocation());
+
             firstPlayer.getInventory().clear();
             createSpawnItems(firstPlayer);
             firstPlayer.updateInventory();
+            firstPlayer.teleport(getLobbyLocation());
 
             secondPlayer.getInventory().clear();
             createSpawnItems(secondPlayer);
@@ -97,9 +99,7 @@ public class QueueProcessor {
         firstPlayer.teleport(selectedArena.getSpawn1());
         secondPlayer.teleport(selectedArena.getSpawn2());
 
-        //PlayerUtils.removeState(firstPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
-        //PlayerUtils.removeState(secondPlayer, PlayerState.LOBBY);
         PlayerUtils.setState(secondPlayer, PlayerState.PLAYING);
 
         processQueueForKit(kitName, players);
@@ -129,7 +129,7 @@ public class QueueProcessor {
         if (isPlayerInQueue(player)) {
             Queue.remove(player);
         } else {
-            player.sendMessage("You are not in a queue!");
+            player.sendMessage(CC.translate(Neptune.messagesConfig.getString("queue.not-in-queue")));
         }
     }
 

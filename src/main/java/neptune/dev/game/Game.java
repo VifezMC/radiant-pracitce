@@ -40,7 +40,6 @@ public class Game {
     }
 
     public static void startGame(String kitName, List<Player> players) {
-
         for (Player p : players) {
             p.getInventory().clear();
             p.getInventory().setArmorContents(null);
@@ -83,7 +82,6 @@ public class Game {
         if (p != null && !countdowns.containsKey(p)) {
             countdowns.put(p, (byte) 5);
             if(KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo")){
-                //TODO
                 PlayerUtils.setGState(p, GameState.SUMO);
             }
             new BukkitRunnable() {

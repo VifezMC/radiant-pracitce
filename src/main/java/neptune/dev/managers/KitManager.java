@@ -41,15 +41,6 @@ public class KitManager {
         }
         return null;
     }
-
-    public static Kit getKitByKit(Kit Kit) {
-        for (Kit kit : kits) {
-            if (kit.getName().equals(Kit)) {
-                return kit;
-            }
-        }
-        return null;
-    }
     public List<Kit> getKits() {
         return kits;
     }

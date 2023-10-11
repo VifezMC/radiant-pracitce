@@ -1,7 +1,10 @@
 package neptune.dev;
 
 import lombok.Getter;
-import neptune.dev.commands.admin.*;
+import neptune.dev.commands.admin.ArenaCMD;
+import neptune.dev.commands.admin.KitsCMD;
+import neptune.dev.commands.admin.MainCMD;
+import neptune.dev.commands.admin.SetSpawnCMD;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
 import neptune.dev.managers.ArenaManager;
@@ -11,19 +14,20 @@ import neptune.dev.ui.StatsInventory;
 import neptune.dev.ui.ranked.RankedModernUI;
 import neptune.dev.ui.unranked.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
-import neptune.dev.utils.render.Console;
 import neptune.dev.utils.assemble.Assemble;
+import neptune.dev.utils.render.Console;
+import org.bukkit.command.CommandExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.security.cert.CRLException;
 import java.util.Arrays;
 
 @Getter
 public class Neptune extends JavaPlugin {
 
-  @Getter
   public static Neptune instance;
   public static File arena;
   public static FileConfiguration arenaConfig;
@@ -67,7 +71,7 @@ public class Neptune extends JavaPlugin {
     registerCommands();
     Console.sendMessage("&7[&9Neptune&7] &aLoaded commands!");
 
-    // START MESSSAGE
+    // START MESSAGE
     Console.sendMessage("&9Neptune Loaded successfully");
     Console.sendMessage("&9Author: &f" + Constants.Autor);
     Console.sendMessage("&9Version: &f" + Constants.Ver);
@@ -75,7 +79,6 @@ public class Neptune extends JavaPlugin {
   }
 
   public void registerConfigs() {
-
     // ARENAS
     saveResourceIfNotExists("cache/arenas.yml", false);
     arena = new File(this.getDataFolder(), "cache/arenas.yml");
@@ -102,6 +105,7 @@ public class Neptune extends JavaPlugin {
     kits = new File(this.getDataFolder(), "cache/kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);
     kitManager.loadKits();
+
     // SCOREBOARD CONFIG
     saveResourceIfNotExists("ui/scoreboard.yml", false);
     scoreboard = new File(this.getDataFolder(), "ui/scoreboard.yml");
@@ -128,8 +132,7 @@ public class Neptune extends JavaPlugin {
     instance.registerConfigs();
   }
 
-
-    private void registerEventListeners() {
+  private void registerEventListeners() {
     Arrays.asList(
             new PlayerJoin(),
             new SpawnListeners(),
@@ -143,18 +146,17 @@ public class Neptune extends JavaPlugin {
   }
 
   private void registerCommands() {
-    getCommand("setspawn").setExecutor(new SetSpawnCMD());
-    getCommand("arena").setExecutor(new ArenaCMD());
-    getCommand("neptune").setExecutor(new MainCMD());
-    getCommand("kit").setExecutor(new KitsCMD());
-    getCommand("queue").setExecutor(new QueueCMD());
-    getCommand("ping").setExecutor(new PingCMD());
-    getCommand("leavequeue").setExecutor(new LeaveQueueCMD());
-    getCommand("stats").setExecutor(new StatsCMD());
-    getCommand("unranked").setExecutor(new UnrankedCMD());
-    getCommand("ranked").setExecutor(new RankedCMD());
+    createCMD("setspawn", new SetSpawnCMD());
+    createCMD("arena", new ArenaCMD());
+    createCMD("neptune", new MainCMD());
+    createCMD("kit", new KitsCMD());
+    createCMD("queue", new QueueCMD());
+    createCMD("ping", new PingCMD());
+    createCMD("leavequeue", new LeaveQueueCMD());
+    createCMD("stats", new StatsCMD());
+    createCMD("unranked", new UnrankedCMD());
+    createCMD("ranked", new RankedCMD());
   }
-
 
   private void saveResourceIfNotExists(String resourcePath, boolean replace) {
     File file = new File(this.getDataFolder(), resourcePath);
@@ -163,16 +165,20 @@ public class Neptune extends JavaPlugin {
     }
   }
 
+  private void createCMD(String cmd, CommandExecutor commandline){
+    getCommand(cmd).setExecutor(commandline);
+  }
+
   @Override
   public void onDisable() {
     getServer().getPluginManager().disablePlugin(this);
   }
 
-
   public static ArenaManager getArenaManager() {
     return arenaManager;
   }
-  public static KitManager getKitManager(){
+
+  public static KitManager getKitManager() {
     return kitManager;
   }
 }
