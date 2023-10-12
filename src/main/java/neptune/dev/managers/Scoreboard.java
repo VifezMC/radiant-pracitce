@@ -58,8 +58,8 @@ public class Scoreboard implements AssembleAdapter {
 
         for (String line : scoreboardLobby) {
             line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
-            line = line.replace("{playing_players}", String.valueOf(QueueProcessor.playing));
-            line = line.replace("{queueing_players}", String.valueOf(QueueProcessor.Queue.size()));
+            line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
+            line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
             lobbyLines.add(line);
         }
         return lobbyLines;
@@ -85,7 +85,7 @@ public class Scoreboard implements AssembleAdapter {
 
             for (String line : scoreboardMatch) {
                 line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
-                line = line.replace("{playing_players}", String.valueOf(QueueProcessor.playing));
+                line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
                 line = line.replace("{user_ping}", String.valueOf(userPing));
                 line = line.replace("{opponent_ping}", String.valueOf(opponentPing));
                 line = line.replace("{opponent}", opponent.getName());
@@ -99,10 +99,10 @@ public class Scoreboard implements AssembleAdapter {
     private List<String> getInQueueLines(Player p) {
         List<String> inQueueLines = new ArrayList<>();
             for (String line : scoreboardInQueue) {
-                line = line.replace("{kit}", QueueProcessor.Queue.get(p));
+                line = line.replace("{kit}", QueueManager.Queue.get(p));
                 line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
                 line = line.replace("{playing_players}", String.valueOf(playingPlayers));
-                line = line.replace("{queueing_players}", String.valueOf(QueueProcessor.Queue.size()));
+                line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
                 inQueueLines.add(line);
             }
         return inQueueLines;

@@ -22,7 +22,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.security.cert.CRLException;
 import java.util.Arrays;
 
 @Getter
@@ -165,10 +164,9 @@ public class Neptune extends JavaPlugin {
     }
   }
 
-  private void createCMD(String cmd, CommandExecutor commandline){
-    getCommand(cmd).setExecutor(commandline);
+  private void createCMD(String cmd, CommandExecutor commandfile){
+    getCommand(cmd).setExecutor(commandfile);
   }
-
   @Override
   public void onDisable() {
     getServer().getPluginManager().disablePlugin(this);

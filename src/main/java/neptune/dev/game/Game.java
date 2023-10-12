@@ -4,7 +4,7 @@ import neptune.dev.Neptune;
 import neptune.dev.managers.ArenaManager;
 import neptune.dev.managers.KitManager;
 import neptune.dev.managers.MatchManager;
-import neptune.dev.managers.QueueProcessor;
+import neptune.dev.managers.QueueManager;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
@@ -73,7 +73,7 @@ public class Game {
             }
             KitManager.getKit(MatchManager.getMatch(loser).getKitName()).removePlaying(2);
             MatchManager.removeMatch(MatchManager.getMatchID(loser));
-            QueueProcessor.playing -= 2;
+            QueueManager.playing -= 2;
         }, 60L);
     }
 

@@ -2,11 +2,10 @@ package neptune.dev.commands.user;
 
 import neptune.dev.Neptune;
 import neptune.dev.managers.KitManager;
-import neptune.dev.managers.QueueProcessor;
+import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.render.CC;
 import neptune.dev.player.PlayerUtils;
-import neptune.dev.utils.render.Console;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,10 +21,10 @@ public class LeaveQueueCMD implements CommandExecutor {
         }
 
         Player p = (Player) sender;
-        if (QueueProcessor.isPlayerInQueue(p)) {
-            KitManager.getKit(QueueProcessor.Queue.get(p)).removeQueue(1);
-            String formattingString = Neptune.messagesConfig.getString("queue.leave-queue").replace("{kit}", QueueProcessor.Queue.get(p));
-            QueueProcessor.removePlayerFromQueue(p);
+        if (QueueManager.isPlayerInQueue(p)) {
+            KitManager.getKit(QueueManager.Queue.get(p)).removeQueue(1);
+            String formattingString = Neptune.messagesConfig.getString("queue.leave-queue").replace("{kit}", QueueManager.Queue.get(p));
+            QueueManager.removePlayerFromQueue(p);
             p.sendMessage(CC.translate(formattingString));
             p.getInventory().clear();
             PlayerUtils.createSpawnItems(p);

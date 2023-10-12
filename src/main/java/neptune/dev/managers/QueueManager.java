@@ -3,7 +3,6 @@ package neptune.dev.managers;
 import neptune.dev.Neptune;
 import neptune.dev.game.Arena;
 import neptune.dev.game.Game;
-import neptune.dev.game.Match;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
@@ -15,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import static neptune.dev.player.PlayerUtils.*;
 
-public class QueueProcessor {
+public class QueueManager {
     public static Map<Player, String> Queue = new ConcurrentHashMap<>();
     public static int playing;
 

@@ -1,7 +1,7 @@
 package neptune.dev.listeners;
 
 import neptune.dev.Neptune;
-import neptune.dev.managers.QueueProcessor;
+import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
@@ -64,8 +64,8 @@ public class SpawnListeners implements Listener {
     @EventHandler // REMOVE PLAYER FROM QUEUE IF THEY LEAVE
     public void onPlayerLeave(PlayerQuitEvent event) {
         event.setQuitMessage(null);
-        if (QueueProcessor.isPlayerInQueue(event.getPlayer())) {
-            QueueProcessor.removePlayerFromQueue(event.getPlayer());
+        if (QueueManager.isPlayerInQueue(event.getPlayer())) {
+            QueueManager.removePlayerFromQueue(event.getPlayer());
         }
         PlayerUtils.playerStates.remove(event.getPlayer());
         PlayerUtils.gameStates.remove(event.getPlayer());

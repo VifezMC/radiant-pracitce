@@ -1,7 +1,7 @@
 package neptune.dev.commands.user;
 
 import neptune.dev.Neptune;
-import neptune.dev.managers.QueueProcessor;
+import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
@@ -32,7 +32,7 @@ public class QueueCMD implements CommandExecutor {
             String formattedMessage = formattingString.replace("{gamemode}", args[0]);
             p.sendMessage(CC.translate(formattedMessage));
             PlayerUtils.setState(p, PlayerState.INQUEUE);
-            QueueProcessor.addPlayerToQueue(p, kitName);
+            QueueManager.addPlayerToQueue(p, kitName);
             return true;
         } else {
             sender.sendMessage(CC.translate("&cThe kit '" + kitName + "' doesn't exist!"));
