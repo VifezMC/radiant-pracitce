@@ -4,7 +4,6 @@ import neptune.dev.Constants;
 import neptune.dev.Neptune;
 import neptune.dev.managers.KitManager;
 import neptune.dev.utils.render.CC;
-import neptune.dev.utils.render.Console;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -16,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class KitsCMD implements CommandExecutor {
 
@@ -57,7 +57,7 @@ public class KitsCMD implements CommandExecutor {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit set <name>.");
                     }
                     break;
-                case "give":
+                case "get":
                     if (args.length >= 2) {
                         String kitName = args[1];
                         giveKit(kitName, player);
@@ -183,8 +183,8 @@ public class KitsCMD implements CommandExecutor {
             if (kitExists(kitName)) {
                 player.getInventory().clear();
                 player.getInventory().setArmorContents(null);
-                ItemStack[] inventoryContents = KitManager.getKit(kitName).getItems();
-                ItemStack[] armorContents = KitManager.getKit(kitName).getArmour();
+                ItemStack[] inventoryContents = Objects.requireNonNull(KitManager.getKit(kitName)).getItems();
+                ItemStack[] armorContents = Objects.requireNonNull(KitManager.getKit(kitName)).getArmour();
                 player.getInventory().setContents(inventoryContents);
                 player.getInventory().setArmorContents(armorContents);
                 player.updateInventory();
