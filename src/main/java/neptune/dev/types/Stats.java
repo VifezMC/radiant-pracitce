@@ -9,12 +9,15 @@ public class Stats {
     private int matches;
     private int wins;
     private int losses;
+    private int elo;
+
 
     public Stats(Player player) {
         this.player = player;
         this.matches = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".matches");
         this.wins = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".wins");
         this.losses = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".losses");
+        this.elo = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".elo");
     }
 
     public Player getPlayer() {
@@ -35,6 +38,10 @@ public class Stats {
 
     public int getWins() {
         return wins;
+    }
+
+    public int getELO() {
+        return elo;
     }
 
     public void setWins(int wins) {
@@ -59,5 +66,13 @@ public class Stats {
 
     public void addLosses() {
         this.losses += 1;
+    }
+
+    public void addELO(byte elo) {
+        this.elo += elo;
+    }
+
+    public void removeELO(byte elo) {
+        this.elo -= elo;
     }
 }

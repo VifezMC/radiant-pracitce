@@ -5,6 +5,8 @@ description: High Quality Practice Plugin
 author: lrxh
 api-version: 1.8
 api: Beta
+softdepend:
+  - PlaceholderAPI
 
 commands:
   setspawn:

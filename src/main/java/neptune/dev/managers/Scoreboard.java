@@ -74,6 +74,8 @@ public class Scoreboard implements AssembleAdapter {
             Player user = matchPlayers.get(0);
             Player opponent = matchPlayers.get(1);
 
+            // TODO: FIX THIS SHIT CODE
+
             if (opponent == player) {
                 Player temp = user;
                 user = opponent;

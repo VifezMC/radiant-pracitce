@@ -17,6 +17,7 @@ import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.assemble.Assemble;
 import neptune.dev.utils.render.Console;
 import org.bukkit.command.CommandExecutor;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
@@ -29,6 +30,10 @@ public class Neptune extends JavaPlugin {
   @Override
   public void onEnable() {
     instance = this;
+    Plugin luckPermsPlugin = getServer().getPluginManager().getPlugin("PlaceholderAPI");
+    if (luckPermsPlugin != null && luckPermsPlugin.isEnabled()) {
+      new Placeholder(this).register();
+    }
     loadManagers();
     Console.sendMessage("&7[&9Neptune&7] &aLoaded managers!");
 
@@ -77,7 +82,8 @@ public class Neptune extends JavaPlugin {
             new RankedModernUI(),
             new BlockListener(),
             new PlayerDataListener(),
-            new MenuListener()
+            new MenuListener(),
+            new StatsListener()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
   }
 

@@ -30,5 +30,6 @@ stats:
     - "&b* Matches Played&7: &f{matches_played}"
     - "&b* Wins&7: &f{matches-won}"
     - "&b* Lost&7: &f{matches-lost}"
+    - "&b* ELO&7: &f{elo}"
     - "&b* KDR&7: &f{kdr}"
     - "&7&m-----------------------"

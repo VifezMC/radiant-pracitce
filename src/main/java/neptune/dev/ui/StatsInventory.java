@@ -35,7 +35,8 @@ public class StatsInventory {
                     .replace("{kdr}", toKDR(stats.getWins(), stats.getLosses()) + "")
                     .replace("{matches_played}", stats.getMatches() + "")
                     .replace("{matches-won}", stats.getWins() + "")
-                    .replace("{matches-lost}", stats.getLosses() + ""));
+                    .replace("{matches-lost}", stats.getLosses() + "")
+                    .replace("{elo}", stats.getELO() + ""));
         }
         stat.setLore(translatedLore);
         menu.setItem(13, stat.toItemStack());

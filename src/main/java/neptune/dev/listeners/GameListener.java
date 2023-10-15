@@ -30,6 +30,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Random;
 
 import static neptune.dev.player.PlayerUtils.hasPlayerState;
 
@@ -72,6 +73,11 @@ public class GameListener implements Listener {
             PlayerUtils.setState(loser, PlayerState.ENDED);
             PlayerDataListener.getStats(loser).addLosses();
             PlayerDataListener.getStats(winner).addWins();
+            Random random = new Random();
+            byte randomNumber = (byte) (random.nextInt(11) + 10);
+
+            PlayerDataListener.getStats(winner).addELO(randomNumber);
+            PlayerDataListener.getStats(loser).removeELO(randomNumber);
 
             Game.EndGame(winner, loser);
         }
@@ -149,6 +155,11 @@ public class GameListener implements Listener {
         Game.EndGame(winner, loser);
         PlayerDataListener.getStats(loser).addLosses();
         PlayerDataListener.getStats(winner).addWins();
+        Random random = new Random();
+        byte randomNumber = (byte) (random.nextInt(11) + 10);
+
+        PlayerDataListener.getStats(winner).addELO(randomNumber);
+        PlayerDataListener.getStats(loser).removeELO(randomNumber);
     }
 
     @EventHandler

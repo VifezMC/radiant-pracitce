@@ -95,7 +95,7 @@ public class QueueManager {
         Queue.remove(firstPlayer);
         Queue.remove(secondPlayer);
         PlayerDataListener.getStats(firstPlayer).addMatches();
-        PlayerDataListener.getStats(secondPlayer).addMatches();
+        PlayerDataListener.getStats(firstPlayer).addMatches();
 
         MatchManager.addMatch(firstPlayer, secondPlayer, selectedArena, kitName);
 

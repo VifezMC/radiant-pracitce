@@ -2,6 +2,7 @@ package neptune.dev.listeners;
 
 import neptune.dev.managers.ConfigManager;
 import neptune.dev.types.Stats;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,7 +17,7 @@ public class PlayerDataListener implements Listener {
     public static HashMap<Player, Stats> stats = new HashMap<>();
 
 
-    public static Stats getStats(Player player) {
+    public static Stats getStats(OfflinePlayer player) {
         return stats.get(player);
     }
 
@@ -29,6 +30,8 @@ public class PlayerDataListener implements Listener {
             ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".matches", 0);
             ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".wins", 0);
             ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".losses", 0);
+            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".elo", ConfigManager.pluginConfig.getInt("general.starting-elo"));
+
             try {
                 ConfigManager.statsConfig.save(ConfigManager.stats);
                 ConfigManager.statsConfig.load(ConfigManager.stats);

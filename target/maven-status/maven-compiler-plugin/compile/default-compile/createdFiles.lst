@@ -16,6 +16,7 @@ neptune\dev\listeners\PlayerJoin.class
 neptune\dev\utils\Cooldowns.class
 neptune\dev\listeners\SpawnListeners.class
 neptune\dev\managers\MatchManager.class
+neptune\dev\listeners\StatsListener.class
 neptune\dev\managers\KitManager.class
 neptune\dev\ui\unranked\UnrankedInventoryLegacy.class
 neptune\dev\commands\user\LeaveQueueCMD.class
@@ -50,5 +51,6 @@ neptune\dev\Constants.class
 neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
+neptune\dev\Placeholder.class
 neptune\dev\utils\render\CC.class
 neptune\dev\listeners\BlockListener.class
