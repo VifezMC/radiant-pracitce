@@ -34,13 +34,13 @@ public class ArenaCMD implements CommandExecutor {
             if (args[0].equalsIgnoreCase("create")) {
                 createArena(arenaName);
                 player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set pos1 and pos2."));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set position a and position b."));
                 Neptune.redloadManagers();
-            } else if (args[0].equalsIgnoreCase("pos1")) {
+            } else if (args[0].equalsIgnoreCase("a")) {
                 setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
                 Neptune.redloadManagers();
-            } else if (args[0].equalsIgnoreCase("pos2")) {
+            } else if (args[0].equalsIgnoreCase("b")) {
                 setSpawn(arenaName, 2, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
                 Neptune.redloadManagers();
@@ -77,16 +77,14 @@ public class ArenaCMD implements CommandExecutor {
     }
 
     private void showArenaCommands(Player player) {
-        player.sendMessage(CC.translate("&7&m------------------------------------------------"));
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&8- &7Arena commands:"));
+        player.sendMessage(CC.translate("&7- Arena Setup"));
         player.sendMessage(CC.translate("&b/arena create &8<&7name&8> &7- &8(&7Create an arena&8)"));
         player.sendMessage(CC.translate("&b/arena remove &8<&7name&8> &7- &8(&7Remove an arena&8)"));
         player.sendMessage(CC.translate(" "));
         player.sendMessage(CC.translate("&8- &7Arena Spawn commands:"));
-        player.sendMessage(CC.translate("&b/arena pos1 &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
-        player.sendMessage(CC.translate("&b/arena pos2 &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
+        player.sendMessage(CC.translate("&b/arena a &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
+        player.sendMessage(CC.translate("&b/arena b &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&7&m------------------------------------------------"));
     }
 }

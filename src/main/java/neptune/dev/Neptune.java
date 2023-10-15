@@ -79,44 +79,44 @@ public class Neptune extends JavaPlugin {
 
   public void registerConfigs() {
     // ARENAS
-    saveResourceIfNotExists("cache/arenas.yml", false);
+    saveResourceIfNotExists("cache/arenas.yml");
     arena = new File(this.getDataFolder(), "cache/arenas.yml");
     arenaConfig = YamlConfiguration.loadConfiguration(arena);
     arenaManager.loadArenas();
 
     // MAIN CONFIG
-    saveResourceIfNotExists("config.yml", false);
+    saveResourceIfNotExists("config.yml");
     config = new File(this.getDataFolder(), "config.yml");
     pluginConfig = YamlConfiguration.loadConfiguration(config);
 
     // MESSAGES CONFIG
-    saveResourceIfNotExists("features/messages.yml", false);
+    saveResourceIfNotExists("features/messages.yml");
     messages = new File(this.getDataFolder(), "features/messages.yml");
     messagesConfig = YamlConfiguration.loadConfiguration(messages);
 
     // SPAWN ITEMS
-    saveResourceIfNotExists("features/spawn-items.yml", false);
+    saveResourceIfNotExists("features/spawn-items.yml");
     spawnItems = new File(this.getDataFolder(), "features/spawn-items.yml");
     spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
 
     // KITS CONFIG
-    saveResourceIfNotExists("cache/kits.yml", false);
+    saveResourceIfNotExists("cache/kits.yml");
     kits = new File(this.getDataFolder(), "cache/kits.yml");
     kitsConfig = YamlConfiguration.loadConfiguration(kits);
     kitManager.loadKits();
 
     // SCOREBOARD CONFIG
-    saveResourceIfNotExists("ui/scoreboard.yml", false);
+    saveResourceIfNotExists("ui/scoreboard.yml");
     scoreboard = new File(this.getDataFolder(), "ui/scoreboard.yml");
     scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
 
     // Menus CONFIG
-    saveResourceIfNotExists("ui/menus.yml", false);
+    saveResourceIfNotExists("ui/menus.yml");
     menus = new File(this.getDataFolder(), "ui/menus.yml");
     menusConfig = YamlConfiguration.loadConfiguration(menus);
 
     // Menus CONFIG
-    saveResourceIfNotExists("features/divisions.yml", false);
+    saveResourceIfNotExists("features/divisions.yml");
     divisions = new File(this.getDataFolder(), "features/divisions.yml");
     divisionsConfig = YamlConfiguration.loadConfiguration(divisions);
   }
@@ -157,10 +157,10 @@ public class Neptune extends JavaPlugin {
     createCMD("ranked", new RankedCMD());
   }
 
-  private void saveResourceIfNotExists(String resourcePath, boolean replace) {
+  private void saveResourceIfNotExists(String resourcePath) {
     File file = new File(this.getDataFolder(), resourcePath);
     if (!file.exists()) {
-      saveResource(resourcePath, replace);
+      saveResource(resourcePath, false);
     }
   }
 
