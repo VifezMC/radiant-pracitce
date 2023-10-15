@@ -1,7 +1,6 @@
 package neptune.dev.types;
 
 import neptune.dev.Neptune;
-import neptune.dev.listeners.PlayerDataListener;
 import neptune.dev.managers.*;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;

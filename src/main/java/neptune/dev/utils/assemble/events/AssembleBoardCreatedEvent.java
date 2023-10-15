@@ -1,8 +1,8 @@
 package neptune.dev.utils.assemble.events;
 
-import neptune.dev.utils.assemble.AssembleBoard;
 import lombok.Getter;
 import lombok.Setter;
+import neptune.dev.utils.assemble.AssembleBoard;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
