@@ -88,6 +88,9 @@ public class KitsCMD implements CommandExecutor {
                                 if (args.length >= 3) {
                                     String kitName = args[2];
                                     String rule = args[3].toLowerCase();
+                                    if(rule.equals(null)){
+                                        p.sendMessage(CC.RED + "Invalid command usage. Use /kit set rule <name> <rule>.");
+                                    }
                                     addRule(kitName, rule, p);
                                     Neptune.redloadManagers();
                                 } else {
@@ -227,7 +230,7 @@ public class KitsCMD implements CommandExecutor {
                 player.sendMessage(CC.GREEN + "Kit rule has been added!");
             } else {
                 player.sendMessage(CC.RED + "Invalid rules");
-                player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo, noDamage, noHunger");
+                player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo, nodamage, nohunger");
             }
         } else {
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
@@ -278,7 +281,7 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit set inv &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit set icon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
         player.sendMessage(CC.translate("&b/kit set description &8<&7name&8> &8<&7description&8> &7- &8(&7Set a kit's description&8)"));
-        player.sendMessage(CC.translate("&b/kit set rules &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
+        player.sendMessage(CC.translate("&b/kit set rule &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
         player.sendMessage(CC.translate(""));
     }
 }
