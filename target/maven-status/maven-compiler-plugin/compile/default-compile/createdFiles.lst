@@ -5,6 +5,7 @@ neptune\dev\ui\ranked\RankedInventoryLegacy.class
 neptune\dev\player\PlayerUtils.class
 neptune\dev\player\GameState.class
 neptune\dev\commands\admin\SetSpawnCMD.class
+neptune\dev\managers\QueueManager.class
 neptune\dev\utils\assemble\AssembleThread.class
 neptune\dev\utils\render\Console.class
 neptune\dev\utils\assemble\AssembleStyle.class
@@ -46,5 +47,4 @@ neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
 neptune\dev\utils\render\CC.class
-neptune\dev\managers\QueueProcessor.class
 neptune\dev\listeners\BlockListener.class

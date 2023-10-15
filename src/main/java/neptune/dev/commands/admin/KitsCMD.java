@@ -42,6 +42,7 @@ public class KitsCMD implements CommandExecutor {
                         createKit(kitName);
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                         player.sendMessage(CC.GREEN + "Kit has been created!");
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit create <name>.");
                     }
@@ -51,6 +52,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         setItemsAndArmour(kitName, player);
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit set <name>.");
                     }
@@ -60,6 +62,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         giveKit(kitName, player);
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit give <name>.");
                     }
@@ -69,6 +72,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         setIcon(kitName, player.getItemInHand(), player);
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit seticon <name>.");
                     }
@@ -82,6 +86,7 @@ public class KitsCMD implements CommandExecutor {
                         }
                         setDesc(kitName, description.toString(), player);
                         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit setdescription <name> <description>.");
                     }
@@ -91,6 +96,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         String arena = args[2];
                         addArena(kitName, arena, player);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit arenas <name> <arena>.");
                     }
@@ -100,6 +106,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         String rule = args[2].toLowerCase();
                         addRule(kitName, rule, player);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit rules <name> <rule>.");
                     }
@@ -109,6 +116,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         String rankedValue = args[2].toLowerCase();
                         setRankedStatus(kitName, rankedValue, player);
+                        Neptune.redloadManagers();
                     } else {
                         player.sendMessage(CC.RED + "Invalid command usage. Use /kit ranked <name> <true/false>.");
                     }

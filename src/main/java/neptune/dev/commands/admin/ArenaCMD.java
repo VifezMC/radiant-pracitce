@@ -34,16 +34,16 @@ public class ArenaCMD implements CommandExecutor {
             if (args[0].equalsIgnoreCase("create")) {
                 createArena(arenaName);
                 player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set spawn1 and spawn2."));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set pos1 and pos2."));
+                Neptune.redloadManagers();
             } else if (args[0].equalsIgnoreCase("pos1")) {
                 setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                Neptune.redloadManagers();
             } else if (args[0].equalsIgnoreCase("pos2")) {
                 setSpawn(arenaName, 2, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                Neptune.redloadManagers();
             } else {
                 showArenaCommands(player);
             }
