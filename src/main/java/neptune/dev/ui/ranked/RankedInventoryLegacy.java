@@ -1,6 +1,6 @@
 package neptune.dev.ui.ranked;
 
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class RankedInventoryLegacy {
 
     public static void openMenu(Player player, ConfigurationSection kitsConfig) {
-        Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate(Neptune.menusConfig.getString("queue-gui-type.ranked.menu-name")));
+        Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.ranked.menu-name")));
 
         if (kitsConfig != null && kitsConfig.contains("kits")) {
             ConfigurationSection kitsSection = kitsConfig.getConfigurationSection("kits");
@@ -24,7 +24,7 @@ public class RankedInventoryLegacy {
                     ItemStack iconItem = kitConfig.getItemStack("icon");
                     ItemMeta itemMeta = iconItem.getItemMeta();
                     itemMeta.addItemFlags(ItemFlag.values());
-                    itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.ranked.item-color") + kitName));
+                    itemMeta.setDisplayName(CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.ranked.item-color") + kitName));
                     iconItem.setItemMeta(itemMeta);
                     menu.addItem(iconItem);
                 }

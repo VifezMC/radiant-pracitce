@@ -1,18 +1,16 @@
 package neptune.dev.commands.admin;
 
 import neptune.dev.Constants;
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.KitManager;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -41,7 +39,7 @@ public class KitsCMD implements CommandExecutor {
                         createKit(kitName);
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                         p.sendMessage(CC.GREEN + "Kit has been created!");
-                        Neptune.redloadManagers();
+                        
                     } else {
                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit create <name>.");
                     }
@@ -59,7 +57,7 @@ public class KitsCMD implements CommandExecutor {
                                     }
                                     setDesc(kitName, description.toString(), p);
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                                    Neptune.redloadManagers();
+                                    
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set description <name> <description>.");
                                 }
@@ -69,7 +67,7 @@ public class KitsCMD implements CommandExecutor {
                                     String kitName = args[2];
                                     setIcon(kitName, p.getItemInHand(), p);
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                                    Neptune.redloadManagers();
+                                    
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set icon <name>.");
                                 }
@@ -79,7 +77,7 @@ public class KitsCMD implements CommandExecutor {
                                     String kitName = args[2];
                                     setItemsAndArmour(kitName, p);
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                                    Neptune.redloadManagers();
+                                    
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set inv <name>.");
                                 }
@@ -92,7 +90,7 @@ public class KitsCMD implements CommandExecutor {
                                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit set rule <name> <rule>.");
                                     }
                                     addRule(kitName, rule, p);
-                                    Neptune.redloadManagers();
+                                    
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set rule <name> <rule>.");
                                 }
@@ -102,7 +100,7 @@ public class KitsCMD implements CommandExecutor {
                                     String kitName = args[1];
                                     String rankedValue = args[2].toLowerCase();
                                     setRankedStatus(kitName, rankedValue, p);
-                                    Neptune.redloadManagers();
+                                    
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit ranked <name> <true/false>.");
                                 }
@@ -120,7 +118,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         giveKit(kitName, p);
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                        Neptune.redloadManagers();
+                        
                     } else {
                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit give <name>.");
                     }
@@ -130,7 +128,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         String arena = args[2];
                         addArena(kitName, arena, p);
-                        Neptune.redloadManagers();
+                        
                     } else {
                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit whitelistarena <name> <arena>.");
                     }
@@ -146,13 +144,13 @@ public class KitsCMD implements CommandExecutor {
     }
 
     private void createKit(String name) {
-        Neptune.kitsConfig.set("kits." + name + ".items", "None");
-        Neptune.kitsConfig.set("kits." + name + ".armour", "None");
-        Neptune.kitsConfig.set("kits." + name + ".icon", "None");
-        Neptune.kitsConfig.set("kits." + name + ".arenas", "None");
-        Neptune.kitsConfig.set("kits." + name + ".rules", "None");
-        Neptune.kitsConfig.set("kits." + name + ".description", "None");
-        saveConfig();
+        ConfigManager.kitsConfig.set("kits." + name + ".items", "None");
+        ConfigManager.kitsConfig.set("kits." + name + ".armour", "None");
+        ConfigManager.kitsConfig.set("kits." + name + ".icon", "None");
+        ConfigManager.kitsConfig.set("kits." + name + ".arenas", "None");
+        ConfigManager.kitsConfig.set("kits." + name + ".rules", "None");
+        ConfigManager.kitsConfig.set("kits." + name + ".description", "None");
+        ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
     }
 
     private void setItemsAndArmour(String kitName, Player player) {
@@ -162,7 +160,7 @@ public class KitsCMD implements CommandExecutor {
 
             setItems(kitName, content);
             setArmour(kitName, armour);
-            saveConfig();
+            ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
             player.sendMessage(CC.GREEN + "Kit has been set to your inventory!");
         } else {
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
@@ -170,26 +168,26 @@ public class KitsCMD implements CommandExecutor {
     }
 
     private void setItems(String location, ItemStack[] items) {
-        Neptune.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
+        ConfigManager.kitsConfig.set("kits." + location + ".items", Arrays.asList(items));
     }
 
     private void setDesc(String location, String desc, Player p) {
-        Neptune.kitsConfig.set("kits." + location + ".description", desc);
+        ConfigManager.kitsConfig.set("kits." + location + ".description", desc);
         p.sendMessage(CC.GREEN + "Kit description has been set!");
     }
 
     private void setIcon(String location, ItemStack item, Player player) {
         if (kitExists(location)) {
-            Neptune.kitsConfig.set("kits." + location + ".icon", item);
+            ConfigManager.kitsConfig.set("kits." + location + ".icon", item);
             player.sendMessage(CC.GREEN + "Kit icon has been set!");
-            saveConfig();
+            ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
         } else {
             player.sendMessage(CC.RED + "Kit with name '" + location + "' does not exist.");
         }
     }
 
     private void setArmour(String location, ItemStack[] items) {
-        Neptune.kitsConfig.set("kits." + location + ".armour", Arrays.asList(items));
+        ConfigManager.kitsConfig.set("kits." + location + ".armour", Arrays.asList(items));
     }
 
     private void giveKit(String kitName, Player player) {
@@ -210,8 +208,8 @@ public class KitsCMD implements CommandExecutor {
     private void setRankedStatus(String kitName, String rankedValue, Player player) {
         if (kitExists(kitName)) {
             boolean isRanked = Boolean.parseBoolean(rankedValue);
-            Neptune.kitsConfig.set("kits." + kitName + ".ranked", isRanked);
-            saveConfig();
+            ConfigManager.kitsConfig.set("kits." + kitName + ".ranked", isRanked);
+            ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
             player.sendMessage(CC.GREEN + "Kit ranked status has been updated!");
         } else {
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");
@@ -222,10 +220,10 @@ public class KitsCMD implements CommandExecutor {
         if (kitExists(kitName)) {
             List<String> validRules = Arrays.asList("boxing", "build", "sumo", "nodamage", "nohunger");
             if (validRules.contains(rule)) {
-                List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
+                List<String> rules = ConfigManager.kitsConfig.getStringList("kits." + kitName + ".rules");
                 rules.add(rule);
-                Neptune.kitsConfig.set("kits." + kitName + ".rules", rules);
-                saveConfig();
+                ConfigManager.kitsConfig.set("kits." + kitName + ".rules", rules);
+                ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
                 player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                 player.sendMessage(CC.GREEN + "Kit rule has been added!");
             } else {
@@ -239,10 +237,10 @@ public class KitsCMD implements CommandExecutor {
 
     private void addArena(String kitName, String arena, Player player) {
         if (kitExists(kitName)) {
-            List<String> arenas = Neptune.kitsConfig.getStringList("kits." + kitName + ".arenas");
+            List<String> arenas = ConfigManager.kitsConfig.getStringList("kits." + kitName + ".arenas");
             arenas.add(arena);
-            Neptune.kitsConfig.set("kits." + kitName + ".arenas", arenas);
-            saveConfig();
+            ConfigManager.kitsConfig.set("kits." + kitName + ".arenas", arenas);
+            ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             player.sendMessage(CC.GREEN + "Arena has been added to kit!");
         } else {
@@ -251,17 +249,9 @@ public class KitsCMD implements CommandExecutor {
     }
 
     private boolean kitExists(String kitName) {
-        return Neptune.kitsConfig.contains("kits." + kitName);
+        return ConfigManager.kitsConfig.contains("kits." + kitName);
     }
-
-    private void saveConfig() {
-        try {
-            Neptune.kitsConfig.save(Neptune.kits);
-            Neptune.kitsConfig.load(Neptune.kits);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
-    }
+    
 
     private void showKitCommands(Player player) {
         player.sendMessage(CC.translate(""));

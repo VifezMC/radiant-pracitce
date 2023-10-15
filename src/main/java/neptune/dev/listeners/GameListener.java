@@ -1,17 +1,19 @@
 package neptune.dev.listeners;
 
-import neptune.dev.Neptune;
-import neptune.dev.game.Game;
-import neptune.dev.game.Kit;
-import neptune.dev.game.Match;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.KitManager;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
+import neptune.dev.player.PlayerUtils;
+import neptune.dev.types.Game;
+import neptune.dev.types.Match;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
-import neptune.dev.player.PlayerUtils;
-import org.bukkit.*;
+import org.bukkit.GameMode;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
@@ -28,7 +30,6 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
-import java.util.List;
 
 import static neptune.dev.player.PlayerUtils.hasPlayerState;
 
@@ -63,12 +64,15 @@ public class GameListener implements Listener {
         p.setFireTicks(0);
         if (hasPlayerState(p, PlayerState.PLAYING)) {
             Player loser = event.getEntity(), winner = MatchManager.getOpponent(loser);
-            String formattingString = Neptune.messagesConfig.getString("match.kill-message");
+            String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
             winner.sendMessage(CC.translate(formattedMessage));
             loser.sendMessage(CC.translate(formattedMessage));
             PlayerUtils.setState(winner, PlayerState.ENDED);
             PlayerUtils.setState(loser, PlayerState.ENDED);
+            PlayerDataListener.getStats(loser).addLosses();
+            PlayerDataListener.getStats(winner).addWins();
+
             Game.EndGame(winner, loser);
         }
         event.setDeathMessage(null);
@@ -83,7 +87,7 @@ public class GameListener implements Listener {
         if (Cooldowns.isOnCooldown("enderpearl", event.getPlayer())) {
             event.setCancelled(true);
             event.getPlayer().updateInventory();
-            event.getPlayer().sendMessage(CC.translate(Neptune.messagesConfig.getString("match.cooldown-message").replace("{cooldown}", Cooldowns.getCooldownForPlayerString("enderpearl", event.getPlayer()))));
+            event.getPlayer().sendMessage(CC.translate(ConfigManager.messagesConfig.getString("match.cooldown-message").replace("{cooldown}", Cooldowns.getCooldownForPlayerString("enderpearl", event.getPlayer()))));
         }
     }
 
@@ -93,7 +97,7 @@ public class GameListener implements Listener {
         if (event.getEntityType() != EntityType.ENDER_PEARL) {
             return;
         }
-        Cooldowns.addCooldown("enderpearl", shooter, Neptune.pluginConfig.getInt("general.ender-pearl-cooldown"));
+        Cooldowns.addCooldown("enderpearl", shooter, ConfigManager.pluginConfig.getInt("general.ender-pearl-cooldown"));
     }
 
     @EventHandler
@@ -102,7 +106,7 @@ public class GameListener implements Listener {
         Player p = event.getPlayer();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
             Player loser = event.getPlayer(), winner = MatchManager.getOpponent(loser);
-            String formattingString = Neptune.messagesConfig.getString("match.kill-message");
+            String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
             winner.sendMessage(CC.translate(formattedMessage));
             loser.sendMessage(CC.translate(formattedMessage));
@@ -138,11 +142,13 @@ public class GameListener implements Listener {
         LightningStrike lightning = world.strikeLightning(lightningLocation);
         Match match = MatchManager.getMatch(p);
         Player winner = MatchManager.getOpponent(p), loser = p;
-        String formattingString = Neptune.messagesConfig.getString("match.kill-message");
+        String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
         String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
         winner.sendMessage(CC.translate(formattedMessage));
         loser.sendMessage(CC.translate(formattedMessage));
         Game.EndGame(winner, loser);
+        PlayerDataListener.getStats(loser).addLosses();
+        PlayerDataListener.getStats(winner).addWins();
     }
 
     @EventHandler
@@ -209,7 +215,7 @@ public class GameListener implements Listener {
         if (hitCount >= 100) {
             Match match = MatchManager.getMatch(damager);
             Player winner = MatchManager.getMatchWinner(match.getMatchID()), loser = damager;
-            String formattingString = Neptune.messagesConfig.getString("match.kill-message");
+            String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
             winner.sendMessage(CC.translate(formattedMessage));
             loser.sendMessage(CC.translate(formattedMessage));

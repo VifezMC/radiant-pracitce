@@ -1,10 +1,10 @@
 package neptune.dev.managers;
 
-import neptune.dev.Neptune;
-import neptune.dev.game.Arena;
-import neptune.dev.game.Game;
+import neptune.dev.listeners.PlayerDataListener;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
+import neptune.dev.types.Arena;
+import neptune.dev.types.Game;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;
@@ -12,7 +12,8 @@ import org.bukkit.entity.Player;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static neptune.dev.player.PlayerUtils.*;
+import static neptune.dev.player.PlayerUtils.createSpawnItems;
+import static neptune.dev.player.PlayerUtils.getLobbyLocation;
 
 public class QueueManager {
     public static Map<Player, String> Queue = new ConcurrentHashMap<>();
@@ -20,7 +21,7 @@ public class QueueManager {
 
     public static void addPlayerToQueue(Player player, String kitName) {
         if (isPlayerInQueue(player)) {
-            player.sendMessage(CC.translate(Neptune.messagesConfig.getString("queue.already-in-queue-message")));
+            player.sendMessage(CC.translate(ConfigManager.messagesConfig.getString("queue.already-in-queue-message")));
             return;
         }
 
@@ -46,7 +47,7 @@ public class QueueManager {
         firstPlayer.getInventory().clear();
         secondPlayer.getInventory().setArmorContents(null);
 
-        if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+        if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
             Console.sendMessage("Match found between " + firstPlayer.getName() + " and " + secondPlayer.getName());
         }
 
@@ -93,6 +94,9 @@ public class QueueManager {
         selectedArena.setAvailable(false);
         Queue.remove(firstPlayer);
         Queue.remove(secondPlayer);
+        PlayerDataListener.getStats(firstPlayer).addMatches();
+        PlayerDataListener.getStats(secondPlayer).addMatches();
+
         MatchManager.addMatch(firstPlayer, secondPlayer, selectedArena, kitName);
 
         firstPlayer.teleport(selectedArena.getSpawn1());
@@ -103,20 +107,20 @@ public class QueueManager {
 
         processQueueForKit(kitName, players);
 
-        if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+        if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
             Console.sendMessage("Removing " + firstPlayer.getName() + " and " + secondPlayer.getName() + " from the queue.");
         }
 
         playing += 2;
         KitManager.getKit(kitName).addPlaying(2);
-        String opponentMessage = Neptune.messagesConfig.getString("match.match-found")
+        String opponentMessage = ConfigManager.messagesConfig.getString("match.match-found")
                 .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer).getName()))
                 .replace("{opponent-ping}", PlayerUtils.getPing(MatchManager.getOpponent(firstPlayer)) + "")
                 .replace("{kit}", MatchManager.getMatch(firstPlayer).getKitName())
                 .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(firstPlayer)).getName());
         firstPlayer.sendMessage(CC.translate(opponentMessage));
 
-        String opponentMessage2 = Neptune.messagesConfig.getString("match.match-found")
+        String opponentMessage2 = ConfigManager.messagesConfig.getString("match.match-found")
                 .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(secondPlayer).getName()))
                 .replace("{opponent-ping}", PlayerUtils.getPing(MatchManager.getOpponent(secondPlayer)) + "")
                 .replace("{kit}", MatchManager.getMatch(firstPlayer).getKitName())
@@ -128,7 +132,7 @@ public class QueueManager {
         if (isPlayerInQueue(player)) {
             Queue.remove(player);
         } else {
-            player.sendMessage(CC.translate(Neptune.messagesConfig.getString("queue.not-in-queue")));
+            player.sendMessage(CC.translate(ConfigManager.messagesConfig.getString("queue.not-in-queue")));
         }
     }
 

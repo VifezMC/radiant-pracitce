@@ -1,10 +1,8 @@
-package neptune.dev.game;
+package neptune.dev.types;
 
 import neptune.dev.Neptune;
-import neptune.dev.managers.ArenaManager;
-import neptune.dev.managers.KitManager;
-import neptune.dev.managers.MatchManager;
-import neptune.dev.managers.QueueManager;
+import neptune.dev.listeners.PlayerDataListener;
+import neptune.dev.managers.*;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
@@ -90,12 +88,12 @@ public class Game {
                     int countdown = countdowns.getOrDefault(p, (byte) 0);
 
                     if (countdown > 0) {
-                        p.sendMessage(CC.translate(Neptune.messagesConfig.getString("match.starting-countdown").replace("{countdown}", countdown + "")));
+                        p.sendMessage(CC.translate(ConfigManager.messagesConfig.getString("match.starting-countdown").replace("{countdown}", countdown + "")));
                         p.playSound(p.getLocation(), Sound.NOTE_STICKS, 1.0f, 1.0f);
                         countdowns.put(p, (byte) (countdown - 1));
                     } else {
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                        p.sendMessage(CC.translate(Neptune.messagesConfig.getString("match.match-started")));
+                        p.sendMessage(CC.translate(ConfigManager.messagesConfig.getString("match.match-started")));
                         countdowns.remove(p);
                         cancel();
                         if(KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo")){

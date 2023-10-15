@@ -1,7 +1,6 @@
 package neptune.dev.managers;
 
-import neptune.dev.Neptune;
-import neptune.dev.game.Kit;
+import neptune.dev.types.Kit;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -16,18 +15,18 @@ public class KitManager {
     }
 
     public void loadKits() {
-        if (Neptune.kitsConfig.get("kits") == null) {
+        if (ConfigManager.kitsConfig.get("kits") == null) {
             return;
         }
 
-        for (String kitName : Neptune.kitsConfig.getConfigurationSection("kits").getKeys(false)) {
-            ItemStack[] items = Neptune.kitsConfig.getList("kits." + kitName + ".items").toArray(new ItemStack[0]);
-            ItemStack[] armour = Neptune.kitsConfig.getList("kits." + kitName + ".armour").toArray(new ItemStack[0]);
-            ItemStack icon = Neptune.kitsConfig.getItemStack("kits." + kitName + ".icon");
-            List<String> arenas = Neptune.kitsConfig.getStringList("kits." + kitName + ".arenas");
-            Boolean ranked = Neptune.kitsConfig.getBoolean("kits." + kitName + ".ranked");
-            List<String> rules = Neptune.kitsConfig.getStringList("kits." + kitName + ".rules");
-            String description = Neptune.kitsConfig.getString("kits." + kitName + ".description");
+        for (String kitName : ConfigManager.kitsConfig.getConfigurationSection("kits").getKeys(false)) {
+            ItemStack[] items = ConfigManager.kitsConfig.getList("kits." + kitName + ".items").toArray(new ItemStack[0]);
+            ItemStack[] armour = ConfigManager.kitsConfig.getList("kits." + kitName + ".armour").toArray(new ItemStack[0]);
+            ItemStack icon = ConfigManager.kitsConfig.getItemStack("kits." + kitName + ".icon");
+            List<String> arenas = ConfigManager.kitsConfig.getStringList("kits." + kitName + ".arenas");
+            Boolean ranked = ConfigManager.kitsConfig.getBoolean("kits." + kitName + ".ranked");
+            List<String> rules = ConfigManager.kitsConfig.getStringList("kits." + kitName + ".rules");
+            String description = ConfigManager.kitsConfig.getString("kits." + kitName + ".description");
             Kit kit = new Kit(kitName, items, armour, icon, arenas, ranked, rules, description);
             kits.add(kit);
         }

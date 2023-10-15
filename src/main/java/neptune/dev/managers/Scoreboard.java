@@ -22,11 +22,11 @@ public class Scoreboard implements AssembleAdapter {
     private int playingPlayers;
 
     public Scoreboard() {
-        lobbyTitle = Neptune.scoreboardConfig.getString("scoreboard.title");
-        scoreboardLobby = Neptune.scoreboardConfig.getStringList("scoreboard.lobby");
-        scoreboardMatch = Neptune.scoreboardConfig.getStringList("scoreboard.match");
-        scoreboardInQueue = Neptune.scoreboardConfig.getStringList("scoreboard.in-queue");
-        scoreboardGameEnd = Neptune.scoreboardConfig.getStringList("scoreboard.game-ended");
+        lobbyTitle = ConfigManager.scoreboardConfig.getString("scoreboard.title");
+        scoreboardLobby = ConfigManager.scoreboardConfig.getStringList("scoreboard.lobby");
+        scoreboardMatch = ConfigManager.scoreboardConfig.getStringList("scoreboard.match");
+        scoreboardInQueue = ConfigManager.scoreboardConfig.getStringList("scoreboard.in-queue");
+        scoreboardGameEnd = ConfigManager.scoreboardConfig.getStringList("scoreboard.game-ended");
 
     }
 
@@ -47,7 +47,7 @@ public class Scoreboard implements AssembleAdapter {
         }else if (playerState == PlayerState.INQUEUE) {
             return getInQueueLines(p);
         }else if (playerState == PlayerState.ENDED) {
-            return getGameEnd(p);
+            return getGameEnd();
         }
 
         return Collections.emptyList();
@@ -98,22 +98,18 @@ public class Scoreboard implements AssembleAdapter {
 
     private List<String> getInQueueLines(Player p) {
         List<String> inQueueLines = new ArrayList<>();
-            for (String line : scoreboardInQueue) {
-                line = line.replace("{kit}", QueueManager.Queue.get(p));
-                line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
-                line = line.replace("{playing_players}", String.valueOf(playingPlayers));
-                line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
-                inQueueLines.add(line);
-            }
+        for (String line : scoreboardInQueue) {
+            line = line.replace("{kit}", QueueManager.Queue.get(p));
+            line = line.replace("{online_players}", String.valueOf(Neptune.instance.getServer().getOnlinePlayers().size()));
+            line = line.replace("{playing_players}", String.valueOf(playingPlayers));
+            line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
+            inQueueLines.add(line);
+        }
         return inQueueLines;
     }
 
-    private List<String> getGameEnd(Player p) {
-        List<String> gameEnded = new ArrayList<>();
-        for (String line : scoreboardGameEnd) {
-            gameEnded.add(line);
-        }
-        return gameEnded;
+    private List<String> getGameEnd() {
+        return new ArrayList<>(scoreboardGameEnd);
     }
 
 }

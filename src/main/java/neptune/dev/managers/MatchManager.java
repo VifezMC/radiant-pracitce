@@ -1,13 +1,15 @@
 package neptune.dev.managers;
 
-import neptune.dev.Neptune;
-import neptune.dev.game.Arena;
-import neptune.dev.game.Match;
+import neptune.dev.types.Arena;
+import neptune.dev.types.Match;
 import neptune.dev.utils.render.Console;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class MatchManager {
@@ -20,7 +22,7 @@ public class MatchManager {
         Match match = new Match(player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);
         matchArenas.put(matchID, arenaName);
-        if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+        if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
             Console.sendMessage("Match added between " + player1.getName() + " and " + player2.getName() + " on arena " + arenaName.getName() + " with kit " + kitName);
         }
     }
@@ -28,7 +30,7 @@ public class MatchManager {
     public static void removeMatch(UUID matchID) {
         Match match = matches.remove(matchID);
         if (match != null) {
-            if (Neptune.pluginConfig.getBoolean("general.enable-debug")) {
+            if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
                 Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName().getName() + " with kit " + match.getKitName());
             }
         }

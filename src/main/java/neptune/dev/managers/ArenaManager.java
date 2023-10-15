@@ -1,7 +1,6 @@
 package neptune.dev.managers;
 
-import neptune.dev.Neptune;
-import neptune.dev.game.Arena;
+import neptune.dev.types.Arena;
 import neptune.dev.utils.LocationUtil;
 import org.bukkit.Location;
 
@@ -17,13 +16,13 @@ public class ArenaManager {
     }
 
     public void loadArenas() {
-        if (Neptune.arenaConfig.get("arenas") == null) {
+        if (ConfigManager.arenaConfig.get("arenas") == null) {
             return;
         }
 
-        for (String arenaName : Neptune.arenaConfig.getConfigurationSection("arenas").getKeys(false)) {
-            Location spawn1 = LocationUtil.toLoc(Neptune.arenaConfig.getString("arenas." + arenaName + ".spawn1"));
-            Location spawn2 = LocationUtil.toLoc(Neptune.arenaConfig.getString("arenas." + arenaName + ".spawn2"));
+        for (String arenaName : ConfigManager.arenaConfig.getConfigurationSection("arenas").getKeys(false)) {
+            Location spawn1 = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".spawn1"));
+            Location spawn2 = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".spawn2"));
             Arena arena = new Arena(arenaName, spawn1, spawn2);
             arenas.add(arena);
         }

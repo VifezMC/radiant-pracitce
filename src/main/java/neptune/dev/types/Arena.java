@@ -1,4 +1,4 @@
-package neptune.dev.game;
+package neptune.dev.types;
 
 import org.bukkit.Location;
 

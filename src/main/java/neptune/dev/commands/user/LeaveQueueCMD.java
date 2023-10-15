@@ -1,11 +1,11 @@
 package neptune.dev.commands.user;
 
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.KitManager;
 import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.render.CC;
 import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -23,7 +23,7 @@ public class LeaveQueueCMD implements CommandExecutor {
         Player p = (Player) sender;
         if (QueueManager.isPlayerInQueue(p)) {
             KitManager.getKit(QueueManager.Queue.get(p)).removeQueue(1);
-            String formattingString = Neptune.messagesConfig.getString("queue.leave-queue").replace("{kit}", QueueManager.Queue.get(p));
+            String formattingString = ConfigManager.messagesConfig.getString("queue.leave-queue").replace("{kit}", QueueManager.Queue.get(p));
             QueueManager.removePlayerFromQueue(p);
             p.sendMessage(CC.translate(formattingString));
             p.getInventory().clear();
@@ -31,7 +31,7 @@ public class LeaveQueueCMD implements CommandExecutor {
             PlayerUtils.setState(p, PlayerState.LOBBY);
             p.updateInventory();
         } else {
-            String formattingString = Neptune.messagesConfig.getString("queue.not-in-queue");
+            String formattingString = ConfigManager.messagesConfig.getString("queue.not-in-queue");
             p.sendMessage(CC.translate(formattingString));
         }
 

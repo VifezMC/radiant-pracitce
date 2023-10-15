@@ -1,6 +1,6 @@
 package neptune.dev.commands.user;
 
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
@@ -28,7 +28,7 @@ public class QueueCMD implements CommandExecutor {
 
         if (isKitConfigured(kitName)) {
             Player p = (Player) sender;
-            String formattingString = Neptune.messagesConfig.getString("queue.added-to-queue");
+            String formattingString = ConfigManager.messagesConfig.getString("queue.added-to-queue");
             String formattedMessage = formattingString.replace("{gamemode}", args[0]);
             p.sendMessage(CC.translate(formattedMessage));
             PlayerUtils.setState(p, PlayerState.INQUEUE);
@@ -41,6 +41,6 @@ public class QueueCMD implements CommandExecutor {
     }
 
     private boolean isKitConfigured(String kitName) {
-        return Neptune.kitsConfig.getConfigurationSection("kits").getKeys(false).contains(kitName);
+        return ConfigManager.kitsConfig.getConfigurationSection("kits").getKeys(false).contains(kitName);
     }
 }

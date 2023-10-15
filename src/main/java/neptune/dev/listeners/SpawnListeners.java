@@ -1,6 +1,6 @@
 package neptune.dev.listeners;
 
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
@@ -41,7 +41,7 @@ public class SpawnListeners implements Listener {
         Player p = event.getPlayer();
         if(hasPlayerState(p, PlayerState.INQUEUE) || hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue")){
             event.setCancelled(true);
-            p.sendMessage(CC.translate("&cYou can't use commands while in-game or in queue."));
+            p.sendMessage(CC.translate("&cYou can't use commands while in-types or in queue."));
         }
     }
 
@@ -77,8 +77,8 @@ public class SpawnListeners implements Listener {
         ItemStack item = event.getItem();
 
         if (event.getAction().toString().contains("RIGHT_CLICK") && item != null) {
-            for (String itemName : Neptune.spawnItemsConfig.getConfigurationSection("spawn-items").getKeys(false)) {
-                ConfigurationSection itemSection = Neptune.spawnItemsConfig.getConfigurationSection("spawn-items." + itemName);
+            for (String itemName : ConfigManager.spawnItemsConfig.getConfigurationSection("spawn-items").getKeys(false)) {
+                ConfigurationSection itemSection = ConfigManager.spawnItemsConfig.getConfigurationSection("spawn-items." + itemName);
                 if (itemSection == null) {
                     getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
                     continue;
@@ -113,8 +113,8 @@ public class SpawnListeners implements Listener {
         ItemStack item = event.getItem();
 
         if (event.getAction().toString().contains("RIGHT_CLICK") && item != null) {
-            for (String itemName : Neptune.spawnItemsConfig.getConfigurationSection("queue-items").getKeys(false)) {
-                ConfigurationSection itemSection = Neptune.spawnItemsConfig.getConfigurationSection("queue-items." + itemName);
+            for (String itemName : ConfigManager.spawnItemsConfig.getConfigurationSection("queue-items").getKeys(false)) {
+                ConfigurationSection itemSection = ConfigManager.spawnItemsConfig.getConfigurationSection("queue-items." + itemName);
                 if (itemSection == null) {
                     getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
                     continue;

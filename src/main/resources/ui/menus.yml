@@ -22,3 +22,13 @@ queue-gui-type:
     - "&fQueuing: &b{queueing}"
     - " "
     - "&aClick to play."
+stats:
+  menu-name: "&bStatistics"
+  item-name: "&bYour Stats"
+  item-meta:
+    - "&7&m-----------------------"
+    - "&b* Matches Played&7: &f{matches_played}"
+    - "&b* Wins&7: &f{matches-won}"
+    - "&b* Lost&7: &f{matches-lost}"
+    - "&b* KDR&7: &f{kdr}"
+    - "&7&m-----------------------"

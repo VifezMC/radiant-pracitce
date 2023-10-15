@@ -1,17 +1,19 @@
 package neptune.dev.player;
 
 import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.utils.render.CC;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.logging.Logger;
 
@@ -28,13 +30,13 @@ public class PlayerUtils {
 
     private static World getLobbyWorld() {
         if (lobbyWorld == null) {
-            lobbyWorld = Neptune.instance.getServer().getWorld(Neptune.arenaConfig.getString("lobby").split(":")[0]);
+            lobbyWorld = Neptune.instance.getServer().getWorld(ConfigManager.arenaConfig.getString("lobby").split(":")[0]);
         }
         return lobbyWorld;
     }
 
     public static Location getLobbyLocation() {
-        String[] data = Neptune.arenaConfig.getString("lobby").split(":");
+        String[] data = ConfigManager.arenaConfig.getString("lobby").split(":");
         double x = Double.parseDouble(data[1]);
         double y = Double.parseDouble(data[2]);
         double z = Double.parseDouble(data[3]);
@@ -84,7 +86,7 @@ public class PlayerUtils {
         }
     }
     private static void createItems(Player player, String configSection, Map<String, ItemStack> itemCache) {
-        ConfigurationSection itemsSection = Neptune.spawnItemsConfig.getConfigurationSection(configSection);
+        ConfigurationSection itemsSection = ConfigManager.spawnItemsConfig.getConfigurationSection(configSection);
         if (itemsSection == null) {
             logger.warning("Invalid configuration for " + configSection + ". Please check 'config.yml'");
             return;

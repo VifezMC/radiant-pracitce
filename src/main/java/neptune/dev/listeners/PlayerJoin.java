@@ -1,9 +1,9 @@
 package neptune.dev.listeners;
 
 
-
-import neptune.dev.Neptune;
-import neptune.dev.player.*;
+import neptune.dev.managers.ConfigManager;
+import neptune.dev.player.GameState;
+import neptune.dev.player.PlayerState;
 import neptune.dev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
@@ -16,20 +16,18 @@ import static neptune.dev.player.PlayerUtils.*;
 
 public class PlayerJoin implements Listener {
 
-
-
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player p = event.getPlayer();
         // ON PLAY JOIN
         setState(p, PlayerState.LOBBY);
         setGState(p, GameState.DEFAULT);
-        if (Neptune.pluginConfig.getBoolean("general.enable-join-message")) {
-            for (String msg : Neptune.messagesConfig.getStringList("general.join-message")) {
+        if (ConfigManager.pluginConfig.getBoolean("general.enable-join-message")) {
+            for (String msg : ConfigManager.messagesConfig.getStringList("general.join-message")) {
                 p.sendMessage(CC.translate(msg));
             }
         }
-        if(!Neptune.arenaConfig.getString("lobby").equals("none")){
+        if(!ConfigManager.arenaConfig.getString("lobby").equals("none")){
             p.teleport(getLobbyLocation());
         }else{
             p.sendMessage(CC.translate("&bNeptune &8| &cMake sure to set server spawn /setspawn"));

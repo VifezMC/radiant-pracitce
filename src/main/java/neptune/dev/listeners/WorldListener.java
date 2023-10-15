@@ -1,6 +1,6 @@
 package neptune.dev.listeners;
 
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -48,7 +48,7 @@ public class WorldListener implements Listener {
 
     @EventHandler
     public void onPlayerDropItem(PlayerDropItemEvent event) {
-        if (Neptune.pluginConfig.getBoolean("general.clear-empty-bottles")) {
+        if (ConfigManager.pluginConfig.getBoolean("general.clear-empty-bottles")) {
             if (event.getItemDrop().getItemStack().getType() == Material.GLASS_BOTTLE) {
                 event.getItemDrop().remove();
             }
@@ -58,7 +58,7 @@ public class WorldListener implements Listener {
     @EventHandler
     public void EntityDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player
-                && Neptune.pluginConfig.getBoolean("general.disable-fall-damage")
+                && ConfigManager.pluginConfig.getBoolean("general.disable-fall-damage")
                 && e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
 
                 e.setCancelled(true);

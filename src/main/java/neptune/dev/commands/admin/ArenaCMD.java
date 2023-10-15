@@ -1,16 +1,13 @@
 package neptune.dev.commands.admin;
 
 import neptune.dev.Constants;
-import neptune.dev.utils.render.CC;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.player.PlayerUtils;
-import neptune.dev.Neptune;
+import neptune.dev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
-
-import java.io.IOException;
 
 
 public class ArenaCMD implements CommandExecutor {
@@ -35,15 +32,18 @@ public class ArenaCMD implements CommandExecutor {
                 createArena(arenaName);
                 player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
                 player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set position a and position b."));
-                Neptune.redloadManagers();
+                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+
             } else if (args[0].equalsIgnoreCase("a")) {
                 setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
-                Neptune.redloadManagers();
+                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+
             } else if (args[0].equalsIgnoreCase("b")) {
                 setSpawn(arenaName, 2, PlayerUtils.toString(player.getLocation()));
                 player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
-                Neptune.redloadManagers();
+                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+
             } else {
                 showArenaCommands(player);
             }
@@ -57,23 +57,14 @@ public class ArenaCMD implements CommandExecutor {
     }
 
     private void createArena(String name) {
-        Neptune.arenaConfig.set("arenas." + name + ".spawn1", "None");
-        Neptune.arenaConfig.set("arenas." + name + ".spawn2", "None");
-        saveConfig();
+        ConfigManager.arenaConfig.set("arenas." + name + ".spawn1", "None");
+        ConfigManager.arenaConfig.set("arenas." + name + ".spawn2", "None");
+        ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
     }
 
     private void setSpawn(String name, int number, String loc) {
-        Neptune.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
-        saveConfig();
-    }
-
-    private void saveConfig() {
-        try {
-            Neptune.arenaConfig.save(Neptune.arena);
-            Neptune.arenaConfig.load(Neptune.arena);
-        } catch (IOException | InvalidConfigurationException e) {
-            e.printStackTrace();
-        }
+        ConfigManager.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
+        ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
     }
 
     private void showArenaCommands(Player player) {

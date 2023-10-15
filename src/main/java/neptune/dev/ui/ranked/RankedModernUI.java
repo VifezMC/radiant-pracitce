@@ -1,6 +1,6 @@
 package neptune.dev.ui.ranked;
 
-import neptune.dev.Neptune;
+import neptune.dev.managers.ConfigManager;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Bukkit;
@@ -20,7 +20,7 @@ import java.util.List;
 
 public class RankedModernUI implements Listener {
     public static void openMenu(Player player, ConfigurationSection kitsConfig) {
-        Inventory menu = Bukkit.createInventory(null, 9 * Neptune.menusConfig.getInt("queue-gui-type.ranked.height"), CC.translate(Neptune.menusConfig.getString("queue-gui-type.ranked.menu-name")));
+        Inventory menu = Bukkit.createInventory(null, 9 * ConfigManager.menusConfig.getInt("queue-gui-type.ranked.height"), CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.ranked.menu-name")));
 
         if (kitsConfig != null && kitsConfig.contains("kits")) {
             ConfigurationSection kitsSection = kitsConfig.getConfigurationSection("kits");
@@ -28,7 +28,7 @@ public class RankedModernUI implements Listener {
             int x = 1;
             int y = 1;
             String loreKey = "queue-gui-type.item-meta";
-            List<String> lore = Neptune.menusConfig.getStringList(loreKey);
+            List<String> lore = ConfigManager.menusConfig.getStringList(loreKey);
             List<String> translatedLore = new ArrayList<>();
             for (String loreLine : lore) {
                 translatedLore.add(CC.translate(loreLine).replace("{queueing}", "0").replace("{playing}", "0"));
@@ -41,7 +41,7 @@ public class RankedModernUI implements Listener {
                         ItemStack iconItem = kitConfig.getItemStack("icon");
                         ItemMeta itemMeta = iconItem.getItemMeta();
                         itemMeta.addItemFlags(ItemFlag.values());
-                        itemMeta.setDisplayName(CC.translate(Neptune.menusConfig.getString("queue-gui-type.ranked.item-color") + kitName));
+                        itemMeta.setDisplayName(CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.ranked.item-color") + kitName));
                         itemMeta.setLore(translatedLore);
                         iconItem.setItemMeta(itemMeta);
 
@@ -60,9 +60,9 @@ public class RankedModernUI implements Listener {
 
         for (int i = 0; i < menu.getSize(); i++) {
             if (menu.getItem(i) == null || menu.getItem(i).getType() == Material.AIR) {
-                Material material = Material.matchMaterial(Neptune.menusConfig.getString("queue-gui-type.ranked.surrounding-items"));
-                short durability = (short) Neptune.menusConfig.getInt("queue-gui-type.ranked.durability");
-                String itemName = Neptune.menusConfig.getString("queue-gui-type.ranked.surrounding-items-name");
+                Material material = Material.matchMaterial(ConfigManager.menusConfig.getString("queue-gui-type.ranked.surrounding-items"));
+                short durability = (short) ConfigManager.menusConfig.getInt("queue-gui-type.ranked.durability");
+                String itemName = ConfigManager.menusConfig.getString("queue-gui-type.ranked.surrounding-items-name");
                 ItemStack blueGlassPane = new ItemStack(material, 1, durability);
                 ItemMeta glassPaneMeta = blueGlassPane.getItemMeta();
                 glassPaneMeta.setDisplayName(CC.translate(itemName));
@@ -77,11 +77,11 @@ public class RankedModernUI implements Listener {
     @EventHandler
     public void onInventoryClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if (event.getInventory().getTitle().equals(CC.translate(Neptune.menusConfig.getString("queue-gui-type.ranked.menu-name")))) {
+        if (event.getInventory().getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.ranked.menu-name")))) {
             if (event.getCurrentItem() != null && event.getCurrentItem().getType() != Material.AIR) {
                 ItemStack clickedItem = event.getCurrentItem();
                 ItemMeta itemMeta = clickedItem.getItemMeta();
-                if (itemMeta != null && itemMeta.getDisplayName() != null && itemMeta.getDisplayName().equals(Neptune.menusConfig.getString("queue-gui-type.unranked.surrounding-items"))) {
+                if (itemMeta != null && itemMeta.getDisplayName() != null && itemMeta.getDisplayName().equals(ConfigManager.menusConfig.getString("queue-gui-type.unranked.surrounding-items"))) {
                     event.setCancelled(true);
                     return;
                 }
