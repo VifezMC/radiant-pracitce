@@ -1,8 +1,10 @@
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Division.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\ArenaManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\GameState.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\PlayerDataListener.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Arena.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\Neptune.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\DivisionsManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\KitManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\ranked\RankedInventoryLegacy.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\QueueCMD.java
@@ -22,7 +24,7 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\a
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\render\ItemBuilder.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\MatchManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Match.java
-C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Stats.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Stat.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\ConfigManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\admin\MainCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\Scoreboard.java

@@ -40,8 +40,6 @@ public class Neptune extends JavaPlugin {
     // CONFIG
     ConfigManager.registerConfigs();
 
-    Console.sendMessage(DivisionsManager.getDivisions() + "");
-
     // SCOREBOARD
     Assemble assemble = new Assemble(this, new Scoreboard());
 
