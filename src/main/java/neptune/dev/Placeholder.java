@@ -2,7 +2,7 @@ package neptune.dev;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import neptune.dev.listeners.PlayerDataListener;
-import neptune.dev.types.Stats;
+import neptune.dev.types.Stat;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 
@@ -47,7 +47,7 @@ public class Placeholder extends PlaceholderExpansion {
     }
 
     private int getPlayerELO(OfflinePlayer p) {
-        Stats stats = PlayerDataListener.getStats(p);
-        return stats.getELO();
+        Stat stat = PlayerDataListener.getStats(p);
+        return stat.getELO();
     }
 }

@@ -1,7 +1,7 @@
 package neptune.dev.listeners;
 
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.types.Stats;
+import neptune.dev.types.Stat;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
@@ -14,10 +14,10 @@ import java.util.HashMap;
 
 public class PlayerDataListener implements Listener {
 
-    public static HashMap<Player, Stats> stats = new HashMap<>();
+    public static HashMap<Player, Stat> stats = new HashMap<>();
 
 
-    public static Stats getStats(OfflinePlayer player) {
+    public static Stat getStats(OfflinePlayer player) {
         return stats.get(player);
     }
 
@@ -39,7 +39,7 @@ public class PlayerDataListener implements Listener {
                 e.printStackTrace();
             }
         }
-        stats.put(event.getPlayer(), new Stats(player));
+        stats.put(event.getPlayer(), new Stat(player));
     }
 
 }

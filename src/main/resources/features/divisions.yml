@@ -1,0 +1,19 @@
+divisions:
+  iron1:
+    display-name: "&7I"
+    elo: 1000
+  iron2:
+    display-name: "&7II"
+    elo: 1100
+  iron3:
+    display-name: "&7III"
+    elo: 1250
+  gold1:
+    display-name: "&eI"
+    elo: 1370
+  gold2:
+    display-name: "&eII"
+    elo: 1530
+  gold3:
+    display-name: "&eIII"
+    elo: 1670

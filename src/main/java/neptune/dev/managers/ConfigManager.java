@@ -1,5 +1,6 @@
 package neptune.dev.managers;
 
+import com.sun.org.apache.xpath.internal.operations.Div;
 import neptune.dev.Neptune;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
@@ -25,10 +26,13 @@ public class ConfigManager {
     public static FileConfiguration scoreboardConfig;
     public static ArenaManager arenaManager;
     public static KitManager kitManager;
+    public static DivisionsManager divisionsManager;
     public static File menus;
     public static FileConfiguration menusConfig;
     public static File stats;
     public static FileConfiguration statsConfig;
+    public static File division;
+    public static FileConfiguration divisionConfig;
 
     public static void registerConfigs() {
         // ARENAS
@@ -72,6 +76,12 @@ public class ConfigManager {
         saveResourceIfNotExists("cache/stats.yml");
         stats = new File(Neptune.instance.getDataFolder(), "cache/stats.yml");
         statsConfig = YamlConfiguration.loadConfiguration(stats);
+
+        // DIVISION CONFIG
+        saveResourceIfNotExists("features/divisions.yml");
+        division = new File(Neptune.instance.getDataFolder(), "features/divisions.yml");
+        divisionConfig = YamlConfiguration.loadConfiguration(division);
+        divisionsManager.loadDivisions();
     }
 
 

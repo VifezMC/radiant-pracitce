@@ -7,10 +7,7 @@ import neptune.dev.commands.admin.MainCMD;
 import neptune.dev.commands.admin.SetSpawnCMD;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
-import neptune.dev.managers.ArenaManager;
-import neptune.dev.managers.ConfigManager;
-import neptune.dev.managers.KitManager;
-import neptune.dev.managers.Scoreboard;
+import neptune.dev.managers.*;
 import neptune.dev.ui.ranked.RankedModernUI;
 import neptune.dev.ui.unranked.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
@@ -43,6 +40,8 @@ public class Neptune extends JavaPlugin {
     // CONFIG
     ConfigManager.registerConfigs();
 
+    Console.sendMessage(DivisionsManager.getDivisions() + "");
+
     // SCOREBOARD
     Assemble assemble = new Assemble(this, new Scoreboard());
 
@@ -65,6 +64,7 @@ public class Neptune extends JavaPlugin {
   public static void loadManagers() {
     ConfigManager.arenaManager = new ArenaManager();
     ConfigManager.kitManager = new KitManager();
+    ConfigManager.divisionsManager = new DivisionsManager();
   }
 
   public static void redloadManagers() {

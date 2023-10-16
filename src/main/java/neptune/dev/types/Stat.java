@@ -3,7 +3,7 @@ package neptune.dev.types;
 import neptune.dev.managers.ConfigManager;
 import org.bukkit.entity.Player;
 
-public class Stats {
+public class Stat {
 
     private Player player;
     private int matches;
@@ -12,7 +12,7 @@ public class Stats {
     private int elo;
 
 
-    public Stats(Player player) {
+    public Stat(Player player) {
         this.player = player;
         this.matches = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".matches");
         this.wins = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".wins");

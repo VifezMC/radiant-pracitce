@@ -2,7 +2,9 @@ package neptune.dev.ui;
 
 import neptune.dev.listeners.PlayerDataListener;
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.types.Stats;
+import neptune.dev.managers.DivisionsManager;
+import neptune.dev.types.Division;
+import neptune.dev.types.Stat;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -17,7 +19,7 @@ import java.util.List;
 public class StatsInventory {
 
     public static void openStats(Player player) {
-        Stats stats = PlayerDataListener.getStats(player);
+        Stat stats = PlayerDataListener.getStats(player);
         if (stats == null) return;
         Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate(ConfigManager.menusConfig.getString("stats.menu-name")));
         for (int x = 0; x < 27; x++) {
@@ -36,7 +38,8 @@ public class StatsInventory {
                     .replace("{matches_played}", stats.getMatches() + "")
                     .replace("{matches-won}", stats.getWins() + "")
                     .replace("{matches-lost}", stats.getLosses() + "")
-                    .replace("{elo}", stats.getELO() + ""));
+                    .replace("{elo}", stats.getELO() + "")
+                    .replace("{divison}", CC.translate(ConfigManager.divisionsManager.getPlayerDivision(stats.getELO()) + "")));
         }
         stat.setLore(translatedLore);
         menu.setItem(13, stat.toItemStack());
