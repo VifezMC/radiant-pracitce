@@ -39,7 +39,7 @@ public class StatsInventory {
                     .replace("{matches-won}", stats.getWins() + "")
                     .replace("{matches-lost}", stats.getLosses() + "")
                     .replace("{elo}", stats.getELO() + "")
-                    .replace("{divison}", CC.translate(ConfigManager.divisionsManager.getPlayerDivision(stats.getELO()))));
+                    .replace("{division}", CC.translate(ConfigManager.divisionsManager.getPlayerDivision(stats.getELO()))));
         }
         stat.setLore(translatedLore);
         menu.setItem(13, stat.toItemStack());
