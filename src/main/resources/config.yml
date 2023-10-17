@@ -5,3 +5,7 @@ general:
   ender-pearl-cooldown: 15
   disable-fall-damage: true
   starting-elo: 1000
+tablist:
+  enable: true
+  header: "&bglacier.net"
+  footer: "&7Enjoy your stay!"

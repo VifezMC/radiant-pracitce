@@ -25,6 +25,7 @@ neptune\dev\commands\user\PingCMD.class
 neptune\dev\listeners\PlayerDataListener.class
 neptune\dev\utils\assemble\AssembleAdapter.class
 neptune\dev\ui\unranked\UnrankedInventoryModern.class
+neptune\dev\managers\InventoryManager.class
 neptune\dev\commands\user\StatsCMD.class
 neptune\dev\utils\assemble\AssembleBoard.class
 neptune\dev\types\Stat.class

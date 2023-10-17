@@ -44,6 +44,16 @@ public class ArenaCMD implements CommandExecutor {
                 player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
                 player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
 
+            }else if (args[0].equalsIgnoreCase("min")) {
+                setEdges(arenaName, "min", PlayerUtils.toString(player.getLocation()));
+                player.sendMessage(CC.translate("&aSuccessfully set the min edge of &b" + arenaName + " &a!"));
+                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+
+            }else if (args[0].equalsIgnoreCase("max")) {
+                setEdges(arenaName, "max", PlayerUtils.toString(player.getLocation()));
+                player.sendMessage(CC.translate("&aSuccessfully set the max edge of &b" + arenaName + " &a!"));
+                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+
             } else {
                 showArenaCommands(player);
             }
@@ -59,11 +69,19 @@ public class ArenaCMD implements CommandExecutor {
     private void createArena(String name) {
         ConfigManager.arenaConfig.set("arenas." + name + ".spawn1", "None");
         ConfigManager.arenaConfig.set("arenas." + name + ".spawn2", "None");
+        ConfigManager.arenaConfig.set("arenas." + name + ".min", "None");
+        ConfigManager.arenaConfig.set("arenas." + name + ".max", "None");
+
         ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
     }
 
     private void setSpawn(String name, int number, String loc) {
         ConfigManager.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
+        ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
+    }
+
+    private void setEdges(String name, String edge, String loc) {
+        ConfigManager.arenaConfig.set("arenas." + name + "." + edge, loc);
         ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
     }
 
@@ -76,6 +94,8 @@ public class ArenaCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&8- &7Arena Spawn commands:"));
         player.sendMessage(CC.translate("&b/arena a &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
         player.sendMessage(CC.translate("&b/arena b &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
+        player.sendMessage(CC.translate("&b/arena min &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
+        player.sendMessage(CC.translate("&b/arena max &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
         player.sendMessage(CC.translate(""));
     }
 }

@@ -1,7 +1,7 @@
 divisions:
   iron1:
     display-name: "&7I"
-    elo: 1000
+    elo: 0
   iron2:
     display-name: "&7II"
     elo: 1100

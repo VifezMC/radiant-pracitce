@@ -41,7 +41,7 @@ public class SpawnListeners implements Listener {
         Player p = event.getPlayer();
         if(hasPlayerState(p, PlayerState.INQUEUE) || hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue")){
             event.setCancelled(true);
-            p.sendMessage(CC.translate("&cYou can't use commands while in-types or in queue."));
+            p.sendMessage(CC.translate("&cYou can't use commands game in-types or in queue."));
         }
     }
 

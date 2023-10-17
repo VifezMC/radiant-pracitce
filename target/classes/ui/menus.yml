@@ -32,5 +32,5 @@ stats:
     - "&b* Lost&7: &f{matches-lost}"
     - "&b* ELO&7: &f{elo}"
     - "&b* KDR&7: &f{kdr}"
-    - "&b* DIVISION&7: &f{divison}"
+    - "&b* TITLE&7: &f{division}"
     - "&7&m-----------------------"

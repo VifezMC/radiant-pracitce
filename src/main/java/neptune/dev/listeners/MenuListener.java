@@ -1,6 +1,7 @@
 package neptune.dev.listeners;
 
 import neptune.dev.managers.ConfigManager;
+import neptune.dev.managers.InventoryManager;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Material;
@@ -41,7 +42,7 @@ public class MenuListener implements Listener {
                 event.setCancelled(true);
                 player.closeInventory();
                 player.getInventory().clear();
-                PlayerUtils.createQueueItems(player);
+                InventoryManager.createQueueItems(player);
                 player.updateInventory();
 
                 if (itemMeta != null && itemMeta.hasDisplayName()) {

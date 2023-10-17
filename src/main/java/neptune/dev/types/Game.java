@@ -32,7 +32,7 @@ public class Game {
         p.getActivePotionEffects().forEach(effect -> p.removePotionEffect(effect.getType()));
         p.getInventory().clear();
         p.getInventory().setArmorContents(null);
-        PlayerUtils.createSpawnItems(p);
+        InventoryManager.createSpawnItems(p);
         p.updateInventory();
     }
 
@@ -52,6 +52,8 @@ public class Game {
     }
 
     public static void EndGame(Player winner, Player loser) {
+        ArenaManager.resetArena(MatchManager.getMatch(winner).getArenaName().getMin(), MatchManager.getMatch(winner).getArenaName().getMax(), winner);
+        ArenaManager.resetArena(MatchManager.getMatch(winner).getArenaName().getMin(), MatchManager.getMatch(winner).getArenaName().getMax(), loser);
         PlayerUtils.setState(winner, PlayerState.ENDED);
         PlayerUtils.setState(loser, PlayerState.ENDED);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

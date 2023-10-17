@@ -12,7 +12,6 @@ import org.bukkit.entity.Player;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static neptune.dev.player.PlayerUtils.createSpawnItems;
 import static neptune.dev.player.PlayerUtils.getLobbyLocation;
 
 public class QueueManager {
@@ -61,11 +60,11 @@ public class QueueManager {
             Queue.remove(secondPlayer);
             firstPlayer.teleport(getLobbyLocation());
             firstPlayer.getInventory().clear();
-            createSpawnItems(firstPlayer);
+            InventoryManager.createSpawnItems(firstPlayer);
             firstPlayer.updateInventory();
 
             secondPlayer.getInventory().clear();
-            createSpawnItems(secondPlayer);
+            InventoryManager.createSpawnItems(secondPlayer);
             secondPlayer.updateInventory();
             secondPlayer.teleport(getLobbyLocation());
             return;
@@ -80,12 +79,12 @@ public class QueueManager {
             Queue.remove(secondPlayer);
 
             firstPlayer.getInventory().clear();
-            createSpawnItems(firstPlayer);
+            InventoryManager.createSpawnItems(firstPlayer);
             firstPlayer.updateInventory();
             firstPlayer.teleport(getLobbyLocation());
 
             secondPlayer.getInventory().clear();
-            createSpawnItems(secondPlayer);
+            InventoryManager.createSpawnItems(secondPlayer);
             secondPlayer.updateInventory();
             secondPlayer.teleport(getLobbyLocation());
             return;

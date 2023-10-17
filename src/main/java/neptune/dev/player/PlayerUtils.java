@@ -23,8 +23,6 @@ public class PlayerUtils {
 
     public static Map<Player, PlayerState> playerStates = new ConcurrentHashMap<>();
     public static Map<Player, GameState> gameStates = new ConcurrentHashMap<>();
-    public static Map<String, ItemStack> spawnItemsCache = new ConcurrentHashMap<>();
-    private static Map<String, ItemStack> queueItemsCache = new ConcurrentHashMap<>();
     private static World lobbyWorld;
     private static final Logger logger = getLogger();
 
@@ -84,50 +82,5 @@ public class PlayerUtils {
         } catch (Exception e) {
             return -1;
         }
-    }
-    private static void createItems(Player player, String configSection, Map<String, ItemStack> itemCache) {
-        ConfigurationSection itemsSection = ConfigManager.spawnItemsConfig.getConfigurationSection(configSection);
-        if (itemsSection == null) {
-            logger.warning("Invalid configuration for " + configSection + ". Please check 'config.yml'");
-            return;
-        }
-
-        for (String itemName : itemsSection.getKeys(false)) {
-            ConfigurationSection itemSection = itemsSection.getConfigurationSection(itemName);
-            if (itemSection == null) {
-                logger.warning("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
-                continue;
-            }
-
-            ItemStack cachedItem = itemCache.get(itemName);
-            if (cachedItem == null) {
-                Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
-                if (material == null) {
-                    logger.warning("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
-                    continue;
-                }
-
-                String displayName = itemSection.getString("display-name");
-                int slot = itemSection.getInt("slot", 1);
-
-                ItemStack item = new ItemStack(material);
-                ItemMeta meta = item.getItemMeta();
-                meta.setDisplayName(CC.translate(displayName));
-                meta.addItemFlags(ItemFlag.values());
-                item.setItemMeta(meta);
-                cachedItem = item;
-                itemCache.put(itemName, item);
-            }
-
-            player.getInventory().setItem(itemSection.getInt("slot", 1) - 1, cachedItem);
-        }
-    }
-
-    public static void createSpawnItems(Player player) {
-        createItems(player, "spawn-items", spawnItemsCache);
-    }
-
-    public static void createQueueItems(Player player) {
-        createItems(player, "queue-items", queueItemsCache);
     }
 }

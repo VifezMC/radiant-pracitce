@@ -1,6 +1,7 @@
 package neptune.dev.commands.user;
 
 import neptune.dev.managers.ConfigManager;
+import neptune.dev.managers.InventoryManager;
 import neptune.dev.managers.KitManager;
 import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
@@ -27,7 +28,7 @@ public class LeaveQueueCMD implements CommandExecutor {
             QueueManager.removePlayerFromQueue(p);
             p.sendMessage(CC.translate(formattingString));
             p.getInventory().clear();
-            PlayerUtils.createSpawnItems(p);
+            InventoryManager.createSpawnItems(p);
             PlayerUtils.setState(p, PlayerState.LOBBY);
             p.updateInventory();
         } else {

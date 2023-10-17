@@ -1,5 +1,6 @@
 package neptune.dev.listeners;
 
+import neptune.dev.player.PlayerState;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -11,19 +12,23 @@ import org.bukkit.event.player.PlayerQuitEvent;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import static neptune.dev.player.PlayerUtils.hasPlayerState;
+
 public class BlockListener implements Listener {
     private static Map<Player, Map<Block, Material>> placedBlocks = new ConcurrentHashMap<>();
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent event) {
-        Player player = event.getPlayer();
-        Block block = event.getBlock();
-        placedBlocks.computeIfAbsent(player, k -> new ConcurrentHashMap<>()).put(block, block.getType());
+        Player p = event.getPlayer();
+        if (hasPlayerState(p, PlayerState.PLAYING)) {
+            Block block = event.getBlock();
+            placedBlocks.computeIfAbsent(p, k -> new ConcurrentHashMap<>()).put(block, block.getType());
+        }
     }
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
-        Player player = event.getPlayer();
-        placedBlocks.computeIfPresent(player, (key, value) -> {
+        Player p = event.getPlayer();
+        placedBlocks.computeIfPresent(p, (key, value) -> {
             for (Block block : value.keySet()) {
                 block.setType(Material.AIR);
             }
@@ -32,15 +37,14 @@ public class BlockListener implements Listener {
     }
 
 
-    public static void removeBlocks(Player player) {
-        if (placedBlocks.containsKey(player)) {
-            Map<Block, Material> playerPlacedBlocks = placedBlocks.get(player);
+    public static void removeBlocks(Player p) {
+        if (placedBlocks.containsKey(p)) {
+            Map<Block, Material> playerPlacedBlocks = placedBlocks.get(p);
 
             for (Block block : playerPlacedBlocks.keySet()) {
-                block.setType(Material.WATER);
+                block.setType(Material.AIR);
             }
-            placedBlocks.remove(player);
+            placedBlocks.remove(p);
         }
     }
-
 }
