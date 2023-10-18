@@ -39,12 +39,12 @@ public class GameListener implements Listener {
     private final HashMap<String, Integer> boxingHits = new HashMap<>();
     private final String[] materials = new String[]{"SWORD", "_AXE"};
 
-    @EventHandler
-    public void onBlockBreak(BlockBreakEvent event) {
-            if (!(event.getPlayer().getGameMode() == GameMode.CREATIVE) || PlayerUtils.hasPlayerState(event.getPlayer(),PlayerState.ENDED)) {
-                event.setCancelled(true);
-        }
-    }
+    //@EventHandler
+    //public void onBlockBreak(BlockBreakEvent event) {
+      //      if (!(event.getPlayer().getGameMode() == GameMode.CREATIVE) || PlayerUtils.hasPlayerState(event.getPlayer(),PlayerState.ENDED)) {
+        //        event.setCancelled(true);
+       // }
+    //}
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {

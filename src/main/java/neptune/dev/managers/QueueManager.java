@@ -5,6 +5,7 @@ import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
 import neptune.dev.types.Arena;
 import neptune.dev.types.Game;
+import neptune.dev.utils.DiscordUtils;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.entity.Player;
@@ -103,6 +104,10 @@ public class QueueManager {
 
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
         PlayerUtils.setState(secondPlayer, PlayerState.PLAYING);
+
+        if(ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")){
+            DiscordUtils.sendMatchStart(firstPlayer.getName(), secondPlayer.getName(), selectedArena.getName(), kitName);
+        }
 
         processQueueForKit(kitName, players);
 

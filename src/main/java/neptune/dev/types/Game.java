@@ -5,6 +5,7 @@ import neptune.dev.managers.*;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.DiscordUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
@@ -58,6 +59,11 @@ public class Game {
         PlayerUtils.setState(loser, PlayerState.ENDED);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(Neptune.instance, () -> {
+
+            if(ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")){
+                DiscordUtils.sendMatchEnd(winner.getName(), loser.getName());
+            }
+
             endGame(winner);
             endGame(loser);
 

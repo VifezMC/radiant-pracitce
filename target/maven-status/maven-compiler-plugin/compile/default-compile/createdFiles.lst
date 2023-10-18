@@ -17,6 +17,7 @@ neptune\dev\listeners\PlayerJoin.class
 neptune\dev\utils\Cooldowns.class
 neptune\dev\listeners\SpawnListeners.class
 neptune\dev\managers\MatchManager.class
+neptune\dev\listeners\RulesListener.class
 neptune\dev\listeners\StatsListener.class
 neptune\dev\managers\KitManager.class
 neptune\dev\ui\unranked\UnrankedInventoryLegacy.class
@@ -35,6 +36,7 @@ neptune\dev\player\PlayerState.class
 neptune\dev\commands\admin\MainCMD.class
 neptune\dev\types\Match.class
 neptune\dev\utils\assemble\AssembleBoardEntry.class
+neptune\dev\utils\DiscordUtils.class
 neptune\dev\types\Game$1.class
 neptune\dev\types\Game.class
 neptune\dev\listeners\MenuListener.class

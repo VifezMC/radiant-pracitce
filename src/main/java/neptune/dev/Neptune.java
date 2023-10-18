@@ -11,6 +11,7 @@ import neptune.dev.managers.*;
 import neptune.dev.ui.ranked.RankedModernUI;
 import neptune.dev.ui.unranked.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
+import neptune.dev.utils.DiscordUtils;
 import neptune.dev.utils.assemble.Assemble;
 import neptune.dev.utils.render.Console;
 import org.bukkit.command.CommandExecutor;
@@ -81,7 +82,8 @@ public class Neptune extends JavaPlugin {
             new BlockListener(),
             new PlayerDataListener(),
             new MenuListener(),
-            new StatsListener()
+            new StatsListener(),
+            new RulesListener()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
   }
 
