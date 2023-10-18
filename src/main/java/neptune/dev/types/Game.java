@@ -47,6 +47,7 @@ public class Game {
             p.closeInventory();
             p.setFoodLevel(20);
             p.setExhaustion(20);
+            p.setSaturation(20);
             p.getActivePotionEffects().forEach(effect -> p.removePotionEffect(effect.getType()));
             startCountdown(p);
         }

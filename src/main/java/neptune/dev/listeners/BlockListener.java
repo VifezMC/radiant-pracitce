@@ -6,6 +6,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
@@ -18,14 +19,13 @@ import static neptune.dev.player.PlayerUtils.hasPlayerState;
 
 public class BlockListener implements Listener {
     static Map<Player, Map<Block, Material>> placedBlocks = new ConcurrentHashMap<>();
-
-    @EventHandler
+    // TODO: REWRITE
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {
         Player p = event.getPlayer();
         if (hasPlayerState(p, PlayerState.PLAYING)) {
             Block block = event.getBlock();
             placedBlocks.computeIfAbsent(p, k -> new ConcurrentHashMap<>()).put(block, block.getType());
-            Console.sendError(placedBlocks + "");
         }
     }
     @EventHandler
