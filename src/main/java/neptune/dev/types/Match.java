@@ -41,7 +41,7 @@ public class Match {
         return loser;
     }
 
-    public Arena getArenaName() {
+    public Arena getArena() {
         return arenaName;
     }
 

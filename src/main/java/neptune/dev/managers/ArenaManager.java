@@ -2,6 +2,7 @@ package neptune.dev.managers;
 
 import neptune.dev.listeners.BlockListener;
 import neptune.dev.types.Arena;
+import neptune.dev.types.Match;
 import neptune.dev.utils.LocationUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -9,8 +10,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Item;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,18 +48,18 @@ public class ArenaManager {
         return null;
     }
 
-    public static void resetArena(Location lowEdge, Location highEdge, Player p, String kitName) {
-        World world = lowEdge.getWorld();
+    public static void resetArena(Match match) {
+        World world = match.getLoser().getWorld();
 
-        int minX = Math.min(lowEdge.getBlockX(), highEdge.getBlockX());
-        int minY = Math.min(lowEdge.getBlockY(), highEdge.getBlockY());
-        int minZ = Math.min(lowEdge.getBlockZ(), highEdge.getBlockZ());
+        int minX = Math.min(match.getArena().getMin().getBlockX(), match.getArena().getMax().getBlockX());
+        int minY = Math.min(match.getArena().getMin().getBlockY(), match.getArena().getMax().getBlockY());
+        int minZ = Math.min(match.getArena().getMin().getBlockZ(), match.getArena().getMax().getBlockZ());
 
-        int maxX = Math.max(lowEdge.getBlockX(), highEdge.getBlockX());
-        int maxY = Math.max(lowEdge.getBlockY(), highEdge.getBlockY());
-        int maxZ = Math.max(lowEdge.getBlockZ(), highEdge.getBlockZ());
+        int maxX = Math.max(match.getArena().getMin().getBlockX(), match.getArena().getMax().getBlockX());
+        int maxY = Math.max(match.getArena().getMin().getBlockY(), match.getArena().getMax().getBlockY());
+        int maxZ = Math.max(match.getArena().getMin().getBlockZ(), match.getArena().getMax().getBlockZ());
 
-        if (KitManager.getKit(kitName).getRules().contains("build")) {
+        if (KitManager.getKit(match.getKitName()).getRules().contains("build")) {
             for (int x = minX; x <= maxX; x++) {
                 for (int y = minY; y <= maxY; y++) {
                     for (int z = minZ; z <= maxZ; z++) {
@@ -71,7 +70,8 @@ public class ArenaManager {
                     }
                 }
             }
-            BlockListener.removeBlocks(p);
+            BlockListener.removeBlocks(match.getPlayer1());
+            BlockListener.removeBlocks(match.getPlayer2());
         }
 
         for (Entity entity : world.getEntities()) {

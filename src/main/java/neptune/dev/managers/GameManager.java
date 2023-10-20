@@ -195,8 +195,8 @@ public class GameManager {
         }
         PlayerUtils.setState(winner, PlayerState.ENDED);
         PlayerUtils.setState(loser, PlayerState.ENDED);
-        ArenaManager.resetArena(MatchManager.getMatch(winner).getArenaName().getMin(), MatchManager.getMatch(winner).getArenaName().getMax(), winner, kitName);
-        ArenaManager.resetArena(MatchManager.getMatch(winner).getArenaName().getMin(), MatchManager.getMatch(winner).getArenaName().getMax(), loser, kitName);
+        ArenaManager.resetArena(MatchManager.getMatch(winner));
+
         PlayerUtils.setState(winner, PlayerState.ENDED);
         PlayerUtils.setState(loser, PlayerState.ENDED);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();

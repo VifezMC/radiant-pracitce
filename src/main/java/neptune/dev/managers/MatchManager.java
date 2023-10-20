@@ -30,7 +30,7 @@ public class MatchManager {
         Match match = matches.remove(matchID);
         if (match != null) {
             if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
-                Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArenaName().getName() + " with kit " + match.getKitName());
+                Console.sendMessage("Match removed between " + match.getPlayer1().getName() + " and " + match.getPlayer2().getName() + " on arena " + match.getArena().getName() + " with kit " + match.getKitName());
             }
         }
         matchArenas.remove(matchID);
