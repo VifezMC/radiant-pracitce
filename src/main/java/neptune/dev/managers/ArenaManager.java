@@ -49,7 +49,7 @@ public class ArenaManager {
     }
 
     public static void resetArena(Match match) {
-        World world = match.getLoser().getWorld();
+        World world = match.getArena().getSpawn1().getWorld();
 
         int minX = Math.min(match.getArena().getMin().getBlockX(), match.getArena().getMax().getBlockX());
         int minY = Math.min(match.getArena().getMin().getBlockY(), match.getArena().getMax().getBlockY());
