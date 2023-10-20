@@ -2,29 +2,46 @@ package neptune.dev.player;
 
 import neptune.dev.Neptune;
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.utils.render.CC;
+import net.minecraft.server.v1_8_R3.MinecraftServer;
+import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
+import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.inventory.ItemFlag;
-import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 
+import java.lang.reflect.Field;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Logger;
-
-import static org.bukkit.Bukkit.getLogger;
 
 public class PlayerUtils {
 
     public static Map<Player, PlayerState> playerStates = new ConcurrentHashMap<>();
     public static Map<Player, GameState> gameStates = new ConcurrentHashMap<>();
     private static World lobbyWorld;
-    private static final Logger logger = getLogger();
+    private static Field STATUS_PACKET_ID_FIELD;
+    private static Field STATUS_PACKET_STATUS_FIELD;
+    private static Field SPAWN_PACKET_ID_FIELD;
+
+
+    static {
+        try {
+            SPAWN_PACKET_ID_FIELD = PacketPlayOutNamedEntitySpawn.class.getDeclaredField("a");
+            SPAWN_PACKET_ID_FIELD.setAccessible(true);
+
+            STATUS_PACKET_ID_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("a");
+            STATUS_PACKET_ID_FIELD.setAccessible(true);
+
+            STATUS_PACKET_STATUS_FIELD = PacketPlayOutEntityStatus.class.getDeclaredField("b");
+            STATUS_PACKET_STATUS_FIELD.setAccessible(true);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 
     private static World getLobbyWorld() {
         if (lobbyWorld == null) {
@@ -82,5 +99,42 @@ public class PlayerUtils {
         } catch (Exception e) {
             return -1;
         }
+    }
+
+    public static void animateDeath(Player player) {
+
+        final int entityId = -1;
+        final PacketPlayOutNamedEntitySpawn spawnPacket = new PacketPlayOutNamedEntitySpawn(((CraftPlayer) player).getHandle());
+        final PacketPlayOutEntityStatus statusPacket = new PacketPlayOutEntityStatus();
+
+        try {
+            SPAWN_PACKET_ID_FIELD.set(spawnPacket, entityId);
+            STATUS_PACKET_ID_FIELD.set(statusPacket, entityId);
+            STATUS_PACKET_STATUS_FIELD.set(statusPacket, (byte) 3);
+
+            final int radius = MinecraftServer.getServer().getPlayerList().d();
+            final Set<Player> sentTo = new HashSet<>();
+
+            for (Entity entity : player.getNearbyEntities(radius, radius, radius)) {
+
+                if (!(entity instanceof Player)) {
+                    continue;
+                }
+
+                final Player watcher = (Player) entity;
+
+                if (watcher.getUniqueId().equals(player.getUniqueId())) {
+                    continue;
+                }
+
+                ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(spawnPacket);
+                ((CraftPlayer) watcher).getHandle().playerConnection.sendPacket(statusPacket);
+
+                sentTo.add(watcher);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }
 }

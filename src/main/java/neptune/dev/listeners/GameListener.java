@@ -1,21 +1,19 @@
 package neptune.dev.listeners;
 
 import neptune.dev.managers.ConfigManager;
+import neptune.dev.managers.GameManager;
 import neptune.dev.managers.KitManager;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
-import neptune.dev.managers.GameManager;
 import neptune.dev.types.Match;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.World;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
@@ -28,14 +26,10 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.HashMap;
-import java.util.Random;
-
 import static neptune.dev.player.PlayerUtils.hasPlayerState;
 
 public class GameListener implements Listener {
 
-    private final HashMap<String, Integer> boxingHits = new HashMap<>();
     private final String[] materials = new String[]{"SWORD", "_AXE"};
 
     //@EventHandler
@@ -49,8 +43,12 @@ public class GameListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         event.getDrops().clear();
         event.setDeathMessage(null);
-        Player loser = event.getEntity(), winner = MatchManager.getOpponent(loser);
-        GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
+
+        Player p = event.getEntity();
+        PlayerUtils.animateDeath(p);
+        MatchManager.getMatch(p).setLoser(p);
+        MatchManager.getMatch(p).getWinner().hidePlayer(MatchManager.getMatch(p).getLoser());
+        GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
     }
 
 
@@ -77,9 +75,10 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
+        Player p = event.getPlayer();
+        MatchManager.getMatch(p).setLoser(p);
         event.setQuitMessage(null);
-        Player loser = event.getPlayer(), winner = MatchManager.getOpponent(loser);
-        GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
+        GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
     }
 
 
@@ -91,8 +90,8 @@ public class GameListener implements Listener {
             String kitName = match.getKitName();
             if (KitManager.getKit(kitName).getRules().contains("sumo")) {
                 if (p.getLocation().getBlock().getType() == Material.WATER || p.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
-                    Player winner = MatchManager.getOpponent(p), loser = p;
-                    GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
+                    MatchManager.getMatch(p).setLoser(p);
+                    GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
                 }
             }
         }
@@ -148,25 +147,9 @@ public class GameListener implements Listener {
             if (hasPlayerState(damager, PlayerState.PLAYING) && hasPlayerState(damaged, PlayerState.PLAYING)) {
                 if (KitManager.getKit(MatchManager.getMatch(damager).getKitName()).getRules().contains("boxing")) {
 
-                    handleBoxingDeath(damager);
+                    //handleBoxingDeath(damager);
                 }
             }
-        }
-    }
-
-    private void handleBoxingDeath(Player damager) {
-        boxingHits.putIfAbsent(damager.getName(), 0);
-        int hitCount = boxingHits.get(damager.getName()) + 1;
-        boxingHits.put(damager.getName(), hitCount);
-        damager.sendMessage("[DEBUG] " + hitCount);
-        if (hitCount >= 100) {
-            Match match = MatchManager.getMatch(damager);
-            Player winner = MatchManager.getMatchWinner(match.getMatchID()), loser = damager;
-            String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
-            String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            winner.sendMessage(CC.translate(formattedMessage));
-            loser.sendMessage(CC.translate(formattedMessage));
-            GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
         }
     }
 

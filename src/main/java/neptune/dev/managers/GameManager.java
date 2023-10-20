@@ -11,7 +11,6 @@ import neptune.dev.utils.DiscordUtils;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.*;
-import org.bukkit.entity.LightningStrike;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -27,22 +26,6 @@ import static neptune.dev.player.PlayerUtils.getLobbyLocation;
 
 public class GameManager {
     private static Map<Player, Byte> countdowns = new ConcurrentHashMap<>();
-
-    public static void endGame(Player p) {
-        PlayerUtils.setState(p, PlayerState.LOBBY);
-        p.teleport(PlayerUtils.getLobbyLocation());
-        p.setSaturation(20);
-        p.setFlying(false);
-        p.setFoodLevel(20);
-        p.setHealth(p.getMaxHealth());
-        p.setFireTicks(0);
-        p.setGameMode(GameMode.SURVIVAL);
-        p.getActivePotionEffects().forEach(effect -> p.removePotionEffect(effect.getType()));
-        p.getInventory().clear();
-        p.getInventory().setArmorContents(null);
-        InventoryManager.createSpawnItems(p);
-        p.updateInventory();
-    }
 
     public static void startGame(List<Player> players) {
             Player firstPlayer = players.get(0);
@@ -145,12 +128,16 @@ public class GameManager {
         }
     }
 
-    public static void EndGame(Player winner, Player loser, String kitName) {
+    public static void EndGame(Match match, String kitName) {
+        Player winner = match.getWinner();
+        Player loser = match.getLoser();
+
         Title winnerTitle = new Title(CC.translate("&a&lYOU WON!"), CC.translate("&fYou beat &b" + loser.getName() + "&7!"));
         winner.sendTitle(winnerTitle);
         Title loserTitle = new Title(CC.translate("&c&lYOU LOST!"), CC.translate("&fYou lost to &b" + winner.getName() + "&7!"));
         loser.sendTitle(loserTitle);
-        loser.setGameMode(GameMode.CREATIVE);
+        loser.setGameMode(GameMode.ADVENTURE);
+
 
         Location location = loser.getLocation();
         double x = location.getX();
@@ -158,46 +145,71 @@ public class GameManager {
         double z = location.getZ();
         World world = location.getWorld();
         Location lightningLocation = new Location(world, x, y, z);
-        LightningStrike lightning = world.strikeLightning(lightningLocation);
-        Location newLocation = new Location(world, x, y + 1.0, z, location.getYaw(), location.getPitch());
+        world.strikeLightning(lightningLocation);
 
-        loser.teleport(newLocation);
         loser.setHealth(loser.getMaxHealth());
         loser.setFireTicks(0);
+
+        PlayerDataListener.getStats(loser).addLosses();
+        PlayerDataListener.getStats(winner).addWins();
+        Random random = new Random();
+        byte elo = (byte) (random.nextInt(11) + 10);
+
+        PlayerDataListener.getStats(winner).addELO(elo);
+        PlayerDataListener.getStats(loser).removeELO(elo);
 
         for (String msg : ConfigManager.messagesConfig.getStringList("match.kill-message")) {
             loser.sendMessage(CC.translate(msg)
                     .replace("{winner}", winner.getName())
-                    .replace("{loser}", loser.getName()));
+                    .replace("{loser}", loser.getName())
+                    .replace("{winner-elo}", "" + PlayerDataListener.getStats(winner).getELO())
+                    .replace("{loser-elo}", "" + PlayerDataListener.getStats(loser).getELO())
+                    .replace("{elo}", "" + elo));
             winner.sendMessage(CC.translate(msg)
                     .replace("{winner}", winner.getName())
-                    .replace("{loser}", loser.getName()));
+                    .replace("{loser}", loser.getName())
+                    .replace("{loser-elo}", "" + PlayerDataListener.getStats(loser).getELO())
+                    .replace("{winner-elo}", "" + PlayerDataListener.getStats(winner).getELO())
+                    .replace("{elo}", "" + elo));
         }
-            PlayerUtils.setState(winner, PlayerState.ENDED);
-            PlayerUtils.setState(loser, PlayerState.ENDED);
-            PlayerDataListener.getStats(loser).addLosses();
-            PlayerDataListener.getStats(winner).addWins();
-            Random random = new Random();
-            byte randomNumber = (byte) (random.nextInt(11) + 10);
-
-            PlayerDataListener.getStats(winner).addELO(randomNumber);
-            PlayerDataListener.getStats(loser).removeELO(randomNumber);
+        PlayerUtils.setState(winner, PlayerState.ENDED);
+        PlayerUtils.setState(loser, PlayerState.ENDED);
         ArenaManager.resetArena(MatchManager.getMatch(winner).getArenaName().getMin(), MatchManager.getMatch(winner).getArenaName().getMax(), winner, kitName);
         ArenaManager.resetArena(MatchManager.getMatch(winner).getArenaName().getMin(), MatchManager.getMatch(winner).getArenaName().getMax(), loser, kitName);
         PlayerUtils.setState(winner, PlayerState.ENDED);
         PlayerUtils.setState(loser, PlayerState.ENDED);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
         scheduler.scheduleSyncDelayedTask(Neptune.instance, () -> {
-
-            if(ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")){
+            if (ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")) {
                 DiscordUtils.sendMatchEnd(winner.getName(), loser.getName());
             }
-
-            endGame(winner);
-            endGame(loser);
-
-            Match match = MatchManager.getMatch(loser);
-
+            loser.teleport(PlayerUtils.getLobbyLocation());
+            loser.setSaturation(20);
+            loser.setFlying(false);
+            loser.setFoodLevel(20);
+            loser.setHealth(loser.getMaxHealth());
+            loser.setFireTicks(0);
+            loser.setGameMode(GameMode.SURVIVAL);
+            loser.getActivePotionEffects().forEach(effect -> loser.removePotionEffect(effect.getType()));
+            loser.getInventory().clear();
+            loser.getInventory().setArmorContents(null);
+            InventoryManager.createSpawnItems(loser);
+            loser.updateInventory();
+            PlayerUtils.setState(loser, PlayerState.LOBBY);
+            winner.teleport(PlayerUtils.getLobbyLocation());
+            winner.setSaturation(20);
+            winner.setFlying(false);
+            winner.setFoodLevel(20);
+            winner.setHealth(winner.getMaxHealth());
+            winner.setFireTicks(0);
+            winner.setGameMode(GameMode.SURVIVAL);
+            winner.getActivePotionEffects().forEach(effect -> winner.removePotionEffect(effect.getType()));
+            winner.getInventory().clear();
+            winner.getInventory().setArmorContents(null);
+            InventoryManager.createSpawnItems(winner);
+            winner.updateInventory();
+            PlayerUtils.setState(winner, PlayerState.LOBBY);
+            winner.showPlayer(loser);
             if (match != null) {
                 String arenaName = match.getArenaNameAsString();
                 Arena arena = ArenaManager.getByName(arenaName);

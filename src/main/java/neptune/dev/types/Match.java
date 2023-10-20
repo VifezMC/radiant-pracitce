@@ -8,12 +8,16 @@ public class Match {
 
     private Player player1;
     private Player player2;
+    private Player winner;
+    private Player loser;
     private Arena arenaName;
     private String kitName;
     private UUID matchID;
 
 
-    public Match(Player player1, Player player2, Arena arenaName, String kitName, UUID matchID) {
+    public Match(Player winner, Player loser, Player player1, Player player2, Arena arenaName, String kitName, UUID matchID) {
+        this.winner = winner;
+        this.loser = loser;
         this.player1 = player1;
         this.player2 = player2;
         this.arenaName = arenaName;
@@ -27,6 +31,14 @@ public class Match {
 
     public Player getPlayer2() {
         return player2;
+    }
+
+    public Player getWinner() {
+        return winner;
+    }
+
+    public Player getLoser() {
+        return loser;
     }
 
     public Arena getArenaName() {
@@ -43,6 +55,13 @@ public class Match {
 
     public String getArenaNameAsString() {
         return arenaName.getName();
+    }
+
+    public void setLoser(Player player) {
+        if (involvesPlayer(player)) {
+            this.loser = player;
+            this.winner = getOtherPlayer(player);
+        }
     }
 
     public boolean involvesPlayer(Player player) {

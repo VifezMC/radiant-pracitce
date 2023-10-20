@@ -3,7 +3,6 @@ package neptune.dev.managers;
 import neptune.dev.types.Arena;
 import neptune.dev.types.Match;
 import neptune.dev.utils.render.Console;
-import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ public class MatchManager {
 
     public static void addMatch(Player player1, Player player2, Arena arenaName, String kitName) {
         UUID matchID = UUID.randomUUID();
-        Match match = new Match(player1, player2, arenaName, kitName, matchID);
+        Match match = new Match(null, null, player1, player2, arenaName, kitName, matchID);
         matches.put(matchID, match);
         matchArenas.put(matchID, arenaName);
         if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
@@ -80,35 +79,5 @@ public class MatchManager {
             return players;
         }
         return null;
-    }
-
-    public static Player getMatchWinner(UUID matchID) {
-        Match match = matches.get(matchID);
-        if (match != null) {
-            Player player1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player player2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-
-            if (player1.getGameMode() == GameMode.CREATIVE) {
-                return player2; // Player 1 is in Creative mode, so player 2 wins
-            } else if (player2.getGameMode() == GameMode.CREATIVE) {
-                return player1; // Player 2 is in Creative mode, so player 1 wins
-            }
-        }
-        return null; // No winner or match not found
-    }
-
-    public static Player getMatchLoser(UUID matchID) {
-        Match match = matches.get(matchID);
-        if (match != null) {
-            Player player1 = MatchManager.getMatchPlayers(match.getMatchID()).get(0);
-            Player player2 = MatchManager.getMatchPlayers(match.getMatchID()).get(1);
-
-            if (player1.getGameMode() == GameMode.CREATIVE) {
-                return player1; // Player 1 is in Creative mode, so player 1 loses
-            } else if (player2.getGameMode() == GameMode.CREATIVE) {
-                return player2; // Player 2 is in Creative mode, so player 2 loses
-            }
-        }
-        return null; // No loser or match not found
     }
 }
