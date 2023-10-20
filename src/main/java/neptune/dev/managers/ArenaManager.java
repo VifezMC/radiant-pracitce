@@ -8,6 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 
@@ -49,18 +50,17 @@ public class ArenaManager {
     }
 
     public static void resetArena(Location lowEdge, Location highEdge, Player p, String kitName) {
+        World world = lowEdge.getWorld();
+
+        int minX = Math.min(lowEdge.getBlockX(), highEdge.getBlockX());
+        int minY = Math.min(lowEdge.getBlockY(), highEdge.getBlockY());
+        int minZ = Math.min(lowEdge.getBlockZ(), highEdge.getBlockZ());
+
+        int maxX = Math.max(lowEdge.getBlockX(), highEdge.getBlockX());
+        int maxY = Math.max(lowEdge.getBlockY(), highEdge.getBlockY());
+        int maxZ = Math.max(lowEdge.getBlockZ(), highEdge.getBlockZ());
+
         if (KitManager.getKit(kitName).getRules().contains("build")) {
-
-            World world = lowEdge.getWorld();
-
-            int minX = Math.min(lowEdge.getBlockX(), highEdge.getBlockX());
-            int minY = Math.min(lowEdge.getBlockY(), highEdge.getBlockY());
-            int minZ = Math.min(lowEdge.getBlockZ(), highEdge.getBlockZ());
-
-            int maxX = Math.max(lowEdge.getBlockX(), highEdge.getBlockX());
-            int maxY = Math.max(lowEdge.getBlockY(), highEdge.getBlockY());
-            int maxZ = Math.max(lowEdge.getBlockZ(), highEdge.getBlockZ());
-
             for (int x = minX; x <= maxX; x++) {
                 for (int y = minY; y <= maxY; y++) {
                     for (int z = minZ; z <= maxZ; z++) {
@@ -71,26 +71,21 @@ public class ArenaManager {
                     }
                 }
             }
-            for (Entity entity : world.getEntities()) {
-                if (entity instanceof Item) {
-                    Location itemLocation = entity.getLocation();
-                    if (isLocationWithinArena(itemLocation, lowEdge, highEdge)) {
-                        entity.remove();
-                    }
-                }
-            }
-
             BlockListener.removeBlocks(p);
         }
+
+        for (Entity entity : world.getEntities()) {
+            if (entity.getType() == EntityType.DROPPED_ITEM) {
+                Location entityLocation = entity.getLocation();
+                if (entityLocation.getBlockX() >= minX && entityLocation.getBlockX() <= maxX
+                        && entityLocation.getBlockY() >= minY && entityLocation.getBlockY() <= maxY
+                        && entityLocation.getBlockZ() >= minZ && entityLocation.getBlockZ() <= maxZ) {
+                    entity.remove();
+                }
+            }
+        }
     }
-    private static boolean isLocationWithinArena(Location location, Location lowEdge, Location highEdge) {
-        return location.getBlockX() >= lowEdge.getBlockX() &&
-                location.getBlockX() <= highEdge.getBlockX() &&
-                location.getBlockY() >= lowEdge.getBlockY() &&
-                location.getBlockY() <= highEdge.getBlockY() &&
-                location.getBlockZ() >= lowEdge.getBlockZ() &&
-                location.getBlockZ() <= highEdge.getBlockZ();
-    }
+
 
 
     public static Arena selectRandomAvailableArena(List<String> arenas) {
