@@ -7,10 +7,8 @@ import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.utils.render.CC;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.Packet;
 import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
-import org.bukkit.ChatColor;
 import org.bukkit.GameMode;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
@@ -21,7 +19,7 @@ import org.bukkit.potion.PotionEffect;
 
 import java.lang.reflect.Field;
 
-import static neptune.dev.player.PlayerUtils.*;
+import static neptune.dev.utils.PlayerUtils.*;
 
 public class PlayerJoin implements Listener {
 

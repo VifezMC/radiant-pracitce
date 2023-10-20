@@ -2,7 +2,7 @@ package neptune.dev.commands.admin;
 
 import neptune.dev.Constants;
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

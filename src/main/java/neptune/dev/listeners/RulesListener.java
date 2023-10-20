@@ -11,7 +11,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 
 import java.util.Map;
 
-import static neptune.dev.player.PlayerUtils.hasPlayerState;
+import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
 public class RulesListener implements Listener {
 

@@ -1,21 +1,19 @@
 package neptune.dev.listeners;
 
 import neptune.dev.player.PlayerState;
-import neptune.dev.utils.render.Console;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static neptune.dev.player.PlayerUtils.hasPlayerState;
+import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
 public class BlockListener implements Listener {
     static Map<Player, Map<Block, Material>> placedBlocks = new ConcurrentHashMap<>();

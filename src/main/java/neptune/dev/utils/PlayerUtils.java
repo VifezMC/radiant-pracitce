@@ -1,7 +1,9 @@
-package neptune.dev.player;
+package neptune.dev.utils;
 
 import neptune.dev.Neptune;
 import neptune.dev.managers.ConfigManager;
+import neptune.dev.player.GameState;
+import neptune.dev.player.PlayerState;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
 import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;

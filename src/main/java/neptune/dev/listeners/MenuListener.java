@@ -3,7 +3,6 @@ package neptune.dev.listeners;
 import neptune.dev.Constants;
 import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.InventoryManager;
-import neptune.dev.player.PlayerUtils;
 import neptune.dev.ui.SettingsKillEffectsInventory;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Material;

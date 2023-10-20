@@ -2,7 +2,7 @@ package neptune.dev.managers;
 
 import neptune.dev.Neptune;
 import neptune.dev.player.PlayerState;
-import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.PlayerUtils;
 import neptune.dev.utils.assemble.AssembleAdapter;
 import org.bukkit.entity.Player;
 

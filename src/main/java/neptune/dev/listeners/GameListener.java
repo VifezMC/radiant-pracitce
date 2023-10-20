@@ -6,7 +6,7 @@ import neptune.dev.managers.KitManager;
 import neptune.dev.managers.MatchManager;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
-import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.PlayerUtils;
 import neptune.dev.types.Match;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
@@ -26,7 +26,7 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 
-import static neptune.dev.player.PlayerUtils.hasPlayerState;
+import static neptune.dev.utils.PlayerUtils.hasPlayerState;
 
 public class GameListener implements Listener {
 
@@ -124,7 +124,7 @@ public class GameListener implements Listener {
     @EventHandler
     public void onMove(PlayerMoveEvent event) {
         Player p = event.getPlayer();
-        if (hasPlayerState(p, PlayerState.PLAYING) && PlayerUtils.hasGPlayerState(p, GameState.SUMO) && (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo"))) {
+        if (hasPlayerState(p, PlayerState.PLAYING) && PlayerUtils.hasGPlayerState(p, GameState.SUMO)) {
                 Location to = event.getTo();
                 Location from = event.getFrom();
                 if ((to.getX() != from.getX() || to.getZ() != from.getZ())) {

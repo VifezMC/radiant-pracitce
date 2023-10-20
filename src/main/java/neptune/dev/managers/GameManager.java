@@ -4,7 +4,7 @@ import neptune.dev.Neptune;
 import neptune.dev.listeners.PlayerDataListener;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
-import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.PlayerUtils;
 import neptune.dev.types.Arena;
 import neptune.dev.types.Match;
 import neptune.dev.utils.DiscordUtils;
@@ -16,7 +16,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import org.github.paperspigot.Title;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +23,7 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static neptune.dev.player.PlayerUtils.getLobbyLocation;
+import static neptune.dev.utils.PlayerUtils.getLobbyLocation;
 
 public class GameManager {
     private static Map<Player, Byte> countdowns = new ConcurrentHashMap<>();
@@ -251,7 +250,7 @@ public class GameManager {
 
         if (p != null && !countdowns.containsKey(p)) {
             countdowns.put(p, (byte) 5);
-            if(KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("sumo")){
+            if(KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("feezeonspawn")){
                 PlayerUtils.setGState(p, GameState.SUMO);
             }
             new BukkitRunnable() {

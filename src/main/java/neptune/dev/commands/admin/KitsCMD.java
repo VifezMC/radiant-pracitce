@@ -218,7 +218,7 @@ public class KitsCMD implements CommandExecutor {
 
     private void addRule(String kitName, String rule, Player player) {
         if (kitExists(kitName)) {
-            List<String> validRules = Arrays.asList("boxing", "build", "sumo", "nodamage", "nohunger");
+            List<String> validRules = Arrays.asList("boxing", "build", "sumo", "nodamage", "nohunger", "feezeonspawn");
             if (validRules.contains(rule)) {
                 List<String> rules = ConfigManager.kitsConfig.getStringList("kits." + kitName + ".rules");
                 rules.add(rule);
@@ -228,7 +228,7 @@ public class KitsCMD implements CommandExecutor {
                 player.sendMessage(CC.GREEN + "Kit rule has been added!");
             } else {
                 player.sendMessage(CC.RED + "Invalid rules");
-                player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo, nodamage, nohunger");
+                player.sendMessage(CC.RED + "Valid rules: boxing, build, sumo, nodamage, nohunger, feezeonspawn");
             }
         } else {
             player.sendMessage(CC.RED + "Kit with name '" + kitName + "' does not exist.");

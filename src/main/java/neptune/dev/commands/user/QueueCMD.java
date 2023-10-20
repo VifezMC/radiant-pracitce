@@ -3,7 +3,7 @@ package neptune.dev.commands.user;
 import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
-import neptune.dev.player.PlayerUtils;
+import neptune.dev.utils.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

@@ -7,7 +7,6 @@ neptune\dev\ui\StatsInventory.class
 neptune\dev\commands\user\RankedCMD.class
 neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.class
 neptune\dev\ui\ranked\RankedInventoryLegacy.class
-neptune\dev\player\PlayerUtils.class
 neptune\dev\types\Arena.class
 neptune\dev\player\GameState.class
 neptune\dev\commands\admin\SetSpawnCMD.class
@@ -42,6 +41,7 @@ neptune\dev\utils\assemble\AssembleBoardEntry.class
 neptune\dev\utils\DiscordUtils.class
 neptune\dev\listeners\MenuListener.class
 neptune\dev\commands\admin\KitsCMD.class
+neptune\dev\utils\PlayerUtils.class
 neptune\dev\utils\LocationUtil.class
 neptune\dev\utils\assemble\AssembleListener.class
 neptune\dev\listeners\GameListener.class

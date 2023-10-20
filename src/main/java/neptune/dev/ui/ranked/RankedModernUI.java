@@ -2,7 +2,6 @@ package neptune.dev.ui.ranked;
 
 import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.InventoryManager;
-import neptune.dev.player.PlayerUtils;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
