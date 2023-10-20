@@ -40,11 +40,9 @@ public class Match {
     public Player getLoser() {
         return loser;
     }
-
     public Arena getArena() {
         return arenaName;
     }
-
     public String getKitName() {
         return kitName;
     }
