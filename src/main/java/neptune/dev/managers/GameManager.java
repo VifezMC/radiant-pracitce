@@ -196,6 +196,8 @@ public class GameManager {
             InventoryManager.createSpawnItems(loser);
             loser.updateInventory();
             PlayerUtils.setState(loser, PlayerState.LOBBY);
+            loser.resetTitle();
+
             winner.teleport(PlayerUtils.getLobbyLocation());
             winner.setSaturation(20);
             winner.setFlying(false);
@@ -210,6 +212,7 @@ public class GameManager {
             winner.updateInventory();
             PlayerUtils.setState(winner, PlayerState.LOBBY);
             winner.showPlayer(loser);
+            winner.resetTitle();
             if (match != null) {
                 String arenaName = match.getArenaNameAsString();
                 Arena arena = ArenaManager.getByName(arenaName);
