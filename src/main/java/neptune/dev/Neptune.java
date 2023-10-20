@@ -98,6 +98,7 @@ public class Neptune extends JavaPlugin {
     createCMD("stats", new StatsCMD());
     createCMD("unranked", new UnrankedCMD());
     createCMD("ranked", new RankedCMD());
+    createCMD("settings", new SettingsCMD());
   }
 
   private void createCMD(String cmd, CommandExecutor commandfile){

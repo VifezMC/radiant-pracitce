@@ -17,13 +17,15 @@ public class StatsListener implements Listener {
         Player player = event.getPlayer();
         Stat stat = PlayerDataListener.getStats(player);
         if (stat == null) return;
-        ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".matches", stat.getMatches());
-        ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".wins", stat.getWins());
-        ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".losses", stat.getLosses());
-        ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".elo", stat.getELO());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".matches", stat.getMatches());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".wins", stat.getWins());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", stat.getLosses());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", stat.getELO());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", stat.getKilleffect());
+
         try {
-            ConfigManager.statsConfig.save(ConfigManager.stats);
-            ConfigManager.statsConfig.load(ConfigManager.stats);
+            ConfigManager.databaseConfig.save(ConfigManager.database);
+            ConfigManager.databaseConfig.load(ConfigManager.database);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }

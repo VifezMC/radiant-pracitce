@@ -1,6 +1,5 @@
 package neptune.dev.managers;
 
-import com.sun.org.apache.xpath.internal.operations.Div;
 import neptune.dev.Neptune;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
@@ -29,8 +28,8 @@ public class ConfigManager {
     public static DivisionsManager divisionsManager;
     public static File menus;
     public static FileConfiguration menusConfig;
-    public static File stats;
-    public static FileConfiguration statsConfig;
+    public static File database;
+    public static FileConfiguration databaseConfig;
     public static File division;
     public static FileConfiguration divisionConfig;
 
@@ -74,8 +73,8 @@ public class ConfigManager {
 
         // STATS CONFIG
         saveResourceIfNotExists("cache/stats.yml");
-        stats = new File(Neptune.instance.getDataFolder(), "cache/stats.yml");
-        statsConfig = YamlConfiguration.loadConfiguration(stats);
+        database = new File(Neptune.instance.getDataFolder(), "cache/stats.yml");
+        databaseConfig = YamlConfiguration.loadConfiguration(database);
 
         // DIVISION CONFIG
         saveResourceIfNotExists("features/divisions.yml");

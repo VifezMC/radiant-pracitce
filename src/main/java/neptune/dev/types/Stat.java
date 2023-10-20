@@ -10,14 +10,16 @@ public class Stat {
     private int wins;
     private int losses;
     private int elo;
+    private String killeffect;
 
 
     public Stat(Player player) {
         this.player = player;
-        this.matches = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".matches");
-        this.wins = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".wins");
-        this.losses = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".losses");
-        this.elo = ConfigManager.statsConfig.getInt(player.getUniqueId().toString() + ".elo");
+        this.matches = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".matches");
+        this.wins = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".wins");
+        this.losses = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".losses");
+        this.elo = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".elo");
+        this.killeffect = ConfigManager.databaseConfig.getString(player.getUniqueId().toString() + ".settings.kill-effect");
     }
 
     public Player getPlayer() {
@@ -75,4 +77,12 @@ public class Stat {
     public void removeELO(byte elo) {
         this.elo -= elo;
     }
+
+    public String getKilleffect() {
+        return killeffect;
+    }
+    public void setKilleffect(String effect) {
+        this.killeffect = effect;
+    }
+
 }

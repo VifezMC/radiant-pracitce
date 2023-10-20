@@ -43,7 +43,7 @@ public class AssembleBoard {
 		}
 
 		// Setup sidebar objective
-		this.objective = this.scoreboard.registerNewObjective("Default2", "dummy");
+		this.objective = this.scoreboard.registerNewObjective("Default", "dummy");
 		this.objective.setDisplaySlot(DisplaySlot.SIDEBAR);
 
 

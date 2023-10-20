@@ -4,6 +4,8 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\PlayerDataListener.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Arena.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\Neptune.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\SettingsInventory.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\SettingsCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\DivisionsManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\KitManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\ranked\RankedInventoryLegacy.java
@@ -17,6 +19,7 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\L
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\PlayerJoin.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\QueueManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\user\RankedCMD.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\SettingsKillEffectsInventory.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\events\AssembleBoardCreateEvent.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\WorldListener.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleBoard.java

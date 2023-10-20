@@ -34,3 +34,5 @@ stats:
     - "&b* KDR&7: &f{kdr}"
     - "&b* TITLE&7: &f{division}"
     - "&7&m-----------------------"
+settings:
+  item-color: "&b"

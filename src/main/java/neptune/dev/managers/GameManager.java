@@ -11,7 +11,9 @@ import neptune.dev.utils.DiscordUtils;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.Console;
 import org.bukkit.*;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.github.paperspigot.Title;
@@ -78,7 +80,8 @@ public class GameManager {
                 secondPlayer.teleport(getLobbyLocation());
                 return;
             }
-
+            firstPlayer.getInventory().setHeldItemSlot(0);
+            secondPlayer.getInventory().setHeldItemSlot(0);
             selectedArena.setAvailable(false);
             QueueManager.Queue.remove(firstPlayer);
             QueueManager.Queue.remove(secondPlayer);
@@ -132,20 +135,37 @@ public class GameManager {
         Player winner = match.getWinner();
         Player loser = match.getLoser();
 
-        Title winnerTitle = new Title(CC.translate("&a&lYOU WON!"), CC.translate("&fYou beat &b" + loser.getName() + "&7!"));
-        winner.sendTitle(winnerTitle);
-        Title loserTitle = new Title(CC.translate("&c&lYOU LOST!"), CC.translate("&fYou lost to &b" + winner.getName() + "&7!"));
-        loser.sendTitle(loserTitle);
-        loser.setGameMode(GameMode.ADVENTURE);
+        PlayerUtils.animateDeath(loser);
+        MatchManager.getMatch(loser).getWinner().hidePlayer(MatchManager.getMatch(loser).getLoser());
 
-
-        Location location = loser.getLocation();
-        double x = location.getX();
-        double y = location.getY() + 6.0;
-        double z = location.getZ();
-        World world = location.getWorld();
-        Location lightningLocation = new Location(world, x, y, z);
-        world.strikeLightning(lightningLocation);
+        switch(PlayerDataListener.getStats(winner).getKilleffect()) {
+            case "Lightning":
+                Location location = loser.getLocation();
+                double x = location.getX();
+                double y = location.getY() + 2.0;
+                double z = location.getZ();
+                World world = location.getWorld();
+                Location lightningLocation = new Location(world, x, y, z);
+                world.strikeLightning(lightningLocation);
+                break;
+            case "Fireworks":
+                Location location2 = loser.getLocation();
+                World world2 = location2.getWorld();
+                Firework firework = world2.spawn(location2, Firework.class);
+                FireworkMeta meta = firework.getFireworkMeta();
+                FireworkEffect.Builder builder = FireworkEffect.builder()
+                        .withColor(Color.RED)
+                        .with(FireworkEffect.Type.BALL_LARGE)
+                        .trail(true)
+                        .flicker(false);
+                meta.addEffect(builder.build());
+                meta.setPower(1);
+                firework.setFireworkMeta(meta);
+                Bukkit.getScheduler().runTaskLater(Neptune.instance, () -> {
+                    firework.detonate();
+                }, 5L);
+                break;
+        }
 
         loser.setHealth(loser.getMaxHealth());
         loser.setFireTicks(0);
@@ -196,7 +216,6 @@ public class GameManager {
             InventoryManager.createSpawnItems(loser);
             loser.updateInventory();
             PlayerUtils.setState(loser, PlayerState.LOBBY);
-            loser.resetTitle();
 
             winner.teleport(PlayerUtils.getLobbyLocation());
             winner.setSaturation(20);
@@ -212,7 +231,7 @@ public class GameManager {
             winner.updateInventory();
             PlayerUtils.setState(winner, PlayerState.LOBBY);
             winner.showPlayer(loser);
-            winner.resetTitle();
+
             if (match != null) {
                 String arenaName = match.getArenaNameAsString();
                 Arena arena = ArenaManager.getByName(arenaName);

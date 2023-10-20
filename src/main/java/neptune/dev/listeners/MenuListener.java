@@ -1,8 +1,10 @@
 package neptune.dev.listeners;
 
+import neptune.dev.Constants;
 import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.InventoryManager;
 import neptune.dev.player.PlayerUtils;
+import neptune.dev.ui.SettingsKillEffectsInventory;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -34,7 +36,6 @@ public class MenuListener implements Listener {
 
                 if (itemMeta != null && itemMeta.getDisplayName() != null &&
                         itemMeta.getDisplayName().equals(CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.unranked.surrounding-items-name")))) {
-                    // Prevent interaction with surrounding items
                     event.setCancelled(true);
                     return;
                 }
@@ -50,6 +51,67 @@ public class MenuListener implements Listener {
                     itemName = itemName.replaceAll("§.", "");
                     String command = "queue " + itemName;
                     player.performCommand(command);
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void settingsMenu(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        Inventory clickedInventory = event.getClickedInventory();
+
+        if (clickedInventory != null && clickedInventory.getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Settings"))) {
+            ItemStack clickedItem = event.getCurrentItem();
+
+            if (clickedItem != null && clickedItem.getType() != Material.AIR) {
+                ItemMeta itemMeta = clickedItem.getItemMeta();
+
+                if (itemMeta != null && itemMeta.getDisplayName() != null &&
+                        itemMeta.getDisplayName().equals(CC.translate("&0."))) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                event.setCancelled(true);
+
+                if (itemMeta != null && itemMeta.hasDisplayName()) {
+                    if (!player.hasPermission(Constants.PlName + ".killeffects")) {
+                        player.sendMessage(CC.translate("&cYou don't have permission to use this."));
+                    }else{
+                        SettingsKillEffectsInventory.openMenu(player);
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler
+    public void killeffectSettingsMenu(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        Inventory clickedInventory = event.getClickedInventory();
+
+        if (clickedInventory != null && clickedInventory.getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Kill Effects"))) {
+            ItemStack clickedItem = event.getCurrentItem();
+
+            if (clickedItem != null && clickedItem.getType() != Material.AIR) {
+                ItemMeta itemMeta = clickedItem.getItemMeta();
+
+                if (itemMeta != null && itemMeta.getDisplayName() != null &&
+                        itemMeta.getDisplayName().equals(CC.translate("&0."))) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                event.setCancelled(true);
+
+                if (itemMeta != null && itemMeta.hasDisplayName()) {
+                    String itemName = itemMeta.getDisplayName();
+                    itemName = itemName.replaceAll("§.", "");
+                    PlayerDataListener.getStats(player).setKilleffect(itemName);
+                    player.sendMessage(CC.translate("&aSuccessfully set kill effect."));
+                    player.closeInventory();
+
                 }
             }
         }

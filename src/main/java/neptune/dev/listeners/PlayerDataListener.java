@@ -24,17 +24,18 @@ public class PlayerDataListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (ConfigManager.statsConfig.get(player.getUniqueId().toString()) == null) {
-            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".kills", 0);
-            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".deaths", 0);
-            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".matches", 0);
-            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".wins", 0);
-            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".losses", 0);
-            ConfigManager.statsConfig.set(player.getUniqueId().toString() + ".elo", ConfigManager.pluginConfig.getInt("general.starting-elo"));
+        if (ConfigManager.databaseConfig.get(player.getUniqueId().toString()) == null) {
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".kills", 0);
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".deaths", 0);
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".matches", 0);
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".wins", 0);
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", 0);
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", ConfigManager.pluginConfig.getInt("general.starting-elo"));
+            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", "none");
 
             try {
-                ConfigManager.statsConfig.save(ConfigManager.stats);
-                ConfigManager.statsConfig.load(ConfigManager.stats);
+                ConfigManager.databaseConfig.save(ConfigManager.database);
+                ConfigManager.databaseConfig.load(ConfigManager.database);
             } catch (IOException | InvalidConfigurationException e) {
                 e.printStackTrace();
             }

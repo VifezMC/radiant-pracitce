@@ -1,4 +1,5 @@
 neptune\dev\managers\DivisionsManager.class
+neptune\dev\ui\SettingsKillEffectsInventory.class
 neptune\dev\types\Kit.class
 neptune\dev\managers\ConfigManager.class
 neptune\dev\managers\GameManager$1.class
@@ -30,6 +31,7 @@ neptune\dev\ui\unranked\UnrankedInventoryModern.class
 neptune\dev\managers\InventoryManager.class
 neptune\dev\commands\user\StatsCMD.class
 neptune\dev\utils\assemble\AssembleBoard.class
+neptune\dev\commands\user\SettingsCMD.class
 neptune\dev\types\Stat.class
 neptune\dev\utils\render\ItemBuilder.class
 neptune\dev\listeners\WorldListener.class
@@ -52,6 +54,7 @@ neptune\dev\types\Division.class
 neptune\dev\utils\assemble\Assemble.class
 neptune\dev\commands\admin\ArenaCMD.class
 neptune\dev\Constants.class
+neptune\dev\ui\SettingsInventory.class
 neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class

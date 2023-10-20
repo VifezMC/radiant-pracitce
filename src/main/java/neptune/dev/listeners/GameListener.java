@@ -50,7 +50,6 @@ public class GameListener implements Listener {
 
         PlayerUtils.animateDeath(p);
         MatchManager.getMatch(p).setLoser(p);
-        MatchManager.getMatch(p).getWinner().hidePlayer(MatchManager.getMatch(p).getLoser());
         GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
     }
 
@@ -79,9 +78,11 @@ public class GameListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player p = event.getPlayer();
-        MatchManager.getMatch(p).setLoser(p);
         event.setQuitMessage(null);
-        GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
+        if(hasPlayerState(p, PlayerState.PLAYING)){
+            MatchManager.getMatch(p).setLoser(p);
+            GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
+        }
     }
 
 
