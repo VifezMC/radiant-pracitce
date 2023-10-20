@@ -7,7 +7,7 @@ general:
   starting-elo: 1000
 tablist:
   enable: true
-  header: "&bglacier.net"
+  header: "&bYou're playing on &fPRACTICE &bon &fglacier.net"
   footer: "&7Enjoy your stay!"
 discord:
   enable-webhook: true
