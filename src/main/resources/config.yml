@@ -10,5 +10,5 @@ tablist:
   header: "&bYou're playing on &fPractice &bon &fglacier.net"
   footer: "&7Enjoy your stay!"
 discord:
-  enable-webhook: true
-  webhook: "https://discord.com/api/webhooks/1164216262365294642/__9QgblObqkTGGVV91KxK28PUxVE3aYQ_SkFby_H_o9cM2Gax8pIx_dJw2RK6FT-MdIG"
+  enable-webhook: false
+  webhook: ""
