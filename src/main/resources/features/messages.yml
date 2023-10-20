@@ -17,6 +17,7 @@ match:
     - '&f- &bOpponent: &f{opponent} &7({opponent-ping}ms)'
     - '&f- &bArena: &f{arena}'
     - '&f- &bKit: &f{kit}'
+    - '&f- &bTitle: &f{division}'
     - ' '
   kill-message:
     - '&7&m------------------------------'

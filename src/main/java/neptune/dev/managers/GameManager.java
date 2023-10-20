@@ -94,12 +94,14 @@ public class GameManager {
                     .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer).getName()))
                     .replace("{opponent-ping}", PlayerUtils.getPing(MatchManager.getOpponent(firstPlayer)) + "")
                     .replace("{kit}", MatchManager.getMatch(firstPlayer).getKitName())
-                    .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(firstPlayer)).getName()));
+                    .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(firstPlayer)).getName())
+                    .replace("{division}", CC.translate(ConfigManager.divisionsManager.getPlayerDivision(PlayerDataListener.getStats(secondPlayer).getELO()))));
             secondPlayer.sendMessage(CC.translate(msg)
                     .replace("{opponent}", Objects.requireNonNull(MatchManager.getOpponent(firstPlayer).getName()))
                     .replace("{opponent-ping}", PlayerUtils.getPing(MatchManager.getOpponent(firstPlayer)) + "")
                     .replace("{kit}", MatchManager.getMatch(firstPlayer).getKitName())
-                    .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(firstPlayer)).getName()));
+                    .replace("{arena}", MatchManager.getArena(MatchManager.getMatchID(firstPlayer)).getName())
+                    .replace("{division}", CC.translate(ConfigManager.divisionsManager.getPlayerDivision(PlayerDataListener.getStats(firstPlayer).getELO()))));
         }
             firstPlayer.teleport(selectedArena.getSpawn1());
             secondPlayer.teleport(selectedArena.getSpawn2());
