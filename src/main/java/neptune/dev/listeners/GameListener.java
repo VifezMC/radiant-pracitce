@@ -43,8 +43,11 @@ public class GameListener implements Listener {
     public void onPlayerDeath(PlayerDeathEvent event) {
         event.getDrops().clear();
         event.setDeathMessage(null);
-
         Player p = event.getEntity();
+        if (p.getInventory().getItemInHand() != null) {
+            p.getInventory().setItemInHand(null);
+        }
+
         PlayerUtils.animateDeath(p);
         MatchManager.getMatch(p).setLoser(p);
         MatchManager.getMatch(p).getWinner().hidePlayer(MatchManager.getMatch(p).getLoser());

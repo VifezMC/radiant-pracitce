@@ -20,8 +20,8 @@ match:
     - ' '
   kill-message:
     - '&7&m------------------------------'
-    - '&a&lWinner: &f{winner}'
-    - '&c&lLoser: &f{loser}'
+    - '&a&lWinner: &f{winner} &a({winner-elo}) (+{elo})'
+    - '&c&lLoser: &f{loser} &c({loser-elo}) (-{elo})'
     - '&7&m------------------------------'
   cooldown-message: "&cYou need to wait {cooldown} seconds!"
   starting-countdown: "&bGame starting in &f{countdown}..."
