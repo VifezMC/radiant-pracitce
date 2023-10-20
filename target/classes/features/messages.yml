@@ -11,13 +11,27 @@ general:
   ping-message: "&eYour ping is &f{ping}"
   other-player-ping-message: "&e{player}'s ping is &f{ping}"
 match:
-  match-found: "\n&bMatch Found\n - &bKit: &f{kit}&f\n - &bArena: &f{arena}&f\n - &bOpponent: &f{opponent}\n - &bPing: &f{opponent-ping}\n "
-  kill-message: "&a{winner} &7killed &c{loser}"
+  match-found:
+    - ' '
+    - '&bMatch Found'
+    - '&f- &bOpponent: &f{opponent} &7({opponent-ping}ms)'
+    - '&f- &bArena: &f{arena}'
+    - '&f- &bKit: &f{kit}'
+    - ' '
+  kill-message:
+    - '&7&m------------------------------'
+    - '&a&lWinner: &f{winner}'
+    - '&c&lLoser: &f{loser}'
+    - '&7&m------------------------------'
   cooldown-message: "&cYou need to wait {cooldown} seconds!"
   starting-countdown: "&bGame starting in &f{countdown}..."
   match-started: "&bGame started!"
 queue:
   already-in-queue-message: "&cYou are already in queue!"
-  added-to-queue: "\n&b{gamemode} Queue \n &fSearching for a match.. \n  "
+  added-to-queue:
+    - ''
+    - '&b{gamemode} Queue'
+    - ' &fSearching for a match..'
+    - ''
   leave-queue: "&cYou're no longer in {kit} queue."
   not-in-queue: "&cYou are not in queue!"

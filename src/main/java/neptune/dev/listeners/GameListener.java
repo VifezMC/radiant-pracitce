@@ -6,7 +6,7 @@ import neptune.dev.managers.MatchManager;
 import neptune.dev.player.GameState;
 import neptune.dev.player.PlayerState;
 import neptune.dev.player.PlayerUtils;
-import neptune.dev.types.Game;
+import neptune.dev.managers.GameManager;
 import neptune.dev.types.Match;
 import neptune.dev.utils.Cooldowns;
 import neptune.dev.utils.render.CC;
@@ -20,7 +20,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.player.PlayerDropItemEvent;
@@ -28,7 +27,6 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
-import org.github.paperspigot.Title;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -49,58 +47,10 @@ public class GameListener implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event) {
-        Player p = event.getEntity();
         event.getDrops().clear();
         event.setDeathMessage(null);
-        p.setGameMode(GameMode.CREATIVE);
-        Location location = p.getLocation();
-        double x = location.getX();
-        double y = location.getY() + 6.0;
-        double z = location.getZ();
-        World world = location.getWorld();
-        Location lightningLocation = new Location(world, x, y, z);
-        LightningStrike lightning = world.strikeLightning(lightningLocation);
-        Location newLocation = new Location(world, x, y + 1.0, z, location.getYaw(), location.getPitch());
-        p.teleport(newLocation);
-        p.setHealth(p.getMaxHealth());
-        p.setFireTicks(0);
-        if (hasPlayerState(p, PlayerState.PLAYING)) {
-            Player loser = event.getEntity(), winner = MatchManager.getOpponent(loser);
-            String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
-            String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            winner.sendMessage(CC.translate(formattedMessage));
-            winner.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
-            winner.sendMessage(CC.translate(CC.translate("&7&lWinner: &f" + winner.getName())));
-            winner.sendMessage(CC.translate(CC.translate("&7&lLoser: &f" + loser.getName())));
-            winner.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
-
-            Title winnerTitle = new Title(CC.translate("&a&lYOU WON!"), CC.translate("&fYou beat &b" + loser.getName() + "&7!"));
-            winner.sendTitle(winnerTitle);
-
-            loser.sendMessage(CC.translate(formattedMessage));
-            loser.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
-            loser.sendMessage(CC.translate(CC.translate("&7&lWinner: &f" + winner.getName())));
-            loser.sendMessage(CC.translate(CC.translate("&7&lLoser: &f" + loser.getName())));
-            loser.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
-
-            Title loserTitle = new Title(CC.translate("&c&lYOU LOST!"), CC.translate("&fYou lost to &b" + winner.getName() + "&7!"));
-            loser.sendTitle(loserTitle);
-
-
-
-            PlayerUtils.setState(winner, PlayerState.ENDED);
-            PlayerUtils.setState(loser, PlayerState.ENDED);
-            PlayerDataListener.getStats(loser).addLosses();
-            PlayerDataListener.getStats(winner).addWins();
-            Random random = new Random();
-            byte randomNumber = (byte) (random.nextInt(11) + 10);
-
-            PlayerDataListener.getStats(winner).addELO(randomNumber);
-            PlayerDataListener.getStats(loser).removeELO(randomNumber);
-
-            Game.EndGame(winner, loser);
-        }
-        event.setDeathMessage(null);
+        Player loser = event.getEntity(), winner = MatchManager.getOpponent(loser);
+        GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
     }
 
 
@@ -128,15 +78,8 @@ public class GameListener implements Listener {
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
-        Player p = event.getPlayer();
-        if (hasPlayerState(p, PlayerState.PLAYING)) {
-            Player loser = event.getPlayer(), winner = MatchManager.getOpponent(loser);
-            String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
-            String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-            winner.sendMessage(CC.translate(formattedMessage));
-            loser.sendMessage(CC.translate(formattedMessage));
-            Game.EndGame(winner, loser);
-        }
+        Player loser = event.getPlayer(), winner = MatchManager.getOpponent(loser);
+        GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
     }
 
 
@@ -148,37 +91,11 @@ public class GameListener implements Listener {
             String kitName = match.getKitName();
             if (KitManager.getKit(kitName).getRules().contains("sumo")) {
                 if (p.getLocation().getBlock().getType() == Material.WATER || p.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
-                    handleSumoDeath(p);
+                    Player winner = MatchManager.getOpponent(p), loser = p;
+                    GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
                 }
             }
         }
-    }
-
-    private void handleSumoDeath(Player p) {
-        p.setGameMode(GameMode.CREATIVE);
-//        PlayerUtils.removeState(p, PlayerState.PLAYING);
-        PlayerUtils.setState(p, PlayerState.LOBBY);
-        Location location = p.getLocation();
-        double x = location.getX();
-        double y = location.getY() + 6.0;
-        double z = location.getZ();
-        World world = location.getWorld();
-        Location lightningLocation = new Location(world, x, y, z);
-        LightningStrike lightning = world.strikeLightning(lightningLocation);
-        Match match = MatchManager.getMatch(p);
-        Player winner = MatchManager.getOpponent(p), loser = p;
-        String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
-        String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
-        winner.sendMessage(CC.translate(formattedMessage));
-        loser.sendMessage(CC.translate(formattedMessage));
-        Game.EndGame(winner, loser);
-        PlayerDataListener.getStats(loser).addLosses();
-        PlayerDataListener.getStats(winner).addWins();
-        Random random = new Random();
-        byte randomNumber = (byte) (random.nextInt(11) + 10);
-
-        PlayerDataListener.getStats(winner).addELO(randomNumber);
-        PlayerDataListener.getStats(loser).removeELO(randomNumber);
     }
 
     @EventHandler
@@ -249,7 +166,7 @@ public class GameListener implements Listener {
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
             winner.sendMessage(CC.translate(formattedMessage));
             loser.sendMessage(CC.translate(formattedMessage));
-            Game.EndGame(winner, loser);
+            GameManager.EndGame(winner, loser, MatchManager.getMatch(winner).getKitName());
         }
     }
 

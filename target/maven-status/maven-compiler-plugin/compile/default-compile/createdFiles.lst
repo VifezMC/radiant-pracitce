@@ -1,6 +1,7 @@
 neptune\dev\managers\DivisionsManager.class
 neptune\dev\types\Kit.class
 neptune\dev\managers\ConfigManager.class
+neptune\dev\managers\GameManager$1.class
 neptune\dev\ui\StatsInventory.class
 neptune\dev\commands\user\RankedCMD.class
 neptune\dev\utils\assemble\events\AssembleBoardCreatedEvent.class
@@ -37,8 +38,6 @@ neptune\dev\commands\admin\MainCMD.class
 neptune\dev\types\Match.class
 neptune\dev\utils\assemble\AssembleBoardEntry.class
 neptune\dev\utils\DiscordUtils.class
-neptune\dev\types\Game$1.class
-neptune\dev\types\Game.class
 neptune\dev\listeners\MenuListener.class
 neptune\dev\commands\admin\KitsCMD.class
 neptune\dev\utils\LocationUtil.class
@@ -56,6 +55,7 @@ neptune\dev\Constants.class
 neptune\dev\Neptune.class
 neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.class
 neptune\dev\commands\user\UnrankedCMD.class
+neptune\dev\managers\GameManager.class
 neptune\dev\Placeholder.class
 neptune\dev\utils\render\CC.class
 neptune\dev\listeners\BlockListener.class

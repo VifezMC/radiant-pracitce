@@ -3,7 +3,6 @@ package neptune.dev.managers;
 import neptune.dev.listeners.BlockListener;
 import neptune.dev.types.Arena;
 import neptune.dev.utils.LocationUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -12,7 +11,7 @@ import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
+import java.util.Random;
 
 public class ArenaManager {
 
@@ -47,7 +46,11 @@ public class ArenaManager {
         return null;
     }
 
-    public static void resetArena(Location lowEdge, Location highEdge, Player p) {
+    public static void resetArena(Location lowEdge, Location highEdge, Player p, String kitName) {
+        if(KitManager.getKit(kitName).getRules().contains("build")){
+
+
+
         World world = lowEdge.getWorld();
 
         int minX = Math.min(lowEdge.getBlockX(), highEdge.getBlockX());
@@ -67,9 +70,26 @@ public class ArenaManager {
                     }
                 }
             }
-        }
+            }
         BlockListener.removeBlocks(p);
+        }
     }
+
+    public static Arena selectRandomAvailableArena(List<String> arenas) {
+        List<Arena> availableArenas = new ArrayList<>();
+        for (String arenaName : arenas) {
+            Arena arena = ArenaManager.getByName(arenaName);
+            if (arena != null && arena.isAvailable()) {
+                availableArenas.add(arena);
+            }
+        }
+        if (availableArenas.isEmpty()) {
+            return null;
+        }
+        Random random = new Random();
+        return availableArenas.get(random.nextInt(availableArenas.size()));
+    }
+
     public static List<Arena> getArenas() {
         return arenas;
     }

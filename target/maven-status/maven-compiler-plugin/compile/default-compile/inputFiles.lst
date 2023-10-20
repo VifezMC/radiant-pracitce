@@ -12,7 +12,6 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\Constan
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\ui\unranked\UnrankedInventoryLegacy.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleBoardEntry.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleListener.java
-C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\types\Game.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\events\AssembleBoardDestroyEvent.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\LocationUtil.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\PlayerJoin.java
@@ -29,6 +28,7 @@ C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\manager
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\listeners\RulesListener.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\admin\MainCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\Scoreboard.java
+C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\managers\GameManager.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\commands\admin\ArenaCMD.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\player\PlayerUtils.java
 C:\Users\nodyt\Desktop\Plugins\Private\Neptune\src\main\java\neptune\dev\utils\assemble\AssembleStyle.java

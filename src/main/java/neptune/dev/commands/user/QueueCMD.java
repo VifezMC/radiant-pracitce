@@ -28,9 +28,10 @@ public class QueueCMD implements CommandExecutor {
 
         if (isKitConfigured(kitName)) {
             Player p = (Player) sender;
-            String formattingString = ConfigManager.messagesConfig.getString("queue.added-to-queue");
-            String formattedMessage = formattingString.replace("{gamemode}", args[0]);
-            p.sendMessage(CC.translate(formattedMessage));
+            for (String msg : ConfigManager.messagesConfig.getStringList("queue.added-to-queue")) {
+                p.sendMessage(CC.translate(msg)
+                        .replace("{gamemode}", args[0]));
+            }
             PlayerUtils.setState(p, PlayerState.INQUEUE);
             QueueManager.addPlayerToQueue(p, kitName);
             return true;
