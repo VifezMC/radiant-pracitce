@@ -7,6 +7,7 @@ import neptune.dev.player.PlayerUtils;
 import neptune.dev.ui.SettingsKillEffectsInventory;
 import neptune.dev.utils.render.CC;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -58,7 +59,7 @@ public class MenuListener implements Listener {
 
     @EventHandler
     public void settingsMenu(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
+        Player p = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
 
         if (clickedInventory != null && clickedInventory.getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Settings"))) {
@@ -76,10 +77,11 @@ public class MenuListener implements Listener {
                 event.setCancelled(true);
 
                 if (itemMeta != null && itemMeta.hasDisplayName()) {
-                    if (!player.hasPermission(Constants.PlName + ".killeffects")) {
-                        player.sendMessage(CC.translate("&cYou don't have permission to use this."));
+                    if (!p.hasPermission(Constants.PlName + ".killeffects")) {
+                        p.sendMessage(CC.translate("&cYou don't have permission to use this."));
                     }else{
-                        SettingsKillEffectsInventory.openMenu(player);
+                        SettingsKillEffectsInventory.openMenu(p);
+                        p.playSound(p.getLocation(), Sound.NOTE_STICKS, 1.0f, 1.0f);
                     }
                 }
             }
@@ -88,7 +90,7 @@ public class MenuListener implements Listener {
 
     @EventHandler
     public void killeffectSettingsMenu(InventoryClickEvent event) {
-        Player player = (Player) event.getWhoClicked();
+        Player p = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
 
         if (clickedInventory != null && clickedInventory.getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Kill Effects"))) {
@@ -108,10 +110,16 @@ public class MenuListener implements Listener {
                 if (itemMeta != null && itemMeta.hasDisplayName()) {
                     String itemName = itemMeta.getDisplayName();
                     itemName = itemName.replaceAll("§.", "");
-                    PlayerDataListener.getStats(player).setKilleffect(itemName);
-                    player.sendMessage(CC.translate("&aSuccessfully set kill effect."));
-                    player.closeInventory();
-
+                    if(PlayerDataListener.getStats(p).getKilleffect().equals(itemName)){
+                        PlayerDataListener.getStats(p).setKilleffect("none");
+                        p.sendMessage(CC.translate("&cSuccessfully removed kill effect."));
+                        p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    }else{
+                        PlayerDataListener.getStats(p).setKilleffect(itemName);
+                        p.sendMessage(CC.translate("&aSuccessfully set kill effect."));
+                        p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    }
+                    p.closeInventory();
                 }
             }
         }
