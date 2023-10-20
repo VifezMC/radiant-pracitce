@@ -72,8 +72,8 @@ public class ConfigManager {
         menusConfig = YamlConfiguration.loadConfiguration(menus);
 
         // STATS CONFIG
-        saveResourceIfNotExists("cache/stats.yml");
-        database = new File(Neptune.instance.getDataFolder(), "cache/stats.yml");
+        saveResourceIfNotExists("cache/data.yml");
+        database = new File(Neptune.instance.getDataFolder(), "cache/data.yml");
         databaseConfig = YamlConfiguration.loadConfiguration(database);
 
         // DIVISION CONFIG
