@@ -28,6 +28,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import org.github.paperspigot.Title;
 
 import java.util.HashMap;
 import java.util.Random;
@@ -68,7 +69,25 @@ public class GameListener implements Listener {
             String formattingString = ConfigManager.messagesConfig.getString("match.kill-message");
             String formattedMessage = formattingString.replace("{winner}", winner.getName()).replace("{loser}", loser.getName());
             winner.sendMessage(CC.translate(formattedMessage));
+            winner.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
+            winner.sendMessage(CC.translate(CC.translate("&7&lWinner: &f" + winner.getName())));
+            winner.sendMessage(CC.translate(CC.translate("&7&lLoser: &f" + loser.getName())));
+            winner.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
+
+            Title winnerTitle = new Title(CC.translate("&a&lYOU WON!"), CC.translate("&fYou beat &b" + loser.getName() + "&7!"));
+            winner.sendTitle(winnerTitle);
+
             loser.sendMessage(CC.translate(formattedMessage));
+            loser.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
+            loser.sendMessage(CC.translate(CC.translate("&7&lWinner: &f" + winner.getName())));
+            loser.sendMessage(CC.translate(CC.translate("&7&lLoser: &f" + loser.getName())));
+            loser.sendMessage(CC.translate(CC.translate("&7&m------------------------------")));
+
+            Title loserTitle = new Title(CC.translate("&c&lYOU LOST!"), CC.translate("&fYou lost to &b" + winner.getName() + "&7!"));
+            loser.sendTitle(loserTitle);
+
+
+
             PlayerUtils.setState(winner, PlayerState.ENDED);
             PlayerUtils.setState(loser, PlayerState.ENDED);
             PlayerDataListener.getStats(loser).addLosses();
