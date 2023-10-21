@@ -1,7 +1,7 @@
 package neptune.dev.listeners;
 
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.types.Stat;
+import neptune.dev.types.Data;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -15,13 +15,13 @@ public class StatsListener implements Listener {
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        Stat stat = PlayerDataListener.getStats(player);
-        if (stat == null) return;
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".matches", stat.getMatches());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".wins", stat.getWins());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", stat.getLosses());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", stat.getELO());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", stat.getKilleffect());
+        Data data = PlayerDataListener.getStats(player);
+        if (data == null) return;
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".matches", data.getMatches());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".wins", data.getWins());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", data.getLosses());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", data.getELO());
+        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", data.getKilleffect());
 
         try {
             ConfigManager.databaseConfig.save(ConfigManager.database);

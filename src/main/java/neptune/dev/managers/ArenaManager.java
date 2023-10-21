@@ -70,8 +70,7 @@ public class ArenaManager {
                     }
                 }
             }
-            BlockListener.removeBlocks(match.getPlayer1());
-            BlockListener.removeBlocks(match.getPlayer2());
+            BlockListener.removeBlocks(match);
         }
 
         for (Entity entity : world.getEntities()) {

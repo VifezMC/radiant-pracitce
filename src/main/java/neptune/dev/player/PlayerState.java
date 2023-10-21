@@ -4,5 +4,6 @@ public enum PlayerState {
     LOBBY,
     ENDED,
     PLAYING,
-    INQUEUE
+    INQUEUE,
+    KITEDITOR
 }

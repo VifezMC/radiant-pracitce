@@ -13,7 +13,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class UnrankedInventoryLegacy {
 
     public static void openMenu(Player player, ConfigurationSection kitsConfig) {
-        Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.unranked.menu-name")));
+        Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate(ConfigManager.menusConfig.getString("kit-editor.unranked.menu-name")));
 
         if (kitsConfig != null && kitsConfig.contains("kits")) {
             ConfigurationSection kitsSection = kitsConfig.getConfigurationSection("kits");
@@ -23,7 +23,7 @@ public class UnrankedInventoryLegacy {
                     ItemStack iconItem = kitConfig.getItemStack("icon");
                     ItemMeta itemMeta = iconItem.getItemMeta();
                     itemMeta.addItemFlags(ItemFlag.values());
-                    itemMeta.setDisplayName(CC.translate(ConfigManager.menusConfig.getString("queue-gui-type.item-color") + kitName));
+                    itemMeta.setDisplayName(CC.translate(ConfigManager.menusConfig.getString("kit-editor.item-color") + kitName));
                     iconItem.setItemMeta(itemMeta);
                     menu.addItem(iconItem);
                 }

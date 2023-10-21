@@ -1,5 +1,6 @@
 package neptune.dev.listeners;
 
+import neptune.dev.commands.user.KitEditorCMD;
 import neptune.dev.managers.ConfigManager;
 import neptune.dev.managers.QueueManager;
 import neptune.dev.player.PlayerState;
@@ -39,7 +40,7 @@ public class SpawnListeners implements Listener {
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().toLowerCase();
         Player p = event.getPlayer();
-        if(hasPlayerState(p, PlayerState.INQUEUE) || hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue")){
+        if(hasPlayerState(p, PlayerState.INQUEUE) || hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue") || hasPlayerState(p, PlayerState.KITEDITOR)){
             event.setCancelled(true);
             p.sendMessage(CC.translate("&cYou can't use commands game in-types or in queue."));
         }
@@ -48,7 +49,7 @@ public class SpawnListeners implements Listener {
     @EventHandler // DISABLING FOOD DROP IN LOBBY
     public void onFoodLevel(FoodLevelChangeEvent event) {
         Player player = (Player) event.getEntity();
-        if (hasPlayerState(player, PlayerState.LOBBY) || hasPlayerState(player, PlayerState.INQUEUE)) {
+        if (hasPlayerState(player, PlayerState.LOBBY) || hasPlayerState(player, PlayerState.INQUEUE) || hasPlayerState(player, PlayerState.KITEDITOR)) {
             event.setCancelled(true);
         }
     }
@@ -56,7 +57,7 @@ public class SpawnListeners implements Listener {
     @EventHandler // DISABLE PLAYER ITEM DROPS
     public void onDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
-        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE || hasPlayerState(player, PlayerState.INQUEUE)) {
+        if (hasPlayerState(player, PlayerState.LOBBY) && player.getGameMode() != GameMode.CREATIVE || hasPlayerState(player, PlayerState.INQUEUE) || hasPlayerState(player, PlayerState.KITEDITOR)) {
             event.setCancelled(true);
         }
     }
@@ -69,10 +70,11 @@ public class SpawnListeners implements Listener {
         }
         PlayerUtils.playerStates.remove(event.getPlayer());
         PlayerUtils.gameStates.remove(event.getPlayer());
+        KitEditorCMD.kiteditor.remove(event.getPlayer());
     }
 
     @EventHandler // SPAWN ITEMS
-    public void onPlayerInteract(PlayerInteractEvent event) {
+    public void onSpawnInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 
@@ -108,7 +110,7 @@ public class SpawnListeners implements Listener {
     }
 
     @EventHandler // Queue Items
-    public void onPlayerInteract2(PlayerInteractEvent event) {
+    public void onQueueInteract(PlayerInteractEvent event) {
         Player player = event.getPlayer();
         ItemStack item = event.getItem();
 

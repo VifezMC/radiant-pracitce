@@ -36,3 +36,10 @@ stats:
     - "&7&m-----------------------"
 settings:
   item-color: "&b"
+kit-editor:
+  menu-name: "&8Kit editor"
+  item-color: "&b"
+  height: 3
+  surrounding-items: STAINED_GLASS_PANE
+  surrounding-items-name: " "
+  durability: 7

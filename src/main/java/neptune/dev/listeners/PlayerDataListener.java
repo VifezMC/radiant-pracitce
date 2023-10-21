@@ -1,7 +1,8 @@
 package neptune.dev.listeners;
 
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.types.Stat;
+import neptune.dev.types.Kit;
+import neptune.dev.types.Data;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
@@ -14,10 +15,10 @@ import java.util.HashMap;
 
 public class PlayerDataListener implements Listener {
 
-    public static HashMap<Player, Stat> stats = new HashMap<>();
+    public static HashMap<Player, Data> stats = new HashMap<>();
 
 
-    public static Stat getStats(OfflinePlayer player) {
+    public static Data getStats(OfflinePlayer player) {
         return stats.get(player);
     }
 
@@ -32,6 +33,9 @@ public class PlayerDataListener implements Listener {
             ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", 0);
             ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", ConfigManager.pluginConfig.getInt("general.starting-elo"));
             ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", "none");
+            for (Kit kit : ConfigManager.kitManager.getKits()) {
+                ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".kiteditor." + kit.getName(), "none");
+            }
 
             try {
                 ConfigManager.databaseConfig.save(ConfigManager.database);
@@ -40,7 +44,7 @@ public class PlayerDataListener implements Listener {
                 e.printStackTrace();
             }
         }
-        stats.put(event.getPlayer(), new Stat(player));
+        stats.put(event.getPlayer(), new Data(player));
     }
 
 }

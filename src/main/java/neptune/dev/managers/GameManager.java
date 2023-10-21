@@ -13,6 +13,7 @@ import neptune.dev.utils.render.Console;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
@@ -121,6 +122,13 @@ public class GameManager {
             p.getInventory().clear();
             p.getInventory().setArmorContents(null);
             p.getInventory().setContents(KitManager.getKit(kitName).getItems());
+
+
+            if (!(ConfigManager.databaseConfig.get(p.getUniqueId() + ".kiteditor." + kitName).equals("none"))) {
+                p.getInventory().setContents(PlayerDataListener.getStats(p).getKitItems(kitName));
+            }else{
+                p.getInventory().setContents(KitManager.getKit(kitName).getItems());
+            }
             p.getInventory().setArmorContents(KitManager.getKit(kitName).getArmour());
             p.updateInventory();
             p.closeInventory();
@@ -132,7 +140,7 @@ public class GameManager {
         }
     }
 
-    public static void EndGame(Match match, String kitName) {
+    public static void EndGame(Match match) {
         Player winner = match.getWinner();
         Player loser = match.getLoser();
 

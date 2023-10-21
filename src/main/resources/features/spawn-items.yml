@@ -16,9 +16,9 @@ spawn-items:
     command: "stats"
   item4:
     type: PAPER
-    display-name: "&bHost Event &7(Right Click)"
+    display-name: "&bKit Editor &7(Right Click)"
     slot: 8
-    command: "events"
+    command: "kiteditor"
   item5:
     type: SKULL_ITEM
     display-name: "&bSettings &7(Right Click)"

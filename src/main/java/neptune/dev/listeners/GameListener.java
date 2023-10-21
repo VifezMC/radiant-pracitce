@@ -50,7 +50,7 @@ public class GameListener implements Listener {
 
         PlayerUtils.animateDeath(p);
         MatchManager.getMatch(p).setLoser(p);
-        GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
+        GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()));
     }
 
 
@@ -81,7 +81,7 @@ public class GameListener implements Listener {
         event.setQuitMessage(null);
         if(hasPlayerState(p, PlayerState.PLAYING)){
             MatchManager.getMatch(p).setLoser(p);
-            GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
+            GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()));
         }
     }
 
@@ -95,7 +95,7 @@ public class GameListener implements Listener {
             if (KitManager.getKit(kitName).getRules().contains("sumo")) {
                 if (p.getLocation().getBlock().getType() == Material.WATER || p.getLocation().getBlock().getType() == Material.STATIONARY_WATER) {
                     MatchManager.getMatch(p).setLoser(p);
-                    GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()), MatchManager.getMatch(MatchManager.getMatch(p).getLoser()).getKitName());
+                    GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()));
                 }
             }
         }

@@ -1,8 +1,6 @@
 package neptune.dev.ui;
 
-import neptune.dev.listeners.PlayerDataListener;
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.types.Stat;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;

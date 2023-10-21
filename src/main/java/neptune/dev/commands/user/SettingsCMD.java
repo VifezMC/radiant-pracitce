@@ -16,7 +16,6 @@ public class SettingsCMD implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        BlockListener.removeBlocks(p);
         SettingsInventory.openMenu(p);
         return true;
     }

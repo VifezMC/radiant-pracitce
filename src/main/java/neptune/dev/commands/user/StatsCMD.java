@@ -16,7 +16,6 @@ public class StatsCMD implements CommandExecutor {
             return true;
         }
         Player p = (Player) sender;
-        BlockListener.removeBlocks(p);
         StatsInventory.openStats(p);
         return true;
     }

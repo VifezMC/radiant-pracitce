@@ -1,17 +1,12 @@
 package neptune.dev;
 
 import lombok.Getter;
-import neptune.dev.commands.admin.ArenaCMD;
-import neptune.dev.commands.admin.KitsCMD;
-import neptune.dev.commands.admin.MainCMD;
-import neptune.dev.commands.admin.SetSpawnCMD;
+import neptune.dev.commands.admin.*;
 import neptune.dev.commands.user.*;
 import neptune.dev.listeners.*;
 import neptune.dev.managers.*;
-import neptune.dev.ui.ranked.RankedModernUI;
 import neptune.dev.ui.unranked.UnrankedInventoryModern;
 import neptune.dev.utils.Cooldowns;
-import neptune.dev.utils.DiscordUtils;
 import neptune.dev.utils.assemble.Assemble;
 import neptune.dev.utils.render.Console;
 import org.bukkit.command.CommandExecutor;
@@ -42,7 +37,7 @@ public class Neptune extends JavaPlugin {
     ConfigManager.registerConfigs();
 
     // SCOREBOARD
-    Assemble assemble = new Assemble(this, new Scoreboard());
+    Assemble assemble = new Assemble(this, new ScoreboardManager());
 
     // LIST LISTENERS
     registerEventListeners();
@@ -78,12 +73,12 @@ public class Neptune extends JavaPlugin {
             new WorldListener(),
             new GameListener(),
             new UnrankedInventoryModern(ConfigManager.kitManager),
-            new RankedModernUI(),
             new BlockListener(),
             new PlayerDataListener(),
             new MenuListener(),
             new StatsListener(),
-            new RulesListener()
+            new RulesListener(),
+            new KitEditorListener()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
   }
 
@@ -99,6 +94,7 @@ public class Neptune extends JavaPlugin {
     createCMD("unranked", new UnrankedCMD());
     createCMD("ranked", new RankedCMD());
     createCMD("settings", new SettingsCMD());
+    createCMD("kiteditor", new KitEditorCMD());
   }
 
   private void createCMD(String cmd, CommandExecutor commandfile){

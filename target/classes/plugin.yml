@@ -29,5 +29,7 @@ commands:
     description: Open settings menu.
   unranked:
     description: Open unranked menu.
+  kiteditor:
+    description: Kit editor
   ranked:
     description: Open ranked menu.

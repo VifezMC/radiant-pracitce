@@ -2,8 +2,10 @@ package neptune.dev.types;
 
 import neptune.dev.managers.ConfigManager;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 
-public class Stat {
+
+public class Data {
 
     private Player player;
     private int matches;
@@ -13,7 +15,8 @@ public class Stat {
     private String killeffect;
 
 
-    public Stat(Player player) {
+
+    public Data(Player player) {
         this.player = player;
         this.matches = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".matches");
         this.wins = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".wins");
@@ -84,5 +87,7 @@ public class Stat {
     public void setKilleffect(String effect) {
         this.killeffect = effect;
     }
-
+    public ItemStack[] getKitItems(String kitName) {
+        return ConfigManager.databaseConfig.getList( player.getUniqueId() + ".kiteditor." + kitName).toArray(new ItemStack[0]);
+    }
 }

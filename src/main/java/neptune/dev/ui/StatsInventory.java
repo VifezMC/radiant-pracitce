@@ -2,9 +2,7 @@ package neptune.dev.ui;
 
 import neptune.dev.listeners.PlayerDataListener;
 import neptune.dev.managers.ConfigManager;
-import neptune.dev.managers.DivisionsManager;
-import neptune.dev.types.Division;
-import neptune.dev.types.Stat;
+import neptune.dev.types.Data;
 import neptune.dev.utils.render.CC;
 import neptune.dev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;
@@ -19,7 +17,7 @@ import java.util.List;
 public class StatsInventory {
 
     public static void openStats(Player player) {
-        Stat stats = PlayerDataListener.getStats(player);
+        Data stats = PlayerDataListener.getStats(player);
         if (stats == null) return;
         Inventory menu = Bukkit.createInventory(null, 9 * 3, CC.translate(ConfigManager.menusConfig.getString("stats.menu-name")));
         for (int x = 0; x < 27; x++) {

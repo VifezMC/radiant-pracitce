@@ -17,6 +17,16 @@ scoreboard:
     - " "
     - " &7glacier.net"
     - "&7&m--------------------"
+  kit-editor:
+    - "&7&m--------------------"
+    - " &fOnline: &b{online_players}"
+    - " &fPlaying: &b{playing_players}"
+    - " "
+    - " &fEditing:"
+    - "  &b{kit}"
+    - " "
+    - " &7glacier.net"
+    - "&7&m--------------------"
   match:
     - "&7&m--------------------"
     - " &bOpponent: &f{opponent}"

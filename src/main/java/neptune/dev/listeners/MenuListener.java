@@ -57,6 +57,39 @@ public class MenuListener implements Listener {
     }
 
     @EventHandler
+    public void kitEditorMenu(InventoryClickEvent event) {
+        Player player = (Player) event.getWhoClicked();
+        Inventory clickedInventory = event.getClickedInventory();
+
+        if (clickedInventory != null && clickedInventory.getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("kit-editor.menu-name")))) {
+            ItemStack clickedItem = event.getCurrentItem();
+
+            if (clickedItem != null && clickedItem.getType() != Material.AIR) {
+                ItemMeta itemMeta = clickedItem.getItemMeta();
+
+                if (itemMeta != null && itemMeta.getDisplayName() != null &&
+                        itemMeta.getDisplayName().equals(CC.translate(ConfigManager.menusConfig.getString("kit-editor.surrounding-items-name")))) {
+                    event.setCancelled(true);
+                    return;
+                }
+
+                event.setCancelled(true);
+                player.closeInventory();
+                player.getInventory().clear();
+                InventoryManager.createQueueItems(player);
+                player.updateInventory();
+
+                if (itemMeta != null && itemMeta.hasDisplayName()) {
+                    String itemName = itemMeta.getDisplayName();
+                    itemName = itemName.replaceAll("§.", "");
+                    String command = "kiteditor " + itemName;
+                    player.performCommand(command);
+                }
+            }
+        }
+    }
+
+    @EventHandler
     public void settingsMenu(InventoryClickEvent event) {
         Player p = (Player) event.getWhoClicked();
         Inventory clickedInventory = event.getClickedInventory();
