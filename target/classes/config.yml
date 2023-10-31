@@ -1,14 +1,25 @@
+#░██████╗████████╗███████╗██╗░░░░░██╗░░░░░░█████╗░██████╗░
+#██╔════╝╚══██╔══╝██╔════╝██║░░░░░██║░░░░░██╔══██╗██╔══██╗
+#╚█████╗░░░░██║░░░█████╗░░██║░░░░░██║░░░░░███████║██████╔╝
+#░╚═══██╗░░░██║░░░██╔══╝░░██║░░░░░██║░░░░░██╔══██║██╔══██╗
+#██████╔╝░░░██║░░░███████╗███████╗███████╗██║░░██║██║░░██║
+#╚═════╝░░░░╚═╝░░░╚══════╝╚══════╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝ v1.1
+# Stellar Practice by Kira Development
+# If you find any bugs or require some sort of support please join our discord
+# https://discord.gg/QmqsCy5xtu
+
 general:
-  enable-join-message: true
-  enable-debug: false
+
+  enable-join-message: true # Enable messages on join event
+  enable-debug: false # Enable debug mode
   clear-empty-bottles: true # Remove bottle from the ground if its empty
-  ender-pearl-cooldown: 15
-  disable-fall-damage: true
-  starting-elo: 1000
+  ender-pearl-cooldown: 15 # Ender pearl cooldown per use
+  disable-fall-damage: true # Disable fall damage or keep it on
+  starting-elo: 1000 # The elo users get when they start
 tablist:
   enable: true
-  header: "&bYou're playing on &fPractice &bon &fglacier.net"
-  footer: "&7Enjoy your stay!"
+  header: "&bYou're playing on &fPractice &bon &fkiradev.xyz" # Text at the top of the tablist.
+  footer: "&eThere are &b{online} online players!" # Text at the bottom of the tablist.
 discord:
-  enable-webhook: false
-  webhook: ""
+  enable-webhook: false # Enable discord webhook logs or not
+  webhook: "" # Enter your webhook inbetween the speachmarks

@@ -1,13 +1,35 @@
+# Stellar Practice v1.2 | Kira Development
+
 scoreboard:
-  title: " &bPRACTICE"
+  title: "&b&lPractice &f| &7&lEU" # Title that shows at the top of the scoreboard
   lobby:
     - "&7&m--------------------"
-    - " &fOnline: &b{online_players}"
-    - " &fPlaying: &b{playing_players}"
+    - "&fOnline: &b{online_players}"
+    - "&fPlaying: &b{playing_players}"
+    - "&fQueueing: &b{queueing_players}"
     - " "
-    - " &7glacier.net"
+    - "&fElo: &b{elo}"
+    - "&fTitle: &b{division}"
+    - " "
+    - "&7{animated_text}" # Do not remove "{animated_text}" and put it somewhere else, It will not work.
     - "&7&m--------------------"
-  in-queue:
+
+animation:
+  animated_texts: # Put the text in the same format below but put your server name
+    - "kiradev.xyz"
+    - "kiradev.xy"
+    - "kiradev.x"
+    - "kiradev."
+    - "kiradev"
+    - "kirade"
+    - "kirad"
+    - "kira"
+    - "kir"
+    - "ki"
+    - "k"
+  update_interval: 1 # Intervals are currently disabled in animations
+
+  in-queue: # Scoreboard while queueing
     - "&7&m--------------------"
     - " &fOnline: &b{online_players}"
     - " &fPlaying: &b{playing_players}"
@@ -15,9 +37,9 @@ scoreboard:
     - " &fQueueing:"
     - "  &b{kit}"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  kit-editor:
+  kit-editor: # Scoreboard while your in the kit editor
     - "&7&m--------------------"
     - " &fOnline: &b{online_players}"
     - " &fPlaying: &b{playing_players}"
@@ -25,19 +47,19 @@ scoreboard:
     - " &fEditing:"
     - "  &b{kit}"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  match:
+  match: # Scoreboard during match
     - "&7&m--------------------"
     - " &bOpponent: &f{opponent}"
     - " "
     - " &bPing: &a{user_ping}ms &7| &c{opponent_ping}ms"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  game-ended:
+  game-ended: # Scoreboard on game end
     - "&7&m--------------------"
     - " &fMatch Ended"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"

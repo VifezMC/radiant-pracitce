@@ -1,8 +1,8 @@
-main: neptune.dev.Neptune
-name: Neptune
-version: 1.0
+main: xyz.kiradev.Stellar
+name: Stellar
+version: 1.1
 description: High Quality Practice Plugin
-author: lrxh
+author: Vifez
 api-version: 1.8
 api: Beta
 softdepend:
@@ -13,7 +13,7 @@ commands:
     description: Sets server spawn.
   arena:
     description: Arena commands.
-  neptune:
+  stellar:
     description: Main command.
   kit:
     description: Main command for kits.

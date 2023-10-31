@@ -157,7 +157,7 @@ kits:
         meta-type: POTION
         display-name: "\xa7bNodebuff"
         lore:
-          - "\xa77The PotPvP"
+          - "\xa77PotPvP"
           - ' '
           - "\xa7fPlaying: \xa7b0"
           - "\xa7fQueuing: \xa7b0"

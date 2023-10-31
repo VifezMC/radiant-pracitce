@@ -1,16 +1,19 @@
 general:
   join-message:
     - "&7&m--------------------------------"
-    - "&bWelcome to Glacier Network"
-    - " "
-    - '&fUse the &esword &fto queue for matches!'
-    - '&fCheck out our &bDiscord&7: &e&ndiscord.glacier.net'
-    - '&fType &e''/help''&f for help'
+    - "&fWelcome &e{player}&f to &bServer&f Network!"
+    -  ' '
+    - "Discord: &ediscord.gg/server"
+    - "Twitter: &etwitter.com/server"
+    - "Teamspeak: &eteamspeak.com/server"
+    -  ' '
+    - "Like us on &bNameMC&f for a free rank!"
+    - "https://namemc.com/server/servername"
     -  ' '
     - '&7&m--------------------------------'
   ping-message: "&eYour ping is &f{ping}"
   other-player-ping-message: "&e{player}'s ping is &f{ping}"
-  kit-saved: "&fSuccessfully &bsaved &fthe sortation"
+  kit-saved: "&aYour kit has saved successfully ."
 match:
   match-found:
     - ' '

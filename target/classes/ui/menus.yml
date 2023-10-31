@@ -1,6 +1,9 @@
+# Kira Development
+# Legacy = No Glass In menu | Modern = Glass In menu
+
 queue-gui-type:
   unranked:
-    type: "modern" # You change between legacy and modern
+    type: "modern" # Menu type: Legacy - Modern
     item-color: "&b"
     height: 3
     menu-name: "&8Unranked Queue"
@@ -8,7 +11,7 @@ queue-gui-type:
     surrounding-items-name: " "
     durability: 7
   ranked:
-    type: "modern" # You change between legacy and modern
+    type: "modern" # Menu type: Legacy - Modern
     item-color: "&9"
     height: 3
     menu-name: "&8Ranked Queue"

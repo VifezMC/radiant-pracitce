@@ -1,13 +1,35 @@
 scoreboard:
-  title: " &bPRACTICE"
+  title: "&b&lPractice &f| &7&lEU"
   lobby:
     - "&7&m--------------------"
-    - " &fOnline: &b{online_players}"
-    - " &fPlaying: &b{playing_players}"
+    - "&fOnline: &b{online_players}"
+    - "&fPlaying: &b{playing_players}"
+    - "&fQueueing: &b{queueing_players}"
     - " "
-    - " &7glacier.net"
+    - "&fElo: &b{elo}"
+    - "&fTitle: &b{division}"
+    - " "
+    - "&7{animated_text}" # Define animated text placeholder
     - "&7&m--------------------"
-  in-queue:
+  # Other scoreboard sections...
+
+animation:
+  animated_texts:
+    - "kiradev.xyz"
+    - "kiradev.xy"
+    - "kiradev.x"
+    - "kiradev."
+    - "kiradev"
+    - "kirade"
+    - "kirad"
+    - "kira"
+    - "kir"
+    - "ki"
+    - "k"
+    # Add more animated texts here
+  update_interval: 1 # Define the interval for text update (in seconds)
+
+  in-queue: # This is the scoreboard of when your queueing
     - "&7&m--------------------"
     - " &fOnline: &b{online_players}"
     - " &fPlaying: &b{playing_players}"
@@ -15,9 +37,9 @@ scoreboard:
     - " &fQueueing:"
     - "  &b{kit}"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  kit-editor:
+  kit-editor: # Scoreboard when you are in the Kit Editor
     - "&7&m--------------------"
     - " &fOnline: &b{online_players}"
     - " &fPlaying: &b{playing_players}"
@@ -25,19 +47,19 @@ scoreboard:
     - " &fEditing:"
     - "  &b{kit}"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  match:
+  match: # This is the scoreboard that shows during a match
     - "&7&m--------------------"
     - " &bOpponent: &f{opponent}"
     - " "
     - " &bPing: &a{user_ping}ms &7| &c{opponent_ping}ms"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  game-ended:
+  game-ended: # This is the scoreboard
     - "&7&m--------------------"
     - " &fMatch Ended"
     - " "
-    - " &7glacier.net"
+    - " &7test.kiradev.xyz"
     - "&7&m--------------------"
