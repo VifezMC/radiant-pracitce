@@ -1,5 +1,7 @@
 package xyz.kiradev.listeners;
 
+import org.bukkit.event.block.BlockBreakEvent;
+import xyz.kiradev.managers.KitManager;
 import xyz.kiradev.managers.MatchManager;
 import xyz.kiradev.player.PlayerState;
 import xyz.kiradev.types.Match;
@@ -19,17 +21,37 @@ import java.util.concurrent.ConcurrentHashMap;
 public class BlockListener implements Listener {
     static Map<Match, Map<Block, Material>> placedBlocks = new ConcurrentHashMap<>();
 
-
-
     // TODO: REWRITE
     @EventHandler(priority = EventPriority.MONITOR)
     public void onBlockPlace(BlockPlaceEvent event) {
         Player p = event.getPlayer();
-        if (PlayerUtils.hasPlayerState(p, PlayerState.PLAYING)) {
+        if (PlayerUtils.hasPlayerState(p, PlayerState.PLAYING) && KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("build")) {
             Block block = event.getBlock();
             placedBlocks.computeIfAbsent(MatchManager.getMatch(p), k -> new ConcurrentHashMap<>()).put(block, block.getType());
+        }else {
+            event.setCancelled(true);
         }
     }
+    @EventHandler(priority = EventPriority.MONITOR)
+    public void onBlockBreak(BlockBreakEvent event) {
+        Player player = event.getPlayer();
+        Block block = event.getBlock();
+        Match match = MatchManager.getMatch(player);
+        if (match != null) {
+            Map<Block, Material> blockMap = placedBlocks.get(match);
+            if (blockMap != null && blockMap.containsKey(block)) {
+                blockMap.remove(block);
+            } else {
+                event.setCancelled(true);
+            }
+        } else {
+            event.setCancelled(true);
+        }
+    }
+
+
+
+
     @EventHandler
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player p = event.getPlayer();

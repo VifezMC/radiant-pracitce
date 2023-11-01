@@ -27,6 +27,15 @@ animation:
     - "kir"
     - "ki"
     - "k"
+    - "ki"
+    - "kir"
+    - "kira"
+    - "kirad"
+    - "kirede"
+    - "kiradev"
+    - "kiradev.x"
+    - "kiradev.xy"
+    - "kiradev.xyz"
   update_interval: 1 # Intervals are currently disabled in animations
 
   in-queue: # Scoreboard while queueing

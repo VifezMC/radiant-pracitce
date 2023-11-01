@@ -1,7 +1,6 @@
 package xyz.kiradev;
 
 import lombok.Getter;
-import xyz.kiradev.license.License;
 import xyz.kiradev.commands.user.*;
 import xyz.kiradev.listeners.*;
 import xyz.kiradev.managers.*;
