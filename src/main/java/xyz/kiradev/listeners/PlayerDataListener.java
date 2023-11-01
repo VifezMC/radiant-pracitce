@@ -3,8 +3,8 @@ package xyz.kiradev.listeners;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.types.Kit;
 import xyz.kiradev.types.Data;
+
 import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,8 +15,7 @@ import java.util.HashMap;
 
 public class PlayerDataListener implements Listener {
 
-    public static HashMap<Player, Data> stats = new HashMap<>();
-
+    private static final HashMap<Player, Data> stats = new HashMap<>();
 
     public static Data getStats(OfflinePlayer player) {
         return stats.get(player);
@@ -25,26 +24,35 @@ public class PlayerDataListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
-        if (ConfigManager.databaseConfig.get(player.getUniqueId().toString()) == null) {
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".kills", 0);
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".deaths", 0);
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".matches", 0);
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".wins", 0);
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", 0);
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", ConfigManager.pluginConfig.getInt("general.starting-elo"));
-            ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", "none");
-            for (Kit kit : ConfigManager.kitManager.getKits()) {
-                ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".kiteditor." + kit.getName(), "none");
-            }
+        String playerId = player.getUniqueId().toString();
 
-            try {
-                ConfigManager.databaseConfig.save(ConfigManager.database);
-                ConfigManager.databaseConfig.load(ConfigManager.database);
-            } catch (IOException | InvalidConfigurationException e) {
-                e.printStackTrace();
-            }
+        if (ConfigManager.databaseConfig.get(playerId) == null) {
+            setDefaultPlayerData(playerId);
+            saveAndLoadConfig();
         }
-        stats.put(event.getPlayer(), new Data(player));
+
+        stats.put(player, new Data(player));
     }
 
+    private void setDefaultPlayerData(String playerId) {
+        ConfigManager.databaseConfig.set(playerId + ".kills", 0);
+        ConfigManager.databaseConfig.set(playerId + ".deaths", 0);
+        ConfigManager.databaseConfig.set(playerId + ".matches", 0);
+        ConfigManager.databaseConfig.set(playerId + ".wins", 0);
+        ConfigManager.databaseConfig.set(playerId + ".losses", 0);
+        ConfigManager.databaseConfig.set(playerId + ".elo", ConfigManager.pluginConfig.getInt("general.starting-elo"));
+        ConfigManager.databaseConfig.set(playerId + ".settings.kill-effect", "none");
+        for (Kit kit : ConfigManager.kitManager.getKits()) {
+            ConfigManager.databaseConfig.set(playerId + ".kiteditor." + kit.getName(), "none");
+        }
+    }
+
+    private void saveAndLoadConfig() {
+        try {
+            ConfigManager.databaseConfig.save(ConfigManager.database);
+            ConfigManager.databaseConfig.load(ConfigManager.database);
+        } catch (IOException | org.bukkit.configuration.InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package xyz.kiradev;
 
 import lombok.Getter;
-import xyz.kiradev.license.License;
+import org.bukkit.Bukkit;
 import xyz.kiradev.commands.user.*;
 import xyz.kiradev.listeners.*;
 import xyz.kiradev.managers.*;
@@ -17,6 +17,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @Getter
@@ -32,7 +35,7 @@ public class Stellar extends JavaPlugin {
       new Placeholder(this).register();
     }
     loadManagers();
-    Console.sendMessage("&7[&9Stellar&7] &aSuccessfully Loaded managers!");
+    Console.sendMessage(" ");
 
     // PEARL COOLDOWN
     Cooldowns.createCooldown("enderpearl");
@@ -45,17 +48,49 @@ public class Stellar extends JavaPlugin {
 
     // LIST LISTENERS
     registerEventListeners();
-    Console.sendMessage("&7[&9Stellar&7] &aSuccessfully Loaded listeners!");
+    Console.sendMessage(" ");
 
     // COMMANDS
     registerCommands();
-    Console.sendMessage("&7[&9Stellar&7] &aSuccessfully Loaded commands!");
+    Console.sendMessage(" ");
+
+// Define the plugin version
+    String pluginVersion = "1.0.0";
+
+// Generate the current date and time when the plugin loaded
+    DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    String loadedTime = LocalDateTime.now().format(dateFormat);
+
+// Define the plugin build number and server version
+    int pluginBuild = 01/11/23;
+
+    String serverVersion = Bukkit.getVersion();
+// Extracting a simplified version string
+    String simplifiedServerVersion = serverVersion.split("MC: ")[1].split("\\)")[0];
 
     // START MESSAGE
-    Console.sendMessage("&9Stellar Loaded successfully" + Constants.Ver);
-    Console.sendMessage("&9Author: &f" + Constants.Author);
-    Console.sendMessage("&9Version: &f" + Constants.Ver);
-    Console.sendMessage("&9Discord: &f" + Constants.Discord);
+    Console.sendMessage("&b $$$$$$\\    $$\\               $$\\ $$\\                     ");
+    Console.sendMessage("&b$$  __$$\\   $$ |              $$ |$$ |                    ");
+    Console.sendMessage("&b$$ /  \\__|$$$$$$\\    $$$$$$\\  $$ |$$ | $$$$$$\\   $$$$$$\\  ");
+    Console.sendMessage("&b\\$$$$$$\\  \\_$$  _|  $$  __$$\\ $$ |$$ | \\____$$\\ $$  __$$\\ ");
+    Console.sendMessage("&b \\____$$\\   $$ |    $$$$$$$$ |$$ |$$ | $$$$$$$ |$$ |  \\__|");
+    Console.sendMessage("&b$$\\   $$ |  $$ |$$\\ $$   ____|$$ |$$ |$$  __$$ |$$ |      ");
+    Console.sendMessage("&b\\$$$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |$$ |\\$$$$$$$ |$$ |      ");
+    Console.sendMessage("&b \\______/    \\____/  \\_______|\\__|\\__| \\_______|\\__|      ");
+    Console.sendMessage("&3Stellar Loaded successfully\n");
+    Console.sendMessage("&b&lInformation");
+    Console.sendMessage(" | &3Version: &f" + Constants.Ver);
+    Console.sendMessage(" | &3Build: " + pluginBuild);
+    Console.sendMessage(" | &3Server Version: " + simplifiedServerVersion);
+    Console.sendMessage(" | &3Plugin loaded on: " + loadedTime + "\n");
+    Console.sendMessage("&b&lLoaded");
+    Console.sendMessage(" | &3Successfully Loaded Managers!");
+    Console.sendMessage(" | &3Successfully Loaded Listeners!");
+    Console.sendMessage(" | &3Successfully Loaded Commands!\n");
+    Console.sendMessage("&b&lCredits");
+    Console.sendMessage(" | &3Author: &f" + Constants.Author);
+    Console.sendMessage(" | &3Thanks for using &9Stellar&3!");
+    Console.sendMessage(" | &3Discord: &b" + Constants.Discord);
   }
 
 

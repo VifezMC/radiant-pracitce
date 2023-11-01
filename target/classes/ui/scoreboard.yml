@@ -1,5 +1,7 @@
+# Stellar Practice v1.2 | Kira Development
+
 scoreboard:
-  title: "&b&lPractice &f| &7&lEU"
+  title: "&b&lPractice &f| &7&lEU" # Title that shows at the top of the scoreboard
   lobby:
     - "&7&m--------------------"
     - "&fOnline: &b{online_players}"
@@ -9,12 +11,11 @@ scoreboard:
     - "&fElo: &b{elo}"
     - "&fTitle: &b{division}"
     - " "
-    - "&7{animated_text}" # Define animated text placeholder
+    - "&7{animated_text}" # Do not remove "{animated_text}" and put it somewhere else, It will not work.
     - "&7&m--------------------"
-  # Other scoreboard sections...
 
 animation:
-  animated_texts:
+  animated_texts: # Put the text in the same format below but put your server name
     - "kiradev.xyz"
     - "kiradev.xy"
     - "kiradev.x"
@@ -26,10 +27,9 @@ animation:
     - "kir"
     - "ki"
     - "k"
-    # Add more animated texts here
-  update_interval: 1 # Define the interval for text update (in seconds)
+  update_interval: 1 # Intervals are currently disabled in animations
 
-  in-queue: # This is the scoreboard of when your queueing
+  in-queue: # Scoreboard while queueing
     - "&7&m--------------------"
     - " &fOnline: &b{online_players}"
     - " &fPlaying: &b{playing_players}"
@@ -39,7 +39,7 @@ animation:
     - " "
     - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  kit-editor: # Scoreboard when you are in the Kit Editor
+  kit-editor: # Scoreboard while your in the kit editor
     - "&7&m--------------------"
     - " &fOnline: &b{online_players}"
     - " &fPlaying: &b{playing_players}"
@@ -49,7 +49,7 @@ animation:
     - " "
     - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  match: # This is the scoreboard that shows during a match
+  match: # Scoreboard during match
     - "&7&m--------------------"
     - " &bOpponent: &f{opponent}"
     - " "
@@ -57,7 +57,7 @@ animation:
     - " "
     - " &7test.kiradev.xyz"
     - "&7&m--------------------"
-  game-ended: # This is the scoreboard
+  game-ended: # Scoreboard on game end
     - "&7&m--------------------"
     - " &fMatch Ended"
     - " "
