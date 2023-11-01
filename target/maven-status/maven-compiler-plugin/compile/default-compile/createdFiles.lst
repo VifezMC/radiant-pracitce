@@ -37,7 +37,6 @@ xyz\kiradev\ui\KitEditorInventory.class
 xyz\kiradev\managers\ArenaManager.class
 xyz\kiradev\utils\Cooldowns.class
 xyz\kiradev\utils\render\CC.class
-xyz\kiradev\listeners\RulesListener.class
 xyz\kiradev\managers\ScoreboardManager$1.class
 xyz\kiradev\utils\PlayerUtils.class
 xyz\kiradev\ui\unranked\UnrankedInventoryLegacy.class

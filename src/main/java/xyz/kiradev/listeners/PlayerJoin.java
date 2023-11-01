@@ -1,6 +1,7 @@
 package xyz.kiradev.listeners;
 
 
+import xyz.kiradev.Stellar;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.InventoryManager;
 import xyz.kiradev.player.GameState;
@@ -30,7 +31,7 @@ public class PlayerJoin implements Listener {
         PlayerUtils.setGState(p, GameState.DEFAULT);
         if (ConfigManager.pluginConfig.getBoolean("general.enable-join-message")) {
             for (String msg : ConfigManager.messagesConfig.getStringList("general.join-message")) {
-                p.sendMessage(CC.translate(msg));
+                p.sendMessage(CC.translate(msg).replace("{player}", p.getName()));
             }
         }
         if(!ConfigManager.arenaConfig.getString("lobby").equals("none")){
@@ -57,7 +58,9 @@ public class PlayerJoin implements Listener {
 
         // TABLIST
         if (ConfigManager.pluginConfig.getBoolean("tablist.enable") ){
-            sendTabHeader(p, ConfigManager.pluginConfig.getString("tablist.header"), ConfigManager.pluginConfig.getString("tablist.footer"));
+            sendTabHeader(p, ConfigManager.pluginConfig.getString("tablist.header")
+                    .replace("{online}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size())), ConfigManager.pluginConfig.getString("tablist.footer")
+                    .replace("{online}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size())));
         }
     }
 

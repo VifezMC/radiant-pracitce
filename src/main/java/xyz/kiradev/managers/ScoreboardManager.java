@@ -21,8 +21,6 @@ public class ScoreboardManager implements AssembleAdapter {
     private final List<String> scoreboardInQueue;
     private final List<String> scoreboardGameEnd;
     private final List<String> scoreboardKiteditor;
-
-    private int playingPlayers;
     private final List<String> animatedTexts;
     private final int updateInterval;
 
@@ -124,7 +122,7 @@ public class ScoreboardManager implements AssembleAdapter {
         for (String line : scoreboardInQueue) {
             line = line.replace("{kit}", QueueManager.Queue.get(p));
             line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
-            line = line.replace("{playing_players}", String.valueOf(playingPlayers));
+            line = line.replace("{playing_players}" , String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 
             if (line.contains("{animated_text}")) {
@@ -140,7 +138,7 @@ public class ScoreboardManager implements AssembleAdapter {
         for (String line : scoreboardKiteditor) {
             line = line.replace("{kit}", KitEditorCMD.kiteditor.get(p).getName());
             line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
-            line = line.replace("{playing_players}", String.valueOf(playingPlayers));
+            line = line.replace("{playing_players}" , String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 
             if (line.contains("{animated_text}")) {
