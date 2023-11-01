@@ -1,16 +1,17 @@
 package xyz.kiradev.ui;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
 import xyz.kiradev.listeners.PlayerDataListener;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.types.Data;
 import xyz.kiradev.utils.render.CC;
 import xyz.kiradev.utils.render.ItemBuilder;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.Player;
-import org.bukkit.inventory.Inventory;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class StatsInventory {
         if (deaths > 0) {
             kd = (double) kills / deaths;
             BigDecimal bd = new BigDecimal(kd);
-            BigDecimal bd2 = bd.setScale(1, BigDecimal.ROUND_HALF_UP);
+            BigDecimal bd2 = bd.setScale(1, RoundingMode.HALF_UP);
             kd = bd2.doubleValue();
         }
         return kd;

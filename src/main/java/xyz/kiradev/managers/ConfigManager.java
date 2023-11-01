@@ -1,11 +1,11 @@
 package xyz.kiradev.managers;
 
-import xyz.kiradev.Stellar;
-import xyz.kiradev.utils.render.CC;
-import xyz.kiradev.utils.render.Console;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import xyz.kiradev.Stellar;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.Console;
 
 import java.io.File;
 import java.io.IOException;
@@ -90,6 +90,7 @@ public class ConfigManager {
             Stellar.instance.saveResource(resourcePath, false);
         }
     }
+
     public static void saveConfig(File config, FileConfiguration fileConfiguration) {
         try {
             fileConfiguration.save(config);

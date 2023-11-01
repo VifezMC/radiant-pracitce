@@ -1,8 +1,8 @@
 package xyz.kiradev.types;
 
-import xyz.kiradev.managers.ConfigManager;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import xyz.kiradev.managers.ConfigManager;
 
 
 public class Data {
@@ -13,7 +13,6 @@ public class Data {
     private int losses;
     private int elo;
     private String killeffect;
-
 
 
     public Data(Player player) {
@@ -45,12 +44,12 @@ public class Data {
         return wins;
     }
 
-    public int getELO() {
-        return elo;
-    }
-
     public void setWins(int wins) {
         this.wins = wins;
+    }
+
+    public int getELO() {
+        return elo;
     }
 
     public int getLosses() {
@@ -84,10 +83,12 @@ public class Data {
     public String getKilleffect() {
         return killeffect;
     }
+
     public void setKilleffect(String effect) {
         this.killeffect = effect;
     }
+
     public ItemStack[] getKitItems(String kitName) {
-        return ConfigManager.databaseConfig.getList( player.getUniqueId() + ".kiteditor." + kitName).toArray(new ItemStack[0]);
+        return ConfigManager.databaseConfig.getList(player.getUniqueId() + ".kiteditor." + kitName).toArray(new ItemStack[0]);
     }
 }

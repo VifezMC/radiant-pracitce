@@ -1,9 +1,5 @@
 package xyz.kiradev.ui.unranked;
 
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.managers.KitManager;
-import xyz.kiradev.types.Kit;
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -12,6 +8,10 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.managers.KitManager;
+import xyz.kiradev.types.Kit;
+import xyz.kiradev.utils.render.CC;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,9 +57,9 @@ public class UnrankedInventoryModern implements Listener {
 
             for (String loreLine : translatedLore) {
                 if (loreLine.contains("{playing}")) {
-                    loreWithDescription.add(loreLine.replace("{playing}", Integer.toString(kitManager.getKit(kit.getName()).getPlaying())));
+                    loreWithDescription.add(loreLine.replace("{playing}", Integer.toString(KitManager.getKit(kit.getName()).getPlaying())));
                 } else if (loreLine.contains("{queueing}")) {
-                    loreWithDescription.add(loreLine.replace("{queueing}", Integer.toString(kitManager.getKit(kit.getName()).getQueue())));
+                    loreWithDescription.add(loreLine.replace("{queueing}", Integer.toString(KitManager.getKit(kit.getName()).getQueue())));
                 } else if (loreLine.contains("{description}")) {
                     if (description != null && !description.isEmpty()) {
                         loreWithDescription.add(loreLine.replace("{description}", CC.translate(description)));

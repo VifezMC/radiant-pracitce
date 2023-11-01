@@ -1,11 +1,5 @@
 package xyz.kiradev.listeners;
 
-import xyz.kiradev.commands.user.KitEditorCMD;
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.managers.QueueManager;
-import xyz.kiradev.player.PlayerState;
-import xyz.kiradev.utils.PlayerUtils;
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
@@ -20,6 +14,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import xyz.kiradev.commands.user.KitEditorCMD;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.managers.QueueManager;
+import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.utils.PlayerUtils;
+import xyz.kiradev.utils.render.CC;
 
 import static org.bukkit.Bukkit.getLogger;
 
@@ -39,7 +39,7 @@ public class SpawnListeners implements Listener {
     public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
         String command = event.getMessage().toLowerCase();
         Player p = event.getPlayer();
-        if(PlayerUtils.hasPlayerState(p, PlayerState.INQUEUE) || PlayerUtils.hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue") || PlayerUtils.hasPlayerState(p, PlayerState.KITEDITOR)){
+        if (PlayerUtils.hasPlayerState(p, PlayerState.INQUEUE) || PlayerUtils.hasPlayerState(p, PlayerState.PLAYING) && !command.equals("/leavequeue") || PlayerUtils.hasPlayerState(p, PlayerState.KITEDITOR)) {
             event.setCancelled(true);
             p.sendMessage(CC.translate("&cYou can't use commands game in-types or in queue."));
         }

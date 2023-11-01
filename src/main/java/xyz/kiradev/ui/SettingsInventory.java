@@ -1,11 +1,11 @@
 package xyz.kiradev.ui;
 
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.utils.render.CC;
-import xyz.kiradev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.ItemBuilder;
 
 public class SettingsInventory {
     public static Inventory menu;

@@ -1,14 +1,13 @@
 package xyz.kiradev.listeners;
 
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.types.Kit;
-import xyz.kiradev.types.Data;
-
 import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.types.Data;
+import xyz.kiradev.types.Kit;
 
 import java.io.IOException;
 import java.util.HashMap;

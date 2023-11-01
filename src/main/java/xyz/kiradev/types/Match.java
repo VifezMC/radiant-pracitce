@@ -6,13 +6,13 @@ import java.util.UUID;
 
 public class Match {
 
-    private Player player1;
-    private Player player2;
+    private final Player player1;
+    private final Player player2;
     private Player winner;
     private Player loser;
-    private Arena arenaName;
-    private String kitName;
-    private UUID matchID;
+    private final Arena arenaName;
+    private final String kitName;
+    private final UUID matchID;
 
 
     public Match(Player winner, Player loser, Player player1, Player player2, Arena arenaName, String kitName, UUID matchID) {
@@ -40,9 +40,18 @@ public class Match {
     public Player getLoser() {
         return loser;
     }
+
+    public void setLoser(Player player) {
+        if (involvesPlayer(player)) {
+            this.loser = player;
+            this.winner = getOtherPlayer(player);
+        }
+    }
+
     public Arena getArena() {
         return arenaName;
     }
+
     public String getKitName() {
         return kitName;
     }
@@ -53,13 +62,6 @@ public class Match {
 
     public String getArenaNameAsString() {
         return arenaName.getName();
-    }
-
-    public void setLoser(Player player) {
-        if (involvesPlayer(player)) {
-            this.loser = player;
-            this.winner = getOtherPlayer(player);
-        }
     }
 
     public boolean involvesPlayer(Player player) {

@@ -1,21 +1,21 @@
 package xyz.kiradev.managers;
 
-import xyz.kiradev.Stellar;
-import xyz.kiradev.listeners.PlayerDataListener;
-import xyz.kiradev.player.GameState;
-import xyz.kiradev.player.PlayerState;
-import xyz.kiradev.utils.PlayerUtils;
-import xyz.kiradev.types.Arena;
-import xyz.kiradev.types.Match;
-import xyz.kiradev.utils.DiscordUtils;
-import xyz.kiradev.utils.render.CC;
-import xyz.kiradev.utils.render.Console;
 import org.bukkit.*;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
+import xyz.kiradev.Stellar;
+import xyz.kiradev.listeners.PlayerDataListener;
+import xyz.kiradev.player.GameState;
+import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.types.Arena;
+import xyz.kiradev.types.Match;
+import xyz.kiradev.utils.DiscordUtils;
+import xyz.kiradev.utils.PlayerUtils;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.Console;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class GameManager {
-    private static Map<Player, Byte> countdowns = new ConcurrentHashMap<>();
+    private static final Map<Player, Byte> countdowns = new ConcurrentHashMap<>();
 
     public static void startGame(List<Player> players) {
         Player firstPlayer = players.get(0);
@@ -105,7 +105,7 @@ public class GameManager {
         PlayerUtils.setState(firstPlayer, PlayerState.PLAYING);
         PlayerUtils.setState(secondPlayer, PlayerState.PLAYING);
 
-        if(ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")){
+        if (ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")) {
             DiscordUtils.sendMatchStart(firstPlayer.getName(), secondPlayer.getName(), selectedArena.getName(), kitName);
         }
         if (ConfigManager.pluginConfig.getBoolean("general.enable-debug")) {
@@ -122,7 +122,7 @@ public class GameManager {
 
             if (!(ConfigManager.databaseConfig.get(p.getUniqueId() + ".kiteditor." + kitName).equals("none"))) {
                 p.getInventory().setContents(PlayerDataListener.getStats(p).getKitItems(kitName));
-            }else{
+            } else {
                 p.getInventory().setContents(KitManager.getKit(kitName).getItems());
             }
             p.getInventory().setArmorContents(KitManager.getKit(kitName).getArmour());
@@ -143,7 +143,7 @@ public class GameManager {
         PlayerUtils.animateDeath(loser);
         MatchManager.getMatch(loser).getWinner().hidePlayer(MatchManager.getMatch(loser).getLoser());
 
-        switch(PlayerDataListener.getStats(winner).getKilleffect()) {
+        switch (PlayerDataListener.getStats(winner).getKilleffect()) {
             case "Lightning":
                 Location location = loser.getLocation();
                 double x = location.getX();
@@ -254,7 +254,7 @@ public class GameManager {
 
         if (p != null && !countdowns.containsKey(p)) {
             countdowns.put(p, (byte) 5);
-            if(KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("feezeonspawn")){
+            if (KitManager.getKit(MatchManager.getMatch(p).getKitName()).getRules().contains("feezeonspawn")) {
                 PlayerUtils.setGState(p, GameState.SUMO);
             }
             new BukkitRunnable() {

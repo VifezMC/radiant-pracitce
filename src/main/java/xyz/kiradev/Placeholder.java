@@ -1,11 +1,11 @@
 package xyz.kiradev;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import xyz.kiradev.listeners.PlayerDataListener;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.types.Data;
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 
 public class Placeholder extends PlaceholderExpansion {
 
@@ -55,6 +55,7 @@ public class Placeholder extends PlaceholderExpansion {
         Data data = PlayerDataListener.getStats(p);
         return data.getELO();
     }
+
     private String getPlayerDivision(OfflinePlayer p) {
         Data data = PlayerDataListener.getStats(p);
         return ConfigManager.divisionsManager.getPlayerDivision(data.getELO());

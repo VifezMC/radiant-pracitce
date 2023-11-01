@@ -1,6 +1,5 @@
 package xyz.kiradev.listeners;
 
-import xyz.kiradev.managers.ConfigManager;
 import org.bukkit.Difficulty;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -19,6 +18,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.event.world.WorldLoadEvent;
+import xyz.kiradev.managers.ConfigManager;
 
 import static org.bukkit.Bukkit.getServer;
 
@@ -59,15 +59,15 @@ public class WorldListener implements Listener {
     public void EntityDamage(EntityDamageEvent e) {
         if (e.getEntity() instanceof Player
                 && ConfigManager.pluginConfig.getBoolean("general.disable-fall-damage")
-                && e.getCause().equals(EntityDamageEvent.DamageCause.FALL)){
+                && e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
 
-                e.setCancelled(true);
+            e.setCancelled(true);
         }
     }
 
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent event) {
-            event.setCancelled(true);
+        event.setCancelled(true);
     }
 
     @EventHandler

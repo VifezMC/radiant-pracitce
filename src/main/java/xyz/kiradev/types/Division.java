@@ -1,12 +1,10 @@
 package xyz.kiradev.types;
 
-import org.bukkit.Location;
-
 public class Division {
 
-    private String name;
-    private String displayname;
-    private int elo;
+    private final String name;
+    private final String displayname;
+    private final int elo;
 
     public Division(String name, String displayname, int elo) {
         this.name = name;
@@ -17,10 +15,12 @@ public class Division {
     public String getName() {
         return name;
     }
-    public String getDisplayname(){
+
+    public String getDisplayname() {
         return displayname;
     }
-    public int getElo(){
+
+    public int getElo() {
         return elo;
     }
 }

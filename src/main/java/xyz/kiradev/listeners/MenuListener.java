@@ -1,10 +1,5 @@
 package xyz.kiradev.listeners;
 
-import xyz.kiradev.Constants;
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.managers.InventoryManager;
-import xyz.kiradev.ui.SettingsKillEffectsInventory;
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
@@ -14,6 +9,11 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import xyz.kiradev.Constants;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.managers.InventoryManager;
+import xyz.kiradev.ui.SettingsKillEffectsInventory;
+import xyz.kiradev.utils.render.CC;
 
 public class MenuListener implements Listener {
 
@@ -23,6 +23,7 @@ public class MenuListener implements Listener {
             event.setCancelled(true);
         }
     }
+
     @EventHandler
     public void unrankedMenu(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
@@ -111,7 +112,7 @@ public class MenuListener implements Listener {
                 if (itemMeta != null && itemMeta.hasDisplayName()) {
                     if (!p.hasPermission(Constants.PlName + ".killeffects")) {
                         p.sendMessage(CC.translate("&cYou don't have permission to use this."));
-                    }else{
+                    } else {
                         p.openInventory(SettingsKillEffectsInventory.menu);
                         p.playSound(p.getLocation(), Sound.NOTE_STICKS, 1.0f, 1.0f);
                     }
@@ -142,11 +143,11 @@ public class MenuListener implements Listener {
                 if (itemMeta != null && itemMeta.hasDisplayName()) {
                     String itemName = itemMeta.getDisplayName();
                     itemName = itemName.replaceAll("§.", "");
-                    if(PlayerDataListener.getStats(p).getKilleffect().equals(itemName)){
+                    if (PlayerDataListener.getStats(p).getKilleffect().equals(itemName)) {
                         PlayerDataListener.getStats(p).setKilleffect("none");
                         p.sendMessage(CC.translate("&cSuccessfully removed kill effect."));
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                    }else{
+                    } else {
                         PlayerDataListener.getStats(p).setKilleffect(itemName);
                         p.sendMessage(CC.translate("&aSuccessfully set kill effect."));
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);

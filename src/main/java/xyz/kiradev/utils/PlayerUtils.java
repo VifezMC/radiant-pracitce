@@ -1,9 +1,5 @@
 package xyz.kiradev.utils;
 
-import xyz.kiradev.Stellar;
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.player.GameState;
-import xyz.kiradev.player.PlayerState;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import net.minecraft.server.v1_8_R3.PacketPlayOutEntityStatus;
 import net.minecraft.server.v1_8_R3.PacketPlayOutNamedEntitySpawn;
@@ -13,6 +9,10 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import xyz.kiradev.Stellar;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.player.GameState;
+import xyz.kiradev.player.PlayerState;
 
 import java.lang.reflect.Field;
 import java.util.HashSet;
@@ -67,6 +67,7 @@ public class PlayerUtils {
         playerStates.remove(player);
         playerStates.put(player, state);
     }
+
     public static void setGState(Player player, GameState state) {
         gameStates.remove(player);
         gameStates.put(player, state);
@@ -75,13 +76,16 @@ public class PlayerUtils {
     public static PlayerState getState(Player player) {
         return playerStates.getOrDefault(player, PlayerState.LOBBY);
     }
+
     public static GameState getGState(Player player) {
         return gameStates.getOrDefault(player, GameState.DEFAULT);
     }
+
     public static boolean hasPlayerState(Player player, PlayerState state) {
         PlayerState currentPlayerState = getState(player);
         return currentPlayerState == state;
     }
+
     public static boolean hasGPlayerState(Player player, GameState state) {
         GameState currentPlayerState = getGState(player);
         return currentPlayerState == state;

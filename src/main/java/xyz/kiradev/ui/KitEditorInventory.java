@@ -1,15 +1,15 @@
 package xyz.kiradev.ui;
 
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.types.Kit;
-import xyz.kiradev.utils.render.CC;
-import xyz.kiradev.utils.render.ItemBuilder;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.types.Kit;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.ItemBuilder;
 
 public class KitEditorInventory {
     public static Inventory menu;

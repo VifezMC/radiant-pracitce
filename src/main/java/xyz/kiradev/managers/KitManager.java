@@ -1,7 +1,7 @@
 package xyz.kiradev.managers;
 
-import xyz.kiradev.types.Kit;
 import org.bukkit.inventory.ItemStack;
+import xyz.kiradev.types.Kit;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +12,15 @@ public class KitManager {
 
     public KitManager() {
         kits = new ArrayList<>();
+    }
+
+    public static Kit getKit(String Kit) {
+        for (Kit kit : kits) {
+            if (kit.getName().equals(Kit)) {
+                return kit;
+            }
+        }
+        return null;
     }
 
     public void loadKits() {
@@ -32,14 +41,6 @@ public class KitManager {
         }
     }
 
-    public static Kit getKit(String Kit) {
-        for (Kit kit : kits) {
-            if (kit.getName().equals(Kit)) {
-                return kit;
-            }
-        }
-        return null;
-    }
     public List<Kit> getKits() {
         return kits;
     }

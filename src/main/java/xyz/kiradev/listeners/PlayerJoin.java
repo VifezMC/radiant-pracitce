@@ -1,12 +1,6 @@
 package xyz.kiradev.listeners;
 
 
-import xyz.kiradev.Stellar;
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.managers.InventoryManager;
-import xyz.kiradev.player.GameState;
-import xyz.kiradev.player.PlayerState;
-import xyz.kiradev.utils.render.CC;
 import net.minecraft.server.v1_8_R3.IChatBaseComponent;
 import net.minecraft.server.v1_8_R3.PacketPlayOutPlayerListHeaderFooter;
 import net.minecraft.server.v1_8_R3.PlayerConnection;
@@ -17,7 +11,13 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.potion.PotionEffect;
+import xyz.kiradev.Stellar;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.managers.InventoryManager;
+import xyz.kiradev.player.GameState;
+import xyz.kiradev.player.PlayerState;
 import xyz.kiradev.utils.PlayerUtils;
+import xyz.kiradev.utils.render.CC;
 
 import java.lang.reflect.Field;
 
@@ -34,9 +34,9 @@ public class PlayerJoin implements Listener {
                 p.sendMessage(CC.translate(msg).replace("{player}", p.getName()));
             }
         }
-        if(!ConfigManager.arenaConfig.getString("lobby").equals("none")){
+        if (!ConfigManager.arenaConfig.getString("lobby").equals("none")) {
             p.teleport(PlayerUtils.getLobbyLocation());
-        }else{
+        } else {
             p.sendMessage(CC.translate("&bStellar &8| &cMake sure to set server spawn /setspawn"));
         }
         p.setSaturation(20);
@@ -57,7 +57,7 @@ public class PlayerJoin implements Listener {
         event.setJoinMessage(null);
 
         // TABLIST
-        if (ConfigManager.pluginConfig.getBoolean("tablist.enable") ){
+        if (ConfigManager.pluginConfig.getBoolean("tablist.enable")) {
             sendTabHeader(p, ConfigManager.pluginConfig.getString("tablist.header")
                     .replace("{online}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size())), ConfigManager.pluginConfig.getString("tablist.footer")
                     .replace("{online}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size())));
@@ -65,7 +65,7 @@ public class PlayerJoin implements Listener {
     }
 
     private void sendTabHeader(Player player, String header, String footer) {
-        CraftPlayer craftPlayer = (CraftPlayer)player;
+        CraftPlayer craftPlayer = (CraftPlayer) player;
         PlayerConnection playerConnection = (craftPlayer.getHandle()).playerConnection;
         IChatBaseComponent tabHeader = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + CC.translate(header) + "\"}");
         IChatBaseComponent tabFooter = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + CC.translate(footer) + "\"}");

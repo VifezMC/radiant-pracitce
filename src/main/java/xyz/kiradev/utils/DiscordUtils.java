@@ -43,6 +43,7 @@ public class DiscordUtils {
             Console.sendError("Failed to send webhook");
         }
     }
+
     public static void sendMatchEnd(String winner, String loser) {
         try {
             URL url = new URL(ConfigManager.pluginConfig.getString("discord.webhook"));

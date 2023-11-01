@@ -1,11 +1,11 @@
 package xyz.kiradev.commands.user;
 
-import xyz.kiradev.ui.StatsInventory;
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import xyz.kiradev.ui.StatsInventory;
+import xyz.kiradev.utils.render.CC;
 
 public class StatsCMD implements CommandExecutor {
     @Override
