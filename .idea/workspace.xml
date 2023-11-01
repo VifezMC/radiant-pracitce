@@ -5,10 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="A">
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,6 +15,11 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_1_ArenaCMD.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp_2_ArenaCMD.class" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$USER_HOME$/AppData/Local/Temp/tmp__ArenaCMD.class" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -26,14 +28,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Stellar&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Stellar"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Stellar" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
@@ -41,6 +44,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -50,6 +54,9 @@
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -82,12 +89,22 @@
       <option name="project" value="LOCAL" />
       <updated>1698826369389</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="A">
+      <option name="closed" value="true" />
+      <created>1698840268501</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1698840268501</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Players can now only break when playing build kit" />
     <MESSAGE value="Fixed scoreboard" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed scoreboard" />
+    <MESSAGE value="Pushing updates" />
+    <MESSAGE value="A" />
+    <option name="LAST_COMMIT_MESSAGE" value="A" />
   </component>
 </project>
