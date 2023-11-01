@@ -84,14 +84,16 @@ public class Stellar extends JavaPlugin {
     Console.sendMessage("&b$$\\   $$ |  $$ |$$\\ $$   ____|$$ |$$ |$$  __$$ |$$ |      ");
     Console.sendMessage("&b\\$$$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |$$ |\\$$$$$$$ |$$ |      ");
     Console.sendMessage("&b \\______/    \\____/  \\_______|\\__|\\__| \\_______|\\__|      ");
-    Console.sendMessage("&3Stellar Loaded successfully\n");
+    Console.sendMessage("&3Stellar Loaded successfully" + Constants.Ver + "\n");
     Console.sendMessage("&b&lInformation");
     Console.sendMessage(" | &3Version: &f" + Constants.Ver);
+    Console.sendMessage(" | &3License: &cNo-License"); // Just a placeholder for when it starts up
     Console.sendMessage(" | &3Finished loading in: " + timeTaken + "ms");
     Console.sendMessage(" | &3Build: " + pluginBuild);
     Console.sendMessage(" | &3Server Version: " + simplifiedServerVersion);
     Console.sendMessage(" | &3Plugin loaded on: " + loadedTime + "\n");
     Console.sendMessage("&b&lLoaded");
+    Console.sendMessage(" | &3Successfully Loaded Configurations!");
     Console.sendMessage(" | &3Successfully Loaded Managers!");
     Console.sendMessage(" | &3Successfully Loaded Listeners!");
     Console.sendMessage(" | &3Successfully Loaded Commands!\n");

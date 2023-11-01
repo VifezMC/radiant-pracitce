@@ -17,7 +17,7 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public String getIdentifier() {
-        return "neptune";
+        return "Stellar";
     }
 
     @Override

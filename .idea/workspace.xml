@@ -4,8 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="A">
+    <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="push">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Stellar-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Stellar-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Stellar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Stellar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/RulesListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,6 +28,12 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
@@ -37,6 +58,11 @@
     "last_opened_file_path": "C:/Stellar"
   }
 }]]></component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
+  </component>
   <component name="RunManager">
     <configuration name="Stellar" type="MavenRunConfiguration" factoryName="Maven" nameIsGenerated="true">
       <MavenSettings>
@@ -97,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1698840268501</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="push">
+      <option name="closed" value="true" />
+      <created>1698840390741</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698840390741</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -105,6 +139,7 @@
     <MESSAGE value="Fixed scoreboard" />
     <MESSAGE value="Pushing updates" />
     <MESSAGE value="A" />
-    <option name="LAST_COMMIT_MESSAGE" value="A" />
+    <MESSAGE value="push" />
+    <option name="LAST_COMMIT_MESSAGE" value="push" />
   </component>
 </project>
