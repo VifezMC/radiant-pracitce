@@ -36,11 +36,10 @@ public class ScoreboardManager implements AssembleAdapter {
         scoreboardGameEnd = ConfigManager.scoreboardConfig.getStringList("scoreboard.game-ended");
         scoreboardKiteditor = ConfigManager.scoreboardConfig.getStringList("scoreboard.kit-editor");
         animatedTexts = ConfigManager.scoreboardConfig.getStringList("animation.animated_texts");
-        updateInterval1 = ConfigManager.scoreboardConfig.getInt("update_interval");
+        updateInterval1 = ConfigManager.scoreboardConfig.getInt("animation.update_interval");
 
-        // Validate and set a default interval if needed
         if(updateInterval1 <= 0){
-            updateInterval1 = 3; // Default update interval (3 seconds)
+            updateInterval1 = 3;
         }
         updateInterval = updateInterval1;
     }
@@ -89,8 +88,7 @@ public class ScoreboardManager implements AssembleAdapter {
     }
 
     private String getAnimatedText() {
-        int interval = 10; // 0.5 seconds * 20 ticks per second
-        int index = (int) ((System.currentTimeMillis() / 500) % animatedTexts.size());
+        int index = (int) ((System.currentTimeMillis() / updateInterval) % animatedTexts.size());
         return animatedTexts.get(index);
     }
 
@@ -111,7 +109,10 @@ public class ScoreboardManager implements AssembleAdapter {
                 line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
                 line = line.replace("{user_ping}", String.valueOf(userPing));
                 line = line.replace("{opponent_ping}", String.valueOf(opponentPing));
-                line = line.replace("{opponent}", opponent.getName());
+
+                if (line.contains("{animated_text}")) {
+                    line = line.replace("{animated_text}", getAnimatedText());
+                }
                 matchLines.add(line);
             }
         }
@@ -126,6 +127,10 @@ public class ScoreboardManager implements AssembleAdapter {
             line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(playingPlayers));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
+
+            if (line.contains("{animated_text}")) {
+                line = line.replace("{animated_text}", getAnimatedText());
+            }
             inQueueLines.add(line);
         }
         return inQueueLines;
@@ -138,6 +143,10 @@ public class ScoreboardManager implements AssembleAdapter {
             line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(playingPlayers));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
+
+            if (line.contains("{animated_text}")) {
+                line = line.replace("{animated_text}", getAnimatedText());
+            }
             inQueueLines.add(line);
         }
         return inQueueLines;

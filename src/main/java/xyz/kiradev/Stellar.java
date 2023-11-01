@@ -80,7 +80,6 @@ public class Stellar extends JavaPlugin {
             new PlayerDataListener(),
             new MenuListener(),
             new StatsListener(),
-            new RulesListener(),
             new KitEditorListener()
     ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
   }
