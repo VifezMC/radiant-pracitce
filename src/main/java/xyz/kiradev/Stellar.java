@@ -84,23 +84,23 @@ public class Stellar extends JavaPlugin {
     Console.sendMessage("&b$$\\   $$ |  $$ |$$\\ $$   ____|$$ |$$ |$$  __$$ |$$ |      ");
     Console.sendMessage("&b\\$$$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |$$ |\\$$$$$$$ |$$ |      ");
     Console.sendMessage("&b \\______/    \\____/  \\_______|\\__|\\__| \\_______|\\__|      ");
-    Console.sendMessage("&3Stellar Loaded successfully" + Constants.Ver + "\n");
-    Console.sendMessage("&b&lInformation");
-    Console.sendMessage(" | &3Version: &f" + Constants.Ver);
-    Console.sendMessage(" | &3License: &cNo-License"); // Just a placeholder for when it starts up
-    Console.sendMessage(" | &3Finished loading in: " + timeTaken + "ms");
-    Console.sendMessage(" | &3Build: " + pluginBuild);
-    Console.sendMessage(" | &3Server Version: " + simplifiedServerVersion);
-    Console.sendMessage(" | &3Plugin loaded on: " + loadedTime + "\n");
-    Console.sendMessage("&b&lLoaded");
-    Console.sendMessage(" | &3Successfully Loaded Configurations!");
-    Console.sendMessage(" | &3Successfully Loaded Managers!");
-    Console.sendMessage(" | &3Successfully Loaded Listeners!");
-    Console.sendMessage(" | &3Successfully Loaded Commands!\n");
-    Console.sendMessage("&b&lCredits");
-    Console.sendMessage(" | &3Author: &f" + Constants.Author);
-    Console.sendMessage(" | &3Thanks for using &9Stellar&3!");
-    Console.sendMessage(" | &3Discord: &b" + Constants.Discord);
+    Console.sendMessage("&3Stellar Practice has Loaded successfully\n");
+    Console.sendMessage("&3&lInformation");
+    Console.sendMessage(" | &bVersion: &f" + Constants.Ver);
+    Console.sendMessage(" | &bLicense: &cNo-License"); // Just a placeholder for when it starts up
+    Console.sendMessage(" | &bFinished loading in: " + timeTaken + "ms");
+    Console.sendMessage(" | &bBuild: " + pluginBuild);
+    Console.sendMessage(" | &bServer Version: " + simplifiedServerVersion);
+    Console.sendMessage(" | &bPlugin loaded on: " + loadedTime + "\n");
+    Console.sendMessage("&3&lLoaded");
+    Console.sendMessage(" | &bSuccessfully Loaded Configurations!");
+    Console.sendMessage(" | &bSuccessfully Loaded Managers!");
+    Console.sendMessage(" | &bSuccessfully Loaded Listeners!");
+    Console.sendMessage(" | &bSuccessfully Loaded Commands!\n");
+    Console.sendMessage("&3&lCredits");
+    Console.sendMessage(" | &bAuthor: &f" + Constants.Author);
+    Console.sendMessage(" | &bThanks for using &9Stellar&3!");
+    Console.sendMessage(" | &bDiscord: &b" + Constants.Discord);
   }
 
 

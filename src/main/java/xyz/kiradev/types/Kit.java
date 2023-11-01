@@ -6,14 +6,14 @@ import java.util.List;
 
 public class Kit {
 
-    private String name;
-    private ItemStack[] items;
-    private ItemStack[] armour;
-    private ItemStack icon;
-    private List<String> arenas;
-    private boolean ranked;
-    private List<String> rules;
-    private String description;
+    private final String name;
+    private final ItemStack[] items;
+    private final ItemStack[] armour;
+    private final ItemStack icon;
+    private final List<String> arenas;
+    private final boolean ranked;
+    private final List<String> rules;
+    private final String description;
     private int playing;
     private int queue;
 
@@ -34,42 +34,55 @@ public class Kit {
     public String getName() {
         return name;
     }
+
     public ItemStack[] getItems() {
         return items;
     }
+
     public ItemStack[] getArmour() {
         return armour;
     }
+
     public ItemStack getIcon() {
         return icon;
     }
+
     public List<String> getArenas() {
         return arenas;
     }
+
     public boolean getRanked() {
         return ranked;
     }
+
     public String getDescription() {
         return description;
     }
-    public List<String> getRules(){
+
+    public List<String> getRules() {
         return rules;
     }
-    public int getPlaying(){
+
+    public int getPlaying() {
         return playing;
     }
+
     public void addPlaying(int playing) {
         this.playing = this.playing + playing;
     }
+
     public void removePlaying(int playing) {
         this.playing = this.playing - playing;
     }
+
     public int getQueue() {
         return queue;
     }
+
     public void addQueue(int queue) {
         this.queue = this.queue + queue;
     }
+
     public void removeQueue(int queue) {
         this.queue = this.queue - queue;
     }

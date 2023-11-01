@@ -13,6 +13,19 @@ public class DivisionsManager {
         divisions = new ArrayList<>();
     }
 
+    public static Division getDivision(String Div) {
+        for (Division divs : divisions) {
+            if (divs.getName().equals(Div)) {
+                return divs;
+            }
+        }
+        return null;
+    }
+
+    public static List<Division> getDivisions() {
+        return divisions;
+    }
+
     public void loadDivisions() {
         if (ConfigManager.divisionConfig.get("divisions") == null) {
             return;
@@ -27,15 +40,6 @@ public class DivisionsManager {
         }
     }
 
-    public static Division getDivision(String Div) {
-        for (Division divs : divisions) {
-            if (divs.getName().equals(Div)) {
-                return divs;
-            }
-        }
-        return null;
-    }
-
     public String getPlayerDivision(int playerElo) {
         Division playerDivision = null;
 
@@ -46,10 +50,5 @@ public class DivisionsManager {
         }
 
         return (playerDivision != null) ? playerDivision.getDisplayname() : "No Division";
-    }
-
-
-    public static List<Division> getDivisions() {
-        return divisions;
     }
 }

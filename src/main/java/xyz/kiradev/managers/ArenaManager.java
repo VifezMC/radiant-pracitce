@@ -1,15 +1,15 @@
 package xyz.kiradev.managers;
 
-import xyz.kiradev.listeners.BlockListener;
-import xyz.kiradev.types.Arena;
-import xyz.kiradev.types.Match;
-import xyz.kiradev.utils.LocationUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import xyz.kiradev.listeners.BlockListener;
+import xyz.kiradev.types.Arena;
+import xyz.kiradev.types.Match;
+import xyz.kiradev.utils.LocationUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,22 +21,6 @@ public class ArenaManager {
 
     public ArenaManager() {
         arenas = new ArrayList<>();
-    }
-
-    public void loadArenas() {
-        if (ConfigManager.arenaConfig.get("arenas") == null) {
-            return;
-        }
-
-        for (String arenaName : ConfigManager.arenaConfig.getConfigurationSection("arenas").getKeys(false)) {
-            Location spawn1 = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".spawn1"));
-            Location spawn2 = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".spawn2"));
-            Location min = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".min"));
-            Location max = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".max"));
-
-            Arena arena = new Arena(arenaName, spawn1, spawn2, min, max);
-            arenas.add(arena);
-        }
     }
 
     public static Arena getByName(String name) {
@@ -85,8 +69,6 @@ public class ArenaManager {
         }
     }
 
-
-
     public static Arena selectRandomAvailableArena(List<String> arenas) {
         List<Arena> availableArenas = new ArrayList<>();
         for (String arenaName : arenas) {
@@ -104,5 +86,21 @@ public class ArenaManager {
 
     public static List<Arena> getArenas() {
         return arenas;
+    }
+
+    public void loadArenas() {
+        if (ConfigManager.arenaConfig.get("arenas") == null) {
+            return;
+        }
+
+        for (String arenaName : ConfigManager.arenaConfig.getConfigurationSection("arenas").getKeys(false)) {
+            Location spawn1 = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".spawn1"));
+            Location spawn2 = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".spawn2"));
+            Location min = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".min"));
+            Location max = LocationUtil.toLoc(ConfigManager.arenaConfig.getString("arenas." + arenaName + ".max"));
+
+            Arena arena = new Arena(arenaName, spawn1, spawn2, min, max);
+            arenas.add(arena);
+        }
     }
 }

@@ -1,15 +1,5 @@
 package xyz.kiradev.listeners;
 
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.managers.GameManager;
-import xyz.kiradev.managers.KitManager;
-import xyz.kiradev.managers.MatchManager;
-import xyz.kiradev.player.GameState;
-import xyz.kiradev.player.PlayerState;
-import xyz.kiradev.utils.PlayerUtils;
-import xyz.kiradev.types.Match;
-import xyz.kiradev.utils.Cooldowns;
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -25,6 +15,16 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.inventory.ItemStack;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.managers.GameManager;
+import xyz.kiradev.managers.KitManager;
+import xyz.kiradev.managers.MatchManager;
+import xyz.kiradev.player.GameState;
+import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.types.Match;
+import xyz.kiradev.utils.Cooldowns;
+import xyz.kiradev.utils.PlayerUtils;
+import xyz.kiradev.utils.render.CC;
 
 public class GameListener implements Listener {
 
@@ -32,9 +32,9 @@ public class GameListener implements Listener {
 
     //@EventHandler
     //public void onBlockBreak(BlockBreakEvent event) {
-      //      if (!(event.getPlayer().getGameMode() == GameMode.CREATIVE) || PlayerUtils.hasPlayerState(event.getPlayer(),PlayerState.ENDED)) {
-        //        event.setCancelled(true);
-       // }
+    //      if (!(event.getPlayer().getGameMode() == GameMode.CREATIVE) || PlayerUtils.hasPlayerState(event.getPlayer(),PlayerState.ENDED)) {
+    //        event.setCancelled(true);
+    // }
     //}
 
     @EventHandler
@@ -77,7 +77,7 @@ public class GameListener implements Listener {
     public void onPlayerQuit(PlayerQuitEvent event) {
         Player p = event.getPlayer();
         event.setQuitMessage(null);
-        if(PlayerUtils.hasPlayerState(p, PlayerState.PLAYING)){
+        if (PlayerUtils.hasPlayerState(p, PlayerState.PLAYING)) {
             MatchManager.getMatch(p).setLoser(p);
             GameManager.EndGame(MatchManager.getMatch(MatchManager.getMatch(p).getLoser()));
         }
@@ -123,10 +123,10 @@ public class GameListener implements Listener {
     public void onMove(PlayerMoveEvent event) {
         Player p = event.getPlayer();
         if (PlayerUtils.hasPlayerState(p, PlayerState.PLAYING) && PlayerUtils.hasGPlayerState(p, GameState.SUMO)) {
-                Location to = event.getTo();
-                Location from = event.getFrom();
-                if ((to.getX() != from.getX() || to.getZ() != from.getZ())) {
-                    p.teleport(from);
+            Location to = event.getTo();
+            Location from = event.getFrom();
+            if ((to.getX() != from.getX() || to.getZ() != from.getZ())) {
+                p.teleport(from);
             }
         }
     }

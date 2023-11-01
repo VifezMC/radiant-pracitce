@@ -1,12 +1,12 @@
 package xyz.kiradev.listeners;
 
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.types.Data;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.types.Data;
 
 import java.io.IOException;
 

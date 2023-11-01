@@ -1,7 +1,7 @@
 package xyz.kiradev.managers;
 
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.entity.Player;
+import xyz.kiradev.utils.render.CC;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

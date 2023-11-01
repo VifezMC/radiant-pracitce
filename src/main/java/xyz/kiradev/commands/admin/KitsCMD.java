@@ -92,7 +92,7 @@ public class KitsCMD implements CommandExecutor {
                                 if (args.length >= 3) {
                                     String kitName = args[2];
                                     String rule = args[3].toLowerCase();
-                                    if(rule.equals(null)){
+                                    if (rule.equals(null)) {
                                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit set rule <name> <rule>.");
                                     }
                                     addRule(kitName, rule, p);

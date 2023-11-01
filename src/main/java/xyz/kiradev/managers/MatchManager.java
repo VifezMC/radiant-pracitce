@@ -1,9 +1,9 @@
 package xyz.kiradev.managers;
 
+import org.bukkit.entity.Player;
 import xyz.kiradev.types.Arena;
 import xyz.kiradev.types.Match;
 import xyz.kiradev.utils.render.Console;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,8 +13,8 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class MatchManager {
 
-    private static Map<UUID, Match> matches = new ConcurrentHashMap<>();
-    private static Map<UUID, Arena> matchArenas = new ConcurrentHashMap<>();
+    private static final Map<UUID, Match> matches = new ConcurrentHashMap<>();
+    private static final Map<UUID, Arena> matchArenas = new ConcurrentHashMap<>();
 
     public static void addMatch(Player player1, Player player2, Arena arenaName, String kitName) {
         UUID matchID = UUID.randomUUID();

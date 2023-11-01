@@ -19,16 +19,6 @@ public class ItemBuilder {
 
     private final ItemStack itemStack;
 
-    public static ItemStack build(Material material, int amount, int setShort, String itemName, List<String> setLore) {
-        ItemStack itemStack = new ItemStack(material, amount, (short) setShort);
-        ItemMeta itemMeta = itemStack.getItemMeta();
-        itemMeta.setDisplayName(CC.translate(itemName));
-        itemMeta.setLore(setLore);
-        itemStack.setItemMeta(itemMeta);
-
-        return itemStack;
-    }
-
     public ItemBuilder(Material m) {
         this(m, 1);
     }
@@ -43,6 +33,16 @@ public class ItemBuilder {
 
     public ItemBuilder(Material m, int amount, byte durability) {
         this.itemStack = new ItemStack(m, amount, durability);
+    }
+
+    public static ItemStack build(Material material, int amount, int setShort, String itemName, List<String> setLore) {
+        ItemStack itemStack = new ItemStack(material, amount, (short) setShort);
+        ItemMeta itemMeta = itemStack.getItemMeta();
+        itemMeta.setDisplayName(CC.translate(itemName));
+        itemMeta.setLore(setLore);
+        itemStack.setItemMeta(itemMeta);
+
+        return itemStack;
     }
 
     public ItemBuilder clone() {

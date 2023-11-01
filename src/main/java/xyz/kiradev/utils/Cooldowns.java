@@ -11,6 +11,10 @@ public class Cooldowns {
 
     public static HashMap<String, HashMap<UUID, Long>> cooldown;
 
+    static {
+        Cooldowns.cooldown = new HashMap<>();
+    }
+
     public static void createCooldown(final String string) {
         if (Cooldowns.cooldown.containsKey(string)) {
             throw new IllegalArgumentException("Cooldown already exists.");
@@ -41,9 +45,8 @@ public class Cooldowns {
         return Cooldowns.cooldown.containsKey(string) && Cooldowns.cooldown.get(string).containsKey(uuid) && System.currentTimeMillis() <= Cooldowns.cooldown.get(string).get(uuid);
     }
 
-
     public static int getCooldownForPlayerInt(final String string, final Player player) {
-        return (int)(Cooldowns.cooldown.get(string).get(player.getUniqueId()) - System.currentTimeMillis()) / 1000;
+        return (int) (Cooldowns.cooldown.get(string).get(player.getUniqueId()) - System.currentTimeMillis()) / 1000;
     }
 
     public static String getCooldownForPlayerString(final String string, final Player player) {
@@ -52,7 +55,6 @@ public class Cooldowns {
         String formattedCooldown = String.format("%.1f", cooldownSeconds);
         return formattedCooldown;
     }
-
 
     public static void removeCooldown(final String string, final Player player) {
         if (!Cooldowns.cooldown.containsKey(string)) {
@@ -66,10 +68,6 @@ public class Cooldowns {
             throw new IllegalArgumentException(string + " does not exist");
         }
         Cooldowns.cooldown.get(string).remove(uuid);
-    }
-
-    static {
-        Cooldowns.cooldown = new HashMap<>();
     }
 
 }

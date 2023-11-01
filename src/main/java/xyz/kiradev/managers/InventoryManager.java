@@ -1,20 +1,20 @@
 package xyz.kiradev.managers;
 
-import xyz.kiradev.utils.render.CC;
-import xyz.kiradev.utils.render.Console;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.Console;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class InventoryManager {
     public static Map<String, ItemStack> spawnItemsCache = new ConcurrentHashMap<>();
-    private static Map<String, ItemStack> queueItemsCache = new ConcurrentHashMap<>();
+    private static final Map<String, ItemStack> queueItemsCache = new ConcurrentHashMap<>();
 
     public static void createSpawnItems(Player player) {
         createItems(player, "spawn-items", spawnItemsCache);
