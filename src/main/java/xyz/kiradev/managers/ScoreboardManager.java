@@ -1,12 +1,12 @@
 package xyz.kiradev.managers;
 
+import org.bukkit.entity.Player;
 import xyz.kiradev.Stellar;
 import xyz.kiradev.commands.user.KitEditorCMD;
 import xyz.kiradev.listeners.PlayerDataListener;
 import xyz.kiradev.player.PlayerState;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.assemble.AssembleAdapter;
-import org.bukkit.entity.Player;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -23,7 +23,6 @@ public class ScoreboardManager implements AssembleAdapter {
     private final List<String> scoreboardKiteditor;
 
     private int playingPlayers;
-    private int animationTicker = 0;
     private final List<String> animatedTexts;
     private final int updateInterval;
 
