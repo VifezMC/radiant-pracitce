@@ -55,28 +55,5 @@ public class PlayerJoin implements Listener {
 
         // REMOVE JOIN MESSAGE
         event.setJoinMessage(null);
-
-        // TABLIST
-        if (ConfigManager.pluginConfig.getBoolean("tablist.enable")) {
-            sendTabHeader(p, ConfigManager.pluginConfig.getString("tablist.header")
-                    .replace("{online}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size())), ConfigManager.pluginConfig.getString("tablist.footer")
-                    .replace("{online}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size())));
-        }
-    }
-
-    private void sendTabHeader(Player player, String header, String footer) {
-        CraftPlayer craftPlayer = (CraftPlayer) player;
-        PlayerConnection playerConnection = (craftPlayer.getHandle()).playerConnection;
-        IChatBaseComponent tabHeader = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + CC.translate(header) + "\"}");
-        IChatBaseComponent tabFooter = IChatBaseComponent.ChatSerializer.a("{\"text\":\"" + CC.translate(footer) + "\"}");
-        PacketPlayOutPlayerListHeaderFooter packet = new PacketPlayOutPlayerListHeaderFooter(tabHeader);
-        try {
-            Field field = packet.getClass().getDeclaredField("b");
-            field.setAccessible(true);
-            field.set(packet, tabFooter);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        playerConnection.sendPacket(packet);
     }
 }

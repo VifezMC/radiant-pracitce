@@ -17,11 +17,11 @@ public class UnrankedCMD implements CommandExecutor {
             return true;
         }
 
-        Player player = (Player) sender;
+        Player p = (Player) sender;
         if (ConfigManager.menusConfig.getString("queue-gui-type.unranked.type").contains("modern")) {
-            UnrankedInventoryModern.openMenu(player);
+            UnrankedInventoryModern.openMenu(p);
         } else {
-            UnrankedInventoryLegacy.openMenu(player, ConfigManager.kitsConfig);
+            UnrankedInventoryLegacy.openMenu(p, ConfigManager.kitsConfig);
         }
         return true;
     }

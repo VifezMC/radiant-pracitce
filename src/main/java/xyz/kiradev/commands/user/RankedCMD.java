@@ -16,11 +16,11 @@ public class RankedCMD implements CommandExecutor {
             return true;
         }
 
-        Player player = (Player) sender;
+        Player p = (Player) sender;
         if (ConfigManager.menusConfig.getString("kit-editor.ranked.type").contains("modern")) {
-            UnrankedInventoryModern.openMenu(player);
+            UnrankedInventoryModern.openMenu(p);
         } else {
-            UnrankedInventoryModern.openMenu(player);
+            UnrankedInventoryModern.openMenu(p);
         }
         return true;
     }

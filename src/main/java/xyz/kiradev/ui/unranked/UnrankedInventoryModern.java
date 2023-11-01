@@ -16,12 +16,7 @@ import xyz.kiradev.utils.render.CC;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnrankedInventoryModern implements Listener {
-    private static KitManager kitManager;
-
-    public UnrankedInventoryModern(KitManager kitManager) {
-        UnrankedInventoryModern.kitManager = kitManager;
-    }
+public class UnrankedInventoryModern  {
 
     public static void openMenu(Player player) {
         // Create the inventory
@@ -35,7 +30,7 @@ public class UnrankedInventoryModern implements Listener {
         List<String> lore = ConfigManager.menusConfig.getStringList(loreKey);
         List<String> translatedLore = new ArrayList<>();
 
-        for (Kit kit : kitManager.getKits()) {
+        for (Kit kit : ConfigManager.kitManager.getKits()) {
             ItemStack iconItem = kit.getIcon();
             ItemMeta itemMeta = iconItem.getItemMeta();
 

@@ -1,63 +1,77 @@
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\admin\ArenaCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\DiscordUtils.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\UnrankedCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\Assemble.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\MenuListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\admin\KitsCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\AssembleAdapter.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\types\Arena.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\admin\MainCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\KitManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\events\AssembleBoardDestroyEvent.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\PlayerDataListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\Placeholder.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\ConfigManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\AssembleStyle.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\ui\KitEditorInventory.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\AssembleListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\player\GameState.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\render\Console.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\types\Kit.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\types\Data.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\ui\StatsInventory.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\PingCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\ui\unranked\UnrankedInventoryModern.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\AssembleBoardEntry.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\SettingsCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\SpawnListeners.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\InventoryManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\types\Division.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\StatsListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\ui\SettingsInventory.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\LeaveQueueCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\PlayerJoin.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\ArenaManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\ui\unranked\UnrankedInventoryLegacy.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\GameListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\render\CC.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\ui\SettingsKillEffectsInventory.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\KitEditorListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\StatsCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\AssembleBoard.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\events\AssembleBoardCreatedEvent.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\KitEditorCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\events\AssembleBoardCreateEvent.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\LocationUtil.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\DivisionsManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\QueueCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\Cooldowns.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\player\PlayerState.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\user\RankedCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\ScoreboardManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\Constants.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\GameManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\MatchManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\BlockListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\types\Match.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\assemble\AssembleThread.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\render\ItemBuilder.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\commands\admin\SetSpawnCMD.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\utils\PlayerUtils.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\listeners\WorldListener.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\managers\QueueManager.java
-C:\Users\vifez\OneDrive\Desktop\Stellar Practice\src\main\java\xyz\kiradev\Stellar.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\events\AssembleBoardCreatedEvent.java
+C:\Stellar\src\main\java\xyz\kiradev\Constants.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleListener.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\PlayerUtils.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\InventoryManager.java
+C:\Stellar\src\main\java\xyz\kiradev\types\Data.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\LobbyLayoutProvider.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\render\ItemBuilder.java
+C:\Stellar\src\main\java\xyz\kiradev\ui\unranked\UnrankedInventoryModern.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\LeaveQueueCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\ui\SettingsInventory.java
+C:\Stellar\src\main\java\xyz\kiradev\Placeholder.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\TabRunnable.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleException.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\DivisionsManager.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\events\AssembleBoardCreateEvent.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\Assemble.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleThread.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\GameListener.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\ScoreboardManager.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\TabImpl.java
+C:\Stellar\src\main\java\xyz\kiradev\Stellar.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\StatsListener.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\MatchManager.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleBoard.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleUtils.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\LocationUtil.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\client\ClientVersionUtil.java
+C:\Stellar\src\main\java\xyz\kiradev\ui\SettingsKillEffectsInventory.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\PlayerJoin.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\entry\TabElementHandler.java
+C:\Stellar\src\main\java\xyz\kiradev\player\GameState.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\admin\SetSpawnCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleBoardEntry.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\ArenaManager.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\entry\TabEntry.java
+C:\Stellar\src\main\java\xyz\kiradev\ui\StatsInventory.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\StatsCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\QueueManager.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\render\CC.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\skin\SkinUtil.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\entry\TabElement.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\SpawnListeners.java
+C:\Stellar\src\main\java\xyz\kiradev\types\Arena.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\KitManager.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\WorldListener.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\Cooldowns.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\RankedCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\player\PlayerState.java
+C:\Stellar\src\main\java\xyz\kiradev\ui\unranked\UnrankedInventoryLegacy.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleStyle.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\v1_8_r3\v1_8_R3TabAdapter.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\ConfigManager.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\TabAdapter.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\KitEditorCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\managers\GameManager.java
+C:\Stellar\src\main\java\xyz\kiradev\types\Division.java
+C:\Stellar\src\main\java\xyz\kiradev\types\Match.java
+C:\Stellar\src\main\java\xyz\kiradev\ui\KitEditorInventory.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\skin\SkinType.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\PingCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\PlayerDataListener.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\AssembleAdapter.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\SettingsCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\admin\MainCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\admin\KitsCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\tab\TabHandler.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\admin\ArenaCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\DiscordUtils.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\UnrankedCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\assemble\events\AssembleBoardDestroyEvent.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\KitEditorListener.java
+C:\Stellar\src\main\java\xyz\kiradev\types\Kit.java
+C:\Stellar\src\main\java\xyz\kiradev\commands\user\QueueCMD.java
+C:\Stellar\src\main\java\xyz\kiradev\utils\render\Console.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\BlockListener.java
+C:\Stellar\src\main\java\xyz\kiradev\listeners\MenuListener.java

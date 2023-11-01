@@ -26,7 +26,7 @@ public class MainCMD implements CommandExecutor {
         }
 
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-            Stellar.redloadManagers();
+            Stellar.reloadManagers();
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             player.sendMessage(CC.GREEN + "Configs have been reloaded!");
             return true;

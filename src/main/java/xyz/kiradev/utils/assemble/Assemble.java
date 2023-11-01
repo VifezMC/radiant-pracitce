@@ -2,62 +2,110 @@ package xyz.kiradev.utils.assemble;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.java.JavaPlugin;
+import xyz.kiradev.utils.assemble.events.AssembleBoardCreateEvent;
 
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-@Getter @Setter
+@Getter
+@Setter
 public class Assemble {
 
-	private JavaPlugin plugin;
-	private AssembleAdapter adapter;
-	private Map<UUID, AssembleBoard> boards;
-	private AssembleThread thread;
-	private AssembleListener listeners;
-	private long ticks = 1;
-	private boolean hook = false;
-	private AssembleStyle assembleStyle = AssembleStyle.MODERN;
+    private final JavaPlugin plugin;
+    private final ChatColor[] chatColorCache = ChatColor.values();
+    private AssembleAdapter adapter;
+    private AssembleThread thread;
+    private AssembleListener listeners;
+    private AssembleStyle assembleStyle = AssembleStyle.MODERN;
+    private Map<UUID, AssembleBoard> boards;
+    private long ticks = 2;
+    private boolean hook = false, debugMode = true, callEvents = true;
 
-	public Assemble(JavaPlugin plugin, AssembleAdapter adapter) {
-		if (plugin == null) {
-			throw new RuntimeException("Assemble can not be instantiated without a plugin instance!");
-		}
+    /**
+     * Assemble.
+     *
+     * @param plugin  instance.
+     * @param adapter that is being provided.
+     */
+    public Assemble(JavaPlugin plugin, AssembleAdapter adapter) {
+        if (plugin == null) {
+            throw new RuntimeException("Assemble can not be instantiated without a plugin instance!");
+        }
 
-		this.plugin = plugin;
-		this.adapter = adapter;
-		this.boards = new ConcurrentHashMap<>();
+        this.plugin = plugin;
+        this.adapter = adapter;
+        this.boards = new ConcurrentHashMap<>();
 
-		this.setup();
-	}
+        this.setup();
+    }
 
-	private void setup() {
-		listeners = new AssembleListener(this);
-		//Register Events
-		this.plugin.getServer().getPluginManager().registerEvents(listeners, this.plugin);
+    /**
+     * Setup Assemble.
+     */
+    public void setup() {
+        // Register Events.
+        this.listeners = new AssembleListener(this);
+        this.plugin.getServer().getPluginManager().registerEvents(listeners, this.plugin);
 
-		//Ensure that the thread has stopped running
-		if (this.thread != null) {
-			this.thread.stop();
-			this.thread = null;
-		}
+        // Ensure that the thread has stopped running.
+        if (this.thread != null) {
+            this.thread.stop();
+            this.thread = null;
+        }
 
-		//Start Thread
-		this.thread = new AssembleThread(this);
-	}
+        // Register new boards for existing online players.
+        for (Player player : this.getPlugin().getServer().getOnlinePlayers()) {
 
-	public void cleanup() {
-		if (this.thread != null) {
-			this.thread.stop();
-			this.thread = null;
-		}
+            // Call Events if enabled.
+            if (this.isCallEvents()) {
+                AssembleBoardCreateEvent createEvent = new AssembleBoardCreateEvent(player);
 
-		if (listeners != null) {
-			HandlerList.unregisterAll(listeners);
-			listeners = null;
-		}
-	}
+                Bukkit.getPluginManager().callEvent(createEvent);
+                if (createEvent.isCancelled()) {
+                    continue;
+                }
+            }
+
+            getBoards().putIfAbsent(player.getUniqueId(), new AssembleBoard(player, this));
+        }
+
+        // Start Thread.
+        this.thread = new AssembleThread(this);
+    }
+
+    /**
+     * Cleanup Assemble.
+     */
+    public void cleanup() {
+        // Stop thread.
+        if (this.thread != null) {
+            this.thread.stop();
+            this.thread = null;
+        }
+
+        // Unregister listeners.
+        if (listeners != null) {
+            HandlerList.unregisterAll(listeners);
+            listeners = null;
+        }
+
+        // Destroy player scoreboards.
+        for (UUID uuid : getBoards().keySet()) {
+            Player player = Bukkit.getPlayer(uuid);
+
+            if (player == null || !player.isOnline()) {
+                continue;
+            }
+
+            getBoards().remove(uuid);
+            player.setScoreboard(Bukkit.getScoreboardManager().getNewScoreboard());
+        }
+    }
 
 }

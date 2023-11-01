@@ -4,6 +4,9 @@ import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import xyz.kiradev.Stellar;
+import xyz.kiradev.tab.TabHandler;
+import xyz.kiradev.tab.TabImpl;
+import xyz.kiradev.tab.v1_8_r3.v1_8_R3TabAdapter;
 import xyz.kiradev.utils.render.CC;
 import xyz.kiradev.utils.render.Console;
 
@@ -32,6 +35,11 @@ public class ConfigManager {
     public static FileConfiguration databaseConfig;
     public static File division;
     public static FileConfiguration divisionConfig;
+    public static File tab;
+    public static FileConfiguration tabConfig;
+    public static File head;
+    public static FileConfiguration headConfig;
+
 
     public static void registerConfigs() {
         // ARENAS
@@ -81,6 +89,19 @@ public class ConfigManager {
         division = new File(Stellar.instance.getDataFolder(), "features/divisions.yml");
         divisionConfig = YamlConfiguration.loadConfiguration(division);
         divisionsManager.loadDivisions();
+
+        // HEAD CONFIG
+        saveResourceIfNotExists("cache/heads.yml");
+        head = new File(Stellar.instance.getDataFolder(), "cache/heads.yml");
+        headConfig = YamlConfiguration.loadConfiguration(head);
+
+        // TABLIST CONFIG
+        saveResourceIfNotExists("ui/tablist.yml");
+        tab = new File(Stellar.instance.getDataFolder(), "ui/tablist.yml");
+        tabConfig = YamlConfiguration.loadConfiguration(tab);
+        if (tabConfig.getBoolean("tablist.enable")) {
+            new TabHandler(new v1_8_R3TabAdapter(), new TabImpl(), 20L);
+        }
     }
 
 
