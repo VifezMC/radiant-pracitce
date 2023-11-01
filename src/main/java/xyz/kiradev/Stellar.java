@@ -68,6 +68,13 @@ public class Stellar extends JavaPlugin {
 // Extracting a simplified version string
     String simplifiedServerVersion = serverVersion.split("MC: ")[1].split("\\)")[0];
 
+    long startTime = System.currentTimeMillis();
+
+// Calculate the time taken for plugin loading
+    long endTime = System.currentTimeMillis();
+    long timeTaken = endTime - startTime;
+
+
     // START MESSAGE
     Console.sendMessage("&b $$$$$$\\    $$\\               $$\\ $$\\                     ");
     Console.sendMessage("&b$$  __$$\\   $$ |              $$ |$$ |                    ");
@@ -80,6 +87,7 @@ public class Stellar extends JavaPlugin {
     Console.sendMessage("&3Stellar Loaded successfully\n");
     Console.sendMessage("&b&lInformation");
     Console.sendMessage(" | &3Version: &f" + Constants.Ver);
+    Console.sendMessage(" | &3Finished loading in: " + timeTaken + "ms");
     Console.sendMessage(" | &3Build: " + pluginBuild);
     Console.sendMessage(" | &3Server Version: " + simplifiedServerVersion);
     Console.sendMessage(" | &3Plugin loaded on: " + loadedTime + "\n");

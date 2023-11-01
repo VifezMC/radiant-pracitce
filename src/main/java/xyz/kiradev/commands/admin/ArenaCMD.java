@@ -1,13 +1,16 @@
 package xyz.kiradev.commands.admin;
 
-import xyz.kiradev.Constants;
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.utils.PlayerUtils;
-import xyz.kiradev.utils.render.CC;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import xyz.kiradev.Constants;
+import xyz.kiradev.managers.ArenaManager;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.utils.PlayerUtils;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.Console;
 
 
 public class ArenaCMD implements CommandExecutor {
@@ -19,48 +22,54 @@ public class ArenaCMD implements CommandExecutor {
             return true;
         }
 
-        Player player = (Player) sender;
-        if (!player.hasPermission(Constants.PlName + ".arena")) {
-            player.sendMessage(CC.translate("&cYou don't have permission to use this command."));
+        Player p = (Player) sender;
+        if (!p.hasPermission(Constants.PlName + ".arena")) {
+            p.sendMessage(CC.translate("&cYou don't have permission to use this command."));
             return true;
         }
 
         if (args.length >= 2) {
             String arenaName = args[1];
-
-            if (args[0].equalsIgnoreCase("create")) {
-                createArena(arenaName);
-                player.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set position a and position b."));
-                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
-
-            } else if (args[0].equalsIgnoreCase("a")) {
-                setSpawn(arenaName, 1, PlayerUtils.toString(player.getLocation()));
-                player.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
-                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
-
-            } else if (args[0].equalsIgnoreCase("b")) {
-                setSpawn(arenaName, 2, PlayerUtils.toString(player.getLocation()));
-                player.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
-                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
-
-            }else if (args[0].equalsIgnoreCase("min")) {
-                setEdges(arenaName, "min", PlayerUtils.toString(player.getLocation()));
-                player.sendMessage(CC.translate("&aSuccessfully set the min edge of &b" + arenaName + " &a!"));
-                player.sendMessage( CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
-
-            }else if (args[0].equalsIgnoreCase("max")) {
-                setEdges(arenaName, "max", PlayerUtils.toString(player.getLocation()));
-                player.sendMessage(CC.translate("&aSuccessfully set the max edge of &b" + arenaName + " &a!"));
-                player.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
-
-            } else {
-                showArenaCommands(player);
+            String subcommand = args[0].toLowerCase();
+            switch (subcommand) {
+                case "create":
+                    createArena(arenaName);
+                    p.sendMessage(CC.translate("&aSuccessfully created the arena &b" + arenaName + " &a!"));
+                    p.sendMessage(CC.translate("&4&lIMPORTANT &cYou need to set position a and position b."));
+                    p.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                    break;
+                case "save":
+                    saveArenas();
+                    p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    p.sendMessage(CC.GREEN + "Arenas have been saved!");
+                    break;
+                case "a":
+                    setSpawn(arenaName, 1, PlayerUtils.toString(p.getLocation()));
+                    p.sendMessage(CC.translate("&aSuccessfully set the first spawn of &b" + arenaName + " &a!"));
+                    p.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                    break;
+                case "b":
+                    setSpawn(arenaName, 2, PlayerUtils.toString(p.getLocation()));
+                    p.sendMessage(CC.translate("&aSuccessfully set the second spawn of &b" + arenaName + " &a!"));
+                    p.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                    break;
+                case "min":
+                    setEdges(arenaName, "min", PlayerUtils.toString(p.getLocation()));
+                    p.sendMessage(CC.translate("&aSuccessfully set the min edge of &b" + arenaName + " &a!"));
+                    p.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                    break;
+                case "max":
+                    setEdges(arenaName, "max", PlayerUtils.toString(p.getLocation()));
+                    p.sendMessage(CC.translate("&aSuccessfully set the max edge of &b" + arenaName + " &a!"));
+                    p.sendMessage(CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+                    break;
+                default:
+                    showArenaCommands(p);
+                    break;
             }
-
             return true;
         } else {
-            showArenaCommands(player);
+            showArenaCommands(p);
         }
 
         return true;
@@ -75,6 +84,12 @@ public class ArenaCMD implements CommandExecutor {
         ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
     }
 
+    private void saveArenas() {
+        ConfigManager.arenaManager = new ArenaManager();
+        ConfigManager.registerConfigs();
+        Console.sendMessage("&aReloaded arenas");
+    }
+
     private void setSpawn(String name, int number, String loc) {
         ConfigManager.arenaConfig.set("arenas." + name + ".spawn" + number, loc);
         ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
@@ -87,11 +102,12 @@ public class ArenaCMD implements CommandExecutor {
 
     private void showArenaCommands(Player player) {
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&3&lStellar Arena Setup"));
+        player.sendMessage(CC.translate("&7- Arena Setup"));
         player.sendMessage(CC.translate("&b/arena create &8<&7name&8> &7- &8(&7Create an arena&8)"));
         player.sendMessage(CC.translate("&b/arena remove &8<&7name&8> &7- &8(&7Remove an arena&8)"));
+        player.sendMessage(CC.translate("&b/arena save &8<&7name&8> &7- &8(&7Save arenas&8)"));
         player.sendMessage(CC.translate(" "));
-        player.sendMessage(CC.translate("&3&lStellar Arena Spawn commands:"));
+        player.sendMessage(CC.translate("&8- &7Arena Spawn commands:"));
         player.sendMessage(CC.translate("&b/arena a &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
         player.sendMessage(CC.translate("&b/arena b &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
         player.sendMessage(CC.translate("&b/arena min &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));

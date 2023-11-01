@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f2763eeb-390b-46e3-aa8f-d114d76d6eed" name="Changes" comment="Update">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/BlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/BlockListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="PUSH_TAGS">
+      <GitPushTagMode>
+        <option name="argument" value="--tags" />
+        <option name="title" value="All" />
+      </GitPushTagMode>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="UPDATE_TYPE" value="REBASE" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2XUVpyrc9HDtw7owsb193XnJKZg" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/vifez/OneDrive/Desktop/Stellar Practice&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.project.maven.repository.indices&quot;
+  }
+}</component>
+  <component name="RunAnythingCache">
+    <option name="myCommands">
+      <command value="mvn clean install" />
+    </option>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="Stellar Practice" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="Stellar Practice" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f2763eeb-390b-46e3-aa8f-d114d76d6eed" name="Changes" comment="" />
+      <created>1698683832427</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1698683832427</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Update">
+      <option name="closed" value="true" />
+      <created>1698778491179</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1698778491179</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Update">
+      <option name="closed" value="true" />
+      <created>1698810777382</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1698810777382</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update" />
+  </component>
+</project>

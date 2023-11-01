@@ -1,15 +1,16 @@
 package xyz.kiradev.commands.admin;
 
-import xyz.kiradev.Constants;
-import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.managers.KitManager;
-import xyz.kiradev.utils.render.CC;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import xyz.kiradev.Constants;
+import xyz.kiradev.managers.ConfigManager;
+import xyz.kiradev.managers.KitManager;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.Console;
 
 import java.util.Arrays;
 import java.util.List;
@@ -39,10 +40,15 @@ public class KitsCMD implements CommandExecutor {
                         createKit(kitName);
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
                         p.sendMessage(CC.GREEN + "Kit has been created!");
-                        
+
                     } else {
                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit create <name>.");
                     }
+                    break;
+                case "save":
+                    saveKits();
+                    p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
+                    p.sendMessage(CC.GREEN + "Kits have been saved!");
                     break;
                 case "set":
                     if (args.length >= 2) {
@@ -57,7 +63,7 @@ public class KitsCMD implements CommandExecutor {
                                     }
                                     setDesc(kitName, description.toString(), p);
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                                    
+
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set description <name> <description>.");
                                 }
@@ -67,7 +73,7 @@ public class KitsCMD implements CommandExecutor {
                                     String kitName = args[2];
                                     setIcon(kitName, p.getItemInHand(), p);
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                                    
+
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set icon <name>.");
                                 }
@@ -77,7 +83,7 @@ public class KitsCMD implements CommandExecutor {
                                     String kitName = args[2];
                                     setItemsAndArmour(kitName, p);
                                     p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                                    
+
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set inv <name>.");
                                 }
@@ -90,7 +96,7 @@ public class KitsCMD implements CommandExecutor {
                                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit set rule <name> <rule>.");
                                     }
                                     addRule(kitName, rule, p);
-                                    
+
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit set rule <name> <rule>.");
                                 }
@@ -100,7 +106,7 @@ public class KitsCMD implements CommandExecutor {
                                     String kitName = args[1];
                                     String rankedValue = args[2].toLowerCase();
                                     setRankedStatus(kitName, rankedValue, p);
-                                    
+
                                 } else {
                                     p.sendMessage(CC.RED + "Invalid command usage. Use /kit ranked <name> <true/false>.");
                                 }
@@ -118,7 +124,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         giveKit(kitName, p);
                         p.playSound(p.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-                        
+
                     } else {
                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit give <name>.");
                     }
@@ -128,7 +134,7 @@ public class KitsCMD implements CommandExecutor {
                         String kitName = args[1];
                         String arena = args[2];
                         addArena(kitName, arena, p);
-                        
+
                     } else {
                         p.sendMessage(CC.RED + "Invalid command usage. Use /kit whitelistarena <name> <arena>.");
                     }
@@ -138,6 +144,7 @@ public class KitsCMD implements CommandExecutor {
                     break;
             }
         } else {
+
             showKitCommands(p);
         }
         return true;
@@ -151,6 +158,12 @@ public class KitsCMD implements CommandExecutor {
         ConfigManager.kitsConfig.set("kits." + name + ".rules", "None");
         ConfigManager.kitsConfig.set("kits." + name + ".description", "None");
         ConfigManager.saveConfig(ConfigManager.kits, ConfigManager.kitsConfig);
+    }
+
+    private void saveKits() {
+        ConfigManager.kitManager = new KitManager();
+        ConfigManager.registerConfigs();
+        Console.sendMessage("&aReloaded kits");
     }
 
     private void setItemsAndArmour(String kitName, Player player) {
@@ -251,7 +264,7 @@ public class KitsCMD implements CommandExecutor {
     private boolean kitExists(String kitName) {
         return ConfigManager.kitsConfig.contains("kits." + kitName);
     }
-    
+
 
     private void showKitCommands(Player player) {
         player.sendMessage(CC.translate(""));
@@ -260,6 +273,7 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&b/kit create &8<&7name&8> &7- &8(&7Create a kit&8)"));
         player.sendMessage(CC.translate("&b/kit get &8<&7name&8> &7- &8(&7Get a kit's inventory&8)"));
         player.sendMessage(CC.translate("&b/kit set &7- &8(&7Opens set sub commands&8)"));
+        player.sendMessage(CC.translate("&b/kit save &7- &8(&7Save kits&8)"));
         player.sendMessage(CC.translate("&b/kit whitelistarena &8<&7name&8> &8<&7arena&8> &7- &8(&7Whitelist an arena to kit&8)"));
         player.sendMessage(CC.translate(""));
     }
