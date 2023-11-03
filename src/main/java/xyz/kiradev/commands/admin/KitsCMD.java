@@ -280,7 +280,7 @@ public class KitsCMD implements CommandExecutor {
 
     private void showSetKitCommands(Player player) {
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&d&lStellar Kit Sub Command &8(&7Set&8)"));
+        player.sendMessage(CC.translate("&d&lStellar Kit Sub Commnd &8(&7Set&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&d/kit set inv &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
         player.sendMessage(CC.translate("&d/kit set icon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));

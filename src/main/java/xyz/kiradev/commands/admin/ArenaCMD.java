@@ -103,7 +103,7 @@ public class ArenaCMD implements CommandExecutor {
     private void showArenaCommands(Player player) {
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("-------------------------------------------------------------"));
-        player.sendMessage(CC.translate("&d&lStellar Arena Setup"));
+        player.sendMessage(CC.translate("&d&lStellar Arena Setup:"));
         player.sendMessage(CC.translate("&d/arena create &8<&7name&8> &7- &8(&7Create an arena&8)"));
         player.sendMessage(CC.translate("&d/arena remove &8<&7name&8> &7- &8(&7Remove an arena&8)"));
         player.sendMessage(CC.translate("&d/arena save &8<&7name&8> &7- &8(&7Save arenas&8)"));
