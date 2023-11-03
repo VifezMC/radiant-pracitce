@@ -17,7 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import xyz.kiradev.commands.user.KitEditorCMD;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.QueueManager;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.render.CC;
 
@@ -81,13 +81,13 @@ public class SpawnListeners implements Listener {
             for (String itemName : ConfigManager.spawnItemsConfig.getConfigurationSection("spawn-items").getKeys(false)) {
                 ConfigurationSection itemSection = ConfigManager.spawnItemsConfig.getConfigurationSection("spawn-items." + itemName);
                 if (itemSection == null) {
-                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'items.yml'");
                     continue;
                 }
 
                 Material material = Material.matchMaterial(itemSection.getString("type"));
                 if (material == null) {
-                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'items.yml'");
                     continue;
                 }
 
@@ -117,13 +117,49 @@ public class SpawnListeners implements Listener {
             for (String itemName : ConfigManager.spawnItemsConfig.getConfigurationSection("queue-items").getKeys(false)) {
                 ConfigurationSection itemSection = ConfigManager.spawnItemsConfig.getConfigurationSection("queue-items." + itemName);
                 if (itemSection == null) {
-                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'items.yml'");
                     continue;
                 }
 
                 Material material = Material.matchMaterial(itemSection.getString("type"));
                 if (material == null) {
-                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'items.yml'");
+                    continue;
+                }
+
+                if (item.getType() == material && item.hasItemMeta()) {
+                    ItemMeta meta = item.getItemMeta();
+                    String displayName = itemSection.getString("display-name");
+
+                    if (meta != null && meta.getDisplayName() != null && meta.getDisplayName().equals(CC.translate(displayName))) {
+                        String command = itemSection.getString("command");
+                        if (!command.isEmpty()) {
+                            player.performCommand(command);
+                            event.setCancelled(true);
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    @EventHandler // Party Items
+    public void onPartyInteract(PlayerInteractEvent event) {
+        Player player = event.getPlayer();
+        ItemStack item = event.getItem();
+
+        if (event.getAction().toString().contains("RIGHT_CLICK") && item != null) {
+            for (String itemName : ConfigManager.spawnItemsConfig.getConfigurationSection("party-items").getKeys(false)) {
+                ConfigurationSection itemSection = ConfigManager.spawnItemsConfig.getConfigurationSection("party-items." + itemName);
+                if (itemSection == null) {
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'items.yml'");
+                    continue;
+                }
+
+                Material material = Material.matchMaterial(itemSection.getString("type"));
+                if (material == null) {
+                    getLogger().warning("Invalid item type in configuration for spawn item '" + itemName + "'. Please check 'items.yml'");
                     continue;
                 }
 

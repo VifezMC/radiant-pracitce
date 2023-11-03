@@ -43,7 +43,6 @@ public class TabHandler {
                 i++;
             }
         }
-        System.out.println("Registered " + i + " custom tab heads");
         this.adapter = adapter;
         this.handler = handler;
         this.ticks = ticks;

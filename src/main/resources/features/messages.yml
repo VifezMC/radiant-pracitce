@@ -1,15 +1,14 @@
 general:
   join-message:
     - "&7&m--------------------------------"
-    - "&fWelcome &e{player}&f to &bServer&f Network!"
+    - "&fWelcome &d{player}&f to &dServer&f Network!"
     - ' '
-    - "Discord: &ediscord.gg/server"
-    - "Twitter: &etwitter.com/server"
-    - "Teamspeak: &eteamspeak.com/server"
+    - "&dDiscord: &fdiscord.gg/server"
+    - "&dTwitter: &ftwitter.com/server"
+    - "&dTeamspeak: &fteamspeak.com/server"
     - ' '
-    - "Like us on &bNameMC&f for a free rank!"
-    - "https://namemc.com/server/servername"
-    - ' '
+    - "Like us on &dNameMC&f for a free rank!"
+    - "&dhttps://namemc.com/server/servername"
     - '&7&m--------------------------------'
   ping-message: "&eYour ping is &f{ping}"
   other-player-ping-message: "&e{player}'s ping is &f{ping}"
@@ -17,11 +16,11 @@ general:
 match:
   match-found:
     - ' '
-    - '&bMatch Found'
-    - '&f- &bOpponent: &f{opponent} &7({opponent-ping}ms)'
-    - '&f- &bArena: &f{arena}'
-    - '&f- &bKit: &f{kit}'
-    - '&f- &bTitle: &f{division}'
+    - '&dMatch Found'
+    - '&f- &dOpponent: &f{opponent} &7({opponent-ping}ms)'
+    - '&f- &dArena: &f{arena}'
+    - '&f- &dKit: &f{kit}'
+    - '&f- &dTitle: &f{division}'
     - ' '
   kill-message:
     - '&7&m------------------------------'
@@ -29,14 +28,44 @@ match:
     - '&c&lLoser: &f{loser} &c({loser-elo})'
     - '&7&m------------------------------'
   cooldown-message: "&cYou need to wait {cooldown} seconds!"
-  starting-countdown: "&bGame starting in &f{countdown}..."
-  match-started: "&bGame started!"
+  starting-countdown: "&dGame starting in &f{countdown}..."
+  match-started: "&dGame started!"
 queue:
   already-in-queue-message: "&cYou are already in queue!"
   added-to-queue:
     - ''
-    - '&b{gamemode} Queue'
+    - '&d{gamemode} Queue'
     - ' &fSearching for a match..'
     - ''
   leave-queue: "&cYou're no longer in {kit} queue."
   not-in-queue: "&cYou are not in queue!"
+party:
+    already-in:
+      - "&cYou are already in a party!"
+    created:
+      - "&aParty successfully created!"
+    not-in:
+      - "&cYou are not in a party!"
+    info:
+      - "&7&m----------------------------------------------------"
+      - "&cParty Information"
+      - "&dLeader: &e{leader}"
+      - "&dMembers({members-count}): &7{members}"
+      - "&dPrivacy: {status}"
+      - "&7&m----------------------------------------------------"
+    not-leader:
+      - "&cYou are not the leader of the party!"
+    already-open:
+      - "&cYour party is already open!"
+    already-lock:
+      - "&cYour party is already closed!"
+    locked:
+      - "&aYou have locked your party!"
+    player-already-in:
+      - "&cThis player is already in a party!"
+    invite-expired:
+      - "&cThis party has expired!"
+    joined:
+      - "&aYou have joined the party!"
+    not-in-your:
+      - "&cThis player is not in your party!"

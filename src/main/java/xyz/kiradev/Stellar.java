@@ -12,8 +12,10 @@ import xyz.kiradev.commands.admin.SetSpawnCMD;
 import xyz.kiradev.commands.user.*;
 import xyz.kiradev.listeners.*;
 import xyz.kiradev.managers.*;
+import xyz.kiradev.party.PartyManager;
 import xyz.kiradev.tab.TabHandler;
 import xyz.kiradev.tab.TabImpl;
+import xyz.kiradev.tab.v1_8_r3.v1_8_R3TabAdapter;
 import xyz.kiradev.utils.Cooldowns;
 import xyz.kiradev.utils.assemble.Assemble;
 import xyz.kiradev.utils.render.Console;
@@ -25,12 +27,19 @@ import java.util.Arrays;
 @Getter
 public class Stellar extends JavaPlugin {
 
-    public static Stellar instance;
-
+    @Getter private static Stellar instance;
     public static void loadManagers() {
         ConfigManager.arenaManager = new ArenaManager();
         ConfigManager.kitManager = new KitManager();
         ConfigManager.divisionsManager = new DivisionsManager();
+        ConfigManager.partyManager = new PartyManager(instance);
+        ConfigManager.arenaManager.loadArenas();
+        ConfigManager.kitManager.loadKits();
+        ConfigManager.divisionsManager.loadDivisions();
+        new Assemble(instance, new ScoreboardManager());
+        if (ConfigManager.tabConfig.getBoolean("tablist.enable")) {
+            new TabHandler(new v1_8_R3TabAdapter(), new TabImpl(), 20L);
+        }
     }
 
     public static void reloadManagers() {
@@ -41,72 +50,49 @@ public class Stellar extends JavaPlugin {
     @Override
     public void onEnable() {
         instance = this;
+
+        ConfigManager.registerConfigs();
+        loadManagers();
+        ConfigManager.registerConfigs();
+
         Plugin luckPermsPlugin = getServer().getPluginManager().getPlugin("PlaceholderAPI");
         if (luckPermsPlugin != null && luckPermsPlugin.isEnabled()) {
             new Placeholder(this).register();
         }
-        loadManagers();
-        Console.sendMessage(" ");
-
-        // PEARL COOL-DOWN
         Cooldowns.createCooldown("enderpearl");
-
-        // CONFIG
-        ConfigManager.registerConfigs();
-
-        // SCOREBOARD
-        Assemble assemble = new Assemble(this, new ScoreboardManager());
-
-        // LIST LISTENERS
         registerEventListeners();
-        Console.sendMessage(" ");
-
-        // COMMANDS
         registerCommands();
-        Console.sendMessage(" ");
-
-// Generate the current date and time when the plugin loaded
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String loadedTime = LocalDateTime.now().format(dateFormat);
-
-// Define the plugin build number and server version
-        int pluginBuild = 01 / 11 / 23;
-
         String serverVersion = Bukkit.getVersion();
-// Extracting a simplified version string
         String simplifiedServerVersion = serverVersion.split("MC: ")[1].split("\\)")[0];
-
         long startTime = System.currentTimeMillis();
-
-// Calculate the time taken for plugin loading
         long endTime = System.currentTimeMillis();
         long timeTaken = endTime - startTime;
 
-
         // START MESSAGE
-        Console.sendMessage("&b $$$$$$\\    $$\\               $$\\ $$\\                     ");
-        Console.sendMessage("&b$$  __$$\\   $$ |              $$ |$$ |                    ");
-        Console.sendMessage("&b$$ /  \\__|$$$$$$\\    $$$$$$\\  $$ |$$ | $$$$$$\\   $$$$$$\\  ");
-        Console.sendMessage("&b\\$$$$$$\\  \\_$$  _|  $$  __$$\\ $$ |$$ | \\____$$\\ $$  __$$\\ ");
-        Console.sendMessage("&b \\____$$\\   $$ |    $$$$$$$$ |$$ |$$ | $$$$$$$ |$$ |  \\__|");
-        Console.sendMessage("&b$$\\   $$ |  $$ |$$\\ $$   ____|$$ |$$ |$$  __$$ |$$ |      ");
-        Console.sendMessage("&b\\$$$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |$$ |\\$$$$$$$ |$$ |      ");
-        Console.sendMessage("&b \\______/    \\____/  \\_______|\\__|\\__| \\_______|\\__|      ");
+        Console.sendMessage("&d $$$$$$\\    $$\\               $$\\ $$\\                     ");
+        Console.sendMessage("&d$$  __$$\\   $$ |              $$ |$$ |                    ");
+        Console.sendMessage("&d$$ /  \\__|$$$$$$\\    $$$$$$\\  $$ |$$ | $$$$$$\\   $$$$$$\\  ");
+        Console.sendMessage("&d\\$$$$$$\\  \\_$$  _|  $$  __$$\\ $$ |$$ | \\____$$\\ $$  __$$\\ ");
+        Console.sendMessage("&d \\____$$\\   $$ |    $$$$$$$$ |$$ |$$ | $$$$$$$ |$$ |  \\__|");
+        Console.sendMessage("&d$$\\   $$ |  $$ |$$\\ $$   ____|$$ |$$ |$$  __$$ |$$ |      ");
+        Console.sendMessage("&d\\$$$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |$$ |\\$$$$$$$ |$$ |      ");
+        Console.sendMessage("&d \\______/    \\____/  \\_______|\\__|\\__| \\_______|\\__|      ");
         Console.sendMessage("&3Stellar Loaded successfully\n");
-        Console.sendMessage("&b&lInformation");
-        Console.sendMessage(" | &3Version: &f" + Constants.Ver);
-        Console.sendMessage(" | &3Finished loading in: " + timeTaken + "ms");
-        Console.sendMessage(" | &3Build: " + pluginBuild);
-        Console.sendMessage(" | &3Server Version: " + simplifiedServerVersion);
-        Console.sendMessage(" | &3Plugin loaded on: " + loadedTime + "\n");
-        Console.sendMessage("&b&lLoaded");
-        Console.sendMessage(" | &3Successfully Loaded Managers!");
-        Console.sendMessage(" | &3Successfully Loaded Listeners!");
-        Console.sendMessage(" | &3Successfully Loaded Commands!\n");
-        Console.sendMessage("&b&lCredits");
-        Console.sendMessage(" | &3Author: &f" + Constants.Author);
-        Console.sendMessage(" | &3Thanks for using &9Stellar&3!");
-        Console.sendMessage(" | &3Discord: &b" + Constants.Discord);
+        Console.sendMessage("&d&lInformation");
+        Console.sendMessage(" | &5Version: &f" + Constants.Ver);
+        Console.sendMessage(" | &5Finished loading in: " + timeTaken + "ms");
+        Console.sendMessage(" | &5Server Version: " + simplifiedServerVersion);
+        Console.sendMessage(" | &5Plugin loaded on: " + loadedTime + "\n");
+        Console.sendMessage("&d&lLoaded");
+        Console.sendMessage(" | &5Successfully Loaded Managers!");
+        Console.sendMessage(" | &5Successfully Loaded Listeners!");
+        Console.sendMessage(" | &5Successfully Loaded Commands!\n");
+        Console.sendMessage("&d&lCredits");
+        Console.sendMessage(" | &5Credits: &f" + Constants.Author);
+        Console.sendMessage(" | &5Thanks for using &9Stellar&3!");
+        Console.sendMessage(" | &5Discord: &d" + Constants.Discord);
     }
 
     private void registerEventListeners() {
@@ -116,13 +102,13 @@ public class Stellar extends JavaPlugin {
                 new WorldListener(),
                 new GameListener(),
                 new BlockListener(),
-                new PlayerDataListener(),
                 new MenuListener(),
                 new StatsListener(),
-                new KitEditorListener()
+                new KitEditorListener(),
+                new PlayerDataListener(),
+                new StatsListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
-
     private void registerCommands() {
         createCMD("setspawn", new SetSpawnCMD());
         createCMD("arena", new ArenaCMD());
@@ -136,6 +122,7 @@ public class Stellar extends JavaPlugin {
         createCMD("ranked", new RankedCMD());
         createCMD("settings", new SettingsCMD());
         createCMD("kiteditor", new KitEditorCMD());
+        createCMD("party", new PartyCMD());
     }
 
     private void createCMD(String cmd, CommandExecutor commandline) {

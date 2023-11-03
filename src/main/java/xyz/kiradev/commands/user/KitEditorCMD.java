@@ -5,7 +5,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.kiradev.managers.KitManager;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.types.Kit;
 import xyz.kiradev.ui.KitEditorInventory;
 import xyz.kiradev.utils.PlayerUtils;
@@ -29,7 +29,6 @@ public class KitEditorCMD implements CommandExecutor {
 
 
         if (args.length == 1 && !(KitManager.getKit(args[0]).getItems().equals("None"))) {
-            p.getInventory().clear();
             kiteditor.put(p, KitManager.getKit(args[0]));
             p.getInventory().setContents(KitManager.getKit(args[0]).getItems());
             PlayerUtils.setState(p, PlayerState.KITEDITOR);

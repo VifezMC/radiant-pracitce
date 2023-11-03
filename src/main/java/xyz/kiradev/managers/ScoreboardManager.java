@@ -4,7 +4,8 @@ import org.bukkit.entity.Player;
 import xyz.kiradev.Stellar;
 import xyz.kiradev.commands.user.KitEditorCMD;
 import xyz.kiradev.listeners.PlayerDataListener;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
+import xyz.kiradev.types.Data;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.assemble.AssembleAdapter;
 
@@ -52,7 +53,7 @@ public class ScoreboardManager implements AssembleAdapter {
 
         switch (playerState) {
             case ENDED:
-                return getGameEnd();
+                return getGameEnd(p);
             case LOBBY:
                 return getLobbyLines(p);
             case INQUEUE:
@@ -67,13 +68,14 @@ public class ScoreboardManager implements AssembleAdapter {
 
     private List<String> getLobbyLines(Player p) {
         List<String> lobbyLines = new ArrayList<>();
+        Data stats = PlayerDataListener.getStats(p);
 
         for (String line : scoreboardLobby) {
-            line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
-            line = line.replace("{elo}", String.valueOf(PlayerDataListener.getStats(p).getELO()));
-            line = line.replace("{division}", String.valueOf(ConfigManager.divisionsManager.getPlayerDivision(PlayerDataListener.getStats(p).getELO())));
+            line = line.replace("{elo}", String.valueOf(stats.getELO()));
+            line = line.replace("{division}", String.valueOf(ConfigManager.divisionsManager.getPlayerDivision(stats.getELO())));
 
             if (line.contains("{animated_text}")) {
                 line = line.replace("{animated_text}", getAnimatedText());
@@ -102,10 +104,11 @@ public class ScoreboardManager implements AssembleAdapter {
             int opponentPing = PlayerUtils.getPing(opponent);
 
             for (String line : scoreboardMatch) {
-                line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
+                line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
                 line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
                 line = line.replace("{user_ping}", String.valueOf(userPing));
                 line = line.replace("{opponent_ping}", String.valueOf(opponentPing));
+                line = line.replace("{opponent}", opponent.getName());
 
                 if (line.contains("{animated_text}")) {
                     line = line.replace("{animated_text}", getAnimatedText());
@@ -121,7 +124,7 @@ public class ScoreboardManager implements AssembleAdapter {
         List<String> inQueueLines = new ArrayList<>();
         for (String line : scoreboardInQueue) {
             line = line.replace("{kit}", QueueManager.Queue.get(p));
-            line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 
@@ -137,7 +140,7 @@ public class ScoreboardManager implements AssembleAdapter {
         List<String> inQueueLines = new ArrayList<>();
         for (String line : scoreboardKiteditor) {
             line = line.replace("{kit}", KitEditorCMD.kiteditor.get(p).getName());
-            line = line.replace("{online_players}", String.valueOf(Stellar.instance.getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 
@@ -149,7 +152,20 @@ public class ScoreboardManager implements AssembleAdapter {
         return inQueueLines;
     }
 
-    private List<String> getGameEnd() {
-        return new ArrayList<>(scoreboardGameEnd);
-    }
+    private List<String> getGameEnd(Player p) {
+        List<String> inGameEnd = new ArrayList<>();
+        for (String line : scoreboardGameEnd) {
+            line = line.replace("{kit}", KitEditorCMD.kiteditor.get(p).getName());
+            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
+            line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
+            line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
+
+            if (line.contains("{animated_text}")) {
+                line = line.replace("{animated_text}", getAnimatedText());
+            }
+            inGameEnd.add(line);
+        }
+        return inGameEnd;
+
+        }
 }

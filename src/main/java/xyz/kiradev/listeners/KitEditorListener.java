@@ -9,7 +9,7 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import xyz.kiradev.commands.user.KitEditorCMD;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.InventoryManager;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.render.CC;
 import xyz.kiradev.utils.render.Console;
@@ -24,13 +24,12 @@ public class KitEditorListener implements Listener {
         Player p = (Player) event.getPlayer();
         if (PlayerUtils.hasPlayerState(p, PlayerState.KITEDITOR)) {
             p.getInventory();
-            ConfigManager.databaseConfig.set(p.getUniqueId() + ".kiteditor." + KitEditorCMD.kiteditor.get(p).getName(), Arrays.asList(p.getInventory().getContents()));
-            p.getInventory().clear();
+            ConfigManager.flatfileConfig.set(p.getUniqueId() + ".kiteditor." + KitEditorCMD.kiteditor.get(p).getName(), Arrays.asList(p.getInventory().getContents()));
             PlayerUtils.setState(p, PlayerState.LOBBY);
             InventoryManager.createSpawnItems(p);
             try {
-                ConfigManager.databaseConfig.save(ConfigManager.database);
-                ConfigManager.databaseConfig.load(ConfigManager.database);
+                ConfigManager.flatfileConfig.save(ConfigManager.flatfile);
+                ConfigManager.flatfileConfig.load(ConfigManager.flatfile);
             } catch (IOException | InvalidConfigurationException e) {
                 Console.sendError("Error occurred while saving kit-editor");
             }

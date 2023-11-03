@@ -33,3 +33,5 @@ commands:
     description: Kit editor
   ranked:
     description: Open ranked menu.
+  party:
+    description: Party commands.

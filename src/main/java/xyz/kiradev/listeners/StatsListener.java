@@ -17,15 +17,15 @@ public class StatsListener implements Listener {
         Player player = event.getPlayer();
         Data data = PlayerDataListener.getStats(player);
         if (data == null) return;
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".matches", data.getMatches());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".wins", data.getWins());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".losses", data.getLosses());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".elo", data.getELO());
-        ConfigManager.databaseConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", data.getKilleffect());
+        ConfigManager.flatfileConfig.set(player.getUniqueId().toString() + ".matches", data.getMatches());
+        ConfigManager.flatfileConfig.set(player.getUniqueId().toString() + ".wins", data.getWins());
+        ConfigManager.flatfileConfig.set(player.getUniqueId().toString() + ".losses", data.getLosses());
+        ConfigManager.flatfileConfig.set(player.getUniqueId().toString() + ".elo", data.getELO());
+        ConfigManager.flatfileConfig.set(player.getUniqueId().toString() + ".settings.kill-effect", data.getKilleffect());
 
         try {
-            ConfigManager.databaseConfig.save(ConfigManager.database);
-            ConfigManager.databaseConfig.load(ConfigManager.database);
+            ConfigManager.flatfileConfig.save(ConfigManager.database);
+            ConfigManager.flatfileConfig.load(ConfigManager.database);
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
         }

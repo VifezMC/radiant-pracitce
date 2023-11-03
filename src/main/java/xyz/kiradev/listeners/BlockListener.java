@@ -11,7 +11,7 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import xyz.kiradev.managers.KitManager;
 import xyz.kiradev.managers.MatchManager;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.types.Match;
 import xyz.kiradev.utils.PlayerUtils;
 

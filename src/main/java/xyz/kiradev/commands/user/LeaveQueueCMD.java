@@ -8,7 +8,7 @@ import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.InventoryManager;
 import xyz.kiradev.managers.KitManager;
 import xyz.kiradev.managers.QueueManager;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.render.CC;
 
@@ -27,7 +27,7 @@ public class LeaveQueueCMD implements CommandExecutor {
             String formattingString = ConfigManager.messagesConfig.getString("queue.leave-queue").replace("{kit}", QueueManager.Queue.get(p));
             QueueManager.removePlayerFromQueue(p);
             p.sendMessage(CC.translate(formattingString));
-            p.getInventory().clear();
+
             InventoryManager.createSpawnItems(p);
             PlayerUtils.setState(p, PlayerState.LOBBY);
             p.updateInventory();

@@ -11,13 +11,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import xyz.kiradev.Stellar;
 import xyz.kiradev.managers.ConfigManager;
-import xyz.kiradev.player.GameState;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.GameState;
+import xyz.kiradev.states.PlayerState;
+import xyz.kiradev.utils.render.CC;
+import xyz.kiradev.utils.render.Console;
 
 import java.lang.reflect.Field;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class PlayerUtils {
@@ -47,7 +47,7 @@ public class PlayerUtils {
 
     private static World getLobbyWorld() {
         if (lobbyWorld == null) {
-            lobbyWorld = Stellar.instance.getServer().getWorld(ConfigManager.arenaConfig.getString("lobby").split(":")[0]);
+            lobbyWorld = Stellar.getInstance().getServer().getWorld(ConfigManager.arenaConfig.getString("lobby").split(":")[0]);
         }
         return lobbyWorld;
     }
@@ -91,7 +91,6 @@ public class PlayerUtils {
         return currentPlayerState == state;
     }
 
-
     public static String toString(Location loc) {
         return loc.getWorld().getName() + ":" + loc.getX() + ":" + loc.getY() + ":" + loc.getZ() + ":" + loc.getYaw() + ":" + loc.getPitch();
     }
@@ -104,6 +103,21 @@ public class PlayerUtils {
             return (Integer) handle.getClass().getDeclaredField("ping").get(handle);
         } catch (Exception e) {
             return -1;
+        }
+    }
+
+    public static void sendMessage(UUID p, String path, String... replacements) {
+        List<String> messages = ConfigManager.messagesConfig.getStringList(path);
+        for (String msg : messages) {
+            String translatedMessage = (msg);
+            if (replacements.length % 2 == 0) {
+                for (int i = 0; i < replacements.length; i += 2) {
+                    translatedMessage = translatedMessage.replace(replacements[i], replacements[i + 1]);
+                }
+            } else {
+                Console.sendError("Error occurred while sending player message.");
+            }
+            Bukkit.getPlayer(p).sendMessage(CC.translate(translatedMessage));
         }
     }
 

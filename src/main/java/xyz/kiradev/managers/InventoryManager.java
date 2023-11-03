@@ -15,6 +15,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InventoryManager {
     public static Map<String, ItemStack> spawnItemsCache = new ConcurrentHashMap<>();
     private static final Map<String, ItemStack> queueItemsCache = new ConcurrentHashMap<>();
+    private static final Map<String, ItemStack> partyItemsCache = new ConcurrentHashMap<>();
+
 
     public static void createSpawnItems(Player player) {
         createItems(player, "spawn-items", spawnItemsCache);
@@ -24,7 +26,13 @@ public class InventoryManager {
         createItems(player, "queue-items", queueItemsCache);
     }
 
-    private static void createItems(Player player, String configSection, Map<String, ItemStack> itemCache) {
+    public static void createPartyItems(Player player) {
+        createItems(player, "party-items", partyItemsCache);
+    }
+
+
+    private static void createItems(Player p, String configSection, Map<String, ItemStack> itemCache) {
+        p.getInventory().clear();
         ConfigurationSection itemsSection = ConfigManager.spawnItemsConfig.getConfigurationSection(configSection);
         if (itemsSection == null) {
             Console.sendError("Invalid configuration for " + configSection + ". Please check 'config.yml'");
@@ -34,7 +42,7 @@ public class InventoryManager {
         for (String itemName : itemsSection.getKeys(false)) {
             ConfigurationSection itemSection = itemsSection.getConfigurationSection(itemName);
             if (itemSection == null) {
-                Console.sendError("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
+                Console.sendError("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'items.yml'");
                 continue;
             }
 
@@ -42,7 +50,7 @@ public class InventoryManager {
             if (cachedItem == null) {
                 Material material = Material.matchMaterial(itemSection.getString("type", "DIAMOND_SWORD"));
                 if (material == null) {
-                    Console.sendError("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'spawn-items.yml'");
+                    Console.sendError("Invalid item type in configuration for " + configSection + " item '" + itemName + "'. Please check 'items.yml'");
                     continue;
                 }
 
@@ -58,7 +66,7 @@ public class InventoryManager {
                 itemCache.put(itemName, item);
             }
 
-            player.getInventory().setItem(itemSection.getInt("slot", 1) - 1, cachedItem);
+            p.getInventory().setItem(itemSection.getInt("slot", 1) - 1, cachedItem);
         }
     }
 }

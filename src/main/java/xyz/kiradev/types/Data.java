@@ -3,7 +3,7 @@ package xyz.kiradev.types;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import xyz.kiradev.managers.ConfigManager;
-
+import xyz.kiradev.managers.KitManager;
 
 public class Data {
 
@@ -17,11 +17,11 @@ public class Data {
 
     public Data(Player player) {
         this.player = player;
-        this.matches = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".matches");
-        this.wins = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".wins");
-        this.losses = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".losses");
-        this.elo = ConfigManager.databaseConfig.getInt(player.getUniqueId().toString() + ".elo");
-        this.killeffect = ConfigManager.databaseConfig.getString(player.getUniqueId().toString() + ".settings.kill-effect");
+        this.matches = ConfigManager.flatfileConfig.getInt(player.getUniqueId().toString() + ".matches");
+        this.wins = ConfigManager.flatfileConfig.getInt(player.getUniqueId().toString() + ".wins");
+        this.losses = ConfigManager.flatfileConfig.getInt(player.getUniqueId().toString() + ".losses");
+        this.elo = ConfigManager.flatfileConfig.getInt(player.getUniqueId().toString() + ".elo");
+        this.killeffect = ConfigManager.flatfileConfig.getString(player.getUniqueId().toString() + ".settings.kill-effect");
     }
 
     public Player getPlayer() {
@@ -89,6 +89,6 @@ public class Data {
     }
 
     public ItemStack[] getKitItems(String kitName) {
-        return ConfigManager.databaseConfig.getList(player.getUniqueId() + ".kiteditor." + kitName).toArray(new ItemStack[0]);
+        return KitManager.getKit(kitName).getItems();
     }
 }

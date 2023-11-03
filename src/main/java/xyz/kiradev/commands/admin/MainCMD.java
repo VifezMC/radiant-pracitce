@@ -38,11 +38,11 @@ public class MainCMD implements CommandExecutor {
     private void showPluginInfo(Player player) {
         player.sendMessage(CC.translate("&7&m--------------------------------------------"));
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&b&lRunning Stellar Practice Core"));
+        player.sendMessage(CC.translate("&d&lRunning Stellar Practice Core"));
         player.sendMessage(CC.translate(""));
-        player.sendMessage((CC.translate("&bAuthor: &f" + Constants.Author)));
-        player.sendMessage((CC.translate("&bVersion: &f" + Constants.Ver)));
-        player.sendMessage((CC.translate("&bDiscord: &f" + Constants.Discord)));
+        player.sendMessage((CC.translate("&dAuthor: &f" + Constants.Author)));
+        player.sendMessage((CC.translate("&dVersion: &f" + Constants.Ver)));
+        player.sendMessage((CC.translate("&dDiscord: &f" + Constants.Discord)));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&7&m--------------------------------------------"));
     }

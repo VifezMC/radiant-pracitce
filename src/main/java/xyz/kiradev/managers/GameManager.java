@@ -8,8 +8,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
 import xyz.kiradev.Stellar;
 import xyz.kiradev.listeners.PlayerDataListener;
-import xyz.kiradev.player.GameState;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.GameState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.types.Arena;
 import xyz.kiradev.types.Match;
 import xyz.kiradev.utils.DiscordUtils;
@@ -83,6 +83,7 @@ public class GameManager {
         QueueManager.Queue.remove(secondPlayer);
         PlayerDataListener.getStats(firstPlayer).addMatches();
         PlayerDataListener.getStats(secondPlayer).addMatches();
+        MatchManager.addMatch(firstPlayer, secondPlayer, selectedArena, kitName);
 
         MatchManager.addMatch(firstPlayer, secondPlayer, selectedArena, kitName);
         for (String msg : ConfigManager.messagesConfig.getStringList("match.match-found")) {
@@ -120,7 +121,7 @@ public class GameManager {
             p.getInventory().setContents(KitManager.getKit(kitName).getItems());
 
 
-            if (!(ConfigManager.databaseConfig.get(p.getUniqueId() + ".kiteditor." + kitName).equals("none"))) {
+            if (!(ConfigManager.flatfileConfig.get(p.getUniqueId() + ".kiteditor." + kitName).equals("none"))) {
                 p.getInventory().setContents(PlayerDataListener.getStats(p).getKitItems(kitName));
             } else {
                 p.getInventory().setContents(KitManager.getKit(kitName).getItems());
@@ -166,7 +167,7 @@ public class GameManager {
                 meta.addEffect(builder.build());
                 meta.setPower(1);
                 firework.setFireworkMeta(meta);
-                Bukkit.getScheduler().runTaskLater(Stellar.instance, () -> {
+                Bukkit.getScheduler().runTaskLater(Stellar.getInstance(), () -> {
                     firework.detonate();
                 }, 5L);
                 break;
@@ -204,7 +205,7 @@ public class GameManager {
         PlayerUtils.setState(winner, PlayerState.ENDED);
         PlayerUtils.setState(loser, PlayerState.ENDED);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-        scheduler.scheduleSyncDelayedTask(Stellar.instance, () -> {
+        scheduler.scheduleSyncDelayedTask(Stellar.getInstance(), () -> {
             if (ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")) {
                 DiscordUtils.sendMatchEnd(winner.getName(), loser.getName());
             }
@@ -274,7 +275,7 @@ public class GameManager {
                         PlayerUtils.setGState(p, GameState.DEFAULT);
                     }
                 }
-            }.runTaskTimer(Stellar.instance, 0, 20);
+            }.runTaskTimer(Stellar.getInstance(), 0, 20);
         }
     }
 }

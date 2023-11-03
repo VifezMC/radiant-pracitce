@@ -4,7 +4,7 @@
 queue-gui-type:
   unranked:
     type: "modern" # Menu type: Legacy - Modern
-    item-color: "&b"
+    item-color: "&d"
     height: 3
     menu-name: "&8Unranked Queue"
     surrounding-items: STAINED_GLASS_PANE
@@ -16,32 +16,32 @@ queue-gui-type:
     height: 3
     menu-name: "&8Ranked Queue"
     surrounding-items: STAINED_GLASS_PANE
-    surrounding-items-name: "&bEmpty"
+    surrounding-items-name: "&dEmpty"
     durability: 11
   item-meta:
     - "&7{description}"
     - " "
-    - "&fPlaying: &b{playing}"
-    - "&fQueuing: &b{queueing}"
+    - "&dPlaying: &f{playing}"
+    - "&dQueuing: &f{queueing}"
     - " "
     - "&aClick to play."
 stats:
-  menu-name: "&bStatistics"
-  item-name: "&bYour Stats"
+  menu-name: "&dStatistics"
+  item-name: "&dYour Stats"
   item-meta:
     - "&7&m-----------------------"
-    - "&b* Matches Played&7: &f{matches_played}"
-    - "&b* Wins&7: &f{matches-won}"
-    - "&b* Lost&7: &f{matches-lost}"
-    - "&b* ELO&7: &f{elo}"
-    - "&b* KDR&7: &f{kdr}"
-    - "&b* TITLE&7: &f{division}"
+    - "&d* Matches Played&7: &f{matches_played}"
+    - "&d* Wins&7: &f{matches-won}"
+    - "&d* Lost&7: &f{matches-lost}"
+    - "&d* ELO&7: &f{elo}"
+    - "&d* KDR&7: &f{kdr}"
+    - "&d* TITLE&7: &f{division}"
     - "&7&m-----------------------"
 settings:
-  item-color: "&b"
+  item-color: "&d"
 kit-editor:
   menu-name: "&8Kit editor"
-  item-color: "&b"
+  item-color: "&d"
   height: 3
   surrounding-items: STAINED_GLASS_PANE
   surrounding-items-name: " "

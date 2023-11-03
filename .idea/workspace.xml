@@ -4,67 +4,150 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="Updated Assemble">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/v1_8_r3/v1_8_R3TabAdapter.java" afterDir="false" />
+    <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="Added parties">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_13_15_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_13_15_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/shelved.patch" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/shelved.patch" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stellar.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Stellar.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libs/ProtocolSupport.jar" beforeDir="false" afterPath="$PROJECT_DIR$/libs/ProtocolSupport.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/MainCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/MainCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/SetSpawnCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/SetSpawnCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/KitEditorCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/KitEditorCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/LeaveQueueCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/LeaveQueueCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/PingCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/PingCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/QueueCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/QueueCMD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/RankedCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/RankedCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/SettingsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/SettingsCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/StatsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/StatsCMD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/UnrankedCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/user/UnrankedCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/BlockListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/BlockListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/GameListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/GameListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/KitEditorListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/KitEditorListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/MenuListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/MenuListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/PlayerDataListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/PlayerDataListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/PlayerJoin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/PlayerJoin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/SpawnListeners.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/SpawnListeners.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/StatsListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/StatsListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/WorldListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/listeners/WorldListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ArenaManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ArenaManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/DivisionsManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/DivisionsManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/InventoryManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/InventoryManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/KitManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/KitManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/MatchManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/MatchManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/QueueManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/QueueManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/player/GameState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/player/PlayerState.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/LobbyLayoutProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/LobbyLayoutProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabRunnable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/TabRunnable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/client/ClientVersionUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/client/ClientVersionUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/entry/TabElement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/entry/TabElement.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/entry/TabElementHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/entry/TabElementHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/entry/TabEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/entry/TabEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/skin/SkinType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/skin/SkinType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/skin/SkinUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/skin/SkinUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/v1_8_r3/v1_8_R3TabAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/tab/v1_8_r3/v1_8_R3TabAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Arena.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Arena.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Data.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Data.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Division.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Division.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Kit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Kit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Match.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/types/Match.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/KitEditorInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/KitEditorInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsKillEffectsInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsKillEffectsInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/StatsInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/StatsInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/unranked/UnrankedInventoryLegacy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/unranked/UnrankedInventoryLegacy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/unranked/UnrankedInventoryModern.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/unranked/UnrankedInventoryModern.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/Cooldowns.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/Cooldowns.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/DiscordUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/DiscordUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/LocationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/LocationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/PlayerUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/Assemble.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/Assemble.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleBoard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleBoardEntry.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleBoardEntry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleListener.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleStyle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleStyle.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/AssembleUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/events/AssembleBoardCreateEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/events/AssembleBoardCreateEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/events/AssembleBoardCreatedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/events/AssembleBoardCreatedEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/events/AssembleBoardDestroyEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/assemble/events/AssembleBoardDestroyEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/render/Console.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/render/Console.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/render/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/render/ItemBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/arenas.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/arenas.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/heads.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/heads.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/divisions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/features/divisions.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/features/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/spawn-items.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/license.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/license.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/menus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/tablist.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/Stellar-1.0.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Stellar-1.0.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/arenas.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/arenas.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/features/divisions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/features/divisions.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/features/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/features/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/features/spawn-items.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/license.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/license.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/menus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/tablist.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Constants.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Stellar.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Stellar.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/MainCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/MainCMD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/RankedCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/RankedCMD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/UnrankedCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/UnrankedCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/KitEditorCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/KitEditorCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/LeaveQueueCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/LeaveQueueCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/QueueCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/user/QueueCMD.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/BlockListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/BlockListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/GameListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/GameListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/KitEditorListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/KitEditorListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/MenuListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/MenuListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/PlayerDataListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/PlayerDataListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/PlayerJoin.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/PlayerJoin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ArenaManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ArenaManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/SpawnListeners.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/SpawnListeners.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/StatsListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/StatsListener.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ConfigManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ConfigManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/DivisionsManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/DivisionsManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/InventoryManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/InventoryManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/KitManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/KitManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/MatchManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/MatchManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Arena.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Arena.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/player/GameState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/player/PlayerState.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/tab/LobbyLayoutProvider.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/tab/LobbyLayoutProvider.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/tab/TabHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/tab/TabHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/tab/client/ClientVersionUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/tab/client/ClientVersionUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Data.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Data.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Division.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Division.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Kit.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Kit.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Match.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/types/Match.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/StatsInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/StatsInventory.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/unranked/UnrankedInventoryModern.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/unranked/UnrankedInventoryModern.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/Cooldowns.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/Cooldowns.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/DiscordUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/DiscordUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/LocationUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/LocationUtil.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/PlayerUtils.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/Assemble.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/Assemble.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleBoard.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleBoard.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleBoardEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleBoardEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleStyle.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleStyle.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleThread.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/AssembleThread.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/events/AssembleBoardCreateEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/events/AssembleBoardCreateEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/events/AssembleBoardCreatedEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/events/AssembleBoardCreatedEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/events/AssembleBoardDestroyEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/assemble/events/AssembleBoardDestroyEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/render/Console.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/render/Console.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/render/ItemBuilder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/render/ItemBuilder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
@@ -82,11 +165,16 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PUSH_AUTO_UPDATE" value="true" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2XZ18JFg1ZHd39NbWFyG4ngLin6" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -94,9 +182,11 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Stellar&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
@@ -108,6 +198,7 @@
         <option name="myRunnerSettings" />
         <option name="myRunnerParameters">
           <MavenRunnerParameters>
+            <option name="cmdOptions" />
             <option name="profiles">
               <set />
             </option>
@@ -117,6 +208,9 @@
             <option name="pomFileName" />
             <option name="profilesMap">
               <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
             </option>
             <option name="resolveToWorkspace" value="false" />
             <option name="workingDirPath" value="$PROJECT_DIR$" />
@@ -156,13 +250,60 @@
       <option name="project" value="LOCAL" />
       <updated>1698845374404</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Added tablist">
+      <created>1698866215723</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1698866215723</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Fixed placeholder">
+      <created>1698876616443</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1698876616443</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Unfinished mongodb">
+      <created>1698878830602</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1698878830602</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed plugin theme">
+      <created>1698944039958</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1698944039958</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Changed plugin theme">
+      <created>1698944081886</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1698944081886</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Added parties">
+      <created>1699037955742</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1699037955742</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Players can now only break when playing build kit" />
     <MESSAGE value="Fixed scoreboard" />
     <MESSAGE value="Updated Assemble" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated Assemble" />
+    <MESSAGE value="Added tablist" />
+    <MESSAGE value="Fixed placeholder" />
+    <MESSAGE value="Unfinished mongodb" />
+    <MESSAGE value="Changed plugin theme" />
+    <MESSAGE value="Added parties" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added parties" />
   </component>
 </project>

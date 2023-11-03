@@ -12,6 +12,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import xyz.kiradev.Constants;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.InventoryManager;
+import xyz.kiradev.types.Data;
 import xyz.kiradev.ui.SettingsKillEffectsInventory;
 import xyz.kiradev.utils.render.CC;
 
@@ -43,7 +44,6 @@ public class MenuListener implements Listener {
 
                 event.setCancelled(true);
                 player.closeInventory();
-                player.getInventory().clear();
                 InventoryManager.createQueueItems(player);
                 player.updateInventory();
 
@@ -76,7 +76,6 @@ public class MenuListener implements Listener {
 
                 event.setCancelled(true);
                 player.closeInventory();
-                player.getInventory().clear();
                 InventoryManager.createQueueItems(player);
                 player.updateInventory();
 
@@ -124,6 +123,7 @@ public class MenuListener implements Listener {
     @EventHandler
     public void killeffectSettingsMenu(InventoryClickEvent event) {
         Player p = (Player) event.getWhoClicked();
+        Data stats = PlayerDataListener.getStats(p);
         Inventory clickedInventory = event.getClickedInventory();
 
         if (clickedInventory != null && clickedInventory.getTitle().equals(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Kill Effects"))) {

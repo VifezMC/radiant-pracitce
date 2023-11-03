@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.QueueManager;
-import xyz.kiradev.player.PlayerState;
+import xyz.kiradev.states.PlayerState;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.render.CC;
 

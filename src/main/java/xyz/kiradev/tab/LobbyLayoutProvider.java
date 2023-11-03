@@ -2,19 +2,20 @@ package xyz.kiradev.tab;
 
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import sun.security.provider.ConfigFile;
 import xyz.kiradev.listeners.PlayerDataListener;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.managers.QueueManager;
 import xyz.kiradev.tab.entry.TabElement;
 import xyz.kiradev.tab.skin.SkinType;
+import xyz.kiradev.types.Data;
 import xyz.kiradev.ui.StatsInventory;
 import xyz.kiradev.utils.PlayerUtils;
 import xyz.kiradev.utils.render.CC;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
 import java.util.function.BiConsumer;
 
 final class LobbyLayoutProvider implements BiConsumer<Player, TabElement> {
@@ -22,6 +23,7 @@ final class LobbyLayoutProvider implements BiConsumer<Player, TabElement> {
     @Override
     public void accept(Player p, TabElement element) {
         List<String> list = Arrays.asList("LEFT", "MIDDLE", "RIGHT", "FAR-RIGHT");
+        Data stats = PlayerDataListener.getStats(p);
 
         for (int i = 0; i < 4; ++i) {
             String s = list.get(i);
@@ -31,10 +33,11 @@ final class LobbyLayoutProvider implements BiConsumer<Player, TabElement> {
                         .replace("{online}", String.valueOf(Bukkit.getOnlinePlayers().size()))
                         .replace("{ping}", String.valueOf(PlayerUtils.getPing(p)))
                         .replace("{playing}", String.valueOf(QueueManager.playing))
-                        .replace("{elo}", String.valueOf(PlayerDataListener.getStats(p).getELO()))
-                        .replace("{division}", ConfigManager.divisionsManager.getPlayerDivision(PlayerDataListener.getStats(p).getELO()))
-                        .replace("{wins}", String.valueOf(PlayerDataListener.getStats(p).getWins()))
-                        .replace("{kdr}", String.valueOf(StatsInventory.toKDR(PlayerDataListener.getStats(p).getWins(), PlayerDataListener.getStats(p).getLosses())))
+                        .replace("{elo}", String.valueOf(stats.getELO()))
+                        .replace("{division}", ConfigManager.divisionsManager.getPlayerDivision(stats.getELO()))
+                        .replace("{wins}", String.valueOf(stats.getWins()))
+                        .replace("{losses}", String.valueOf(stats.getLosses()))
+                        .replace("{kdr}", String.valueOf(StatsInventory.toKDR(stats.getWins(), stats.getLosses())))
                         .replace("{queueing}", String.valueOf(QueueManager.Queue.size()));
 
 

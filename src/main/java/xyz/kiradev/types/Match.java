@@ -8,11 +8,11 @@ public class Match {
 
     private final Player player1;
     private final Player player2;
-    private Player winner;
-    private Player loser;
     private final Arena arenaName;
     private final String kitName;
     private final UUID matchID;
+    private Player winner;
+    private Player loser;
 
 
     public Match(Player winner, Player loser, Player player1, Player player2, Arena arenaName, String kitName, UUID matchID) {
