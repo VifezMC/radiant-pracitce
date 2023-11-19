@@ -74,7 +74,9 @@ public class Stellar extends JavaPlugin {
                 Console.sendMessage("&f---------------------------------------------");
                 Console.sendMessage("&3Stellar [&b" + getDescription().getVersion() + "&3] &7- &3Kira Development");
                 Console.sendMessage(" ");
-                Console.sendMessage("&3Thanks for choosing Stellar Practice!");
+                Console.sendMessage("&3Loaded Configurations");
+                Console.sendMessage("&3Loaded data");
+                Console.sendMessage("&3Loaded Arena managers");
                 Console.sendMessage(" ");
                 Console.sendMessage("&3Devs: &f" + Constants.Author);
                 Console.sendMessage("&3Discord: &f" + Constants.Discord);
