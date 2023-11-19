@@ -71,28 +71,14 @@ public class Stellar extends JavaPlugin {
         long timeTaken = endTime - startTime;
 
         // START MESSAGE
-        Console.sendMessage("&d $$$$$$\\    $$\\               $$\\ $$\\                     ");
-        Console.sendMessage("&d$$  __$$\\   $$ |              $$ |$$ |                    ");
-        Console.sendMessage("&d$$ /  \\__|$$$$$$\\    $$$$$$\\  $$ |$$ | $$$$$$\\   $$$$$$\\  ");
-        Console.sendMessage("&d\\$$$$$$\\  \\_$$  _|  $$  __$$\\ $$ |$$ | \\____$$\\ $$  __$$\\ ");
-        Console.sendMessage("&d \\____$$\\   $$ |    $$$$$$$$ |$$ |$$ | $$$$$$$ |$$ |  \\__|");
-        Console.sendMessage("&d$$\\   $$ |  $$ |$$\\ $$   ____|$$ |$$ |$$  __$$ |$$ |      ");
-        Console.sendMessage("&d\\$$$$$$  |  \\$$$$  |\\$$$$$$$\\ $$ |$$ |\\$$$$$$$ |$$ |      ");
-        Console.sendMessage("&d \\______/    \\____/  \\_______|\\__|\\__| \\_______|\\__|      ");
-        Console.sendMessage("&3Stellar Loaded successfully\n");
-        Console.sendMessage("&d&lInformation");
-        Console.sendMessage(" | &5Version: &f" + Constants.Ver);
-        Console.sendMessage(" | &5Finished loading in: " + timeTaken + "ms");
-        Console.sendMessage(" | &5Server Version: " + simplifiedServerVersion);
-        Console.sendMessage(" | &5Plugin loaded on: " + loadedTime + "\n");
-        Console.sendMessage("&d&lLoaded");
-        Console.sendMessage(" | &5Successfully Loaded Managers!");
-        Console.sendMessage(" | &5Successfully Loaded Listeners!");
-        Console.sendMessage(" | &5Successfully Loaded Commands!\n");
-        Console.sendMessage("&d&lCredits");
-        Console.sendMessage(" | &5Credits: &f" + Constants.Author);
-        Console.sendMessage(" | &5Thanks for using &9Stellar&3!");
-        Console.sendMessage(" | &5Discord: &d" + Constants.Discord);
+                Console.sendMessage("&f---------------------------------------------");
+                Console.sendMessage("&3Stellar [&b" + getDescription().getVersion() + "&3] &7- &3Kira Development");
+                Console.sendMessage(" ");
+                Console.sendMessage("&3Thanks for choosing Stellar Practice!");
+                Console.sendMessage(" ");
+                Console.sendMessage("&3Devs: &f" + Constants.Author);
+                Console.sendMessage("&3Discord: &f" + Constants.Discord);
+                Console.sendMessage("&f---------------------------------------------");
     }
 
     private void registerEventListeners() {
