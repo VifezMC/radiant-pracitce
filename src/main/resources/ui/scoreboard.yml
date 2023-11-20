@@ -1,7 +1,7 @@
 # Practice scoreboard.yml
 
 scoreboard:
-  title: "&b&lSoarPvP&7 |&f EU Practice" # Title that shows at the top of the scoreboard
+  title: "&b&lPRACTICE" # Title that shows at the top of the scoreboard
   lobby:
     - "&7&m--------------------"
     - "&b&lServer"

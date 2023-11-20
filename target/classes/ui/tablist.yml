@@ -1,22 +1,22 @@
-# Practice Practice tablist.yml
+# Practice tablist.yml
 
 tablist:
   enable: true
-  header: "&dYou're playing on &fPractice &don &fkiradev.xyz" # Text at the top of the tablist.
-  footer: "&dPurchase Practice from discord.gg/kiradev" # Text at the bottom of the tablist.
+  header: "&bYou're playing on &fPractice &bon &fkiradev.xyz" # Text at the top of the tablist.
+  footer: "&bPurchase Practice from discord.gg/kiradev" # Text at the bottom of the tablist.
   LEFT:
     1: ""
     2: " &7&m---------------- "
-    3: "&d&lUser"
-    4: "<skin=dot>&dName: &f{player}"
-    5: "<skin=dot>&dPing: &f{ping}"
+    3: "&b&lUser"
+    4: "<skin=dot>&bName: &f{player}"
+    5: "<skin=dot>&bPing: &f{ping}"
     6: ""
-    7: "&d&lStatistics"
-    8: "<skin=dot>&dWins: &f{wins}"
-    9: "<skin=dot>&dLosses: &f{losses}"
-    10: "<skin=dot>&dELO: &f{elo}"
-    11: "<skin=dot>&dDivision: {division}"
-    12: "<skin=dot>&dKDR: &f{kdr}"
+    7: "&b&lStatistics"
+    8: "<skin=dot>&bWins: &f{wins}"
+    9: "<skin=dot>&bLosses: &f{losses}"
+    10: "<skin=dot>&bELO: &f{elo}"
+    11: "<skin=dot>&bDivision: {division}"
+    12: "<skin=dot>&bKDR: &f{kdr}"
     13: ""
     14: ""
     15: ""
@@ -28,10 +28,10 @@ tablist:
   MIDDLE:
     1: ""
     2: " &7&m---------------- "
-    3: "&d&lServer Info"
-    4: "<skin=dot>&dOnline: &f{online}"
-    5: "<skin=dot>&dQueueing: &f{queueing}"
-    6: "<skin=dot>&dPlaying: &f{playing}"
+    3: "&b&lServer Info"
+    4: "<skin=dot>&bOnline: &f{online}"
+    5: "<skin=dot>&bQueueing: &f{queueing}"
+    6: "<skin=dot>&bPlaying: &f{playing}"
     7: ""
     8: ""
     9: ""

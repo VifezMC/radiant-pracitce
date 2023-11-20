@@ -28,6 +28,7 @@ import java.util.Arrays;
 public class Practice extends JavaPlugin {
 
     @Getter private static Practice instance;
+
     public static void loadManagers() {
         ConfigManager.arenaManager = new ArenaManager();
         ConfigManager.kitManager = new KitManager();
@@ -63,24 +64,22 @@ public class Practice extends JavaPlugin {
         registerEventListeners();
         registerCommands();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String loadedTime = LocalDateTime.now().format(dateFormat);
-        String serverVersion = Bukkit.getVersion();
-        String simplifiedServerVersion = serverVersion.split("MC: ")[1].split("\\)")[0];
         long startTime = System.currentTimeMillis();
+        // Perform some operations or wait for a while
         long endTime = System.currentTimeMillis();
         long timeTaken = endTime - startTime;
 
         // START MESSAGE
-                Console.sendMessage("&f---------------------------------------------");
-                Console.sendMessage("&aEmerald [&2" + getDescription().getVersion() + "&3] &7- &aKira Development");
-                Console.sendMessage(" ");
-                Console.sendMessage("&aLoaded Configurations");
-                Console.sendMessage("&aLoaded data");
-                Console.sendMessage("&aLoaded Arena managers");
-                Console.sendMessage(" ");
-                Console.sendMessage("&aDevs: &2" + Constants.Author);
-                Console.sendMessage("&aDiscord: &2" + Constants.Discord);
-                Console.sendMessage("&f---------------------------------------------");
+        Console.sendMessage("&f---------------------------------------------");
+        Console.sendMessage("&aSoar Practice [&2" + getDescription().getVersion() + "&3]");
+        Console.sendMessage(" ");
+        Console.sendMessage("&aLoaded Configurations");
+        Console.sendMessage("&aLoaded data");
+        Console.sendMessage("&aLoaded Arena managers");
+        Console.sendMessage(" ");
+        Console.sendMessage("&aDevs: &2" + Constants.Author);
+        Console.sendMessage("&aDiscord: &2" + Constants.Discord);
+        Console.sendMessage("&f---------------------------------------------");
     }
 
     private void registerEventListeners() {
@@ -97,10 +96,11 @@ public class Practice extends JavaPlugin {
                 new StatsListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
+
     private void registerCommands() {
         createCMD("setspawn", new SetSpawnCMD());
         createCMD("arena", new ArenaCMD());
-        createCMD("Stellar", new MainCMD());
+        createCMD("practice", new MainCMD());
         createCMD("kit", new KitsCMD());
         createCMD("queue", new QueueCMD());
         createCMD("ping", new PingCMD());

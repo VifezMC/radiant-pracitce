@@ -13,7 +13,7 @@ commands:
     description: Sets server spawn.
   arena:
     description: Arena commands.
-  stellar:
+  practice:
     description: Main command.
   kit:
     description: Main command for kits.
