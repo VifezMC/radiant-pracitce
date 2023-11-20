@@ -1,7 +1,9 @@
+# Practice Practice tablist.yml
+
 tablist:
   enable: true
   header: "&dYou're playing on &fPractice &don &fkiradev.xyz" # Text at the top of the tablist.
-  footer: "&dThere are &f{online} &donline players!" # Text at the bottom of the tablist.
+  footer: "&dPurchase Practice from discord.gg/kiradev" # Text at the bottom of the tablist.
   LEFT:
     1: ""
     2: " &7&m---------------- "
@@ -43,7 +45,7 @@ tablist:
     17: ""
     18: ""
     19: "&9Discord"
-    20: "<skin=discord>discord.kiradev.xyz"
+    20: "<skin=discord>discord.gg/kiradev"
   RIGHT:
     1: ""
     2: " &7&m---------------- "

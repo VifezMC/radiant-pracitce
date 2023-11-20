@@ -25,9 +25,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @Getter
-public class Stellar extends JavaPlugin {
+public class Practice extends JavaPlugin {
 
-    @Getter private static Stellar instance;
+    @Getter private static Practice instance;
     public static void loadManagers() {
         ConfigManager.arenaManager = new ArenaManager();
         ConfigManager.kitManager = new KitManager();
@@ -72,14 +72,14 @@ public class Stellar extends JavaPlugin {
 
         // START MESSAGE
                 Console.sendMessage("&f---------------------------------------------");
-                Console.sendMessage("&3Stellar [&b" + getDescription().getVersion() + "&3] &7- &3Kira Development");
+                Console.sendMessage("&aEmerald [&2" + getDescription().getVersion() + "&3] &7- &aKira Development");
                 Console.sendMessage(" ");
-                Console.sendMessage("&3Loaded Configurations");
-                Console.sendMessage("&3Loaded data");
-                Console.sendMessage("&3Loaded Arena managers");
+                Console.sendMessage("&aLoaded Configurations");
+                Console.sendMessage("&aLoaded data");
+                Console.sendMessage("&aLoaded Arena managers");
                 Console.sendMessage(" ");
-                Console.sendMessage("&3Devs: &f" + Constants.Author);
-                Console.sendMessage("&3Discord: &f" + Constants.Discord);
+                Console.sendMessage("&aDevs: &2" + Constants.Author);
+                Console.sendMessage("&aDiscord: &2" + Constants.Discord);
                 Console.sendMessage("&f---------------------------------------------");
     }
 

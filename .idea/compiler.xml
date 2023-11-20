@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Stellar" />
+        <module name="Practice" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="Emerald" target="1.8" />
       <module name="Neptune" target="1.8" />
+      <module name="Stellar" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

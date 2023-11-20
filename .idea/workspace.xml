@@ -5,9 +5,111 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="Changed Kit &amp; Arena Format">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Emerald.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Practice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_13_15_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_13_15__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Arena.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/ArenaCMD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/ArenaManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Assemble.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleBoardCreateEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleBoardCreatedEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleBoardDestroyEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleBoardEntry.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleStyle.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/AssembleThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/BlockListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/ConfigManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Console.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Cooldowns.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Data.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/DiscordUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Division.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/DivisionsManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/GameManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/InventoryManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/ItemBuilder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Kit.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/KitManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/KitsCMD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/MainCMD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Match.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/MatchManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/MenuListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Placeholder.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/PlayerDataListener.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/PlayerUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/RankedCMD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/ScoreboardManager$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/ScoreboardManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/StatsInventory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Stellar-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/Stellar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/UnrankedCMD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/UnrankedInventoryModern.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_01_11_2023_17_26__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Stellar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Practice.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/MainCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/MainCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/LocationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/LocationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/PlayerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/arenas.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/arenas.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/data.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/data.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/heads.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/heads.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/kits.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/kits.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/divisions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/features/divisions.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/features/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/license.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/menus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/tablist.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Stellar-1.0.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/arenas.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/arenas.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/data.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/data.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/kits.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/kits.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/features/divisions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/features/divisions.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/features/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/features/messages.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/license.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/menus.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/tablist.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Stellar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/MainCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/MainCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/SetSpawnCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/SetSpawnCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/MenuListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/MenuListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ConfigManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ConfigManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/LocationUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/LocationUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/PlayerUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +261,17 @@
     </task>
     <option name="localTasksCounter" value="11" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Players can now only break when playing build kit" />

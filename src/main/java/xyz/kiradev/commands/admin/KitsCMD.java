@@ -267,7 +267,7 @@ public class KitsCMD implements CommandExecutor {
 
 
     private void showKitCommands(Player player) {
-        player.sendMessage(CC.translate("==============================================================="));
+        player.sendMessage(CC.translate("&d--------------------------------------------------------"));
         player.sendMessage(CC.translate("&d&lStellar Kit Setup"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&d/kit create &8<&7name&8> &7- &8(&7Create a kit&8)"));
@@ -275,17 +275,17 @@ public class KitsCMD implements CommandExecutor {
         player.sendMessage(CC.translate("&d/kit set &7- &8(&7Opens set sub commands&8)"));
         player.sendMessage(CC.translate("&d/kit save &7- &8(&7Save kits&8)"));
         player.sendMessage(CC.translate("&d/kit whitelistarena &8<&7name&8> &8<&7arena&8> &7- &8(&7Whitelist an arena to kit&8)"));
-        player.sendMessage(CC.translate("==============================================================="));
+        player.sendMessage(CC.translate("&d--------------------------------------------------------"));
     }
 
     private void showSetKitCommands(Player player) {
-        player.sendMessage(CC.translate("==============================================================="));
+        player.sendMessage(CC.translate("&d------------------------------------------------"));
         player.sendMessage(CC.translate("&d&lStellar Kit Sub Commnd &8(&7Set&8)"));
         player.sendMessage(CC.translate(""));
         player.sendMessage(CC.translate("&d/kit set inv &8<&7name&8> &7- &8(&7Set a kit's inventory&8)"));
         player.sendMessage(CC.translate("&d/kit set icon &8<&7name&8> &7- &8(&7Set a kit's icon&8)"));
         player.sendMessage(CC.translate("&d/kit set description &8<&7name&8> &8<&7description&8> &7- &8(&7Set a kit's description&8)"));
         player.sendMessage(CC.translate("&d/kit set rule &8<&7name&8> &8<&7rule&8> &7- &8(&7Set a kit's rule(s)&8)"));
-        player.sendMessage(CC.translate("==============================================================="));
+        player.sendMessage(CC.translate("&d------------------------------------------------"));
     }
 }

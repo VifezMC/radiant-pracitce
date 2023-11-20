@@ -6,7 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import xyz.kiradev.Constants;
-import xyz.kiradev.Stellar;
+import xyz.kiradev.Practice;
 import xyz.kiradev.utils.render.CC;
 
 
@@ -26,7 +26,7 @@ public class MainCMD implements CommandExecutor {
         }
 
         if (args.length == 1 && args[0].equalsIgnoreCase("reload")) {
-            Stellar.reloadManagers();
+            Practice.reloadManagers();
             player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
             player.sendMessage(CC.GREEN + "Configs have been reloaded!");
             return true;
@@ -38,7 +38,7 @@ public class MainCMD implements CommandExecutor {
     private void showPluginInfo(Player player) {
         player.sendMessage(CC.translate("&7&m--------------------------------------------"));
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("&d&lRunning Stellar Practice Core"));
+        player.sendMessage(CC.translate("&d&lRunning Practice Practice Core"));
         player.sendMessage(CC.translate(""));
         player.sendMessage((CC.translate("&dAuthor: &f" + Constants.Author)));
         player.sendMessage((CC.translate("&dVersion: &f" + Constants.Ver)));

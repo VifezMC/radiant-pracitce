@@ -1,7 +1,7 @@
 package xyz.kiradev.managers;
 
 import org.bukkit.entity.Player;
-import xyz.kiradev.Stellar;
+import xyz.kiradev.Practice;
 import xyz.kiradev.commands.user.KitEditorCMD;
 import xyz.kiradev.listeners.PlayerDataListener;
 import xyz.kiradev.states.PlayerState;
@@ -71,7 +71,7 @@ public class ScoreboardManager implements AssembleAdapter {
         Data stats = PlayerDataListener.getStats(p);
 
         for (String line : scoreboardLobby) {
-            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Practice.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
             line = line.replace("{elo}", String.valueOf(stats.getELO()));
@@ -104,7 +104,7 @@ public class ScoreboardManager implements AssembleAdapter {
             int opponentPing = PlayerUtils.getPing(opponent);
 
             for (String line : scoreboardMatch) {
-                line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
+                line = line.replace("{online_players}", String.valueOf(Practice.getInstance().getServer().getOnlinePlayers().size()));
                 line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
                 line = line.replace("{user_ping}", String.valueOf(userPing));
                 line = line.replace("{opponent_ping}", String.valueOf(opponentPing));
@@ -124,7 +124,7 @@ public class ScoreboardManager implements AssembleAdapter {
         List<String> inQueueLines = new ArrayList<>();
         for (String line : scoreboardInQueue) {
             line = line.replace("{kit}", QueueManager.Queue.get(p));
-            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Practice.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 
@@ -140,7 +140,7 @@ public class ScoreboardManager implements AssembleAdapter {
         List<String> inQueueLines = new ArrayList<>();
         for (String line : scoreboardKiteditor) {
             line = line.replace("{kit}", KitEditorCMD.kiteditor.get(p).getName());
-            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Practice.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 
@@ -156,7 +156,7 @@ public class ScoreboardManager implements AssembleAdapter {
         List<String> inGameEnd = new ArrayList<>();
         for (String line : scoreboardGameEnd) {
             line = line.replace("{kit}", KitEditorCMD.kiteditor.get(p).getName());
-            line = line.replace("{online_players}", String.valueOf(Stellar.getInstance().getServer().getOnlinePlayers().size()));
+            line = line.replace("{online_players}", String.valueOf(Practice.getInstance().getServer().getOnlinePlayers().size()));
             line = line.replace("{playing_players}", String.valueOf(QueueManager.playing));
             line = line.replace("{queueing_players}", String.valueOf(QueueManager.Queue.size()));
 

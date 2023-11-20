@@ -1,8 +1,8 @@
-main: xyz.kiradev.Stellar
-name: Stellar
-version: 1.1
+main: xyz.kiradev.Practice
+name: Practice
+version: 1.4
 description: High Quality Practice Plugin
-author: Vifez
+author: SoarPvP & Kira Development
 api-version: 1.8
 api: Beta
 softdepend:
