@@ -72,7 +72,7 @@ public class Practice extends JavaPlugin {
 
         // START MESSAGE
                 Console.sendMessage("&f---------------------------------------------");
-                Console.sendMessage("&aEmerald [&2" + getDescription().getVersion() + "&3] &7- &aKira Development");
+                Console.sendMessage("&aSoar Practice &7-&a [&2" + getDescription().getVersion() + "&3]");
                 Console.sendMessage(" ");
                 Console.sendMessage("&aLoaded Configurations");
                 Console.sendMessage("&aLoaded data");
