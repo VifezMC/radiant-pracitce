@@ -2,8 +2,8 @@
 
 tablist:
   enable: true
-  header: "&bYou're playing on &fPractice &bon &fkiradev.xyz" # Text at the top of the tablist.
-  footer: "&bPurchase Practice from discord.gg/kiradev" # Text at the bottom of the tablist.
+  header: "&eYou're playing on &bPractice &eon &bSoarPvP" # Text at the top of the tablist.
+  footer: "&bJoin our discord! discord.soarpvp.club" # Text at the bottom of the tablist.
   LEFT:
     1: ""
     2: " &7&m---------------- "
@@ -45,7 +45,7 @@ tablist:
     17: ""
     18: ""
     19: "&9Discord"
-    20: "<skin=discord>discord.gg/kiradev"
+    20: "<skin=discord>discord.soarpvp.club"
   RIGHT:
     1: ""
     2: " &7&m---------------- "
@@ -66,7 +66,7 @@ tablist:
     17: ""
     18: ""
     19: "&aWesbite"
-    20: "<skin=internet>www.kiradev.xyz"
+    20: "<skin=internet>www.soarpvp.club"
   FAR-RIGHT:
     1: ""
     2: ""
