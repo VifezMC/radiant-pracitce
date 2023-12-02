@@ -1,6 +1,8 @@
 # Radiant-Practice
 Radiant practice. I used to use this practice core for a server of mine but then I closed the server and was about to begin selling licenses of it until will decided it needs a recode.
 
+# Download: https://builtbybit.com/resources/radiant-practice-free-core.34768/?preview=1
+
 # Please remember this is an open source project which was intended for private use so the code is not the best.
 
 # Rules
