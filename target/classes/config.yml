@@ -1,22 +1,18 @@
-#░██████╗████████╗███████╗██╗░░░░░██╗░░░░░░█████╗░██████╗░
-#██╔════╝╚══██╔══╝██╔════╝██║░░░░░██║░░░░░██╔══██╗██╔══██╗
-#╚█████╗░░░░██║░░░█████╗░░██║░░░░░██║░░░░░███████║██████╔╝
-#░╚═══██╗░░░██║░░░██╔══╝░░██║░░░░░██║░░░░░██╔══██║██╔══██╗
-#██████╔╝░░░██║░░░███████╗███████╗███████╗██║░░██║██║░░██║
-#╚═════╝░░░░╚═╝░░░╚══════╝╚══════╝╚══════╝╚═╝░░╚═╝╚═╝░░╚═╝ v1.4
-# Practice Practice by Kira Development
-# If you find any bugs or require some sort of support please join our discord
-# https://discord.gg/kiradev
-
-License: "your_license_key_here" # Please enter your license to enable Practice.
+#
+#    ██████╗░░█████╗░██████╗░██╗░█████╗░███╗░░██╗████████╗
+#    ██╔══██╗██╔══██╗██╔══██╗██║██╔══██╗████╗░██║╚══██╔══╝
+#    ██████╔╝███████║██║░░██║██║███████║██╔██╗██║░░░██║░░░
+#    ██╔══██╗██╔══██║██║░░██║██║██╔══██║██║╚████║░░░██║░░░
+#    ██║░░██║██║░░██║██████╔╝██║██║░░██║██║░╚███║░░░██║░░░ v1.4
+# Radiant Practice by Kira Development - https://discord.gg/kiradev
 
 general:
-  enable-join-message: true # Enable messages on join event
-  enable-debug: false # Enable debug mode
-  clear-empty-bottles: true # Remove bottle from the ground if its empty
-  ender-pearl-cooldown: 15 # Ender pearl cooldown per use
-  disable-fall-damage: true # Disable fall damage or keep it on
-  starting-elo: 1000 # The default Elo before a user gains / loses Elo.
+  enable-join-message: true
+  enable-debug: false
+  clear-empty-bottles: true
+  ender-pearl-cooldown: 15
+  disable-fall-damage: true
+  starting-elo: 1000
 discord:
-  enable-webhook: false # Enable discord webhook logs or not
-  webhook: "" # Enter your webhook inbetween the speachmarks
+  enable-webhook: true
+  webhook: "https://discord.com/api/webhooks/1176221079941951662/WOJSLdjpTWtXf8YurhVzDwlzYo_aFSeoonDf0LVNg3ymb_x12QXZ9EPugoHdcHorG7Qg"

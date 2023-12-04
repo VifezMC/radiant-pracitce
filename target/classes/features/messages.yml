@@ -1,16 +1,14 @@
-# Practice Practice messages.yml
-
 general:
   join-message:
     - "&7&m--------------------------------"
-    - "&fWelcome &d{player}&f to &dServer&f Network!"
+    - "&fWelcome &d{player}&f to &bKira &f Network!"
     - ' '
-    - "&dDiscord: &fdiscord.gg/server"
-    - "&dTwitter: &ftwitter.com/server"
-    - "&dTeamspeak: &fteamspeak.com/server"
+    - "&bDiscord: &fdiscord.gg/server"
+    - "&bTwitter: &ftwitter.com/server"
+    - "&bTeamspeak: &fteamspeak.com/server"
     - ' '
     - "Like us on &dNameMC&f for a free rank!"
-    - "&dhttps://namemc.com/server/servername"
+    - "&bhttps://namemc.com/server/servername"
     - '&7&m--------------------------------'
   ping-message: "&eYour ping is &f{ping}"
   other-player-ping-message: "&e{player}'s ping is &f{ping}"

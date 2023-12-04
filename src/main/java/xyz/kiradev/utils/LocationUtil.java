@@ -2,13 +2,13 @@ package xyz.kiradev.utils;
 
 import org.bukkit.Location;
 import org.bukkit.World;
-import xyz.kiradev.Practice;
+import xyz.kiradev.Radiant;
 
 public class LocationUtil {
 
     public static Location toLoc(String location) {
         String[] data = location.split(":");
-        World w = Practice.getInstance().getServer().getWorld(data[0]);
+        World w = Radiant.getInstance().getServer().getWorld(data[0]);
         double x = Double.parseDouble(data[1]);
         double y = Double.parseDouble(data[2]) + 1;
         double z = Double.parseDouble(data[3]);

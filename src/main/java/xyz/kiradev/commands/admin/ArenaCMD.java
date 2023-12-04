@@ -102,20 +102,20 @@ public class ArenaCMD implements CommandExecutor {
 
     private void showArenaCommands(Player player) {
         player.sendMessage(CC.translate(""));
-        player.sendMessage(CC.translate("---------------------------------------------------------"));
-        player.sendMessage(CC.translate("&d&lSoarPvP Arena Setup:"));
-        player.sendMessage(CC.translate("&d/arena create &8<&7name&8> &7- &8(&7Create an arena&8)"));
-        player.sendMessage(CC.translate("&d/arena remove &8<&7name&8> &7- &8(&7Remove an arena&8)"));
-        player.sendMessage(CC.translate("&d/arena save &8<&7name&8> &7- &8(&7Save arenas&8)"));
-        player.sendMessage(CC.translate("---------------------------------------------------------"));
+        player.sendMessage(CC.translate("&c------------------------------------------------------"));
+        player.sendMessage(CC.translate("&c&lRadiant Arena Setup:"));
+        player.sendMessage(CC.translate("&c/arena create &8<&7name&8> &7- &8(&7Create an arena&8)"));
+        player.sendMessage(CC.translate("&c/arena remove &8<&7name&8> &7- &8(&7Remove an arena&8)"));
+        player.sendMessage(CC.translate("&c/arena save &8<&7name&8> &7- &8(&7Save arenas&8)"));
+        player.sendMessage(CC.translate("&c------------------------------------------------------"));
         player.sendMessage(CC.translate(" "));
-        player.sendMessage(CC.translate("---------------------------------------------------------"));
-        player.sendMessage(CC.translate("&d&lSoarPvP Arena Spawn commands:"));
-        player.sendMessage(CC.translate("&d/arena a &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
-        player.sendMessage(CC.translate("&d/arena b &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
-        player.sendMessage(CC.translate("&d/arena min &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
-        player.sendMessage(CC.translate("&d/arena max &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
-        player.sendMessage(CC.translate("---------------------------------------------------------"));
+        player.sendMessage(CC.translate("&c------------------------------------------------------"));
+        player.sendMessage(CC.translate("&c&lRadiant Arena Spawn commands:"));
+        player.sendMessage(CC.translate("&c/arena a &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
+        player.sendMessage(CC.translate("&c/arena b &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
+        player.sendMessage(CC.translate("&c/arena min &8<&7name&8> &7- &8(&7Set the first player spawn&8)"));
+        player.sendMessage(CC.translate("&c/arena max &8<&7name&8> &7- &8(&7Set the second player spawn&8)"));
+        player.sendMessage(CC.translate("&c------------------------------------------------------"));
         player.sendMessage(CC.translate(""));
     }
 }

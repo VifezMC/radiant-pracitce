@@ -1,14 +1,11 @@
 package xyz.kiradev;
 
+import dev.demeng.sentinel.wrapper.model.License;
 import lombok.Getter;
-import org.bukkit.Bukkit;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import xyz.kiradev.commands.admin.ArenaCMD;
-import xyz.kiradev.commands.admin.KitsCMD;
-import xyz.kiradev.commands.admin.MainCMD;
-import xyz.kiradev.commands.admin.SetSpawnCMD;
+import xyz.kiradev.commands.admin.*;
 import xyz.kiradev.commands.user.*;
 import xyz.kiradev.listeners.*;
 import xyz.kiradev.managers.*;
@@ -20,14 +17,18 @@ import xyz.kiradev.utils.Cooldowns;
 import xyz.kiradev.utils.assemble.Assemble;
 import xyz.kiradev.utils.render.Console;
 
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 @Getter
-public class Practice extends JavaPlugin {
+public class Radiant extends JavaPlugin {
 
-    @Getter private static Practice instance;
+    @Getter
+    private static Radiant instance;
+
+    @Getter
+    private static License license;
+
     public static void loadManagers() {
         ConfigManager.arenaManager = new ArenaManager();
         ConfigManager.kitManager = new KitManager();
@@ -63,24 +64,19 @@ public class Practice extends JavaPlugin {
         registerEventListeners();
         registerCommands();
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        String loadedTime = LocalDateTime.now().format(dateFormat);
-        String serverVersion = Bukkit.getVersion();
-        String simplifiedServerVersion = serverVersion.split("MC: ")[1].split("\\)")[0];
         long startTime = System.currentTimeMillis();
         long endTime = System.currentTimeMillis();
         long timeTaken = endTime - startTime;
 
-        // START MESSAGE
-                Console.sendMessage("&f---------------------------------------------");
-                Console.sendMessage("&aSoar Practice &7-&a [&2" + getDescription().getVersion() + "&3]");
-                Console.sendMessage(" ");
-                Console.sendMessage("&aLoaded Configurations");
-                Console.sendMessage("&aLoaded data");
-                Console.sendMessage("&aLoaded Arena managers");
-                Console.sendMessage(" ");
-                Console.sendMessage("&aDevs: &2" + Constants.Author);
-                Console.sendMessage("&aDiscord: &2" + Constants.Discord);
-                Console.sendMessage("&f---------------------------------------------");
+        Console.sendMessage("&f---------------------------------------------");
+        Console.sendMessage("&c&lRadiant Practice &7[&c" + getDescription().getVersion() + "&7]");
+        Console.sendMessage(" ");
+        Console.sendMessage("&cInformation");
+        Console.sendMessage(" &cVersion &f" + getDescription().getVersion());
+        Console.sendMessage(" ");
+        Console.sendMessage("&cCredits: &f" + Constants.Author);
+        Console.sendMessage("&cDiscord: &fdiscord.gg/kiradev");
+        Console.sendMessage("&f---------------------------------------------");
     }
 
     private void registerEventListeners() {
@@ -97,10 +93,11 @@ public class Practice extends JavaPlugin {
                 new StatsListener()
         ).forEach(listener -> getServer().getPluginManager().registerEvents(listener, this));
     }
+
     private void registerCommands() {
         createCMD("setspawn", new SetSpawnCMD());
         createCMD("arena", new ArenaCMD());
-        createCMD("Stellar", new MainCMD());
+        createCMD("radiant", new MainCMD());
         createCMD("kit", new KitsCMD());
         createCMD("queue", new QueueCMD());
         createCMD("ping", new PingCMD());

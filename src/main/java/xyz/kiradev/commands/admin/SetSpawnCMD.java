@@ -35,6 +35,6 @@ public class SetSpawnCMD implements CommandExecutor {
         ConfigManager.arenaConfig.set("lobby", loc);
         ConfigManager.saveConfig(ConfigManager.arena, ConfigManager.arenaConfig);
         player.playSound(player.getLocation(), Sound.LEVEL_UP, 1.0f, 1.0f);
-        player.sendMessage(CC.GREEN + "Spawn has been set!\n" + CC.translate("&4&lIMPORTANT &cYou might need to restart or reload your server to see changes!"));
+        player.sendMessage(CC.GREEN + "&aSpawn has been set!\n" + CC.translate("&4&lIMPORTANT &cYou may need to restart or reload your server to see changes!"));
     }
 }

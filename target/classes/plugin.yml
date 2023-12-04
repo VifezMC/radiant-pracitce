@@ -1,8 +1,8 @@
-main: xyz.kiradev.Practice
-name: Practice
+main: xyz.kiradev.Radiant
+name: Radiant
 version: 1.4
-description: High Quality Practice Plugin
-author: SoarPvP & Kira Development
+description: High Quality Radiant Plugin
+author: Kira Development
 api-version: 1.8
 api: Beta
 softdepend:
@@ -13,7 +13,7 @@ commands:
     description: Sets server spawn.
   arena:
     description: Arena commands.
-  practice:
+  radiant:
     description: Main command.
   kit:
     description: Main command for kits.

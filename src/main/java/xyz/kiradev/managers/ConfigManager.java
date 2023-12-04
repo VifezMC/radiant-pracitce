@@ -3,7 +3,7 @@ package xyz.kiradev.managers;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import xyz.kiradev.Practice;
+import xyz.kiradev.Radiant;
 import xyz.kiradev.party.PartyManager;
 import xyz.kiradev.utils.render.CC;
 import xyz.kiradev.utils.render.Console;
@@ -45,69 +45,69 @@ public class ConfigManager {
     public static void registerConfigs() {
         // ARENAS
         saveResourceIfNotExists("cache/arenas.yml");
-        arena = new File(Practice.getInstance().getDataFolder(), "cache/arenas.yml");
+        arena = new File(Radiant.getInstance().getDataFolder(), "cache/arenas.yml");
         arenaConfig = YamlConfiguration.loadConfiguration(arena);
 
         // MAIN CONFIG
         saveResourceIfNotExists("config.yml");
-        config = new File(Practice.getInstance().getDataFolder(), "config.yml");
+        config = new File(Radiant.getInstance().getDataFolder(), "config.yml");
         pluginConfig = YamlConfiguration.loadConfiguration(config);
 
         // MESSAGES CONFIG
         saveResourceIfNotExists("features/messages.yml");
-        messages = new File(Practice.getInstance().getDataFolder(), "features/messages.yml");
+        messages = new File(Radiant.getInstance().getDataFolder(), "features/messages.yml");
         messagesConfig = YamlConfiguration.loadConfiguration(messages);
 
         // SPAWN ITEMS
         saveResourceIfNotExists("features/items.yml");
-        spawnItems = new File(Practice.getInstance().getDataFolder(), "features/items.yml");
+        spawnItems = new File(Radiant.getInstance().getDataFolder(), "features/items.yml");
         spawnItemsConfig = YamlConfiguration.loadConfiguration(spawnItems);
 
         // KITS CONFIG
         saveResourceIfNotExists("cache/kits.yml");
-        kits = new File(Practice.getInstance().getDataFolder(), "cache/kits.yml");
+        kits = new File(Radiant.getInstance().getDataFolder(), "cache/kits.yml");
         kitsConfig = YamlConfiguration.loadConfiguration(kits);
 
         // SCOREBOARD CONFIG
         saveResourceIfNotExists("ui/scoreboard.yml");
-        scoreboard = new File(Practice.getInstance().getDataFolder(), "ui/scoreboard.yml");
+        scoreboard = new File(Radiant.getInstance().getDataFolder(), "ui/scoreboard.yml");
         scoreboardConfig = YamlConfiguration.loadConfiguration(scoreboard);
 
         // Menus CONFIG
         saveResourceIfNotExists("ui/menus.yml");
-        menus = new File(Practice.getInstance().getDataFolder(), "ui/menus.yml");
+        menus = new File(Radiant.getInstance().getDataFolder(), "ui/menus.yml");
         menusConfig = YamlConfiguration.loadConfiguration(menus);
 
         // DATA CONFIG
         saveResourceIfNotExists("cache/data.yml");
-        flatfile = new File(Practice.getInstance().getDataFolder(), "cache/data.yml");
+        flatfile = new File(Radiant.getInstance().getDataFolder(), "cache/data.yml");
         flatfileConfig = YamlConfiguration.loadConfiguration(flatfile);
 
         // DIVISION CONFIG
         saveResourceIfNotExists("features/divisions.yml");
-        division = new File(Practice.getInstance().getDataFolder(), "features/divisions.yml");
+        division = new File(Radiant.getInstance().getDataFolder(), "features/divisions.yml");
         divisionConfig = YamlConfiguration.loadConfiguration(division);
 
         // HEAD CONFIG
         saveResourceIfNotExists("cache/heads.yml");
-        head = new File(Practice.getInstance().getDataFolder(), "cache/heads.yml");
+        head = new File(Radiant.getInstance().getDataFolder(), "cache/heads.yml");
         headConfig = YamlConfiguration.loadConfiguration(head);
 
         // TABLIST CONFIG
         saveResourceIfNotExists("ui/tablist.yml");
-        tab = new File(Practice.getInstance().getDataFolder(), "ui/tablist.yml");
+        tab = new File(Radiant.getInstance().getDataFolder(), "ui/tablist.yml");
         tabConfig = YamlConfiguration.loadConfiguration(tab);
 
         // MONGO/DATABASE CONFIG
         saveResourceIfNotExists("features/database.yml");
-        database = new File(Practice.getInstance().getDataFolder(), "features/database.yml");
+        database = new File(Radiant.getInstance().getDataFolder(), "features/database.yml");
         databaseconfig = YamlConfiguration.loadConfiguration(database);
     }
 
     private static void saveResourceIfNotExists(String resourcePath) {
-        File file = new File(Practice.getInstance().getDataFolder(), resourcePath);
+        File file = new File(Radiant.getInstance().getDataFolder(), resourcePath);
         if (!file.exists()) {
-            Practice.getInstance().saveResource(resourcePath, false);
+            Radiant.getInstance().saveResource(resourcePath, false);
         }
     }
 

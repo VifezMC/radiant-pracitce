@@ -1,4 +1,3 @@
-# Practice Practice menus.yml
 # Legacy = No Glass In menu | Modern = Glass In menu
 
 queue-gui-type:
@@ -30,12 +29,12 @@ stats:
   item-name: "&dYour Stats"
   item-meta:
     - "&7&m-----------------------"
-    - "&d* Matches Played&7: &f{matches_played}"
-    - "&d* Wins&7: &f{matches-won}"
-    - "&d* Lost&7: &f{matches-lost}"
-    - "&d* ELO&7: &f{elo}"
-    - "&d* KDR&7: &f{kdr}"
-    - "&d* TITLE&7: &f{division}"
+    - "&c* Matches Played&7: &f{matches_played}"
+    - "&c* Wins&7: &f{matches-won}"
+    - "&c* Lost&7: &f{matches-lost}"
+    - "&c* ELO&7: &f{elo}"
+    - "&c* KDR&7: &f{kdr}"
+    - "&c* TITLE&7: &f{division}"
     - "&7&m-----------------------"
 settings:
   item-color: "&d"

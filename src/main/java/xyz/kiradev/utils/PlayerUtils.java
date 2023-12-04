@@ -9,7 +9,7 @@ import org.bukkit.World;
 import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import xyz.kiradev.Practice;
+import xyz.kiradev.Radiant;
 import xyz.kiradev.managers.ConfigManager;
 import xyz.kiradev.states.GameState;
 import xyz.kiradev.states.PlayerState;
@@ -47,7 +47,7 @@ public class PlayerUtils {
 
     private static World getLobbyWorld() {
         if (lobbyWorld == null) {
-            lobbyWorld = Practice.getInstance().getServer().getWorld(ConfigManager.arenaConfig.getString("lobby").split(":")[0]);
+            lobbyWorld = Radiant.getInstance().getServer().getWorld(ConfigManager.arenaConfig.getString("lobby").split(":")[0]);
         }
         return lobbyWorld;
     }

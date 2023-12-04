@@ -9,15 +9,15 @@ import xyz.kiradev.types.Data;
 
 public class Placeholder extends PlaceholderExpansion {
 
-    private final Practice plugin;
+    private final Radiant plugin;
 
-    public Placeholder(Practice plugin) {
+    public Placeholder(Radiant plugin) {
         this.plugin = plugin;
     }
 
     @Override
     public String getIdentifier() {
-        return "Practice";
+        return "Radiant";
     }
 
     @Override
@@ -32,7 +32,7 @@ public class Placeholder extends PlaceholderExpansion {
 
     @Override
     public boolean canRegister() {
-        return Bukkit.getPluginManager().isPluginEnabled("Practice");
+        return Bukkit.getPluginManager().isPluginEnabled("Radiant");
     }
 
     @Override

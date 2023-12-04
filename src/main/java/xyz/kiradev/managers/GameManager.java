@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scheduler.BukkitScheduler;
-import xyz.kiradev.Practice;
+import xyz.kiradev.Radiant;
 import xyz.kiradev.listeners.PlayerDataListener;
 import xyz.kiradev.states.GameState;
 import xyz.kiradev.states.PlayerState;
@@ -167,7 +167,7 @@ public class GameManager {
                 meta.addEffect(builder.build());
                 meta.setPower(1);
                 firework.setFireworkMeta(meta);
-                Bukkit.getScheduler().runTaskLater(Practice.getInstance(), () -> {
+                Bukkit.getScheduler().runTaskLater(Radiant.getInstance(), () -> {
                     firework.detonate();
                 }, 5L);
                 break;
@@ -205,7 +205,7 @@ public class GameManager {
         PlayerUtils.setState(winner, PlayerState.ENDED);
         PlayerUtils.setState(loser, PlayerState.ENDED);
         BukkitScheduler scheduler = Bukkit.getServer().getScheduler();
-        scheduler.scheduleSyncDelayedTask(Practice.getInstance(), () -> {
+        scheduler.scheduleSyncDelayedTask(Radiant.getInstance(), () -> {
             if (ConfigManager.pluginConfig.getBoolean("discord.enable-webhook")) {
                 DiscordUtils.sendMatchEnd(winner.getName(), loser.getName());
             }
@@ -275,7 +275,7 @@ public class GameManager {
                         PlayerUtils.setGState(p, GameState.DEFAULT);
                     }
                 }
-            }.runTaskTimer(Practice.getInstance(), 0, 20);
+            }.runTaskTimer(Radiant.getInstance(), 0, 20);
         }
     }
 }

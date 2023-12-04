@@ -18,8 +18,8 @@ public class SettingsInventory {
         ItemBuilder stat = new ItemBuilder(Material.FIREBALL);
         stat.setName(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Kill Effects"));
         stat.addLoreLine("&7&m-----------------------");
-        stat.addLoreLine((CC.translate("&7Click here to select your preferred ")));
-        stat.addLoreLine((CC.translate("&7kill effect.")));
+        stat.addLoreLine((CC.translate("&7Click here to open the ")));
+        stat.addLoreLine((CC.translate("&7kill effect menu.")));
         stat.addLoreLine("&7&m-----------------------");
         menu.setItem(10, stat.toItemStack());
     }

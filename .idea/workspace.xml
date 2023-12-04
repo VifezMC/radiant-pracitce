@@ -4,19 +4,66 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="Changed scoreboard format&#10;Cleaned out Arena setup&#10;Fixed animated scoreboard text&#10;Editted startup&#10;Added getDescription().getVersion()">
+    <list default="true" id="617ba883-ed92-47d4-8c3a-8e7c598a687b" name="Changes" comment="Fixed line 68 error">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Practice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Practice.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Emerald.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Practice.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Stellar.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Constants.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Placeholder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Practice.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/Radiant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/ArenaCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/KitsCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/MainCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/MainCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/SetSpawnCMD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/commands/admin/SetSpawnCMD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ConfigManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ConfigManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/GameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/GameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/managers/ScoreboardManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsKillEffectsInventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/ui/SettingsKillEffectsInventory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/LocationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/LocationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/PlayerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/kiradev/utils/PlayerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/arenas.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/arenas.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/data.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/data.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/heads.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/heads.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cache/kits.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cache/kits.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/divisions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/features/divisions.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/features/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/features/messages.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ui/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/menus.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/scoreboard.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/ui/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ui/tablist.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/arenas.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/arenas.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/data.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/data.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cache/kits.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cache/kits.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/config.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/config.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/features/divisions.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/features/divisions.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/features/messages.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/features/messages.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/plugin.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/ui/menus.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/menus.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/scoreboard.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/ui/tablist.yml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/ui/tablist.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Constants.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Constants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/Placeholder.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/ArenaCMD.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/KitsCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/MainCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/MainCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/SetSpawnCMD.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/commands/admin/SetSpawnCMD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/MenuListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/listeners/MenuListener.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ConfigManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ConfigManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/GameManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/managers/ScoreboardManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/SettingsInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/SettingsInventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/SettingsKillEffectsInventory.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/ui/SettingsKillEffectsInventory.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/LocationUtil.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/LocationUtil.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/PlayerUtils.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/xyz/kiradev/utils/PlayerUtils.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-archiver/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-archiver/pom.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,17 +93,18 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Stellar&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/vifez/OneDrive/Desktop/Radiant Practice",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="Practice" />
@@ -187,7 +235,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700492611725</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Fixed line 68 error">
+      <option name="closed" value="true" />
+      <created>1700494864592</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1700494864592</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -212,6 +268,7 @@
     <MESSAGE value="Added parties" />
     <MESSAGE value="Changed Kit &amp; Arena Format" />
     <MESSAGE value="Changed scoreboard format&#10;Cleaned out Arena setup&#10;Fixed animated scoreboard text&#10;Editted startup&#10;Added getDescription().getVersion()" />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed scoreboard format&#10;Cleaned out Arena setup&#10;Fixed animated scoreboard text&#10;Editted startup&#10;Added getDescription().getVersion()" />
+    <MESSAGE value="Fixed line 68 error" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed line 68 error" />
   </component>
 </project>
