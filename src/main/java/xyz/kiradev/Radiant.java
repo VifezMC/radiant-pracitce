@@ -74,7 +74,7 @@ public class Radiant extends JavaPlugin {
         Console.sendMessage("&cInformation");
         Console.sendMessage(" &cVersion &f" + getDescription().getVersion());
         Console.sendMessage(" ");
-        Console.sendMessage("&cCredits: &f" + Constants.Author);
+        Console.sendMessage("&cCredits: &fKira Development");
         Console.sendMessage("&cDiscord: &fdiscord.gg/kiradev");
         Console.sendMessage("&f---------------------------------------------");
     }
