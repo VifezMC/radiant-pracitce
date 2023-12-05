@@ -3,7 +3,7 @@
 queue-gui-type:
   unranked:
     type: "modern" # Menu type: Legacy - Modern
-    item-color: "&d"
+    item-color: "&c"
     height: 3
     menu-name: "&8Unranked Queue"
     surrounding-items: STAINED_GLASS_PANE
@@ -15,18 +15,18 @@ queue-gui-type:
     height: 3
     menu-name: "&8Ranked Queue"
     surrounding-items: STAINED_GLASS_PANE
-    surrounding-items-name: "&dEmpty"
+    surrounding-items-name: "&cEmpty"
     durability: 11
   item-meta:
     - "&7{description}"
     - " "
-    - "&dPlaying: &f{playing}"
-    - "&dQueuing: &f{queueing}"
+    - "&cPlaying: &f{playing}"
+    - "&cQueuing: &f{queueing}"
     - " "
     - "&aClick to play."
 stats:
-  menu-name: "&dStatistics"
-  item-name: "&dYour Stats"
+  menu-name: "&cStatistics"
+  item-name: "&cYour Stats"
   item-meta:
     - "&7&m-----------------------"
     - "&c* Matches Played&7: &f{matches_played}"
@@ -37,10 +37,10 @@ stats:
     - "&c* TITLE&7: &f{division}"
     - "&7&m-----------------------"
 settings:
-  item-color: "&d"
+  item-color: "&c"
 kit-editor:
   menu-name: "&8Kit editor"
-  item-color: "&d"
+  item-color: "&c"
   height: 3
   surrounding-items: STAINED_GLASS_PANE
   surrounding-items-name: " "
