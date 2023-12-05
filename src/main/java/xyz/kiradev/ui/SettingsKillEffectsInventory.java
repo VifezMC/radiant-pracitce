@@ -19,7 +19,7 @@ public class SettingsKillEffectsInventory {
         stat.setName(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Fireworks"));
         stat.addLoreLine("&7&m-----------------------");
         stat.addLoreLine((CC.translate("&7Click here to select")));
-        stat.addLoreLine((CC.translate("&7Fireworks.")));
+        stat.addLoreLine((CC.translate("&7Fireworks Kill effect.")));
         stat.addLoreLine("&7&m-----------------------");
         menu.setItem(10, stat.toItemStack());
 
@@ -27,7 +27,7 @@ public class SettingsKillEffectsInventory {
         lightning.setName(CC.translate(ConfigManager.menusConfig.getString("settings.item-color") + "Lightning"));
         lightning.addLoreLine("&7&m-----------------------");
         lightning.addLoreLine((CC.translate("&7Click here to select")));
-        lightning.addLoreLine((CC.translate("&7Lightning.")));
+        lightning.addLoreLine((CC.translate("&7Lightning Kill effect.")));
         lightning.addLoreLine("&7&m-----------------------");
         menu.setItem(12, lightning.toItemStack());
     }
