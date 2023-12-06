@@ -46,7 +46,6 @@ public class ScoreboardManager implements AssembleAdapter {
     public String getTitle(Player player) {
         String title = lobbyTitle;
 
-        // Add animated text to the title it's defined in the config
         if (title.contains("{animated_text}")) {
             title = title.replace("{animated_text}", getAnimatedText());
         }
